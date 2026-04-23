@@ -10,6 +10,7 @@ export function QrScanner({
   onDetected,
   onClose,
   notice,
+  processingLabel,
   closeOnDetected = true
 }: {
   title: string;
@@ -17,6 +18,7 @@ export function QrScanner({
   onDetected: (value: string) => boolean | void | Promise<boolean | void>;
   onClose?: () => void;
   notice?: string | null;
+  processingLabel?: string;
   closeOnDetected?: boolean;
 }) {
   const { dictionary } = useLocale();
@@ -27,6 +29,7 @@ export function QrScanner({
   const detectorRef = useRef<BarcodeDetector | null>(null);
   const [isSupported, setIsSupported] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -71,6 +74,8 @@ export function QrScanner({
   }, [stopCamera]);
 
   const startCamera = useCallback(async () => {
+    setIsProcessing(false);
+
     if (!isSupported) {
       setError(qrCopy.unsupported);
       return;
@@ -108,10 +113,12 @@ export function QrScanner({
           const results = await detectorRef.current.detect(videoRef.current);
           const rawValue = results[0]?.rawValue;
           if (rawValue) {
+            setIsProcessing(true);
             stopCamera();
             const nextAction = await onDetected(rawValue);
 
             if (nextAction === false) {
+              setIsProcessing(false);
               window.setTimeout(() => {
                 void startCamera();
               }, 240);
@@ -123,6 +130,7 @@ export function QrScanner({
             }
           }
         } catch {
+          setIsProcessing(false);
           // Ignore transient camera detection failures.
         }
       }, 700);
@@ -177,11 +185,17 @@ export function QrScanner({
             <div className="absolute inset-0 flex items-center justify-center bg-[#F4F1FA]/88 px-6 text-center">
               <div className="space-y-4">
                 <p className="text-sm text-[#625B78]">
-                  {error || notice || dictionary.qrScanner.ready}
+                  {isProcessing
+                    ? processingLabel || dictionary.qrScanner.ready
+                    : error || notice || dictionary.qrScanner.ready}
                 </p>
-                <Button onClick={() => void startCamera()}>
-                  {qrCopy.openCamera}
-                </Button>
+                {isProcessing ? (
+                  <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-[#D8D1EA] border-t-[#17122A]" />
+                ) : (
+                  <Button onClick={() => void startCamera()}>
+                    {qrCopy.openCamera}
+                  </Button>
+                )}
               </div>
             </div>
           ) : (

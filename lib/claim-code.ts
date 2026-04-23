@@ -12,7 +12,6 @@ export function buildClaimUrl(appUrl: string, claimId: bigint | number) {
   const url = new URL(
     buildDashboardUrl({
       role: "merchant",
-      scanner: "claim",
       claim: claimId.toString()
     }),
     appUrl
@@ -33,6 +32,15 @@ export function buildClaimCode(
   claimId: bigint | number
 ) {
   return `${store.shortCode}-${claimId.toString().padStart(4, "0")}`;
+}
+
+export function normalizeClaimInputValue(value: string) {
+  const trimmedStart = value.trimStart();
+  if (/^[a-z][a-z0-9+.-]*:\/\//i.test(trimmedStart) || trimmedStart.startsWith("/")) {
+    return value;
+  }
+
+  return value.toUpperCase();
 }
 
 export function parseClaimInput(value: string) {

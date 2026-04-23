@@ -2,7 +2,7 @@ export type DashboardRole = "customer" | "merchant";
 export type DashboardCustomerTab = "loyalty" | "rewards" | "stores";
 export type DashboardMerchantTab = "users" | "rewards" | "catalog" | "onchain";
 export type DashboardTab = DashboardCustomerTab | DashboardMerchantTab;
-export type DashboardScanner = "purchase" | "claim";
+export type DashboardScanner = "purchase" | "claim" | "claim-code";
 
 export type DashboardQueryState = {
   role?: DashboardRole;
@@ -37,7 +37,7 @@ export function normalizeDashboardTab(value?: string | null): DashboardTab | und
 export function normalizeDashboardScanner(
   value?: string | null
 ): DashboardScanner | undefined {
-  if (value === "purchase" || value === "claim") {
+  if (value === "purchase" || value === "claim" || value === "claim-code") {
     return value;
   }
 

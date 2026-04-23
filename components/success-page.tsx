@@ -124,9 +124,23 @@ export function SuccessPage({
                     : dictionary.actions.backToRewards}
                 </Button>
               </Link>
-              <Link href={store ? `/app/store/${store.slug}` : "/app"}>
+              <Link
+                href={
+                  isConsume
+                    ? buildDashboardUrl({ role: "merchant", tab: "users" })
+                    : store
+                      ? `/app/store/${store.slug}`
+                      : "/app"
+                }
+              >
                 <Button variant="outline">
-                  {store ? dictionary.actions.backToStore : dictionary.actions.openApp}
+                  {isConsume
+                    ? locale === "pt-BR"
+                      ? "Voltar ao dashboard"
+                      : "Back to dash"
+                    : store
+                      ? dictionary.actions.backToStore
+                      : dictionary.actions.openApp}
                 </Button>
               </Link>
             </div>

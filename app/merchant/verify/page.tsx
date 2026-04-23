@@ -11,7 +11,6 @@ export default async function Page({ searchParams }: VerifyRouteProps) {
   redirect(
     buildDashboardUrl({
       role: "merchant",
-      scanner: "claim",
       claim: resolvedSearchParams.claim
     })
   );

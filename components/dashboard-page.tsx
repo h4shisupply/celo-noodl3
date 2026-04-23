@@ -27,6 +27,7 @@ import {
 import {
   buildClaimCode,
   formatWalletLabel,
+  normalizeClaimInputValue,
   parseClaimInput
 } from "../lib/claim-code";
 import { resolveContractAddressForChain } from "../lib/chains";
@@ -251,7 +252,10 @@ export function DashboardPage({
       buildDashboardUrl({
         role: "merchant",
         tab: activeTab,
-        scanner: explicitScanner === "claim" ? "claim" : undefined,
+        scanner:
+          explicitScanner === "claim" || explicitScanner === "claim-code"
+            ? explicitScanner
+            : undefined,
         claim: claimParam
       })
     );
@@ -423,11 +427,12 @@ export function DashboardPage({
         scanner:
           merchantMode
             ? "scanner" in nextState
-              ? normalizeDashboardScanner(nextState.scanner) === "claim"
-                ? "claim"
+              ? normalizeDashboardScanner(nextState.scanner) === "claim" ||
+                normalizeDashboardScanner(nextState.scanner) === "claim-code"
+                ? normalizeDashboardScanner(nextState.scanner)
                 : undefined
-              : explicitScanner === "claim"
-                ? "claim"
+              : explicitScanner === "claim" || explicitScanner === "claim-code"
+                ? explicitScanner
                 : undefined
             : "scanner" in nextState
             ? normalizeDashboardScanner(nextState.scanner)
@@ -439,6 +444,23 @@ export function DashboardPage({
     },
     [claimParam, explicitRole, explicitScanner, explicitTab, merchantMode, router]
   );
+
+  useEffect(() => {
+    if (
+      !merchantMode ||
+      (explicitScanner !== "claim" && explicitScanner !== "claim-code") ||
+      !claimParam
+    ) {
+      return;
+    }
+
+    router.replace(
+      buildDashboardUrl({
+        role: "merchant",
+        claim: claimParam
+      })
+    );
+  }, [claimParam, explicitScanner, merchantMode, router]);
 
   const lookupClaim = useCallback(
     async (
@@ -616,6 +638,14 @@ export function DashboardPage({
     claimRecord && claimStoreMeta ? buildClaimCode(claimStoreMeta, claimRecord.id) : null;
   const claimCustomer =
     claimRecord ? customerByAddress[claimRecord.user.toLowerCase()] : undefined;
+  const isRewardVerifierScannerOpen =
+    merchantMode && activeScanner === "claim" && !claimParam;
+  const isRewardVerifierCodeOpen =
+    merchantMode && activeScanner === "claim-code" && !claimParam;
+  const isFocusedRewardVerifier = merchantMode && Boolean(claimParam);
+  const isFocusedRewardFlow = isFocusedRewardVerifier || isRewardVerifierCodeOpen;
+  const isRewardVerifierOpen =
+    isRewardVerifierScannerOpen || isRewardVerifierCodeOpen || isFocusedRewardVerifier;
 
   async function handleClaim(slug: string) {
     if (!account) {
@@ -795,6 +825,134 @@ export function DashboardPage({
     refreshWalletState,
     disconnect
   };
+  const claimDetailsCard = (
+    <Card className={isFocusedRewardVerifier ? "mx-auto w-full max-w-xl" : undefined}>
+      <CardHeader>
+        <CardTitle>{locale === "pt-BR" ? "Detalhes do resgate" : "Claim details"}</CardTitle>
+        <CardDescription>
+          {locale === "pt-BR"
+            ? "Confira loja, cliente e status antes de confirmar."
+            : "Review the store, customer, and status before confirming."}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-5">
+        {claimRecord && claimStoreMeta && claimStoreRecord ? (
+          <>
+            <div className="space-y-2 border-t border-[#EEE8F5] pt-4">
+              <p className="text-sm font-semibold text-[#18122A]">
+                {resolveText(claimStoreMeta.name, locale)}
+              </p>
+              <p className="text-sm text-[#625B78]">
+                {buildRewardCopy(claimStoreMeta, locale)}
+              </p>
+              {claimCode ? (
+                <p className="font-mono text-sm text-[#18122A]">{claimCode}</p>
+              ) : null}
+            </div>
+            <div className="space-y-2 border-t border-[#EEE8F5] pt-4 text-sm text-[#625B78]">
+              <p>
+                {locale === "pt-BR" ? "Cliente" : "Customer"}:{" "}
+                <span className="text-[#18122A]">
+                  {claimCustomer?.profile?.displayName ?? formatWalletLabel(claimRecord.user)}
+                </span>
+              </p>
+              {claimCustomer?.profile ? (
+                <p>
+                  {locale === "pt-BR" ? "Carteira" : "Wallet"}:{" "}
+                  <span className="text-[#18122A]">
+                    {formatWalletLabel(claimRecord.user)}
+                  </span>
+                </p>
+              ) : null}
+              <p>
+                {locale === "pt-BR" ? "Status" : "Status"}:{" "}
+                <span className="text-[#18122A]">
+                  {claimRecord.consumed
+                    ? locale === "pt-BR"
+                      ? "Consumido"
+                      : "Consumed"
+                    : locale === "pt-BR"
+                      ? "Pendente"
+                      : "Pending"}
+                </span>
+              </p>
+              <p>
+                {locale === "pt-BR" ? "Carteira da loja" : "Store wallet"}:{" "}
+                <span className="text-[#18122A]">
+                  {formatWalletLabel(claimStoreRecord.manager)}
+                </span>
+              </p>
+            </div>
+          </>
+        ) : (
+          <p className="text-sm text-[#625B78]">
+            {locale === "pt-BR" ? "Carregando resgate..." : "Loading claim..."}
+          </p>
+        )}
+
+        {claimLookupError ? (
+          <p className="rounded-[24px] border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
+            {claimLookupError}
+          </p>
+        ) : null}
+
+        <Button
+          className={isFocusedRewardVerifier ? "w-full" : undefined}
+          onClick={() => void handleConsume()}
+          disabled={!claimRecord || claimRecord.consumed || !isAuthorizedManager || isConsuming}
+        >
+          {isConsuming
+            ? locale === "pt-BR"
+              ? "Confirmando..."
+              : "Confirming..."
+            : locale === "pt-BR"
+              ? "Confirmar resgate"
+              : "Confirm reward"}
+        </Button>
+      </CardContent>
+    </Card>
+  );
+  const manualClaimValidationCard = (
+    <Card className={isRewardVerifierCodeOpen ? "mx-auto w-full max-w-xl" : undefined}>
+      <CardHeader>
+        <CardTitle>{locale === "pt-BR" ? "Validar manualmente" : "Manual validation"}</CardTitle>
+        <CardDescription>
+          {locale === "pt-BR"
+            ? "Cole um link, um código ou apenas o claimId."
+            : "Paste a link, a short code, or just the claim id."}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <Input
+          value={claimInputValue}
+          onChange={(event) =>
+            setClaimInputValue(normalizeClaimInputValue(event.target.value))
+          }
+          placeholder={
+            locale === "pt-BR"
+              ? "Ex.: CHOI-0001 ou claim 1"
+              : "Ex.: CHOI-0001 or claim 1"
+          }
+        />
+        <Button
+          className={isRewardVerifierCodeOpen ? "w-full" : undefined}
+          onClick={async () => {
+            const parsedClaimId = parseClaimInput(claimInputValue);
+            const loaded = await lookupClaim(claimInputValue, { source: "manual" });
+
+            if (loaded && parsedClaimId !== null) {
+              replaceDashboardState({
+                scanner: undefined,
+                claim: parsedClaimId.toString()
+              });
+            }
+          }}
+        >
+          {locale === "pt-BR" ? "Validar resgate" : "Check claim"}
+        </Button>
+      </CardContent>
+    </Card>
+  );
 
   return (
     <AppChrome
@@ -827,86 +985,119 @@ export function DashboardPage({
           </p>
         ) : null}
 
-        <div className="flex flex-col gap-5">
-          <div className="flex items-center justify-between gap-4">
-            <h1 className="text-2xl font-semibold tracking-[-0.04em] text-[#18122A] md:text-3xl">
-              {locale === "pt-BR" ? "Seu dashboard" : "Your dashboard"}
-            </h1>
+        {!isFocusedRewardFlow ? (
+          <div className="flex flex-col gap-5">
+            <div className="flex items-center justify-between gap-4">
+              <h1 className="text-2xl font-semibold tracking-[-0.04em] text-[#18122A] md:text-3xl">
+                {locale === "pt-BR" ? "Seu dashboard" : "Your dashboard"}
+              </h1>
 
-            <button
-              type="button"
-              onClick={() =>
-                replaceDashboardState({
-                  scanner:
-                    activeScanner === (role === "customer" ? "purchase" : "claim")
-                      ? undefined
-                      : role === "customer"
-                        ? "purchase"
-                      : "claim"
-                })
-              }
-              className="flex flex-col items-center gap-2 text-[#241B3C]"
-              aria-label={
-                role === "customer"
-                  ? locale === "pt-BR"
-                    ? "Ler QR de pagamento"
-                    : "Scan payment QR"
-                  : locale === "pt-BR"
-                    ? "Abrir validador de QR"
-                    : "Open QR validator"
-              }
-              title={
-                role === "customer"
-                  ? locale === "pt-BR"
-                    ? "Ler QR de pagamento"
-                    : "Scan payment QR"
-                  : locale === "pt-BR"
-                    ? "Abrir validador de QR"
-                    : "Open QR validator"
-              }
-            >
-              <span
-                className={`inline-flex h-14 w-14 items-center justify-center rounded-full border shadow-[0_12px_32px_rgba(23,18,42,0.06)] ${
-                  activeScanner === (role === "customer" ? "purchase" : "claim")
-                    ? "border-transparent bg-[#17122A] text-white"
-                    : "border-[#DED9F0] bg-white text-[#241B3C]"
-                }`}
-              >
-                <QrActionIcon />
-              </span>
-              <span className="text-xs font-medium text-[#625B78]">
-                {role === "customer"
-                  ? locale === "pt-BR"
-                    ? "Pagar agora"
-                    : "Pay now"
-                  : locale === "pt-BR"
-                    ? "Validar QR"
-                    : "Validate QR"}
-              </span>
-            </button>
-          </div>
+              <div className="flex items-start gap-3">
+                <button
+                  type="button"
+                  onClick={() =>
+                    replaceDashboardState({
+                      scanner:
+                        activeScanner === (role === "customer" ? "purchase" : "claim")
+                          ? undefined
+                          : role === "customer"
+                            ? "purchase"
+                            : "claim",
+                      claim: undefined
+                    })
+                  }
+                  className="flex flex-col items-center gap-2 text-[#241B3C]"
+                  aria-label={
+                    role === "customer"
+                      ? locale === "pt-BR"
+                        ? "Ler QR de pagamento"
+                        : "Scan payment QR"
+                      : locale === "pt-BR"
+                        ? "Abrir validador de QR"
+                        : "Open QR validator"
+                  }
+                  title={
+                    role === "customer"
+                      ? locale === "pt-BR"
+                        ? "Ler QR de pagamento"
+                        : "Scan payment QR"
+                      : locale === "pt-BR"
+                        ? "Abrir validador de QR"
+                        : "Open QR validator"
+                  }
+                >
+                  <span
+                    className={`inline-flex h-14 w-14 items-center justify-center rounded-full border shadow-[0_12px_32px_rgba(23,18,42,0.06)] ${
+                      activeScanner === (role === "customer" ? "purchase" : "claim")
+                        ? "border-transparent bg-[#17122A] text-white"
+                        : "border-[#DED9F0] bg-white text-[#241B3C]"
+                    }`}
+                  >
+                    <QrActionIcon />
+                  </span>
+                  <span className="text-xs font-medium text-[#625B78]">
+                    {role === "customer"
+                      ? locale === "pt-BR"
+                        ? "Pagar agora"
+                        : "Pay now"
+                      : locale === "pt-BR"
+                        ? "Validar QR"
+                        : "Validate QR"}
+                  </span>
+                </button>
 
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex flex-wrap items-center gap-3">
-            {role === "merchant" && selectedManagedStore && managedStores.length > 1 ? (
-              <HeadlessSelect
-                value={selectedManagedStore.slug}
-                onChange={setSelectedStoreSlug}
-                align="right"
-                options={managedStores.map((store) => ({
-                  value: store.slug,
-                  label: resolveText(store.name, locale),
-                  description: `${resolveText(store.category, locale)} · ${resolveText(
-                    store.city,
-                    locale
-                  )}`
-                }))}
-                triggerClassName="min-w-[16rem]"
-              />
-            ) : null}
+                {role === "merchant" ? (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      replaceDashboardState({
+                        scanner: activeScanner === "claim-code" ? undefined : "claim-code",
+                        claim: undefined
+                      })
+                    }
+                    className="flex flex-col items-center gap-2 text-[#241B3C]"
+                    aria-label={locale === "pt-BR" ? "Validar código" : "Validate code"}
+                    title={locale === "pt-BR" ? "Validar código" : "Validate code"}
+                  >
+                    <span
+                      className={`inline-flex h-14 w-14 items-center justify-center rounded-full border shadow-[0_12px_32px_rgba(23,18,42,0.06)] ${
+                        activeScanner === "claim-code"
+                          ? "border-transparent bg-[#17122A] text-white"
+                          : "border-[#DED9F0] bg-white text-[#241B3C]"
+                      }`}
+                    >
+                      <CodeActionIcon />
+                    </span>
+                    <span className="text-xs font-medium text-[#625B78]">
+                      {locale === "pt-BR" ? "Validar Código" : "Validate Code"}
+                    </span>
+                  </button>
+                ) : null}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex flex-wrap items-center gap-3">
+              {role === "merchant" && selectedManagedStore && managedStores.length > 1 ? (
+                <HeadlessSelect
+                  value={selectedManagedStore.slug}
+                  onChange={setSelectedStoreSlug}
+                  align="right"
+                  options={managedStores.map((store) => ({
+                    value: store.slug,
+                    label: resolveText(store.name, locale),
+                    description: `${resolveText(store.category, locale)} · ${resolveText(
+                      store.city,
+                      locale
+                    )}`
+                  }))}
+                  triggerClassName="min-w-[16rem]"
+                />
+              ) : null}
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
 
         {role === "customer" ? (
           <>
@@ -1151,6 +1342,8 @@ export function DashboardPage({
           </>
         ) : (
           <>
+            {!isFocusedRewardFlow ? (
+              <>
             <div className="grid gap-5 md:grid-cols-2">
               <KpiCard
                 label={locale === "pt-BR" ? "Usuários ativos" : "Active users"}
@@ -1195,8 +1388,19 @@ export function DashboardPage({
                 }
               />
             )}
+              </>
+            ) : null}
 
-            {activeScanner === "claim" || claimParam ? (
+            {isRewardVerifierOpen ? (
+              isFocusedRewardVerifier ? (
+                <section className="flex min-h-[calc(100dvh-12rem)] items-start justify-center pt-2">
+                  {claimDetailsCard}
+                </section>
+              ) : isRewardVerifierCodeOpen ? (
+                <section className="flex min-h-[calc(100dvh-12rem)] items-start justify-center pt-2">
+                  {manualClaimValidationCard}
+                </section>
+              ) : (
               <section className="grid gap-6 xl:grid-cols-[minmax(0,1.1fr)_22rem]">
                 <div className="space-y-6">
                   {selectedCustomer ? (
@@ -1239,7 +1443,7 @@ export function DashboardPage({
                   ) : null}
 
                   <div className="grid gap-6 lg:grid-cols-2">
-                    {activeScanner === "claim" ? (
+                    {isRewardVerifierScannerOpen ? (
                       <QrScanner
                         title={locale === "pt-BR" ? "Validar recompensa" : "Validate reward"}
                         description={
@@ -1248,6 +1452,9 @@ export function DashboardPage({
                             : "Scan the QR generated by the customer to load the claim."
                         }
                         notice={claimScannerNotice}
+                        processingLabel={
+                          locale === "pt-BR" ? "Carregando resgate..." : "Loading claim..."
+                        }
                         closeOnDetected={false}
                         onClose={() => {
                           setClaimScannerNotice(null);
@@ -1271,124 +1478,16 @@ export function DashboardPage({
                       />
                     ) : null}
 
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>{locale === "pt-BR" ? "Validar manualmente" : "Manual validation"}</CardTitle>
-                        <CardDescription>
-                          {locale === "pt-BR"
-                            ? "Cole um link, um código ou apenas o claimId."
-                            : "Paste a link, a short code, or just the claim id."}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <Input
-                          value={claimInputValue}
-                          onChange={(event) => setClaimInputValue(event.target.value)}
-                          placeholder={
-                            locale === "pt-BR"
-                              ? "Ex.: CHOI-0001 ou claim 1"
-                              : "Ex.: CHOI-0001 or claim 1"
-                          }
-                        />
-                        <Button onClick={() => void lookupClaim(claimInputValue, { source: "manual" })}>
-                          {locale === "pt-BR" ? "Validar resgate" : "Check claim"}
-                        </Button>
-                      </CardContent>
-                    </Card>
+                    {manualClaimValidationCard}
                   </div>
                 </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{locale === "pt-BR" ? "Detalhes do resgate" : "Claim details"}</CardTitle>
-                    <CardDescription>
-                      {locale === "pt-BR"
-                        ? "Confira loja, cliente e status antes de confirmar."
-                        : "Review the store, customer, and status before confirming."}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-5">
-                    {claimRecord && claimStoreMeta && claimStoreRecord ? (
-                      <>
-                        <div className="space-y-2 border-t border-[#EEE8F5] pt-4">
-                          <p className="text-sm font-semibold text-[#18122A]">
-                            {resolveText(claimStoreMeta.name, locale)}
-                          </p>
-                          <p className="text-sm text-[#625B78]">
-                            {buildRewardCopy(claimStoreMeta, locale)}
-                          </p>
-                          {claimCode ? (
-                            <p className="font-mono text-sm text-[#18122A]">{claimCode}</p>
-                          ) : null}
-                        </div>
-                        <div className="space-y-2 border-t border-[#EEE8F5] pt-4 text-sm text-[#625B78]">
-                          <p>
-                            {locale === "pt-BR" ? "Cliente" : "Customer"}:{" "}
-                            <span className="text-[#18122A]">
-                              {claimCustomer?.profile?.displayName ??
-                                formatWalletLabel(claimRecord.user)}
-                            </span>
-                          </p>
-                          {claimCustomer?.profile ? (
-                            <p>
-                              {locale === "pt-BR" ? "Carteira" : "Wallet"}:{" "}
-                              <span className="text-[#18122A]">
-                                {formatWalletLabel(claimRecord.user)}
-                              </span>
-                            </p>
-                          ) : null}
-                          <p>
-                            {locale === "pt-BR" ? "Status" : "Status"}:{" "}
-                            <span className="text-[#18122A]">
-                              {claimRecord.consumed
-                                ? locale === "pt-BR"
-                                  ? "Consumido"
-                                  : "Consumed"
-                                : locale === "pt-BR"
-                                  ? "Pendente"
-                                  : "Pending"}
-                            </span>
-                          </p>
-                          <p>
-                            {locale === "pt-BR" ? "Carteira da loja" : "Store wallet"}:{" "}
-                            <span className="text-[#18122A]">
-                              {formatWalletLabel(claimStoreRecord.manager)}
-                            </span>
-                          </p>
-                        </div>
-                      </>
-                    ) : (
-                      <p className="text-sm text-[#625B78]">
-                        {locale === "pt-BR"
-                          ? "Nenhum resgate carregado ainda."
-                          : "No claim loaded yet."}
-                      </p>
-                    )}
-
-                    {claimLookupError ? (
-                      <p className="rounded-[24px] border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
-                        {claimLookupError}
-                      </p>
-                    ) : null}
-
-                    <Button
-                      onClick={() => void handleConsume()}
-                      disabled={!claimRecord || claimRecord.consumed || !isAuthorizedManager || isConsuming}
-                    >
-                      {isConsuming
-                        ? locale === "pt-BR"
-                          ? "Confirmando..."
-                          : "Confirming..."
-                        : locale === "pt-BR"
-                          ? "Confirmar resgate"
-                          : "Confirm reward"}
-                    </Button>
-                  </CardContent>
-                </Card>
+                {claimDetailsCard}
               </section>
+              )
             ) : null}
 
-            {merchantMode && activeTab === "users" ? (
+            {merchantMode && !isRewardVerifierOpen && activeTab === "users" ? (
               filteredCustomers.length > 0 ? (
                 <div className="grid gap-4">
                   <div className="max-w-md">
@@ -1441,16 +1540,6 @@ export function DashboardPage({
                               ) : null}
                             </div>
                           </div>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => {
-                              setSelectedCustomer(customer.address);
-                              replaceDashboardState({ scanner: "claim", claim: undefined });
-                            }}
-                          >
-                            {locale === "pt-BR" ? "Ler QR da recompensa" : "Read reward QR"}
-                          </Button>
                         </div>
                         <ProgressMeter value={customer.stamps} total={customer.stampsRequired} />
                       </CardContent>
@@ -1474,7 +1563,7 @@ export function DashboardPage({
               )
             ) : null}
 
-            {merchantMode && activeTab === "rewards" ? (
+            {merchantMode && !isRewardVerifierOpen && activeTab === "rewards" ? (
               merchantClaims.length > 0 ? (
                 <div className="grid gap-4">
                   {merchantClaims.map((claim) => {
@@ -1583,7 +1672,7 @@ export function DashboardPage({
               )
             ) : null}
 
-            {merchantMode && activeTab === "catalog" && selectedManagedStore ? (
+            {merchantMode && !isRewardVerifierOpen && activeTab === "catalog" && selectedManagedStore ? (
               <MerchantCatalogPanel
                 selectedStore={selectedManagedStore}
                 initialChainId={initialChainId}
@@ -1591,7 +1680,7 @@ export function DashboardPage({
               />
             ) : null}
 
-            {merchantMode && activeTab === "onchain" && selectedManagedStore ? (
+            {merchantMode && !isRewardVerifierOpen && activeTab === "onchain" && selectedManagedStore ? (
               <MerchantOnchainPanel
                 selectedStore={selectedManagedStore}
                 initialChainId={initialChainId}
@@ -1827,6 +1916,25 @@ function QrActionIcon() {
       <path d="M18 14h2v2" />
       <path d="M14 18h2v2h-2z" />
       <path d="M18 18h2v2h-2z" />
+    </svg>
+  );
+}
+
+function CodeActionIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M9 7 4 12l5 5" />
+      <path d="M15 7l5 5-5 5" />
+      <path d="M13 5 11 19" />
     </svg>
   );
 }
