@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { formatUnits, getAddress, parseUnits, type Hex } from "viem";
 import {
   buildMerchantPatchMessage,
@@ -24,6 +24,7 @@ import {
   getSupportedTokens,
   type SupportedToken
 } from "../lib/tokens";
+import { useAutoDismissMessage } from "../lib/use-auto-dismiss-message";
 import { useLocale } from "./locale-provider";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
@@ -34,7 +35,25 @@ import type { LocalizedText, StoreCatalogEntry } from "../lib/catalog";
 type LocalizedFieldKey = "pt-BR" | "en";
 type EditableMenuDraft = MerchantCatalogMenuPatchItem & {
   isExisting: boolean;
+  draftKey: string;
 };
+
+type OnchainFormState = {
+  manager: string;
+  payout: string;
+  token: string;
+  acceptedTokens: string[];
+  minimumPurchase: string;
+  stampsPerPurchase: string;
+  stampsRequired: string;
+  rewardType: StoreCatalogEntry["loyalty"]["rewardType"];
+  rewardValue: string;
+  active: boolean;
+};
+
+function buildDraftKey() {
+  return `draft:${Date.now().toString(36)}:${Math.random().toString(36).slice(2, 8)}`;
+}
 
 function emptyLocalizedText(): LocalizedText {
   return {
@@ -58,12 +77,103 @@ function cloneMenuDraft(item: StoreCatalogEntry["menu"][number]): EditableMenuDr
     price: item.price,
     badge: item.badge ? cloneLocalizedText(item.badge) : null,
     archived: Boolean(item.archived),
-    isExisting: true
+    isExisting: true,
+    draftKey: `existing:${item.id}`
   };
 }
 
 function buildDraftMenuId(index: number) {
   return `item-${index + 1}`;
+}
+
+function buildCatalogDraftState(store: StoreCatalogEntry) {
+  return {
+    storeDraft: {
+      name: cloneLocalizedText(store.name),
+      storeLogoUrl: store.storeLogoUrl || "",
+      category: cloneLocalizedText(store.category),
+      city: cloneLocalizedText(store.city),
+      accent: store.accent,
+      summary: cloneLocalizedText(store.summary)
+    },
+    menuDraft: store.menu.map(cloneMenuDraft)
+  };
+}
+
+function serializeCatalogDraft(params: {
+  storeSlug: string;
+  storeDraft: {
+    name: LocalizedText;
+    storeLogoUrl: string;
+    category: LocalizedText;
+    city: LocalizedText;
+    accent: string;
+    summary: LocalizedText;
+  };
+  menuDraft: EditableMenuDraft[];
+}) {
+  return JSON.stringify({
+    storeSlug: params.storeSlug,
+    store: {
+      name: params.storeDraft.name,
+      storeLogoUrl: params.storeDraft.storeLogoUrl.trim(),
+      category: params.storeDraft.category,
+      city: params.storeDraft.city,
+      accent: params.storeDraft.accent.trim(),
+      summary: params.storeDraft.summary
+    },
+    menu: params.menuDraft.map(({ isExisting: _isExisting, draftKey: _draftKey, ...item }) => ({
+      ...item,
+      price: item.price.trim(),
+      badge:
+        item.badge?.["pt-BR"]?.trim() || item.badge?.en?.trim() ? item.badge : null
+    }))
+  });
+}
+
+function buildOnchainFormState(
+  store: StoreCatalogEntry,
+  supportedTokens: SupportedToken[],
+  onchainStore?: Awaited<ReturnType<typeof fetchStore>> | null,
+  acceptedTokens?: Hex[]
+): OnchainFormState {
+  return {
+    manager: onchainStore?.manager || store.onchain?.manager || "",
+    payout: onchainStore?.payout || store.onchain?.payout || "",
+    token: onchainStore?.token || store.onchain?.token || supportedTokens[0]?.address || "",
+    acceptedTokens:
+      (acceptedTokens?.length
+        ? acceptedTokens
+        : store.onchain?.acceptedTokens || []
+      ).map((address) => address.toLowerCase()),
+    minimumPurchase: onchainStore
+      ? formatUnits(onchainStore.minPurchaseAmount, 18)
+      : store.loyalty.minimumPurchase,
+    stampsPerPurchase: String(
+      onchainStore?.stampsPerPurchase ?? store.loyalty.stampsPerPurchase
+    ),
+    stampsRequired: String(
+      onchainStore?.stampsRequired ?? store.loyalty.stampsRequired
+    ),
+    rewardType: onchainStore?.rewardType ?? store.loyalty.rewardType,
+    rewardValue: onchainStore
+      ? formatUnits(onchainStore.rewardValue, 18)
+      : store.loyalty.rewardValue,
+    active: onchainStore?.active ?? true
+  };
+}
+
+function serializeOnchainForm(form: OnchainFormState) {
+  return JSON.stringify({
+    ...form,
+    manager: form.manager.trim(),
+    payout: form.payout.trim(),
+    token: form.token.trim(),
+    minimumPurchase: form.minimumPurchase.trim(),
+    stampsPerPurchase: form.stampsPerPurchase.trim(),
+    stampsRequired: form.stampsRequired.trim(),
+    rewardValue: form.rewardValue.trim()
+  });
 }
 
 async function saveMerchantPatch<T extends MerchantCatalogPatchPayload | MerchantOwnerMirrorPatchPayload>(
@@ -111,6 +221,66 @@ function FieldLabel({ children }: { children: string }) {
     <label className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
       {children}
     </label>
+  );
+}
+
+function SuccessToast({
+  message
+}: {
+  message: string;
+}) {
+  return (
+    <div className="fixed bottom-6 right-6 z-50 max-w-sm rounded-[26px] border border-[#CDEFD8] bg-white px-5 py-4 shadow-[0_24px_80px_rgba(23,18,42,0.14)]">
+      <div className="flex items-start gap-3">
+        <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#E6F8EC] text-[#2D7A46]">
+          ✓
+        </span>
+        <div className="space-y-1">
+          <p className="text-sm font-semibold text-[#1B1630]">Saved</p>
+          <p className="text-sm leading-6 text-[#5E6173]">{message}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StatusChoice({
+  active,
+  title,
+  description,
+  onClick,
+  disabled
+}: {
+  active: boolean;
+  title: string;
+  description: string;
+  onClick: () => void;
+  disabled?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-pressed={active}
+      className={`rounded-[26px] border px-5 py-4 text-left transition ${
+        active
+          ? "border-[#17122A] bg-[#17122A] text-white shadow-[0_18px_40px_rgba(23,18,42,0.18)]"
+          : "border-[#E7E1F1] bg-white text-[#241B3C]"
+      } ${disabled ? "cursor-default opacity-70" : ""}`}
+    >
+      <div className="flex items-center gap-3">
+        <span
+          className={`inline-flex h-3 w-3 rounded-full ${
+            active ? "bg-[#8EF0AE]" : "bg-[#D0CADD]"
+          }`}
+        />
+        <p className="text-sm font-semibold">{title}</p>
+      </div>
+      <p className={`mt-2 text-sm leading-6 ${active ? "text-white/74" : "text-[#7A748E]"}`}>
+        {description}
+      </p>
+    </button>
   );
 }
 
@@ -186,34 +356,53 @@ export function MerchantCatalogPanel({
   onStoresUpdated: (stores: StoreCatalogEntry[]) => void;
 }) {
   const { locale } = useLocale();
-  const [storeDraft, setStoreDraft] = useState({
-    name: cloneLocalizedText(selectedStore.name),
-    storeLogoUrl: selectedStore.storeLogoUrl || "",
-    category: cloneLocalizedText(selectedStore.category),
-    city: cloneLocalizedText(selectedStore.city),
-    accent: selectedStore.accent,
-    summary: cloneLocalizedText(selectedStore.summary)
-  });
-  const [menuDraft, setMenuDraft] = useState<EditableMenuDraft[]>(
-    selectedStore.menu.map(cloneMenuDraft)
+  const initialDraftState = useMemo(
+    () => buildCatalogDraftState(selectedStore),
+    [selectedStore]
+  );
+  const [storeDraft, setStoreDraft] = useState(initialDraftState.storeDraft);
+  const [menuDraft, setMenuDraft] = useState<EditableMenuDraft[]>(initialDraftState.menuDraft);
+  const [baselineSnapshot, setBaselineSnapshot] = useState(() =>
+    serializeCatalogDraft({
+      storeSlug: selectedStore.slug,
+      storeDraft: initialDraftState.storeDraft,
+      menuDraft: initialDraftState.menuDraft
+    })
   );
   const [isSaving, setIsSaving] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const clearStatus = useCallback(() => {
+    setStatus(null);
+  }, []);
+
+  useAutoDismissMessage(status, clearStatus, 3500);
 
   useEffect(() => {
-    setStoreDraft({
-      name: cloneLocalizedText(selectedStore.name),
-      storeLogoUrl: selectedStore.storeLogoUrl || "",
-      category: cloneLocalizedText(selectedStore.category),
-      city: cloneLocalizedText(selectedStore.city),
-      accent: selectedStore.accent,
-      summary: cloneLocalizedText(selectedStore.summary)
-    });
-    setMenuDraft(selectedStore.menu.map(cloneMenuDraft));
+    const nextDraftState = initialDraftState;
+    setStoreDraft(nextDraftState.storeDraft);
+    setMenuDraft(nextDraftState.menuDraft);
+    setBaselineSnapshot(
+      serializeCatalogDraft({
+        storeSlug: selectedStore.slug,
+        storeDraft: nextDraftState.storeDraft,
+        menuDraft: nextDraftState.menuDraft
+      })
+    );
     setStatus(null);
     setError(null);
-  }, [selectedStore]);
+  }, [initialDraftState, selectedStore.slug]);
+
+  const currentSnapshot = useMemo(
+    () =>
+      serializeCatalogDraft({
+        storeSlug: selectedStore.slug,
+        storeDraft,
+        menuDraft
+      }),
+    [menuDraft, selectedStore.slug, storeDraft]
+  );
+  const isDirty = currentSnapshot !== baselineSnapshot;
 
   function updateStoreLocalizedField(
     field: "name" | "category" | "city" | "summary",
@@ -230,11 +419,11 @@ export function MerchantCatalogPanel({
   }
 
   function updateMenuItem(
-    itemId: string,
+    draftKey: string,
     updater: (current: EditableMenuDraft) => EditableMenuDraft
   ) {
     setMenuDraft((current) =>
-      current.map((item) => (item.id === itemId ? updater(item) : item))
+      current.map((item) => (item.draftKey === draftKey ? updater(item) : item))
     );
   }
 
@@ -264,6 +453,17 @@ export function MerchantCatalogPanel({
       };
       const data = await saveMerchantPatch(payload, initialChainId);
       onStoresUpdated(data.stores);
+      const nextSelectedStore =
+        data.stores.find((store) => store.slug === selectedStore.slug) ?? selectedStore;
+      const nextDraftState = buildCatalogDraftState(nextSelectedStore);
+      const nextSnapshot = serializeCatalogDraft({
+        storeSlug: nextSelectedStore.slug,
+        storeDraft: nextDraftState.storeDraft,
+        menuDraft: nextDraftState.menuDraft
+      });
+      setStoreDraft(nextDraftState.storeDraft);
+      setMenuDraft(nextDraftState.menuDraft);
+      setBaselineSnapshot(nextSnapshot);
       setStatus(
         data.deployment?.url
           ? locale === "pt-BR"
@@ -351,15 +551,18 @@ export function MerchantCatalogPanel({
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-5">
-          {menuDraft.map((item, index) => (
-            <div key={item.id} className="rounded-[28px] border border-[#ECEAF4] bg-[#FBFAFD] p-5">
+          {menuDraft.map((item) => (
+            <div
+              key={item.draftKey}
+              className="rounded-[28px] border border-[#ECEAF4] bg-[#FBFAFD] p-5"
+            >
               <div className="grid gap-5">
                 <SectionGrid>
                   <TextField
                     label="ID"
                     value={item.id}
                     onChange={(value) =>
-                      updateMenuItem(item.id, (current) => ({ ...current, id: value }))
+                      updateMenuItem(item.draftKey, (current) => ({ ...current, id: value }))
                     }
                     disabled={item.isExisting}
                   />
@@ -369,7 +572,7 @@ export function MerchantCatalogPanel({
                         type="checkbox"
                         checked={Boolean(item.archived)}
                         onChange={(event) =>
-                          updateMenuItem(item.id, (current) => ({
+                          updateMenuItem(item.draftKey, (current) => ({
                             ...current,
                             archived: event.target.checked
                           }))
@@ -383,7 +586,7 @@ export function MerchantCatalogPanel({
                   label={locale === "pt-BR" ? "Nome" : "Name"}
                   value={item.name}
                   onChange={(localeKey, value) =>
-                    updateMenuItem(item.id, (current) => ({
+                    updateMenuItem(item.draftKey, (current) => ({
                       ...current,
                       name: {
                         ...current.name,
@@ -396,7 +599,7 @@ export function MerchantCatalogPanel({
                   label={locale === "pt-BR" ? "Descrição" : "Description"}
                   value={item.description}
                   onChange={(localeKey, value) =>
-                    updateMenuItem(item.id, (current) => ({
+                    updateMenuItem(item.draftKey, (current) => ({
                       ...current,
                       description: {
                         ...current.description,
@@ -409,7 +612,7 @@ export function MerchantCatalogPanel({
                   label={locale === "pt-BR" ? "Badge" : "Badge"}
                   value={item.badge || emptyLocalizedText()}
                   onChange={(localeKey, value) =>
-                    updateMenuItem(item.id, (current) => ({
+                    updateMenuItem(item.draftKey, (current) => ({
                       ...current,
                       badge: {
                         ...(current.badge || emptyLocalizedText()),
@@ -422,7 +625,7 @@ export function MerchantCatalogPanel({
                   label={locale === "pt-BR" ? "Preço" : "Price"}
                   value={item.price}
                   onChange={(value) =>
-                    updateMenuItem(item.id, (current) => ({ ...current, price: value }))
+                    updateMenuItem(item.draftKey, (current) => ({ ...current, price: value }))
                   }
                 />
                 {!item.isExisting ? (
@@ -431,7 +634,9 @@ export function MerchantCatalogPanel({
                       variant="outline"
                       size="sm"
                       onClick={() =>
-                        setMenuDraft((current) => current.filter((candidate) => candidate.id !== item.id))
+                        setMenuDraft((current) =>
+                          current.filter((candidate) => candidate.draftKey !== item.draftKey)
+                        )
                       }
                     >
                       {locale === "pt-BR" ? "Remover novo item" : "Remove new item"}
@@ -446,23 +651,24 @@ export function MerchantCatalogPanel({
             <Button
               variant="outline"
               onClick={() =>
-                setMenuDraft((current) => [
-                  ...current,
-                  {
-                    id: buildDraftMenuId(current.length),
-                    name: emptyLocalizedText(),
-                    description: emptyLocalizedText(),
-                    price: "0.01",
-                    badge: emptyLocalizedText(),
-                    archived: false,
-                    isExisting: false
+                    setMenuDraft((current) => [
+                      ...current,
+                      {
+                        id: buildDraftMenuId(current.length),
+                        name: emptyLocalizedText(),
+                        description: emptyLocalizedText(),
+                        price: "0.01",
+                        badge: emptyLocalizedText(),
+                        archived: false,
+                        isExisting: false,
+                        draftKey: buildDraftKey()
+                      }
+                    ])
                   }
-                ])
-              }
             >
               {locale === "pt-BR" ? "Adicionar item" : "Add item"}
             </Button>
-            <Button onClick={() => void handleSaveCatalog()} disabled={isSaving}>
+            <Button onClick={() => void handleSaveCatalog()} disabled={isSaving || !isDirty}>
               {isSaving
                 ? locale === "pt-BR"
                   ? "Salvando..."
@@ -473,7 +679,6 @@ export function MerchantCatalogPanel({
             </Button>
           </div>
 
-          {status ? <p className="text-sm text-[#2D7A46]">{status}</p> : null}
           {error ? (
             <p className="rounded-[24px] border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
               {error}
@@ -481,6 +686,7 @@ export function MerchantCatalogPanel({
           ) : null}
         </CardContent>
       </Card>
+      {status ? <SuccessToast message={status} /> : null}
     </div>
   );
 }
@@ -507,47 +713,24 @@ export function MerchantOnchainPanel({
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
-  const [form, setForm] = useState<{
-    manager: string;
-    payout: string;
-    token: string;
-    acceptedTokens: string[];
-    minimumPurchase: string;
-    stampsPerPurchase: string;
-    stampsRequired: string;
-    rewardType: StoreCatalogEntry["loyalty"]["rewardType"];
-    rewardValue: string;
-    active: boolean;
-  }>({
-    manager: selectedStore.onchain?.manager || "",
-    payout: selectedStore.onchain?.payout || "",
-    token: selectedStore.onchain?.token || supportedTokens[0]?.address || "",
-    acceptedTokens:
-      selectedStore.onchain?.acceptedTokens?.map((address) => address.toLowerCase()) || [],
-    minimumPurchase: selectedStore.loyalty.minimumPurchase,
-    stampsPerPurchase: String(selectedStore.loyalty.stampsPerPurchase),
-    stampsRequired: String(selectedStore.loyalty.stampsRequired),
-    rewardType: selectedStore.loyalty.rewardType,
-    rewardValue: selectedStore.loyalty.rewardValue,
-    active: true
-  });
+  const [form, setForm] = useState<OnchainFormState>(() =>
+    buildOnchainFormState(selectedStore, supportedTokens)
+  );
+  const [baselineSnapshot, setBaselineSnapshot] = useState(() =>
+    serializeOnchainForm(buildOnchainFormState(selectedStore, supportedTokens))
+  );
+  const clearStatus = useCallback(() => {
+    setStatus(null);
+  }, []);
+
+  useAutoDismissMessage(status, clearStatus, 3500);
 
   useEffect(() => {
     async function loadOnchainValues() {
       if (!contractAddress) {
-        setForm({
-          manager: selectedStore.onchain?.manager || "",
-          payout: selectedStore.onchain?.payout || "",
-          token: selectedStore.onchain?.token || supportedTokens[0]?.address || "",
-          acceptedTokens:
-            selectedStore.onchain?.acceptedTokens?.map((address) => address.toLowerCase()) || [],
-          minimumPurchase: selectedStore.loyalty.minimumPurchase,
-          stampsPerPurchase: String(selectedStore.loyalty.stampsPerPurchase),
-          stampsRequired: String(selectedStore.loyalty.stampsRequired),
-          rewardType: selectedStore.loyalty.rewardType,
-          rewardValue: selectedStore.loyalty.rewardValue,
-          active: true
-        });
+        const nextForm = buildOnchainFormState(selectedStore, supportedTokens);
+        setForm(nextForm);
+        setBaselineSnapshot(serializeOnchainForm(nextForm));
         return;
       }
 
@@ -562,34 +745,14 @@ export function MerchantOnchainPanel({
           fetchStoreAcceptedTokens(storeId, initialChainId, contractAddress)
         ]);
 
-        setForm({
-          manager: onchainStore?.manager || selectedStore.onchain?.manager || "",
-          payout: onchainStore?.payout || selectedStore.onchain?.payout || "",
-          token:
-            onchainStore?.token ||
-            selectedStore.onchain?.token ||
-            supportedTokens[0]?.address ||
-            "",
-          acceptedTokens:
-            (acceptedTokens.length > 0
-              ? acceptedTokens
-              : selectedStore.onchain?.acceptedTokens || []
-            ).map((address) => address.toLowerCase()),
-          minimumPurchase: onchainStore
-            ? formatUnits(onchainStore.minPurchaseAmount, 18)
-            : selectedStore.loyalty.minimumPurchase,
-          stampsPerPurchase: String(
-            onchainStore?.stampsPerPurchase ?? selectedStore.loyalty.stampsPerPurchase
-          ),
-          stampsRequired: String(
-            onchainStore?.stampsRequired ?? selectedStore.loyalty.stampsRequired
-          ),
-          rewardType: onchainStore?.rewardType ?? selectedStore.loyalty.rewardType,
-          rewardValue: onchainStore
-            ? formatUnits(onchainStore.rewardValue, 18)
-            : selectedStore.loyalty.rewardValue,
-          active: onchainStore?.active ?? true
-        });
+        const nextForm = buildOnchainFormState(
+          selectedStore,
+          supportedTokens,
+          onchainStore,
+          acceptedTokens
+        );
+        setForm(nextForm);
+        setBaselineSnapshot(serializeOnchainForm(nextForm));
       } catch (nextError) {
         setError(
           getUserFacingErrorMessage(
@@ -606,6 +769,11 @@ export function MerchantOnchainPanel({
 
     void loadOnchainValues();
   }, [contractAddress, initialChainId, locale, selectedStore, supportedTokens]);
+
+  const isDirty = useMemo(
+    () => serializeOnchainForm(form) !== baselineSnapshot,
+    [baselineSnapshot, form]
+  );
 
   async function handleSaveOnchain() {
     if (!contractAddress) {
@@ -685,6 +853,11 @@ export function MerchantOnchainPanel({
 
       const data = await saveMerchantPatch(payload, initialChainId);
       onStoresUpdated(data.stores);
+      const nextForm = {
+        ...form,
+        acceptedTokens: [...form.acceptedTokens]
+      };
+      setBaselineSnapshot(serializeOnchainForm(nextForm));
       setStatus(
         locale === "pt-BR"
           ? "Configuração onchain atualizada e espelhada no catálogo."
@@ -835,26 +1008,36 @@ export function MerchantOnchainPanel({
               }
             ]}
           />
-          <div className="flex items-end">
-            <label className="inline-flex items-center gap-3 text-sm text-[#625B78]">
-              <input
-                type="checkbox"
-                checked={form.active}
-                onChange={(event) =>
-                  setForm((current) => ({
-                    ...current,
-                    active: event.target.checked
-                  }))
+          <div className="space-y-2">
+            <FieldLabel>{locale === "pt-BR" ? "Status da loja" : "Store status"}</FieldLabel>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <StatusChoice
+                active={form.active}
+                title={locale === "pt-BR" ? "Ativa" : "Active"}
+                description={
+                  locale === "pt-BR"
+                    ? "Aceita compras e emite progresso normalmente."
+                    : "Accepts purchases and records loyalty as usual."
                 }
+                onClick={() => setForm((current) => ({ ...current, active: true }))}
                 disabled={!isContractOwner}
               />
-              {locale === "pt-BR" ? "Loja ativa" : "Store active"}
-            </label>
+              <StatusChoice
+                active={!form.active}
+                title={locale === "pt-BR" ? "Inativa" : "Inactive"}
+                description={
+                  locale === "pt-BR"
+                    ? "Bloqueia novas compras até reativar a loja."
+                    : "Blocks new purchases until the store is reactivated."
+                }
+                onClick={() => setForm((current) => ({ ...current, active: false }))}
+                disabled={!isContractOwner}
+              />
+            </div>
           </div>
         </SectionGrid>
 
         {isLoading ? <p className="text-sm text-[#625B78]">Loading...</p> : null}
-        {status ? <p className="text-sm text-[#2D7A46]">{status}</p> : null}
         {error ? (
           <p className="rounded-[24px] border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
             {error}
@@ -862,7 +1045,7 @@ export function MerchantOnchainPanel({
         ) : null}
 
         {isContractOwner ? (
-          <Button onClick={() => void handleSaveOnchain()} disabled={isSaving}>
+          <Button onClick={() => void handleSaveOnchain()} disabled={isSaving || !isDirty}>
             {isSaving
               ? locale === "pt-BR"
                 ? "Salvando..."
@@ -873,6 +1056,7 @@ export function MerchantOnchainPanel({
           </Button>
         ) : null}
       </CardContent>
+      {status ? <SuccessToast message={status} /> : null}
     </Card>
   );
 }
