@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { parseUnits, type Hex } from "viem";
 import { AppChrome } from "./app-chrome";
 import { ProgressMeter } from "./progress-meter";
@@ -27,6 +27,7 @@ import { getUserFacingErrorMessage } from "../lib/error-message";
 import { useMiniPay } from "../lib/minipay";
 import { encodeStoreId } from "../lib/store-id";
 import { getPrimaryPaymentToken, getTokenByAddress, type SupportedToken } from "../lib/tokens";
+import { useAutoDismissMessage } from "../lib/use-auto-dismiss-message";
 import {
   approveToken,
   purchaseTx,
@@ -78,7 +79,8 @@ export function StorePage({
     switchToDefaultChain,
     refreshWalletState,
     disconnect,
-    connectError
+    connectError,
+    clearConnectError
   } = useMiniPay(initialChainId);
   const contractAddress = useMemo(
     () => resolveContractAddressForChain(initialChainId, contractAddresses),
@@ -106,6 +108,12 @@ export function StorePage({
     : null;
   const hasInsufficientBalance =
     selectedToken !== null && currentBalance !== null && currentBalance < amount;
+  const clearError = useCallback(() => {
+    setError(null);
+  }, []);
+
+  useAutoDismissMessage(error, clearError);
+  useAutoDismissMessage(connectError, clearConnectError);
 
   useEffect(() => {
     async function loadState() {

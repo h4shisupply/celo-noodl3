@@ -199,12 +199,16 @@ export function useProfile(
     });
     void refresh();
   }, [address, refresh]);
+  const clearProfileError = useCallback(() => {
+    setProfileError(null);
+  }, []);
 
   return {
     profile,
     hasSeenPrompt,
     isSaving,
     profileError,
+    clearProfileError,
     saveProfile,
     dismissProfilePrompt,
     refresh

@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
 import {
   buildRewardCopy,
   buildStampRuleCopy,
@@ -9,6 +11,7 @@ import {
 } from "../lib/catalog";
 import { getDefaultChainId } from "../lib/chains";
 import { useMiniPay } from "../lib/minipay";
+import { useAutoDismissMessage } from "../lib/use-auto-dismiss-message";
 import { useLocale } from "./locale-provider";
 import { StoreLogo } from "./store-logo";
 import { SiteHeader } from "./site-header";
@@ -16,8 +19,18 @@ import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 
 export function HomePage({ stores }: { stores: StoreCatalogEntry[] }) {
+  const router = useRouter();
   const { locale, dictionary } = useLocale();
-  const { account } = useMiniPay(getDefaultChainId());
+  const [activePrimaryCta, setActivePrimaryCta] = useState<"header" | "hero" | "footer" | null>(
+    null
+  );
+  const {
+    account,
+    connect,
+    isConnecting,
+    connectError,
+    clearConnectError
+  } = useMiniPay(getDefaultChainId());
   const primaryCtaLabel =
     locale === "pt-BR"
       ? account
@@ -26,6 +39,34 @@ export function HomePage({ stores }: { stores: StoreCatalogEntry[] }) {
       : account
         ? "Open my dashboard"
         : "Join noodl3";
+  const primaryCtaDisplayLabel =
+    isConnecting ? (locale === "pt-BR" ? "Conectando..." : "Connecting...") : primaryCtaLabel;
+  const clearLandingConnectError = useCallback(() => {
+    clearConnectError();
+    setActivePrimaryCta(null);
+  }, [clearConnectError]);
+  const handlePrimaryCta = useCallback(
+    async (source: "header" | "hero" | "footer") => {
+      setActivePrimaryCta(source);
+
+      if (account) {
+        clearLandingConnectError();
+        router.push("/app");
+        return;
+      }
+
+      const nextAccount = await connect();
+      if (!nextAccount) {
+        return;
+      }
+
+      clearLandingConnectError();
+      router.push("/app");
+    },
+    [account, clearLandingConnectError, connect, router]
+  );
+
+  useAutoDismissMessage(connectError, clearLandingConnectError);
 
   return (
     <main className="space-y-20 pb-24 md:space-y-28 md:pb-28">
@@ -37,10 +78,16 @@ export function HomePage({ stores }: { stores: StoreCatalogEntry[] }) {
           { href: "#faq", label: dictionary.nav.faq }
         ]}
         cta={{
-          href: "/app",
-          label: primaryCtaLabel
+          label: primaryCtaDisplayLabel,
+          onClick: () => void handlePrimaryCta("header"),
+          isLoading: isConnecting
         }}
       />
+      {activePrimaryCta === "header" && connectError ? (
+        <p className="rounded-[24px] border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
+          {connectError}
+        </p>
+      ) : null}
 
       <section className="grid gap-12 pt-0 lg:grid-cols-[minmax(0,1.25fr)_24rem] lg:items-end">
         <div className="space-y-8">
@@ -57,15 +104,24 @@ export function HomePage({ stores }: { stores: StoreCatalogEntry[] }) {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Link href="/app">
-              <Button size="lg">{primaryCtaLabel}</Button>
-            </Link>
+            <Button
+              size="lg"
+              onClick={() => void handlePrimaryCta("hero")}
+              disabled={isConnecting}
+            >
+              {primaryCtaDisplayLabel}
+            </Button>
             <Link href="#stores">
               <Button size="lg" variant="outline">
                 {dictionary.actions.exploreStores}
               </Button>
             </Link>
           </div>
+          {activePrimaryCta === "hero" && connectError ? (
+            <p className="rounded-[24px] border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
+              {connectError}
+            </p>
+          ) : null}
 
           <div className="grid gap-4 pt-4 text-sm text-[#4C4660] md:grid-cols-3">
             {dictionary.landing.stats.map((stat) => (
@@ -241,15 +297,24 @@ export function HomePage({ stores }: { stores: StoreCatalogEntry[] }) {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Link href="/app">
-              <Button size="lg">{primaryCtaLabel}</Button>
-            </Link>
+            <Button
+              size="lg"
+              onClick={() => void handlePrimaryCta("footer")}
+              disabled={isConnecting}
+            >
+              {primaryCtaDisplayLabel}
+            </Button>
             <Link href="#stores">
               <Button size="lg" variant="outline">
                 {dictionary.actions.exploreStores}
               </Button>
             </Link>
           </div>
+          {activePrimaryCta === "footer" && connectError ? (
+            <p className="w-full rounded-[24px] border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
+              {connectError}
+            </p>
+          ) : null}
         </div>
       </section>
     </main>

@@ -2,6 +2,8 @@
 
 `noodl3` is a MiniPay-native loyalty app for local food and drink stores on Celo.
 
+Built and maintained as a H4shi project.
+
 The product is split into two layers:
 
 - `/`: public landing page
@@ -135,6 +137,11 @@ npm run typecheck
 npm run build
 npm run dev
 ```
+
+## Repo hygiene
+
+- Do not commit generated or vendor paths such as `node_modules/`, `.next/`, `.home/`, `artifacts/`, `cache/`, or `tsconfig.tsbuildinfo`.
+- Keep `lib/abi.ts` tracked as the runtime ABI source and regenerate local contract outputs with `npm run compile` plus `npm run export:abi` when needed.
 
 ## Deploy and seed
 

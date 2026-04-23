@@ -41,6 +41,7 @@ import {
   decodeStoreId,
   encodeStoreId
 } from "../lib/store-id";
+import { useAutoDismissMessage } from "../lib/use-auto-dismiss-message";
 import {
   claimRewardTx,
   consumeRewardTx,
@@ -101,6 +102,7 @@ export function DashboardPage({
   const [claimRecord, setClaimRecord] = useState<ClaimRecord | null>(null);
   const [claimStoreRecord, setClaimStoreRecord] = useState<StoreRecord | null>(null);
   const [claimLookupError, setClaimLookupError] = useState<string | null>(null);
+  const [claimScannerNotice, setClaimScannerNotice] = useState<string | null>(null);
   const [isConsuming, setIsConsuming] = useState(false);
   const [claimingSlug, setClaimingSlug] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
@@ -121,7 +123,8 @@ export function DashboardPage({
     switchToDefaultChain,
     refreshWalletState,
     disconnect,
-    connectError
+    connectError,
+    clearConnectError
   } = useMiniPay(initialChainId);
   const contractAddress = useMemo(
     () => resolveContractAddressForChain(initialChainId, contractAddresses),
@@ -132,11 +135,23 @@ export function DashboardPage({
     hasSeenPrompt,
     isSaving: isSavingProfile,
     profileError,
+    clearProfileError,
     saveProfile,
     dismissProfilePrompt
   } = useProfile(account, initialChainId, contractAddress, {
     enabled: !isWrongChain
   });
+  const clearActionError = useCallback(() => {
+    setActionError(null);
+  }, []);
+  const clearClaimLookupError = useCallback(() => {
+    setClaimLookupError(null);
+  }, []);
+
+  useAutoDismissMessage(actionError, clearActionError);
+  useAutoDismissMessage(claimLookupError, clearClaimLookupError);
+  useAutoDismissMessage(connectError, clearConnectError);
+  useAutoDismissMessage(profileError, clearProfileError);
 
   const explicitRole = normalizeDashboardRole(searchParams.get("role"));
   const explicitTab = normalizeDashboardTab(searchParams.get("tab"));
@@ -321,10 +336,16 @@ export function DashboardPage({
   useEffect(() => {
     setSelectedCustomer(null);
     setClaimLookupError(null);
+    setClaimScannerNotice(null);
     setClaimId(null);
     setClaimRecord(null);
     setClaimStoreRecord(null);
   }, [selectedStoreSlug]);
+  useEffect(() => {
+    if (activeScanner !== "claim") {
+      setClaimScannerNotice(null);
+    }
+  }, [activeScanner]);
 
   const replaceDashboardState = useCallback(
     (nextState: {
@@ -355,64 +376,76 @@ export function DashboardPage({
   );
 
   const lookupClaim = useCallback(
-    async (rawValue: string) => {
+    async (
+      rawValue: string,
+      options?: {
+        source?: "manual" | "scanner" | "link";
+      }
+    ) => {
+      const isScannerLookup = options?.source === "scanner";
+      const showLookupError = (message: string) => {
+        if (isScannerLookup) {
+          setClaimScannerNotice(message);
+          return false;
+        }
+
+        setClaimLookupError(message);
+        return false;
+      };
       const parsed = parseClaimInput(rawValue);
       if (parsed === null) {
-        setClaimLookupError(locale === "pt-BR" ? "Claim inválido." : "Invalid claim.");
         setClaimId(null);
         setClaimRecord(null);
         setClaimStoreRecord(null);
-        return;
+        return showLookupError(locale === "pt-BR" ? "Claim inválido." : "Invalid claim.");
       }
 
       if (!contractAddress) {
-        setClaimLookupError(
+        return showLookupError(
           locale === "pt-BR"
             ? "Contrato indisponível nesta rede."
             : "Contract unavailable on this network."
         );
-        return;
       }
 
       if (account && isWrongChain) {
-        setClaimLookupError(
+        return showLookupError(
           locale === "pt-BR"
             ? `Troque sua carteira para ${expectedChainLabel} antes de continuar.`
             : `Switch your wallet to ${expectedChainLabel} before continuing.`
         );
-        return;
       }
 
       setClaimLookupError(null);
+      setClaimScannerNotice(null);
       setClaimId(parsed);
 
       const nextClaimRecord = await fetchClaim(parsed, initialChainId, contractAddress);
       if (!nextClaimRecord) {
         setClaimRecord(null);
         setClaimStoreRecord(null);
-        setClaimLookupError(locale === "pt-BR" ? "Resgate não encontrado." : "Claim not found.");
-        return;
+        return showLookupError(
+          locale === "pt-BR" ? "Resgate não encontrado." : "Claim not found."
+        );
       }
 
       const nextStoreRecord = await fetchStore(nextClaimRecord.storeId, initialChainId, contractAddress);
       if (!nextStoreRecord) {
         setClaimRecord(null);
         setClaimStoreRecord(null);
-        setClaimLookupError(locale === "pt-BR" ? "Loja não encontrada." : "Store not found.");
-        return;
+        return showLookupError(locale === "pt-BR" ? "Loja não encontrada." : "Store not found.");
       }
 
       if (selectedManagedStore) {
         const selectedStoreId = encodeStoreId(selectedManagedStore.slug).toLowerCase();
         if (nextClaimRecord.storeId.toLowerCase() !== selectedStoreId) {
-          setClaimLookupError(
+          setClaimRecord(null);
+          setClaimStoreRecord(null);
+          return showLookupError(
             locale === "pt-BR"
               ? "Este resgate pertence a outra loja."
               : "This claim belongs to another store."
           );
-          setClaimRecord(null);
-          setClaimStoreRecord(null);
-          return;
         }
       }
 
@@ -420,14 +453,13 @@ export function DashboardPage({
         selectedCustomer &&
         nextClaimRecord.user.toLowerCase() !== selectedCustomer.toLowerCase()
       ) {
-        setClaimLookupError(
+        setClaimRecord(null);
+        setClaimStoreRecord(null);
+        return showLookupError(
           locale === "pt-BR"
             ? "Este resgate pertence a outro cliente."
             : "This claim belongs to another customer."
         );
-        setClaimRecord(null);
-        setClaimStoreRecord(null);
-        return;
       }
 
       setClaimRecord(nextClaimRecord);
@@ -440,13 +472,15 @@ export function DashboardPage({
             : "This claim has already been used."
         );
       }
+
+      return true;
     },
     [account, contractAddress, expectedChainLabel, initialChainId, isWrongChain, locale, selectedCustomer, selectedManagedStore]
   );
 
   useEffect(() => {
     if (claimParam) {
-      void lookupClaim(claimParam);
+      void lookupClaim(claimParam, { source: "link" });
     }
   }, [claimParam, lookupClaim]);
 
@@ -1145,21 +1179,23 @@ export function DashboardPage({
                   ) : null}
 
                   <div className="grid gap-6 lg:grid-cols-2">
-                    <QrScanner
-                      title={locale === "pt-BR" ? "Validar recompensa" : "Validate reward"}
-                      description={
-                        locale === "pt-BR"
-                          ? "Leia o QR gerado pelo cliente para carregar o claim."
-                          : "Scan the QR generated by the customer to load the claim."
-                      }
-                      notice={claimLookupError}
-                      onClose={() => replaceDashboardState({ scanner: undefined })}
-                      onDetected={async (value) => {
-                        setClaimInputValue(value);
-                        await lookupClaim(value);
-                        return true;
-                      }}
-                    />
+                <QrScanner
+                  title={locale === "pt-BR" ? "Validar recompensa" : "Validate reward"}
+                  description={
+                    locale === "pt-BR"
+                      ? "Leia o QR gerado pelo cliente para carregar o claim."
+                      : "Scan the QR generated by the customer to load the claim."
+                  }
+                  notice={claimScannerNotice}
+                  onClose={() => {
+                    setClaimScannerNotice(null);
+                    replaceDashboardState({ scanner: undefined });
+                  }}
+                  onDetected={async (value) => {
+                    setClaimInputValue(value);
+                    return lookupClaim(value, { source: "scanner" });
+                  }}
+                />
 
                     <Card>
                       <CardHeader>
@@ -1180,7 +1216,7 @@ export function DashboardPage({
                               : "Ex.: CHOI-0001 or claim 1"
                           }
                         />
-                        <Button onClick={() => void lookupClaim(claimInputValue)}>
+                        <Button onClick={() => void lookupClaim(claimInputValue, { source: "manual" })}>
                           {locale === "pt-BR" ? "Validar resgate" : "Check claim"}
                         </Button>
                       </CardContent>

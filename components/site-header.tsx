@@ -16,8 +16,10 @@ type SiteHeaderProps = {
   brandHref: string;
   items: NavItem[];
   cta?: {
-    href: string;
     label: string;
+    href?: string;
+    onClick?: () => void;
+    isLoading?: boolean;
   };
 };
 
@@ -55,6 +57,35 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
   const { locale } = useLocale();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuLabel = menuOpen ? (locale === "pt-BR" ? "Fechar" : "Close") : "Menu";
+  const renderCta = (onClick?: () => void) => {
+    if (!cta) {
+      return null;
+    }
+
+    if (cta.onClick) {
+      return (
+        <Button
+          onClick={() => {
+            onClick?.();
+            cta.onClick?.();
+          }}
+          disabled={cta.isLoading}
+        >
+          {cta.label}
+        </Button>
+      );
+    }
+
+    if (!cta.href) {
+      return null;
+    }
+
+    return (
+      <Link href={cta.href} onClick={onClick}>
+        <Button>{cta.label}</Button>
+      </Link>
+    );
+  };
 
   return (
     <header className="py-4 md:py-5">
@@ -68,11 +99,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
             ))}
           </nav>
           <LanguageSwitcher />
-          {cta ? (
-            <Link href={cta.href}>
-              <Button>{cta.label}</Button>
-            </Link>
-          ) : null}
+          {renderCta()}
         </div>
 
         <button
@@ -97,11 +124,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
           </nav>
           <div className="flex flex-wrap items-center gap-3">
             <LanguageSwitcher />
-            {cta ? (
-              <Link href={cta.href} onClick={() => setMenuOpen(false)}>
-                <Button>{cta.label}</Button>
-              </Link>
-            ) : null}
+            {renderCta(() => setMenuOpen(false))}
           </div>
         </div>
       ) : null}
