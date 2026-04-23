@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { Hex } from "viem";
 import { AppChrome } from "./app-chrome";
@@ -178,27 +177,16 @@ export function ClaimPage({
                   </li>
                 ))}
               </ol>
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href={buildDashboardUrl({
-                    role: "merchant",
-                    scanner: "claim",
-                    claim: claimId
-                  })}
+              {claimUrl ? (
+                <Button
+                  variant="outline"
+                  onClick={async () => {
+                    await navigator.clipboard.writeText(claimUrl);
+                  }}
                 >
-                  <Button>{dictionary.actions.openVerifier}</Button>
-                </Link>
-                {claimUrl ? (
-                  <Button
-                    variant="outline"
-                    onClick={async () => {
-                      await navigator.clipboard.writeText(claimUrl);
-                    }}
-                  >
-                    {dictionary.actions.copyLink}
-                  </Button>
-                ) : null}
-              </div>
+                  {dictionary.actions.copyLink}
+                </Button>
+              ) : null}
             </CardContent>
           </Card>
         </div>

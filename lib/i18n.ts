@@ -544,7 +544,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       nextStepTitle: "O que fazer agora",
       purchaseNextSteps: [
         "Abra a carteira de recompensas para acompanhar o avanço desta loja.",
-        "Quando atingir a meta, gere o QR do resgate e apresente no caixa."
+        "Continue comprando nesta loja para avançar até a próxima recompensa."
       ],
       consumeNextSteps: [
         "Volte para o verificador para ler outro QR ou validar manualmente.",
@@ -863,7 +863,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       nextStepTitle: "What to do next",
       purchaseNextSteps: [
         "Open Rewards to track progress for this store.",
-        "When you reach the threshold, generate the claim QR and present it at checkout."
+        "Keep buying at this store to progress toward the next reward."
       ],
       consumeNextSteps: [
         "Return to the verifier to scan another QR or validate manually.",

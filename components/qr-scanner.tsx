@@ -9,13 +9,15 @@ export function QrScanner({
   description,
   onDetected,
   onClose,
-  notice
+  notice,
+  closeOnDetected = true
 }: {
   title: string;
   description: string;
   onDetected: (value: string) => boolean | void | Promise<boolean | void>;
   onClose?: () => void;
   notice?: string | null;
+  closeOnDetected?: boolean;
 }) {
   const { dictionary } = useLocale();
   const qrCopy = dictionary.qrScanner;
@@ -116,7 +118,9 @@ export function QrScanner({
               return;
             }
 
-            onClose?.();
+            if (closeOnDetected) {
+              onClose?.();
+            }
           }
         } catch {
           // Ignore transient camera detection failures.
@@ -130,6 +134,7 @@ export function QrScanner({
     }
   }, [
     isSupported,
+    closeOnDetected,
     onClose,
     onDetected,
     qrCopy,
