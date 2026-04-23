@@ -1,7 +1,7 @@
-import { parseUnits } from "viem";
 import {
   normalizeImageUrl
 } from "./format";
+import { sanitizeStablecoinDecimalString } from "./stablecoin-value";
 import type {
   LocalizedText,
   MenuItem,
@@ -113,16 +113,6 @@ function sanitizeOptionalLocalizedText(value?: LocalizedText | null, label?: str
   return sanitizeLocalizedText(value, label || "Text");
 }
 
-function sanitizeDecimalString(value: string, label: string) {
-  const trimmed = value.trim();
-  if (!/^\d+(\.\d+)?$/.test(trimmed)) {
-    throw new Error(`${label} must be a decimal string.`);
-  }
-
-  parseUnits(trimmed, 18);
-  return trimmed;
-}
-
 function sanitizeItemId(value: string) {
   const trimmed = value.trim();
   if (!/^[a-z0-9][a-z0-9-_]{0,63}$/.test(trimmed)) {
@@ -137,7 +127,7 @@ function sanitizeCatalogPatchItem(item: MerchantCatalogMenuPatchItem): MenuItem 
     id: sanitizeItemId(item.id),
     name: sanitizeLocalizedText(item.name, "Menu name"),
     description: sanitizeLocalizedText(item.description, "Menu description"),
-    price: sanitizeDecimalString(item.price, "Menu price"),
+    price: sanitizeStablecoinDecimalString(item.price, "Menu price"),
     badge: sanitizeOptionalLocalizedText(item.badge, "Menu badge"),
     archived: Boolean(item.archived)
   };
@@ -217,11 +207,11 @@ export function applyMerchantCatalogPatch(
 }
 
 export function sanitizeOwnerMirrorPatch(payload: MerchantOwnerMirrorPatchPayload) {
-  const minimumPurchase = sanitizeDecimalString(
+  const minimumPurchase = sanitizeStablecoinDecimalString(
     payload.loyalty.minimumPurchase,
     "Minimum purchase"
   );
-  const rewardValue = sanitizeDecimalString(payload.loyalty.rewardValue, "Reward value");
+  const rewardValue = sanitizeStablecoinDecimalString(payload.loyalty.rewardValue, "Reward value");
 
   if (payload.loyalty.stampsPerPurchase < 1 || payload.loyalty.stampsRequired < 1) {
     throw new Error("Stamp configuration must be greater than zero.");

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { formatUnits, getAddress, parseUnits, type Hex } from "viem";
 import {
   buildMerchantPatchMessage,
@@ -14,6 +14,11 @@ import {
 } from "../lib/contract";
 import { getUserFacingErrorMessage } from "../lib/error-message";
 import { encodeStoreId } from "../lib/store-id";
+import {
+  canonicalizeStablecoinValueInput,
+  normalizeStablecoinValueInput,
+  sanitizeStablecoinDecimalString
+} from "../lib/stablecoin-value";
 import {
   configureStoreAcceptedTokensTx,
   configureStoreTx,
@@ -74,7 +79,7 @@ function cloneMenuDraft(item: StoreCatalogEntry["menu"][number]): EditableMenuDr
     id: item.id,
     name: cloneLocalizedText(item.name),
     description: cloneLocalizedText(item.description),
-    price: item.price,
+    price: canonicalizeStablecoinValueInput(item.price),
     badge: item.badge ? cloneLocalizedText(item.badge) : null,
     archived: Boolean(item.archived),
     isExisting: true,
@@ -146,9 +151,11 @@ function buildOnchainFormState(
         ? acceptedTokens
         : store.onchain?.acceptedTokens || []
       ).map((address) => address.toLowerCase()),
-    minimumPurchase: onchainStore
-      ? formatUnits(onchainStore.minPurchaseAmount, 18)
-      : store.loyalty.minimumPurchase,
+    minimumPurchase: canonicalizeStablecoinValueInput(
+      onchainStore
+        ? formatUnits(onchainStore.minPurchaseAmount, 18)
+        : store.loyalty.minimumPurchase
+    ),
     stampsPerPurchase: String(
       onchainStore?.stampsPerPurchase ?? store.loyalty.stampsPerPurchase
     ),
@@ -156,9 +163,9 @@ function buildOnchainFormState(
       onchainStore?.stampsRequired ?? store.loyalty.stampsRequired
     ),
     rewardType: onchainStore?.rewardType ?? store.loyalty.rewardType,
-    rewardValue: onchainStore
-      ? formatUnits(onchainStore.rewardValue, 18)
-      : store.loyalty.rewardValue,
+    rewardValue: canonicalizeStablecoinValueInput(
+      onchainStore ? formatUnits(onchainStore.rewardValue, 18) : store.loyalty.rewardValue
+    ),
     active: onchainStore?.active ?? true
   };
 }
@@ -314,6 +321,37 @@ function TextField({
   );
 }
 
+function StablecoinValueField({
+  label,
+  value,
+  onChange,
+  disabled
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  disabled?: boolean;
+}) {
+  return (
+    <div className="space-y-2">
+      <FieldLabel>{label}</FieldLabel>
+      <Input
+        value={value}
+        inputMode="decimal"
+        pattern="[0-9]*[.,]?[0-9]{0,6}"
+        onChange={(event) => onChange(normalizeStablecoinValueInput(event.target.value))}
+        onBlur={() => {
+          const canonicalValue = canonicalizeStablecoinValueInput(value);
+          if (canonicalValue !== value) {
+            onChange(canonicalValue);
+          }
+        }}
+        disabled={disabled}
+      />
+    </div>
+  );
+}
+
 function LocalizedFields({
   label,
   value,
@@ -372,6 +410,7 @@ export function MerchantCatalogPanel({
   const [isSaving, setIsSaving] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const previousStoreSlugRef = useRef(selectedStore.slug);
   const clearStatus = useCallback(() => {
     setStatus(null);
   }, []);
@@ -379,6 +418,8 @@ export function MerchantCatalogPanel({
   useAutoDismissMessage(status, clearStatus, 3500);
 
   useEffect(() => {
+    const storeChanged = previousStoreSlugRef.current !== selectedStore.slug;
+    previousStoreSlugRef.current = selectedStore.slug;
     const nextDraftState = initialDraftState;
     setStoreDraft(nextDraftState.storeDraft);
     setMenuDraft(nextDraftState.menuDraft);
@@ -389,7 +430,9 @@ export function MerchantCatalogPanel({
         menuDraft: nextDraftState.menuDraft
       })
     );
-    setStatus(null);
+    if (storeChanged) {
+      setStatus(null);
+    }
     setError(null);
   }, [initialDraftState, selectedStore.slug]);
 
@@ -621,7 +664,7 @@ export function MerchantCatalogPanel({
                     }))
                   }
                 />
-                <TextField
+                <StablecoinValueField
                   label={locale === "pt-BR" ? "Preço" : "Price"}
                   value={item.price}
                   onChange={(value) =>
@@ -722,21 +765,30 @@ export function MerchantOnchainPanel({
   const clearStatus = useCallback(() => {
     setStatus(null);
   }, []);
+  const previousStoreSlugRef = useRef(selectedStore.slug);
 
   useAutoDismissMessage(status, clearStatus, 3500);
 
   useEffect(() => {
+    const storeChanged = previousStoreSlugRef.current !== selectedStore.slug;
+    previousStoreSlugRef.current = selectedStore.slug;
+
     async function loadOnchainValues() {
       if (!contractAddress) {
         const nextForm = buildOnchainFormState(selectedStore, supportedTokens);
         setForm(nextForm);
         setBaselineSnapshot(serializeOnchainForm(nextForm));
+        if (storeChanged) {
+          setStatus(null);
+        }
         return;
       }
 
       setIsLoading(true);
       setError(null);
-      setStatus(null);
+      if (storeChanged) {
+        setStatus(null);
+      }
 
       try {
         const storeId = encodeStoreId(selectedStore.slug);
@@ -806,17 +858,22 @@ export function MerchantOnchainPanel({
       });
 
       const storeId = encodeStoreId(selectedStore.slug);
+      const minimumPurchase = sanitizeStablecoinDecimalString(
+        form.minimumPurchase,
+        "Minimum purchase"
+      );
+      const rewardValue = sanitizeStablecoinDecimalString(form.rewardValue, "Reward value");
       const configureHash = await configureStoreTx({
         contractAddress,
         storeId,
         payout: getAddress(form.payout) as Hex,
         manager: getAddress(form.manager) as Hex,
         token: getAddress(form.token) as Hex,
-        minPurchaseAmount: parseUnits(form.minimumPurchase, 18),
+        minPurchaseAmount: parseUnits(minimumPurchase, 18),
         stampsPerPurchase: Number(form.stampsPerPurchase),
         stampsRequired: Number(form.stampsRequired),
         rewardType: form.rewardType === "free_item" ? 1 : 0,
-        rewardValue: parseUnits(form.rewardValue, 18),
+        rewardValue: parseUnits(rewardValue, 18),
         active: form.active,
         chainId: initialChainId
       });
@@ -839,8 +896,8 @@ export function MerchantOnchainPanel({
           stampsPerPurchase: Number(form.stampsPerPurchase),
           stampsRequired: Number(form.stampsRequired),
           rewardType: form.rewardType,
-          rewardValue: form.rewardValue,
-          minimumPurchase: form.minimumPurchase
+          rewardValue,
+          minimumPurchase
         },
         onchain: {
           manager: getAddress(form.manager) as Hex,
@@ -957,13 +1014,13 @@ export function MerchantOnchainPanel({
         </div>
 
         <SectionGrid>
-          <TextField
+          <StablecoinValueField
             label={locale === "pt-BR" ? "Compra mínima" : "Minimum purchase"}
             value={form.minimumPurchase}
             onChange={(value) => setForm((current) => ({ ...current, minimumPurchase: value }))}
             disabled={!isContractOwner}
           />
-          <TextField
+          <StablecoinValueField
             label={locale === "pt-BR" ? "Valor da recompensa" : "Reward value"}
             value={form.rewardValue}
             onChange={(value) => setForm((current) => ({ ...current, rewardValue: value }))}
