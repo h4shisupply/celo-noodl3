@@ -1,0 +1,206 @@
+[
+  {
+    "slug": "cafe-lina",
+    "shortCode": "LINA",
+    "name": {
+      "pt-BR": "Cafe Lina",
+      "en": "Cafe Lina"
+    },
+    "store_logo_url": "/store-logos/cafe-lina.svg",
+    "category": {
+      "pt-BR": "Café especial",
+      "en": "Specialty coffee"
+    },
+    "city": {
+      "pt-BR": "Bela Vista",
+      "en": "Bela Vista"
+    },
+    "accent": "from-[#7B3FE4] via-[#9E70F0] to-[#E5DAFF]",
+    "summary": {
+      "pt-BR": "Cafés, cookies e pausas rápidas com fidelidade no MiniPay.",
+      "en": "Coffee, cookies, and quick loyalty in MiniPay."
+    },
+    "loyalty": {
+      "stampsPerPurchase": 1,
+      "stampsRequired": 10,
+      "rewardType": "fixed_amount",
+      "rewardValue": "8",
+      "minimumPurchase": "8"
+    },
+    "menu": [
+      {
+        "id": "flat-white",
+        "name": {
+          "pt-BR": "Flat White da Casa",
+          "en": "House Flat White"
+        },
+        "description": {
+          "pt-BR": "Café especial com leite texturizado.",
+          "en": "Specialty coffee with silky steamed milk."
+        },
+        "price": "12",
+        "badge": {
+          "pt-BR": "Mais pedido",
+          "en": "Top pick"
+        }
+      },
+      {
+        "id": "cookie-lina",
+        "name": {
+          "pt-BR": "Cookie de chocolate",
+          "en": "Chocolate cookie"
+        },
+        "description": {
+          "pt-BR": "Cookie macio para acompanhar o café.",
+          "en": "Soft cookie designed to pair with coffee."
+        },
+        "price": "8",
+        "badge": {
+          "pt-BR": "Combo ideal",
+          "en": "Easy add-on"
+        }
+      }
+    ],
+    "onchain": {
+      "manager": "0x1111111111111111111111111111111111111111",
+      "payout": "0x2222222222222222222222222222222222222222",
+      "token": "0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e"
+    }
+  },
+  {
+    "slug": "choices-bar",
+    "shortCode": "CHOI",
+    "name": {
+      "pt-BR": "Choices Bar",
+      "en": "Choices Bar"
+    },
+    "store_logo_url": "/store-logos/choices-bar.svg",
+    "category": {
+      "pt-BR": "Chopp & petiscos",
+      "en": "Draft beer & snacks"
+    },
+    "city": {
+      "pt-BR": "Pinheiros",
+      "en": "Pinheiros"
+    },
+    "accent": "from-[#17122A] via-[#4F46E5] to-[#B7B5FF]",
+    "summary": {
+      "pt-BR": "Pedidos repetidos e recompensas sem atrito.",
+      "en": "Repeat orders and frictionless rewards."
+    },
+    "loyalty": {
+      "stampsPerPurchase": 1,
+      "stampsRequired": 10,
+      "rewardType": "free_item",
+      "rewardValue": "1",
+      "minimumPurchase": "12"
+    },
+    "menu": [
+      {
+        "id": "chopp-choices",
+        "name": {
+          "pt-BR": "Um chopp da loja Choices",
+          "en": "Choices draft beer"
+        },
+        "description": {
+          "pt-BR": "Pilsen gelada para a rodada da noite.",
+          "en": "Cold pilsner for a late-evening round."
+        },
+        "price": "16",
+        "badge": {
+          "pt-BR": "Vira recompensa",
+          "en": "Reward item"
+        }
+      },
+      {
+        "id": "batata-crocante",
+        "name": {
+          "pt-BR": "Batata crocante",
+          "en": "Crispy potatoes"
+        },
+        "description": {
+          "pt-BR": "Porção pequena para dividir.",
+          "en": "Small plate made for sharing."
+        },
+        "price": "18",
+        "badge": {
+          "pt-BR": "Petisco",
+          "en": "Snack"
+        }
+      }
+    ],
+    "onchain": {
+      "manager": "0x3333333333333333333333333333333333333333",
+      "payout": "0x4444444444444444444444444444444444444444",
+      "token": "0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e"
+    }
+  },
+  {
+    "slug": "nubi-gelato",
+    "shortCode": "NUBI",
+    "name": {
+      "pt-BR": "Nubi Gelato",
+      "en": "Nubi Gelato"
+    },
+    "store_logo_url": "/store-logos/nubi-gelato.svg",
+    "category": {
+      "pt-BR": "Sobremesas",
+      "en": "Desserts"
+    },
+    "city": {
+      "pt-BR": "Vila Madalena",
+      "en": "Vila Madalena"
+    },
+    "accent": "from-[#F59E0B] via-[#F6C453] to-[#FFF0B6]",
+    "summary": {
+      "pt-BR": "Gelato e sobremesas com recompensa simples de entender e validar.",
+      "en": "Gelato and desserts with rewards that are easy to understand and verify."
+    },
+    "loyalty": {
+      "stampsPerPurchase": 1,
+      "stampsRequired": 8,
+      "rewardType": "fixed_amount",
+      "rewardValue": "10",
+      "minimumPurchase": "10"
+    },
+    "menu": [
+      {
+        "id": "gelato-doppio",
+        "name": {
+          "pt-BR": "Gelato doppio",
+          "en": "Gelato doppio"
+        },
+        "description": {
+          "pt-BR": "Dois sabores sazonais.",
+          "en": "Two seasonal flavors."
+        },
+        "price": "14",
+        "badge": {
+          "pt-BR": "Clássico",
+          "en": "Classic"
+        }
+      },
+      {
+        "id": "affogato",
+        "name": {
+          "pt-BR": "Affogato cremoso",
+          "en": "Creamy affogato"
+        },
+        "description": {
+          "pt-BR": "Gelato de baunilha com espresso.",
+          "en": "Vanilla gelato finished with espresso."
+        },
+        "price": "18",
+        "badge": {
+          "pt-BR": "Premium",
+          "en": "Premium"
+        }
+      }
+    ],
+    "onchain": {
+      "manager": "0x5555555555555555555555555555555555555555",
+      "payout": "0x6666666666666666666666666666666666666666",
+      "token": "0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e"
+    }
+  }
+]
