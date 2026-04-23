@@ -9,6 +9,9 @@ export type ServerEnv = {
   seedManagerAddress: string;
   seedPayoutAddress: string;
   noodl3StoreCatalogJson: string;
+  vercelAccessToken: string;
+  vercelProjectId: string;
+  vercelTeamId: string;
 };
 
 function readServerVar(name: string, fallback = "") {
@@ -29,7 +32,10 @@ export function readServerEnv(): ServerEnv {
     noodl3ContractAddressSepolia: readServerVar("NOODL3_CONTRACT_ADDRESS_SEPOLIA"),
     seedManagerAddress: readServerVar("NOODL3_SEED_MANAGER_ADDRESS"),
     seedPayoutAddress: readServerVar("NOODL3_SEED_PAYOUT_ADDRESS"),
-    noodl3StoreCatalogJson: readServerVar("NOODL3_STORE_CATALOG_JSON")
+    noodl3StoreCatalogJson: readServerVar("NOODL3_STORE_CATALOG_JSON"),
+    vercelAccessToken: readServerVar("VERCEL_ACCESS_TOKEN"),
+    vercelProjectId: readServerVar("VERCEL_PROJECT_ID"),
+    vercelTeamId: readServerVar("VERCEL_TEAM_ID")
   };
 }
 

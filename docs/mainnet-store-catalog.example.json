@@ -93,9 +93,25 @@
       "stampsRequired": 10,
       "rewardType": "free_item",
       "rewardValue": "1",
-      "minimumPurchase": "12"
+      "minimumPurchase": "0.01"
     },
     "menu": [
+      {
+        "id": "promo-mainnet",
+        "name": {
+          "pt-BR": "Promo mainnet 1 centavo",
+          "en": "Mainnet 1 cent promo"
+        },
+        "description": {
+          "pt-BR": "Item promocional para validar o fluxo real na mainnet com valor mínimo.",
+          "en": "Promo item for validating the real mainnet flow at the minimum amount."
+        },
+        "price": "0.01",
+        "badge": {
+          "pt-BR": "Teste mainnet",
+          "en": "Mainnet test"
+        }
+      },
       {
         "id": "chopp-choices",
         "name": {

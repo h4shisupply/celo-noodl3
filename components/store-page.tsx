@@ -16,6 +16,7 @@ import {
   buildStampRuleCopy,
   findItemById,
   formatPaymentAmount,
+  getActiveMenuItems,
   resolveText,
   type StoreCatalogEntry
 } from "../lib/catalog";
@@ -54,8 +55,9 @@ export function StorePage({
 }) {
   const router = useRouter();
   const { locale, dictionary } = useLocale();
+  const visibleItems = useMemo(() => getActiveMenuItems(store), [store]);
   const [selectedItemId, setSelectedItemId] = useState(
-    findItemById(store, initialItemId)?.id ?? store.menu[0].id
+    findItemById(store, initialItemId)?.id ?? visibleItems[0]?.id ?? ""
   );
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState<string | null>(null);
@@ -87,8 +89,8 @@ export function StorePage({
     [contractAddresses, initialChainId]
   );
   const selectedItem = useMemo(
-    () => findItemById(store, selectedItemId) ?? store.menu[0],
-    [selectedItemId, store]
+    () => findItemById(store, selectedItemId) ?? visibleItems[0],
+    [selectedItemId, store, visibleItems]
   );
   const storeId = useMemo(() => encodeStoreId(store.slug), [store.slug]);
   const selectedToken = useMemo(
@@ -100,8 +102,10 @@ export function StorePage({
   );
   const amount = useMemo(
     () =>
-      selectedToken ? parseUnits(selectedItem.price, selectedToken.decimals) : 0n,
-    [selectedItem.price, selectedToken]
+      selectedToken && selectedItem
+        ? parseUnits(selectedItem.price, selectedToken.decimals)
+        : 0n,
+    [selectedItem, selectedToken]
   );
   const currentBalance = selectedPaymentToken
     ? balancesByToken[selectedPaymentToken.toLowerCase()] ?? null
@@ -170,6 +174,11 @@ export function StorePage({
       return;
     }
 
+    if (!selectedItem) {
+      setSelectedPaymentToken(acceptedTokens[0]?.address ?? null);
+      return;
+    }
+
     setSelectedPaymentToken((current) => {
       if (
         current &&
@@ -186,7 +195,7 @@ export function StorePage({
 
       return tokenWithBalance?.address ?? acceptedTokens[0].address;
     });
-  }, [acceptedTokens, balancesByToken, selectedItem.price]);
+  }, [acceptedTokens, balancesByToken, selectedItem]);
 
   async function handleCheckout() {
     if (!account) {
@@ -203,7 +212,7 @@ export function StorePage({
       return;
     }
 
-    if (!selectedToken || !selectedPaymentToken) {
+    if (!selectedItem || !selectedToken || !selectedPaymentToken) {
       setError(dictionary.messages.genericActionFailed);
       return;
     }
@@ -282,7 +291,11 @@ export function StorePage({
   }
 
   const checkoutDisabled =
-    isSubmitting || !onchainReady || !selectedToken || hasInsufficientBalance;
+    isSubmitting ||
+    !onchainReady ||
+    !selectedToken ||
+    hasInsufficientBalance ||
+    !selectedItem;
 
   return (
     <AppChrome
@@ -315,17 +328,19 @@ export function StorePage({
               <CardDescription>{dictionary.store.checkoutDescription}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="rounded-[24px] border border-[#ECEAF4] bg-[#F8F6FC] px-4 py-4">
-                <p className="text-sm font-semibold text-[#1B1630]">
-                  {resolveText(selectedItem.name, locale)}
-                </p>
-                <p className="mt-1 text-sm text-[#6D6783]">
-                  {resolveText(selectedItem.description, locale)}
-                </p>
-                <p className="mt-3 text-2xl font-semibold text-[#1B1630]">
-                  {selectedToken ? formatPaymentAmount(amount, locale, selectedToken) : "—"}
-                </p>
-              </div>
+              {selectedItem ? (
+                <div className="rounded-[24px] border border-[#ECEAF4] bg-[#F8F6FC] px-4 py-4">
+                  <p className="text-sm font-semibold text-[#1B1630]">
+                    {resolveText(selectedItem.name, locale)}
+                  </p>
+                  <p className="mt-1 text-sm text-[#6D6783]">
+                    {resolveText(selectedItem.description, locale)}
+                  </p>
+                  <p className="mt-3 text-2xl font-semibold text-[#1B1630]">
+                    {selectedToken ? formatPaymentAmount(amount, locale, selectedToken) : "—"}
+                  </p>
+                </div>
+              ) : null}
 
               <div className="rounded-[24px] border border-[#ECEAF4] bg-white px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.18em] text-[#8B84A1]">
@@ -429,7 +444,7 @@ export function StorePage({
             <CardDescription>{dictionary.store.selectItemDescription}</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
-            {store.menu.map((item) => (
+            {visibleItems.map((item) => (
               <button
                 key={item.id}
                 type="button"
@@ -468,6 +483,13 @@ export function StorePage({
                 </div>
               </button>
             ))}
+            {visibleItems.length === 0 ? (
+              <p className="rounded-[24px] border border-[#ECEAF4] bg-[#FBFAFD] px-5 py-4 text-sm text-[#6D6783]">
+                {locale === "pt-BR"
+                  ? "Nenhum item ativo no momento."
+                  : "No active items right now."}
+              </p>
+            ) : null}
           </CardContent>
         </Card>
 

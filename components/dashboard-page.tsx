@@ -14,6 +14,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/
 import { HeadlessSelect } from "./ui/headless-select";
 import { Input } from "./ui/input";
 import {
+  MerchantCatalogPanel,
+  MerchantOnchainPanel
+} from "./merchant-settings-panels";
+import {
   buildRewardCopy,
   buildStampRuleCopy,
   findStoreBySlug,
@@ -50,6 +54,7 @@ import {
 } from "../lib/wallet";
 import {
   fetchClaim,
+  fetchContractOwner,
   fetchProfile,
   fetchProgress,
   fetchStore,
@@ -72,7 +77,7 @@ type CustomerSummary = {
 type ProfileModalMode = "setup" | "edit" | null;
 
 export function DashboardPage({
-  stores,
+  stores: initialStores,
   initialChainId,
   contractAddresses
 }: {
@@ -86,6 +91,7 @@ export function DashboardPage({
   const router = useRouter();
   const searchParams = useSearchParams();
   const { locale } = useLocale();
+  const [stores, setStores] = useState(initialStores);
   const [query, setQuery] = useState("");
   const [scannerError, setScannerError] = useState<string | null>(null);
   const [progressBySlug, setProgressBySlug] = useState<Record<string, number>>({});
@@ -109,6 +115,7 @@ export function DashboardPage({
   const [profileModalMode, setProfileModalMode] = useState<ProfileModalMode>(null);
   const [profileName, setProfileName] = useState("");
   const [profileAvatarUrl, setProfileAvatarUrl] = useState("");
+  const [contractOwner, setContractOwner] = useState<Hex | null>(null);
   const {
     account,
     chainId,
@@ -158,7 +165,32 @@ export function DashboardPage({
   const explicitScanner = normalizeDashboardScanner(searchParams.get("scanner"));
   const claimParam = searchParams.get("claim") ?? undefined;
 
+  useEffect(() => {
+    setStores(initialStores);
+  }, [initialStores]);
+
+  useEffect(() => {
+    async function loadContractOwner() {
+      if (!contractAddress) {
+        setContractOwner(null);
+        return;
+      }
+
+      setContractOwner(await fetchContractOwner(initialChainId, contractAddress));
+    }
+
+    void loadContractOwner();
+  }, [contractAddress, initialChainId]);
+
+  const isContractOwner =
+    account && contractOwner
+      ? account.toLowerCase() === contractOwner.toLowerCase()
+      : false;
   const managedStores = useMemo(() => {
+    if (isContractOwner) {
+      return stores;
+    }
+
     if (!account) return [];
 
     return stores.filter(
@@ -166,10 +198,10 @@ export function DashboardPage({
         candidate.onchain?.manager &&
         candidate.onchain.manager.toLowerCase() === account.toLowerCase()
     );
-  }, [account, stores]);
+  }, [account, isContractOwner, stores]);
 
-  const managerMode = managedStores.length > 0;
-  const role: DashboardRole = explicitRole ?? (managerMode ? "merchant" : "customer");
+  const merchantMode = managedStores.length > 0;
+  const role: DashboardRole = merchantMode ? "merchant" : explicitRole ?? "customer";
   const activeTab =
     explicitTab && isTabAllowedForRole(explicitTab, role)
       ? explicitTab
@@ -179,17 +211,17 @@ export function DashboardPage({
   const activeScanner = explicitScanner;
 
   const selectedManagedStore = useMemo(() => {
-    if (!managerMode) return null;
+    if (!merchantMode) return null;
 
     return (
       managedStores.find((candidate) => candidate.slug === selectedStoreSlug) ??
       managedStores[0] ??
       null
     );
-  }, [managedStores, managerMode, selectedStoreSlug]);
+  }, [managedStores, merchantMode, selectedStoreSlug]);
 
   useEffect(() => {
-    if (!managerMode) {
+    if (!merchantMode) {
       setSelectedStoreSlug("");
       return;
     }
@@ -199,7 +231,31 @@ export function DashboardPage({
         ? current
         : managedStores[0]?.slug ?? ""
     );
-  }, [managedStores, managerMode]);
+  }, [managedStores, merchantMode]);
+
+  useEffect(() => {
+    if (!merchantMode) {
+      return;
+    }
+
+    const needsRewrite =
+      explicitRole !== "merchant" ||
+      (explicitTab !== null && explicitTab !== undefined && !isTabAllowedForRole(explicitTab, "merchant")) ||
+      explicitScanner === "purchase";
+
+    if (!needsRewrite) {
+      return;
+    }
+
+    router.replace(
+      buildDashboardUrl({
+        role: "merchant",
+        tab: activeTab,
+        scanner: explicitScanner === "claim" ? "claim" : undefined,
+        claim: claimParam
+      })
+    );
+  }, [activeTab, claimParam, explicitRole, explicitScanner, explicitTab, merchantMode, router]);
 
   useEffect(() => {
     if (!account || isWrongChain) {
@@ -225,7 +281,7 @@ export function DashboardPage({
 
   useEffect(() => {
     async function loadCustomerData() {
-      if (!account || !contractAddress || isWrongChain) {
+      if (merchantMode || !account || !contractAddress || isWrongChain) {
         setProgressBySlug({});
         setClaimableBySlug({});
         setCustomerClaims([]);
@@ -270,11 +326,11 @@ export function DashboardPage({
     }
 
     void loadCustomerData();
-  }, [account, contractAddress, initialChainId, isWrongChain, stores]);
+  }, [account, contractAddress, initialChainId, isWrongChain, merchantMode, stores]);
 
   useEffect(() => {
     async function loadMerchantData() {
-      if (!selectedManagedStore || !contractAddress || !managerMode || isWrongChain) {
+      if (!selectedManagedStore || !contractAddress || !merchantMode || isWrongChain) {
         setCustomers([]);
         setMerchantClaims([]);
         return;
@@ -331,7 +387,7 @@ export function DashboardPage({
     }
 
     void loadMerchantData();
-  }, [contractAddress, initialChainId, isWrongChain, managerMode, selectedManagedStore]);
+  }, [contractAddress, initialChainId, isWrongChain, merchantMode, selectedManagedStore]);
 
   useEffect(() => {
     setSelectedCustomer(null);
@@ -355,8 +411,9 @@ export function DashboardPage({
       claim?: string;
     }) => {
       const href = buildDashboardUrl({
-        role:
-          "role" in nextState
+        role: merchantMode
+          ? "merchant"
+          : "role" in nextState
             ? normalizeDashboardRole(nextState.role)
             : explicitRole,
         tab:
@@ -364,7 +421,15 @@ export function DashboardPage({
             ? normalizeDashboardTab(nextState.tab)
             : explicitTab,
         scanner:
-          "scanner" in nextState
+          merchantMode
+            ? "scanner" in nextState
+              ? normalizeDashboardScanner(nextState.scanner) === "claim"
+                ? "claim"
+                : undefined
+              : explicitScanner === "claim"
+                ? "claim"
+                : undefined
+            : "scanner" in nextState
             ? normalizeDashboardScanner(nextState.scanner)
             : explicitScanner,
         claim: "claim" in nextState ? nextState.claim || undefined : claimParam
@@ -372,7 +437,7 @@ export function DashboardPage({
 
       router.replace(href);
     },
-    [claimParam, explicitRole, explicitScanner, explicitTab, router]
+    [claimParam, explicitRole, explicitScanner, explicitTab, merchantMode, router]
   );
 
   const lookupClaim = useCallback(
@@ -823,21 +888,6 @@ export function DashboardPage({
 
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-wrap items-center gap-3">
-            {managerMode ? (
-              <div className="inline-flex rounded-full border border-[#E7E1F1] bg-white p-1">
-                <TabToggle
-                  active={role === "customer"}
-                  label={locale === "pt-BR" ? "Cliente" : "Customer"}
-                  onClick={() => replaceDashboardState({ role: "customer", tab: "loyalty" })}
-                />
-                <TabToggle
-                  active={role === "merchant"}
-                  label={locale === "pt-BR" ? "Loja" : "Merchant"}
-                  onClick={() => replaceDashboardState({ role: "merchant", tab: "users" })}
-                />
-              </div>
-            ) : null}
-
             {role === "merchant" && selectedManagedStore && managedStores.length > 1 ? (
               <HeadlessSelect
                 value={selectedManagedStore.slug}
@@ -1112,7 +1162,7 @@ export function DashboardPage({
               />
             </div>
 
-            {managerMode ? (
+            {merchantMode ? (
               <div className="flex flex-wrap gap-2">
                 <DashboardTab
                   active={activeTab === "users"}
@@ -1123,6 +1173,16 @@ export function DashboardPage({
                   active={activeTab === "rewards"}
                   label={locale === "pt-BR" ? "Recompensas" : "Rewards"}
                   onClick={() => replaceDashboardState({ tab: "rewards" })}
+                />
+                <DashboardTab
+                  active={activeTab === "catalog"}
+                  label={locale === "pt-BR" ? "Catálogo" : "Catalog"}
+                  onClick={() => replaceDashboardState({ tab: "catalog" })}
+                />
+                <DashboardTab
+                  active={activeTab === "onchain"}
+                  label={locale === "pt-BR" ? "Onchain" : "Onchain"}
+                  onClick={() => replaceDashboardState({ tab: "onchain" })}
                 />
               </div>
             ) : (
@@ -1314,7 +1374,7 @@ export function DashboardPage({
               </section>
             ) : null}
 
-            {managerMode && activeTab === "users" ? (
+            {merchantMode && activeTab === "users" ? (
               filteredCustomers.length > 0 ? (
                 <div className="grid gap-4">
                   <div className="max-w-md">
@@ -1400,7 +1460,7 @@ export function DashboardPage({
               )
             ) : null}
 
-            {managerMode && activeTab === "rewards" ? (
+            {merchantMode && activeTab === "rewards" ? (
               merchantClaims.length > 0 ? (
                 <div className="grid gap-4">
                   {merchantClaims.map((claim) => {
@@ -1508,6 +1568,24 @@ export function DashboardPage({
                 />
               )
             ) : null}
+
+            {merchantMode && activeTab === "catalog" && selectedManagedStore ? (
+              <MerchantCatalogPanel
+                selectedStore={selectedManagedStore}
+                initialChainId={initialChainId}
+                onStoresUpdated={setStores}
+              />
+            ) : null}
+
+            {merchantMode && activeTab === "onchain" && selectedManagedStore ? (
+              <MerchantOnchainPanel
+                selectedStore={selectedManagedStore}
+                initialChainId={initialChainId}
+                contractAddress={contractAddress}
+                isContractOwner={isContractOwner}
+                onStoresUpdated={setStores}
+              />
+            ) : null}
           </>
         )}
       </section>
@@ -1520,7 +1598,7 @@ function isTabAllowedForRole(tab: string, role: DashboardRole) {
     return tab === "loyalty" || tab === "rewards" || tab === "stores";
   }
 
-  return tab === "users" || tab === "rewards";
+  return tab === "users" || tab === "rewards" || tab === "catalog" || tab === "onchain";
 }
 
 function DashboardTab({
@@ -1540,28 +1618,6 @@ function DashboardTab({
         active
           ? "bg-[#17122A] text-white"
           : "border border-[#E7E1F1] bg-white text-[#625B78]"
-      }`}
-    >
-      {label}
-    </button>
-  );
-}
-
-function TabToggle({
-  active,
-  label,
-  onClick
-}: {
-  active: boolean;
-  label: string;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`rounded-full px-4 py-2 text-sm transition ${
-        active ? "bg-[#17122A] text-white" : "text-[#625B78]"
       }`}
     >
       {label}

@@ -131,6 +131,26 @@ export async function getInjectedWalletClient(chainId?: number) {
   });
 }
 
+export async function signWalletMessage(params: {
+  message: string;
+  chainId?: number;
+}) {
+  const { message, chainId } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+
+  const signature = await walletClient.signMessage({
+    account,
+    message
+  });
+
+  return {
+    account,
+    signature
+  };
+}
+
 export function getBrowserPublicClient(chainId = getDefaultChainId()) {
   return createPublicClient({
     chain: getChainConfig(chainId),
@@ -244,6 +264,79 @@ export async function consumeRewardTx(params: {
     abi: loyaltyAbi,
     functionName: "consumeReward",
     args: [claimId]
+  });
+}
+
+export async function configureStoreTx(params: {
+  contractAddress: Hex;
+  storeId: Hex;
+  payout: Hex;
+  manager: Hex;
+  token: Hex;
+  minPurchaseAmount: bigint;
+  stampsPerPurchase: number;
+  stampsRequired: number;
+  rewardType: 0 | 1;
+  rewardValue: bigint;
+  active: boolean;
+  chainId?: number;
+}) {
+  const {
+    contractAddress,
+    storeId,
+    payout,
+    manager,
+    token,
+    minPurchaseAmount,
+    stampsPerPurchase,
+    stampsRequired,
+    rewardType,
+    rewardValue,
+    active,
+    chainId
+  } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+
+  return walletClient.writeContract({
+    account,
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "configureStore",
+    args: [
+      storeId,
+      payout,
+      manager,
+      token,
+      minPurchaseAmount,
+      stampsPerPurchase,
+      stampsRequired,
+      rewardType,
+      rewardValue,
+      active
+    ]
+  });
+}
+
+export async function configureStoreAcceptedTokensTx(params: {
+  contractAddress: Hex;
+  storeId: Hex;
+  tokens: Hex[];
+  decimals: number[];
+  chainId?: number;
+}) {
+  const { contractAddress, storeId, tokens, decimals, chainId } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+
+  return walletClient.writeContract({
+    account,
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "configureStoreAcceptedTokens",
+    args: [storeId, tokens, decimals]
   });
 }
 

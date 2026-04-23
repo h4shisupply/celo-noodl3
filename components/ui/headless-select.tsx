@@ -17,7 +17,8 @@ export function HeadlessSelect({
   placeholder,
   className,
   triggerClassName,
-  align = "left"
+  align = "left",
+  disabled = false
 }: {
   label?: string;
   value: string;
@@ -27,6 +28,7 @@ export function HeadlessSelect({
   className?: string;
   triggerClassName?: string;
   align?: "left" | "right";
+  disabled?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -70,9 +72,14 @@ export function HeadlessSelect({
         <button
           type="button"
           aria-expanded={open}
-          onClick={() => setOpen((current) => !current)}
+          onClick={() => {
+            if (disabled) return;
+            setOpen((current) => !current);
+          }}
+          disabled={disabled}
           className={clsx(
             "flex min-h-12 w-full items-center justify-between rounded-[22px] border border-[#E7E1F1] bg-white px-4 py-3 text-left shadow-[0_10px_30px_rgba(23,18,42,0.06)] transition hover:border-[#D7CFF0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7B3FE4]/15",
+            disabled && "cursor-default opacity-70 hover:border-[#E7E1F1]",
             triggerClassName
           )}
         >

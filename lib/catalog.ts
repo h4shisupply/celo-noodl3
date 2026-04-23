@@ -24,6 +24,7 @@ export type MenuItem = {
   description: LocalizedText;
   price: string;
   badge?: LocalizedText | null;
+  archived?: boolean;
 };
 
 export type StoreCatalogEntry = {
@@ -74,6 +75,7 @@ export type StoreCatalogInput = {
     description: LocalizedTextInput;
     price: string;
     badge?: LocalizedTextInput | null;
+    archived?: boolean;
   }>;
   onchain?: {
     payout?: Hex;
@@ -125,7 +127,8 @@ function normalizeMenuItem(item: StoreCatalogInput["menu"][number]): MenuItem {
     name: normalizeText(item.name),
     description: normalizeText(item.description),
     price: item.price,
-    badge: item.badge ? normalizeText(item.badge) : null
+    badge: item.badge ? normalizeText(item.badge) : null,
+    archived: Boolean(item.archived)
   };
 }
 
@@ -249,9 +252,25 @@ const DEFAULT_STORE_INPUT: StoreCatalogInput[] = [
       stampsRequired: 10,
       rewardType: "free_item",
       rewardValue: "1",
-      minimumPurchase: "12"
+      minimumPurchase: "0.01"
     },
     menu: [
+      {
+        id: "promo-mainnet",
+        name: {
+          "pt-BR": "Promo mainnet 1 centavo",
+          en: "Mainnet 1 cent promo"
+        },
+        description: {
+          "pt-BR": "Item promocional para validar o fluxo real na mainnet com valor mínimo.",
+          en: "Promo item for validating the real mainnet flow at the minimum amount."
+        },
+        price: "0.01",
+        badge: {
+          "pt-BR": "Teste mainnet",
+          en: "Mainnet test"
+        }
+      },
       {
         id: "chopp-choices",
         name: {
@@ -362,11 +381,12 @@ export function findStoreBySlug(stores: StoreCatalogEntry[], slug: string) {
 }
 
 export function findItemById(store: StoreCatalogEntry, itemId?: string) {
+  const activeItems = getActiveMenuItems(store);
   if (!itemId) {
-    return store.menu[0];
+    return activeItems[0];
   }
 
-  return store.menu.find((item) => item.id === itemId) || store.menu[0];
+  return activeItems.find((item) => item.id === itemId) || activeItems[0];
 }
 
 export function getItemById(
@@ -377,6 +397,10 @@ export function getItemById(
   const store = findStoreBySlug(stores, storeSlug);
   if (!store) return undefined;
   return findItemById(store, itemId);
+}
+
+export function getActiveMenuItems(store: Pick<StoreCatalogEntry, "menu">) {
+  return store.menu.filter((item) => !item.archived);
 }
 
 export function formatPaymentAmount(

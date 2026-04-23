@@ -26,7 +26,8 @@ The core loop is simple:
 - `npm run use:test-catalog` to inject the Sepolia test catalog into `.env`
 - Onchain loyalty progress per store
 - Internal non-transferable claims instead of points tokens or NFTs
-- A single `/app` dashboard with customer and merchant modes
+- A single `/app` dashboard with customer discovery plus merchant-first manager views
+- Merchant tabs for `Users`, `Rewards`, `Catalog`, and `Onchain`
 
 ## Routes
 
@@ -98,6 +99,7 @@ type StoreConfig = {
     description: string | { "pt-BR"?: string; en?: string };
     price: string;
     badge?: string | { "pt-BR"?: string; en?: string };
+    archived?: boolean;
   }>;
   onchain?: {
     payout?: `0x${string}`;
@@ -115,6 +117,7 @@ The same catalog powers:
 - item menus and reward copy
 - seed script input
 - merchant manager detection
+- merchant catalog editing and Vercel sync
 
 Ready-to-use examples:
 
@@ -164,6 +167,8 @@ npm run verify:mainnet
 - The app accepts the main Celo stablecoins: `USDT`, `USDC`, and `cUSD`.
 - `NOODL3_SEED_MANAGER_ADDRESS` and `NOODL3_SEED_PAYOUT_ADDRESS` are optional. When omitted, the seed script falls back to the deployer wallet.
 - `NOODL3_STORE_CATALOG_JSON` is optional on Sepolia, but required when `NEXT_PUBLIC_DEFAULT_CHAIN=celo`.
+- `VERCEL_ACCESS_TOKEN` and `VERCEL_PROJECT_ID` are required to publish merchant catalog edits back into Vercel.
+- `VERCEL_TEAM_ID` is optional and only needed when the Vercel project belongs to a team.
 - `store_logo_url` is optional. It can be an `https://` URL or a root-relative asset such as `/store-logos/cafe-lina.svg`. When omitted or invalid, the UI falls back to a placeholder with store initials.
 - Locale detection uses the `noodl3_locale` cookie first and request headers second.
 

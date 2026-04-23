@@ -99,6 +99,28 @@ export async function fetchStore(
   }
 }
 
+export async function fetchContractOwner(
+  chainId = getDefaultChainId(),
+  contractAddressOverride?: Hex | null
+) {
+  const contractAddress = resolveAddress(chainId, contractAddressOverride);
+  if (!contractAddress) return null;
+
+  try {
+    const client = getBrowserPublicClient(chainId);
+    const owner = await client.readContract({
+      address: contractAddress,
+      abi: loyaltyAbi,
+      functionName: "owner",
+      args: []
+    });
+
+    return getAddress(owner) as Hex;
+  } catch {
+    return null;
+  }
+}
+
 export async function fetchProgress(
   user: Hex,
   storeId: Hex,
