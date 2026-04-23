@@ -25,6 +25,7 @@ import { buildDashboardUrl } from "../lib/dashboard-route";
 import { fetchProgress, fetchStore, fetchStoreAcceptedTokens } from "../lib/contract";
 import { resolveContractAddressForChain } from "../lib/chains";
 import { getUserFacingErrorMessage } from "../lib/error-message";
+import { interpolate } from "../lib/i18n";
 import { useMiniPay } from "../lib/minipay";
 import { encodeStoreId } from "../lib/store-id";
 import { getPrimaryPaymentToken, getTokenByAddress, type SupportedToken } from "../lib/tokens";
@@ -205,9 +206,9 @@ export function StorePage({
 
     if (isWrongChain) {
       setError(
-        locale === "pt-BR"
-          ? `Troque sua carteira para ${expectedChainLabel} antes de continuar.`
-          : `Switch your wallet to ${expectedChainLabel} before continuing.`
+        interpolate(dictionary.messages.switchToNetworkBeforeContinue, {
+          network: expectedChainLabel
+        })
       );
       return;
     }
@@ -237,9 +238,9 @@ export function StorePage({
       setIsSubmitting(true);
       setError(null);
       setStatus(
-        locale === "pt-BR"
-          ? `Checando allowance de ${selectedToken.symbol}...`
-          : `Checking ${selectedToken.symbol} allowance...`
+        interpolate(dictionary.messages.checkingTokenAllowance, {
+          token: selectedToken.symbol
+        })
       );
 
       const allowance = await readAllowance(
@@ -251,9 +252,9 @@ export function StorePage({
 
       if (allowance < amount) {
         setStatus(
-          locale === "pt-BR"
-            ? `Aprovando ${selectedToken.symbol} para este pagamento...`
-            : `Approving ${selectedToken.symbol} for this payment...`
+          interpolate(dictionary.messages.approvingTokenPayment, {
+            token: selectedToken.symbol
+          })
         );
         const approvalHash = await approveToken({
           contractAddress,
@@ -265,9 +266,9 @@ export function StorePage({
       }
 
       setStatus(
-        locale === "pt-BR"
-          ? `Enviando pagamento em ${selectedToken.symbol} e registrando Selos...`
-          : `Sending ${selectedToken.symbol} payment and recording Stamps...`
+        interpolate(dictionary.messages.sendingTokenPayment, {
+          token: selectedToken.symbol
+        })
       );
       const txHash = await purchaseTx({
         contractAddress,
@@ -316,7 +317,7 @@ export function StorePage({
         disconnect
       }}
       backHref={buildDashboardUrl({ role: "customer", tab: "stores" })}
-      backLabel={locale === "pt-BR" ? "Voltar ao dashboard" : "Back to dashboard"}
+      backLabel={dictionary.actions.backToDashboard}
       eyebrow={openedFromQr ? dictionary.store.qrEyebrow : dictionary.store.eyebrow}
       title={resolveText(store.name, locale)}
       description={`${resolveText(store.summary, locale)} ${dictionary.brand.shortDescription}`}
@@ -362,7 +363,7 @@ export function StorePage({
                     setError(null);
                     setSelectedPaymentToken(value as Hex);
                   }}
-                  label={locale === "pt-BR" ? "Token de pagamento" : "Payment token"}
+                  label={dictionary.store.paymentTokenLabel}
                   options={acceptedTokens.map((token) => ({
                     value: token.address,
                     label: token.symbol,
@@ -485,9 +486,7 @@ export function StorePage({
             ))}
             {visibleItems.length === 0 ? (
               <p className="rounded-[24px] border border-[#ECEAF4] bg-[#FBFAFD] px-5 py-4 text-sm text-[#6D6783]">
-                {locale === "pt-BR"
-                  ? "Nenhum item ativo no momento."
-                  : "No active items right now."}
+                {dictionary.store.noActiveItems}
               </p>
             ) : null}
           </CardContent>

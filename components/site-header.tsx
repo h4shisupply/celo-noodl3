@@ -54,9 +54,9 @@ function NavLink({
 }
 
 export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
-  const { locale } = useLocale();
+  const { dictionary } = useLocale();
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuLabel = menuOpen ? (locale === "pt-BR" ? "Fechar" : "Close") : "Menu";
+  const menuLabel = menuOpen ? dictionary.common.close : "Menu";
   const renderCta = (onClick?: () => void) => {
     if (!cta) {
       return null;

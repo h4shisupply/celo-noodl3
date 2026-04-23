@@ -33,7 +33,7 @@ export function AppChrome({
     <main className="space-y-10 pb-20 md:space-y-14 md:pb-24">
       {walletState.account && walletState.isWrongChain ? (
         <NetworkMismatchModal
-          eyebrow={locale === "pt-BR" ? "Rede" : "Network"}
+          eyebrow={dictionary.common.network}
           title={walletState.expectedChainLabel}
           description={
             walletState.isMiniPay

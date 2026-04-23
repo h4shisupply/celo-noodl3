@@ -2,7 +2,7 @@ import Link from "next/link";
 import { cookies, headers } from "next/headers";
 import { findStoreBySlug, resolveText } from "../../../lib/catalog";
 import { getResolvedStoreCatalog } from "../../../lib/catalog-server";
-import { getDictionary, resolveLocaleFromRequest } from "../../../lib/i18n";
+import { getDictionary, interpolate, resolveLocaleFromRequest } from "../../../lib/i18n";
 
 type StoreRouteProps = {
   params: Promise<{ slug: string }>;
@@ -23,14 +23,10 @@ export default async function Page({ params }: StoreRouteProps) {
             noodl3
           </p>
           <h1 className="mt-5 text-4xl font-semibold tracking-[-0.05em] text-[#18122A] sm:text-5xl">
-            {locale === "pt-BR"
-              ? `${storeName} abre dentro do app`
-              : `${storeName} opens inside the app`}
+            {interpolate(dictionary.store.redirectTitle, { store: storeName })}
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#625B78]">
-            {locale === "pt-BR"
-              ? "Para continuar com pagamento e Selos, volte para o app do noodl3 e abra a loja por lá."
-              : "To continue with payment and Stamps, go back to the noodl3 app and open the store from there."}
+            {dictionary.store.redirectDescription}
           </p>
 
           <div className="mt-8 flex items-center justify-center">
@@ -38,7 +34,7 @@ export default async function Page({ params }: StoreRouteProps) {
               href="/app"
               className="inline-flex h-12 items-center justify-center rounded-full bg-[#17122A] px-6 text-sm font-medium text-white transition hover:bg-[#0E0A1C]"
             >
-              {locale === "pt-BR" ? "Ir para o dashboard" : "Go to dashboard"}
+              {dictionary.actions.backToDashboard}
             </Link>
           </div>
         </section>

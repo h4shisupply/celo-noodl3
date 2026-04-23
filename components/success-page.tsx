@@ -71,7 +71,7 @@ export function SuccessPage({
           ? buildDashboardUrl({ role: "merchant", tab: "rewards" })
           : buildDashboardUrl({ role: "customer", tab: "rewards" })
       }
-      backLabel={locale === "pt-BR" ? "Voltar ao dashboard" : "Back to dashboard"}
+      backLabel={dictionary.actions.backToDashboard}
       eyebrow={isConsume ? dictionary.success.consumeEyebrow : dictionary.success.purchaseEyebrow}
       title={isConsume ? dictionary.success.consumeTitle : dictionary.success.purchaseTitle}
       description={
@@ -135,9 +135,7 @@ export function SuccessPage({
               >
                 <Button variant="outline">
                   {isConsume
-                    ? locale === "pt-BR"
-                      ? "Voltar ao dashboard"
-                      : "Back to dash"
+                    ? dictionary.actions.backToDashboard
                     : store
                       ? dictionary.actions.backToStore
                       : dictionary.actions.openApp}

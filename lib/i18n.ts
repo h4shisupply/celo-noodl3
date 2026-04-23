@@ -30,25 +30,36 @@ export type Dictionary = {
     miniPayNative: string;
     currentWallet: string;
     currentBalance: string;
+    network: string;
+    wallet: string;
     reward: string;
     rule: string;
     minimumEligible: string;
     transaction: string;
     status: string;
+    date: string;
+    code: string;
     manager: string;
     customer: string;
     customers: string;
     backupCode: string;
     searchPlaceholder: string;
+    loading: string;
+    loadingReward: string;
+    loadingUsers: string;
     loadingBalance: string;
     disconnected: string;
     used: string;
     pending: string;
+    consumed: string;
     authorized: string;
     unauthorized: string;
     contractMissing: string;
     activity: string;
     eligible: string;
+    saved: string;
+    saving: string;
+    close: string;
   };
   nav: {
     howItWorks: string;
@@ -74,16 +85,26 @@ export type Dictionary = {
     copyLink: string;
     openVerifier: string;
     openExplorer: string;
+    backToDashboard: string;
     backToStore: string;
     backToRewards: string;
     backToVerifier: string;
     viewStore: string;
+    viewQr: string;
+    buy: string;
+    validate: string;
+    validateQr: string;
+    validateCode: string;
     openPurchaseFlow: string;
     checkClaim: string;
     readRewardQr: string;
     clearSelection: string;
     switchNetwork: string;
     refreshNetwork: string;
+    save: string;
+    skipForNow: string;
+    editProfile: string;
+    addProfile: string;
   };
   messages: {
     noWalletFound: string;
@@ -108,6 +129,8 @@ export type Dictionary = {
     claimWrongStore: string;
     claimWrongCustomer: string;
     claimAlreadyUsed: string;
+    storeNotFound: string;
+    contractUnavailable: string;
     noManagedStores: string;
     wrongNetworkDescription: string;
     wrongNetworkMiniPayDescription: string;
@@ -115,8 +138,13 @@ export type Dictionary = {
     walletActionRejected: string;
     insufficientBalance: string;
     invalidProfileInput: string;
+    profileSaveFailed: string;
     notEnoughStamps: string;
     profileContractOutdated: string;
+    switchToNetworkBeforeContinue: string;
+    checkingTokenAllowance: string;
+    approvingTokenPayment: string;
+    sendingTokenPayment: string;
   };
   landing: {
     eyebrow: string;
@@ -138,6 +166,8 @@ export type Dictionary = {
     faqs: FaqCopy[];
     footerTitle: string;
     footerDescription: string;
+    connectedCta: string;
+    disconnectedCta: string;
   };
   dashboard: {
     eyebrow: string;
@@ -148,6 +178,35 @@ export type Dictionary = {
     rewardsDisconnected: string;
     quickActionsTitle: string;
     quickActionsDescription: string;
+    shellTitle: string;
+    tabs: {
+      loyalty: string;
+      rewards: string;
+      stores: string;
+      users: string;
+      catalog: string;
+      onchain: string;
+    };
+    kpis: {
+      rewardsClaimed: string;
+      currentStamps: string;
+      activeUsers: string;
+      rewards: string;
+    };
+    payNowTitle: string;
+    paymentScannerLabel: string;
+    paymentScannerAria: string;
+    verifierScannerLabel: string;
+    verifierScannerAria: string;
+    codeValidatorLabel: string;
+    codeValidatorAria: string;
+    loyaltyEmptyTitle: string;
+    loyaltyEmptyDescription: string;
+    rewardsEmptyTitle: string;
+    rewardsEmptyDescription: string;
+    storesSearchPlaceholder: string;
+    noStoreWalletTitle: string;
+    noStoreWalletDescription: string;
     scanTitle: string;
     scanDescription: string;
     storesTitle: string;
@@ -175,6 +234,8 @@ export type Dictionary = {
     selectItemDescription: string;
     checkoutTitle: string;
     checkoutDescription: string;
+    paymentTokenLabel: string;
+    noActiveItems: string;
     qrTitle: string;
     qrDescription: string;
     progressTitle: string;
@@ -182,6 +243,8 @@ export type Dictionary = {
     nextStepTitle: string;
     nextStepDescription: string;
     openedViaQr: string;
+    redirectTitle: string;
+    redirectDescription: string;
   };
   claim: {
     eyebrow: string;
@@ -189,6 +252,7 @@ export type Dictionary = {
     description: string;
     howToUseTitle: string;
     howToUseDescription: string;
+    qrAlt: string;
     steps: string[];
   };
   verifier: {
@@ -217,8 +281,82 @@ export type Dictionary = {
     manualPlaceholder: string;
     detailsTitle: string;
     detailsDescription: string;
+    detailsLoading: string;
+    customerWalletLabel: string;
+    storeWalletLabel: string;
+    manualCardTitle: string;
+    manualCardDescription: string;
+    manualShortPlaceholder: string;
+    scannerFocusedTitle: string;
+    scannerFocusedDescription: string;
+    customersLoadingTitle: string;
+    customersEmptyTitle: string;
+    merchantRewardsEmptyTitle: string;
+    merchantRewardsEmptyDescription: string;
     emptyState: string;
     connectStoreWallet: string;
+  };
+  account: {
+    openMenu: string;
+    connectedWallet: string;
+    expectedNetwork: string;
+    connect: string;
+    connecting: string;
+  };
+  profile: {
+    title: string;
+    description: string;
+    namePlaceholder: string;
+    avatarPlaceholder: string;
+  };
+  catalogEditor: {
+    savedTitle: string;
+    saved: string;
+    savedWithDeploy: string;
+    saveFailed: string;
+    storeDetailsTitle: string;
+    storeDetailsDescription: string;
+    storeNameLabel: string;
+    categoryLabel: string;
+    cityLabel: string;
+    summaryLabel: string;
+    logoUrlLabel: string;
+    accentGradientLabel: string;
+    menuItemsTitle: string;
+    menuItemsDescription: string;
+    archivedLabel: string;
+    nameLabel: string;
+    descriptionLabel: string;
+    badgeLabel: string;
+    priceLabel: string;
+    removeNewItem: string;
+    addItem: string;
+    saveCatalog: string;
+  };
+  onchainSettings: {
+    title: string;
+    ownerDescription: string;
+    lockedDescription: string;
+    loadFailed: string;
+    saveFailed: string;
+    saved: string;
+    managerLabel: string;
+    payoutLabel: string;
+    primaryTokenLabel: string;
+    acceptedTokensLabel: string;
+    minimumPurchaseLabel: string;
+    rewardValueLabel: string;
+    stampsPerPurchaseLabel: string;
+    stampsRequiredLabel: string;
+    rewardTypeLabel: string;
+    fixedAmountLabel: string;
+    freeItemLabel: string;
+    storeStatusLabel: string;
+    activeTitle: string;
+    activeDescription: string;
+    inactiveTitle: string;
+    inactiveDescription: string;
+    saveOnchain: string;
   };
   success: {
     purchaseEyebrow: string;
@@ -265,25 +403,36 @@ const dictionaries: Record<Locale, Dictionary> = {
       miniPayNative: "Compatível com MiniPay",
       currentWallet: "Carteira atual",
       currentBalance: "Saldo atual",
+      network: "Rede",
+      wallet: "Carteira",
       reward: "Recompensa",
       rule: "Regra",
       minimumEligible: "Pagamento mínimo elegível",
       transaction: "Transação",
       status: "Status",
+      date: "Data",
+      code: "Código",
       manager: "Responsável",
       customer: "Cliente",
       customers: "Clientes",
       backupCode: "Código de apoio",
       searchPlaceholder: "Buscar loja, bairro ou categoria",
+      loading: "Carregando...",
+      loadingReward: "Carregando resgate...",
+      loadingUsers: "Carregando clientes...",
       loadingBalance: "carregando...",
       disconnected: "desconectado",
       used: "utilizado",
       pending: "pendente",
+      consumed: "consumido",
       authorized: "autorizada",
       unauthorized: "sem autorização",
       contractMissing: "Contrato ainda não configurado nesta rede.",
       activity: "Atividade",
-      eligible: "Elegível"
+      eligible: "Elegível",
+      saved: "Salvo",
+      saving: "Salvando...",
+      close: "Fechar"
     },
     nav: {
       howItWorks: "Como funciona",
@@ -304,21 +453,31 @@ const dictionaries: Record<Locale, Dictionary> = {
       closeScanner: "Fechar leitura",
       payNow: "Pagar",
       payAndEarn: "Pagar e ganhar Selos",
-      claimNow: "Resgatar agora",
+      claimNow: "Resgatar",
       consumeReward: "Confirmar resgate",
       copyLink: "Copiar link",
       openVerifier: "Abrir verificador",
       openExplorer: "Ver no explorer",
+      backToDashboard: "Voltar ao dashboard",
       backToStore: "Voltar para a loja",
       backToRewards: "Voltar para recompensas",
       backToVerifier: "Voltar para o verificador",
       viewStore: "Ver loja",
+      viewQr: "Ver QR",
+      buy: "Comprar",
+      validate: "Validar",
+      validateQr: "Validar QR",
+      validateCode: "Validar código",
       openPurchaseFlow: "Abrir fluxo de pagamento",
       checkClaim: "Validar resgate",
       readRewardQr: "Ler QR da recompensa",
       clearSelection: "Limpar seleção",
       switchNetwork: "Trocar rede",
-      refreshNetwork: "Já troquei"
+      refreshNetwork: "Já troquei",
+      save: "Salvar",
+      skipForNow: "Pular por agora",
+      editProfile: "Editar perfil",
+      addProfile: "Adicionar perfil"
     },
     messages: {
       noWalletFound: "Nenhuma carteira compatível foi encontrada.",
@@ -336,13 +495,16 @@ const dictionaries: Record<Locale, Dictionary> = {
       claimFailed: "Não foi possível gerar o resgate.",
       consumeFailed: "Não foi possível confirmar o resgate.",
       claimLookupFirst: "Leia um QR ou informe um código antes de confirmar.",
-      claimCreatedMissing: "O contrato confirmou a transação, mas o claimId não foi encontrado.",
+      claimCreatedMissing:
+        "O contrato confirmou a transação, mas o id do resgate não foi encontrado.",
       allowanceCheck: "Checando allowance do pagamento...",
       approving: "Aprovando o token para este pagamento...",
       sendingPayment: "Enviando pagamento e registrando Selos...",
       claimWrongStore: "Este resgate pertence a outra loja.",
       claimWrongCustomer: "Este resgate pertence a outro cliente.",
       claimAlreadyUsed: "Este resgate já foi utilizado.",
+      storeNotFound: "Loja não encontrada.",
+      contractUnavailable: "Contrato indisponível nesta rede.",
       noManagedStores: "Nenhuma loja vinculada a esta carteira foi encontrada.",
       wrongNetworkDescription:
         "Troque sua carteira para a rede correta antes de pagar, resgatar ou validar no noodl3.",
@@ -353,9 +515,15 @@ const dictionaries: Record<Locale, Dictionary> = {
       insufficientBalance: "Saldo insuficiente para concluir este pagamento.",
       invalidProfileInput:
         "Use um nome válido e, se quiser, uma foto com link https://.",
+      profileSaveFailed: "Não foi possível salvar o perfil.",
       notEnoughStamps: "Você ainda não tem Selos suficientes para resgatar.",
       profileContractOutdated:
-        "O contrato atual ainda não suporta perfis onchain. Faça deploy da versão mais recente e atualize o endereço no app."
+        "O contrato atual ainda não suporta perfis onchain. Faça deploy da versão mais recente e atualize o endereço no app.",
+      switchToNetworkBeforeContinue:
+        "Troque sua carteira para {{network}} antes de continuar.",
+      checkingTokenAllowance: "Checando allowance de {{token}}...",
+      approvingTokenPayment: "Aprovando {{token}} para este pagamento...",
+      sendingTokenPayment: "Enviando pagamento em {{token}} e registrando Selos..."
     },
     landing: {
       eyebrow: "Fidelidade simples para consumo local",
@@ -388,7 +556,7 @@ const dictionaries: Record<Locale, Dictionary> = {
         {
           title: "Resgate",
           description:
-            "Ao atingir a regra da loja, o cliente gera o QR do resgate e o caixa consome o claim no checkout."
+            "Ao atingir a regra da loja, o cliente gera o QR do resgate e o caixa confirma o uso no checkout."
         }
       ],
       storesTitle: "Lojas ativas no app",
@@ -414,12 +582,14 @@ const dictionaries: Record<Locale, Dictionary> = {
         },
         {
           question: "Como o caixa valida a recompensa?",
-          answer: "O cliente gera um QR com o claimId e o responsável da loja confirma o consumo no verificador."
+          answer: "O cliente gera um QR com o código do resgate e o responsável da loja confirma o uso no verificador."
         }
       ],
       footerTitle: "Entre direto no fluxo de recompensas",
       footerDescription:
-        "Abra o app, conecte a carteira e acompanhe o progresso por loja em poucos toques."
+        "Abra o app, conecte a carteira e acompanhe o progresso por loja em poucos toques.",
+      connectedCta: "Abrir dashboard",
+      disconnectedCta: "Começar no noodl3"
     },
     dashboard: {
       eyebrow: "Área do cliente",
@@ -433,6 +603,38 @@ const dictionaries: Record<Locale, Dictionary> = {
       quickActionsTitle: "Encontre uma loja ou leia um pedido",
       quickActionsDescription:
         "Busque por nome, bairro ou categoria. Se o caixa já tiver um QR de cobrança, use a leitura para cair direto no checkout.",
+      shellTitle: "Seu dashboard",
+      tabs: {
+        loyalty: "Fidelidade",
+        rewards: "Recompensas",
+        stores: "Lojas",
+        users: "Clientes",
+        catalog: "Catálogo",
+        onchain: "Onchain"
+      },
+      kpis: {
+        rewardsClaimed: "Resgates gerados",
+        currentStamps: "Selos atuais",
+        activeUsers: "Clientes ativos",
+        rewards: "Recompensas"
+      },
+      payNowTitle: "Pagar agora",
+      paymentScannerLabel: "Pagar agora",
+      paymentScannerAria: "Ler QR de pagamento",
+      verifierScannerLabel: "Validar QR",
+      verifierScannerAria: "Abrir validador de QR",
+      codeValidatorLabel: "Validar código",
+      codeValidatorAria: "Validar código",
+      loyaltyEmptyTitle: "Nenhuma fidelidade ativa ainda.",
+      loyaltyEmptyDescription:
+        "Assim que você pagar em uma loja, o progresso aparece aqui.",
+      rewardsEmptyTitle: "Nenhum resgate gerado ainda.",
+      rewardsEmptyDescription:
+        "Quando você gerar um resgate, o histórico aparece aqui.",
+      storesSearchPlaceholder: "Buscar lojas",
+      noStoreWalletTitle: "Conecte uma carteira de loja.",
+      noStoreWalletDescription:
+        "O modo de loja fica disponível quando a carteira conectada corresponde ao gerente configurado da loja.",
       scanTitle: "Leitura de QR de pagamento",
       scanDescription:
         "Leia o QR da loja para abrir o item certo e continuar o pagamento no fluxo do app.",
@@ -450,7 +652,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Carteira de resgates",
       title: "Tudo o que você já acumulou por loja.",
       description:
-        "Veja o progresso de Selos, gere claims quando atingir a meta e leve o QR direto ao caixa.",
+        "Veja o progresso de Selos, gere resgates quando atingir a meta e leve o QR direto ao caixa.",
       summaryTitle: "Estado atual",
       summaryConnected: "Você tem {{claimable}} resgates prontos neste momento.",
       summaryDisconnected:
@@ -468,6 +670,8 @@ const dictionaries: Record<Locale, Dictionary> = {
       checkoutTitle: "Resumo do checkout",
       checkoutDescription:
         "Revise o item, o valor e a regra de fidelidade antes de confirmar.",
+      paymentTokenLabel: "Token de pagamento",
+      noActiveItems: "Nenhum item ativo no momento.",
       qrTitle: "QR do pedido",
       qrDescription:
         "Mostre este QR no balcão ou envie o link para abrir o mesmo fluxo em outro dispositivo.",
@@ -477,16 +681,20 @@ const dictionaries: Record<Locale, Dictionary> = {
       nextStepTitle: "Próximo passo",
       nextStepDescription:
         "Quando atingir a meta, gere o QR do resgate na área de recompensas",
-      openedViaQr: "Pedido aberto por QR"
+      openedViaQr: "Pedido aberto por QR",
+      redirectTitle: "{{store}} abre dentro do app",
+      redirectDescription:
+        "Para continuar com pagamento e Selos, volte para o app do noodl3 e abra a loja por lá."
     },
     claim: {
       eyebrow: "Resgate pronto",
       title: "Mostre este QR no caixa.",
       description:
-        "O claim foi criado com sucesso. Agora basta apresentar o QR ou o código de apoio para validação.",
+        "O resgate foi criado com sucesso. Agora basta apresentar o QR ou o código de apoio para validação.",
       howToUseTitle: "Como usar",
       howToUseDescription:
-        "O caixa deve abrir o verificador com a carteira da loja e consumir este claim uma única vez.",
+        "O caixa deve abrir o verificador com a carteira da loja e confirmar este resgate uma única vez.",
+      qrAlt: "QR do resgate {{id}}",
       steps: [
         "Apresente o QR ao responsável da loja.",
         "Se precisar, informe também o código de apoio.",
@@ -497,7 +705,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Operação da loja",
       title: "Valide resgates com contexto da loja e do cliente.",
       description:
-        "Se a carteira conectada gerencia uma loja, o verificador abre um painel com clientes e progresso. Caso contrário, funciona como uma validação manual de claim.",
+        "Se a carteira conectada gerencia uma loja, o verificador abre um painel com clientes e progresso. Caso contrário, funciona como uma validação manual de resgate.",
       managedTitle: "Painel da loja",
       managedDescription:
         "Selecione a loja, procure o cliente e valide o QR do resgate quando ele estiver pronto.",
@@ -510,25 +718,106 @@ const dictionaries: Record<Locale, Dictionary> = {
       customersEmpty: "Nenhum cliente com histórico encontrado para esta loja.",
       selectedCustomerLabel: "Cliente selecionado",
       selectedCustomerHint:
-        "Leia o QR deste cliente para validar um claim da mesma loja.",
+        "Leia o QR deste cliente para validar um resgate da mesma loja.",
       progressLabel: "Progresso",
       readyLabel: "Pronto para resgatar",
       collectingLabel: "Acumulando Selos",
       genericTitle: "Validação manual",
       genericDescription:
-        "Use o QR ou o código do claim para verificar detalhes e confirmar o consumo com a carteira da loja.",
+        "Use o QR ou o código do resgate para conferir os detalhes e confirmar com a carteira da loja.",
       scanTitle: "Leitura do QR de resgate",
       scanDescription:
         "Leia o QR gerado pelo cliente. O verificador checa loja, cliente e status antes da confirmação.",
       manualTitle: "Ou valide manualmente",
       manualDescription:
-        "Cole um link, um código curto ou apenas o claimId para carregar o resgate.",
+        "Cole um link, um código curto ou o claimId para carregar o resgate.",
       manualPlaceholder: "Ex.: CHOI-0001 ou https://.../app?role=merchant&scanner=claim&claim=1",
       detailsTitle: "Detalhes do resgate",
       detailsDescription:
         "Confira recompensa, cliente e autorização da carteira atual antes de consumir.",
+      detailsLoading: "Carregando resgate...",
+      customerWalletLabel: "Carteira do cliente",
+      storeWalletLabel: "Carteira da loja",
+      manualCardTitle: "Validar manualmente",
+      manualCardDescription: "Cole um link, um código ou apenas o claimId.",
+      manualShortPlaceholder: "Ex.: CHOI-0001 ou resgate 1",
+      scannerFocusedTitle: "Validar recompensa",
+      scannerFocusedDescription:
+        "Leia o QR gerado pelo cliente para carregar o resgate.",
+      customersLoadingTitle: "Carregando clientes...",
+      customersEmptyTitle: "Nenhum cliente encontrado.",
+      merchantRewardsEmptyTitle: "Nenhuma recompensa gerada.",
+      merchantRewardsEmptyDescription:
+        "Os resgates emitidos para esta loja aparecem aqui.",
       emptyState: "Nenhum resgate carregado ainda.",
       connectStoreWallet: "Conectar carteira da loja"
+    },
+    account: {
+      openMenu: "Abrir menu da conta",
+      connectedWallet: "Carteira conectada",
+      expectedNetwork: "{{current}} · esperado {{expected}}",
+      connect: "Conectar",
+      connecting: "Conectando..."
+    },
+    profile: {
+      title: "Seu perfil no noodl3",
+      description:
+        "Adicione um nome e, se quiser, uma foto. Você pode pular isso por agora.",
+      namePlaceholder: "Seu nome",
+      avatarPlaceholder: "Link da foto (opcional)"
+    },
+    catalogEditor: {
+      savedTitle: "Salvo",
+      saved: "Catálogo salvo.",
+      savedWithDeploy: "Catálogo salvo e novo deploy enviado ao Vercel.",
+      saveFailed: "Não foi possível salvar o catálogo.",
+      storeDetailsTitle: "Dados da loja",
+      storeDetailsDescription:
+        "Edite os campos que vêm do catálogo publicado no Vercel.",
+      storeNameLabel: "Nome da loja",
+      categoryLabel: "Categoria",
+      cityLabel: "Cidade",
+      summaryLabel: "Resumo",
+      logoUrlLabel: "Logo URL",
+      accentGradientLabel: "Gradiente de destaque",
+      menuItemsTitle: "Itens do menu",
+      menuItemsDescription:
+        "Itens existentes mantêm o mesmo id. Para remover do app, marque como arquivado.",
+      archivedLabel: "Arquivado",
+      nameLabel: "Nome",
+      descriptionLabel: "Descrição",
+      badgeLabel: "Badge",
+      priceLabel: "Preço",
+      removeNewItem: "Remover novo item",
+      addItem: "Adicionar item",
+      saveCatalog: "Salvar catálogo"
+    },
+    onchainSettings: {
+      title: "Configuração onchain",
+      ownerDescription:
+        "Você está usando a carteira owner do contrato e pode reconfigurar esta loja.",
+      lockedDescription:
+        "Apenas a carteira owner do contrato pode salvar estas mudanças.",
+      loadFailed: "Não foi possível carregar a configuração onchain.",
+      saveFailed: "Não foi possível salvar a configuração onchain.",
+      saved: "Configuração onchain atualizada e espelhada no catálogo.",
+      managerLabel: "Manager",
+      payoutLabel: "Payout",
+      primaryTokenLabel: "Token principal",
+      acceptedTokensLabel: "Tokens aceitos",
+      minimumPurchaseLabel: "Compra mínima",
+      rewardValueLabel: "Valor da recompensa",
+      stampsPerPurchaseLabel: "Selos por compra",
+      stampsRequiredLabel: "Selos para resgatar",
+      rewardTypeLabel: "Tipo de recompensa",
+      fixedAmountLabel: "Valor fixo",
+      freeItemLabel: "Item grátis",
+      storeStatusLabel: "Status da loja",
+      activeTitle: "Ativa",
+      activeDescription: "Aceita compras e emite progresso normalmente.",
+      inactiveTitle: "Inativa",
+      inactiveDescription: "Bloqueia novas compras até reativar a loja.",
+      saveOnchain: "Salvar onchain"
     },
     success: {
       purchaseEyebrow: "Pagamento concluído",
@@ -538,9 +827,9 @@ const dictionaries: Record<Locale, Dictionary> = {
       purchaseDescription:
         "A compra foi registrada e os Selos desta loja já foram atualizados.",
       consumeDescription:
-        "O claim foi consumido onchain e não pode mais ser usado novamente.",
+        "O resgate foi confirmado onchain e não pode mais ser usado novamente.",
       purchaseDetail: "{{item}} registrado com fidelidade ativa.",
-      consumeDetail: "Claim {{claimId}} validado no checkout.",
+      consumeDetail: "Resgate {{claimId}} validado no checkout.",
       nextStepTitle: "O que fazer agora",
       purchaseNextSteps: [
         "Abra a carteira de recompensas para acompanhar o avanço desta loja.",
@@ -583,25 +872,36 @@ const dictionaries: Record<Locale, Dictionary> = {
       miniPayNative: "MiniPay-ready",
       currentWallet: "Current wallet",
       currentBalance: "Current balance",
+      network: "Network",
+      wallet: "Wallet",
       reward: "Reward",
       rule: "Rule",
       minimumEligible: "Minimum eligible payment",
       transaction: "Transaction",
       status: "Status",
+      date: "Date",
+      code: "Code",
       manager: "Manager",
       customer: "Customer",
       customers: "Customers",
       backupCode: "Backup code",
       searchPlaceholder: "Search store, area, or category",
+      loading: "Loading...",
+      loadingReward: "Loading reward...",
+      loadingUsers: "Loading customers...",
       loadingBalance: "loading...",
       disconnected: "disconnected",
       used: "used",
       pending: "pending",
+      consumed: "consumed",
       authorized: "authorized",
       unauthorized: "not authorized",
       contractMissing: "This network does not have a configured contract yet.",
       activity: "Activity",
-      eligible: "Eligible"
+      eligible: "Eligible",
+      saved: "Saved",
+      saving: "Saving...",
+      close: "Close"
     },
     nav: {
       howItWorks: "How it works",
@@ -622,21 +922,31 @@ const dictionaries: Record<Locale, Dictionary> = {
       closeScanner: "Close scanner",
       payNow: "Pay now",
       payAndEarn: "Pay and earn Stamps",
-      claimNow: "Claim now",
+      claimNow: "Redeem reward",
       consumeReward: "Confirm reward",
       copyLink: "Copy link",
       openVerifier: "Open verifier",
       openExplorer: "Open explorer",
+      backToDashboard: "Back to dashboard",
       backToStore: "Back to store",
       backToRewards: "Back to rewards",
       backToVerifier: "Back to verifier",
       viewStore: "View store",
+      viewQr: "View QR",
+      buy: "Buy",
+      validate: "Validate",
+      validateQr: "Validate QR",
+      validateCode: "Validate code",
       openPurchaseFlow: "Open payment flow",
-      checkClaim: "Check claim",
+      checkClaim: "Check reward",
       readRewardQr: "Read reward QR",
       clearSelection: "Clear selection",
       switchNetwork: "Switch network",
-      refreshNetwork: "I switched already"
+      refreshNetwork: "I switched already",
+      save: "Save",
+      skipForNow: "Skip for now",
+      editProfile: "Edit profile",
+      addProfile: "Add profile"
     },
     messages: {
       noWalletFound: "No compatible wallet was found.",
@@ -646,25 +956,27 @@ const dictionaries: Record<Locale, Dictionary> = {
       couldNotSwitchNetwork: "Could not switch the network.",
       unsupportedNetwork: "Unsupported network.",
       qrMismatch: "The scanned QR does not point to a valid noodl3 payment.",
-      invalidClaimId: "Could not identify a valid claim.",
-      claimNotFound: "Claim not found.",
+      invalidClaimId: "Could not identify a valid reward.",
+      claimNotFound: "Reward not found.",
       rewardNotFound: "Reward not found.",
       storeNotReady: "This store has not been configured on this network yet.",
       purchaseFailed: "Could not complete the payment.",
-      claimFailed: "Could not create the claim.",
-      consumeFailed: "Could not confirm the claim.",
+      claimFailed: "Could not create the reward.",
+      consumeFailed: "Could not confirm the reward.",
       claimLookupFirst: "Scan a QR or enter a code before confirming.",
       claimCreatedMissing:
-        "The transaction succeeded, but the emitted claimId could not be found.",
+        "The transaction succeeded, but the emitted reward id could not be found.",
       allowanceCheck: "Checking payment allowance...",
       approving: "Approving the token for this payment...",
       sendingPayment: "Sending payment and recording Stamps...",
-      claimWrongStore: "This claim belongs to a different store.",
-      claimWrongCustomer: "This claim belongs to a different customer.",
-      claimAlreadyUsed: "This claim has already been used.",
+      claimWrongStore: "This reward belongs to a different store.",
+      claimWrongCustomer: "This reward belongs to a different customer.",
+      claimAlreadyUsed: "This reward has already been used.",
+      storeNotFound: "Store not found.",
+      contractUnavailable: "Contract unavailable on this network.",
       noManagedStores: "No store managed by this wallet was found.",
       wrongNetworkDescription:
-        "Switch your wallet to the required network before paying, claiming, or validating inside noodl3.",
+        "Switch your wallet to the required network before paying, redeeming, or validating inside noodl3.",
       wrongNetworkMiniPayDescription:
         "MiniPay is on the wrong network for this app. Open MiniPay settings, switch to the expected network, and come back to continue.",
       genericActionFailed: "Something went wrong. Please try again later.",
@@ -672,9 +984,15 @@ const dictionaries: Record<Locale, Dictionary> = {
       insufficientBalance: "Insufficient balance to complete this payment.",
       invalidProfileInput:
         "Use a valid display name and, if you want, a photo with an https:// link.",
-      notEnoughStamps: "You do not have enough Stamps to claim this reward yet.",
+      profileSaveFailed: "Could not save the profile.",
+      notEnoughStamps: "You do not have enough Stamps to redeem this reward yet.",
       profileContractOutdated:
-        "The current contract does not support onchain profiles yet. Deploy the latest version and update the app contract address."
+        "The current contract does not support onchain profiles yet. Deploy the latest version and update the app contract address.",
+      switchToNetworkBeforeContinue:
+        "Switch your wallet to {{network}} before continuing.",
+      checkingTokenAllowance: "Checking {{token}} allowance...",
+      approvingTokenPayment: "Approving {{token}} for this payment...",
+      sendingTokenPayment: "Sending {{token}} payment and recording Stamps..."
     },
     landing: {
       eyebrow: "Loyalty made for repeat local spend",
@@ -688,7 +1006,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       valuePoints: [
         "USDT, USDC, and cUSD with the same checkout journey.",
         "Non-transferable store-specific Stamps.",
-        "Claims consumed onchain at the moment of redemption."
+        "Rewards confirmed onchain at the moment of redemption."
       ],
       howTitle: "How it works",
       howDescription:
@@ -707,7 +1025,7 @@ const dictionaries: Record<Locale, Dictionary> = {
         {
           title: "Redeem",
           description:
-            "Once the threshold is reached, the customer generates a claim QR and the cashier consumes it at checkout."
+            "Once the threshold is reached, the customer generates a reward QR and the cashier confirms it at checkout."
         }
       ],
       storesTitle: "Active stores in the app",
@@ -718,7 +1036,7 @@ const dictionaries: Record<Locale, Dictionary> = {
         "The product keeps operations simple for the store and clear for the customer.",
       trustBullets: [
         "Payment and loyalty in the same surface.",
-        "Onchain verification for accrual, claim, and consumption.",
+        "Onchain verification for accrual, reward creation, and redemption.",
         "UX designed for repeat use, not long onboarding."
       ],
       faqTitle: "Quick answers",
@@ -733,12 +1051,14 @@ const dictionaries: Record<Locale, Dictionary> = {
         },
         {
           question: "How does the cashier validate a reward?",
-          answer: "The customer generates a QR with the claimId and the store manager consumes that claim in the verifier."
+          answer: "The customer generates a QR with the reward id and the store manager confirms it in the verifier."
         }
       ],
       footerTitle: "Jump straight into the rewards flow",
       footerDescription:
-        "Open the app, connect your wallet, and keep track of store progress in just a few taps."
+        "Open the app, connect your wallet, and keep track of store progress in just a few taps.",
+      connectedCta: "Open dashboard",
+      disconnectedCta: "Start with noodl3"
     },
     dashboard: {
       eyebrow: "Customer view",
@@ -752,6 +1072,38 @@ const dictionaries: Record<Locale, Dictionary> = {
       quickActionsTitle: "Find a store or scan a payment",
       quickActionsDescription:
         "Search by name, area, or category. If the cashier already has a purchase QR, scan it to jump straight into checkout.",
+      shellTitle: "Your dashboard",
+      tabs: {
+        loyalty: "Loyalty",
+        rewards: "Rewards",
+        stores: "Stores",
+        users: "Customers",
+        catalog: "Catalog",
+        onchain: "Onchain"
+      },
+      kpis: {
+        rewardsClaimed: "Rewards created",
+        currentStamps: "Current Stamps",
+        activeUsers: "Active customers",
+        rewards: "Rewards"
+      },
+      payNowTitle: "Pay now",
+      paymentScannerLabel: "Pay now",
+      paymentScannerAria: "Scan payment QR",
+      verifierScannerLabel: "Validate QR",
+      verifierScannerAria: "Open QR validator",
+      codeValidatorLabel: "Validate code",
+      codeValidatorAria: "Validate code",
+      loyaltyEmptyTitle: "No active loyalty yet.",
+      loyaltyEmptyDescription:
+        "Once you pay at a store, your progress will show up here.",
+      rewardsEmptyTitle: "No rewards created yet.",
+      rewardsEmptyDescription:
+        "Once you create a reward, it will appear here.",
+      storesSearchPlaceholder: "Search stores",
+      noStoreWalletTitle: "Connect a store wallet.",
+      noStoreWalletDescription:
+        "Merchant mode becomes available when the connected wallet matches a configured store manager.",
       scanTitle: "Payment QR scanner",
       scanDescription:
         "Scan the store QR to open the right item and continue through the same payment flow.",
@@ -769,12 +1121,12 @@ const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Rewards wallet",
       title: "Everything you have already collected by store.",
       description:
-        "Review Stamp progress, generate claims when thresholds are reached, and take the QR straight to the cashier.",
+        "Review Stamp progress, generate rewards when thresholds are reached, and take the QR straight to the cashier.",
       summaryTitle: "Current status",
       summaryConnected: "You have {{claimable}} rewards ready right now.",
       summaryDisconnected:
         "Connect your wallet to load the Stamps from each store.",
-      readyToClaim: "Ready to claim",
+      readyToClaim: "Ready to redeem",
       goToStore: "Open store"
     },
     store: {
@@ -787,25 +1139,31 @@ const dictionaries: Record<Locale, Dictionary> = {
       checkoutTitle: "Checkout summary",
       checkoutDescription:
         "Review the item, the amount, and the loyalty rule before confirming.",
+      paymentTokenLabel: "Payment token",
+      noActiveItems: "No active items right now.",
       qrTitle: "Purchase QR",
       qrDescription:
         "Show this QR at the counter or share the link to open the same payment flow elsewhere.",
       progressTitle: "Your progress at this store",
       progressDescription:
-        "Stamps accumulate per store and are only burned when a claim is generated.",
+        "Stamps accumulate per store and are only burned when a reward is created.",
       nextStepTitle: "Next step",
       nextStepDescription:
         "Once you reach the threshold, generate the reward QR from your rewards wallet",
-      openedViaQr: "Opened from QR"
+      openedViaQr: "Opened from QR",
+      redirectTitle: "{{store}} opens inside the app",
+      redirectDescription:
+        "To continue with payment and Stamps, go back to the noodl3 app and open the store from there."
     },
     claim: {
       eyebrow: "Reward ready",
       title: "Show this QR at checkout.",
       description:
-        "The claim was created successfully. Now present the QR or the backup code for validation.",
+        "The reward was created successfully. Now present the QR or backup code for validation.",
       howToUseTitle: "How to use it",
       howToUseDescription:
-        "The store manager should open the verifier with the store wallet and consume this claim once.",
+        "The store manager should open the verifier with the store wallet and confirm this reward once.",
+      qrAlt: "Reward QR {{id}}",
       steps: [
         "Show the QR to the cashier.",
         "If needed, also provide the backup code.",
@@ -814,9 +1172,9 @@ const dictionaries: Record<Locale, Dictionary> = {
     },
     verifier: {
       eyebrow: "Store operations",
-      title: "Validate reward claims with store and customer context.",
+      title: "Validate rewards with store and customer context.",
       description:
-        "If the connected wallet manages a store, the verifier opens a customer dashboard. Otherwise it works as a manual claim checker.",
+        "If the connected wallet manages a store, the verifier opens a customer dashboard. Otherwise it works as a manual reward checker.",
       managedTitle: "Store dashboard",
       managedDescription:
         "Select a store, find the customer, and validate the reward QR when they are ready to redeem.",
@@ -829,16 +1187,16 @@ const dictionaries: Record<Locale, Dictionary> = {
       customersEmpty: "No customer history found for this store yet.",
       selectedCustomerLabel: "Selected customer",
       selectedCustomerHint:
-        "Scan this customer's reward QR to validate a claim for the same store.",
+        "Scan this customer's reward QR to validate a reward for the same store.",
       progressLabel: "Progress",
-      readyLabel: "Ready to claim",
+      readyLabel: "Ready to redeem",
       collectingLabel: "Collecting Stamps",
       genericTitle: "Manual validation",
       genericDescription:
-        "Use a claim QR or a short code to load the reward and confirm consumption with the store wallet.",
+        "Use a reward QR or short code to load the reward and confirm it with the store wallet.",
       scanTitle: "Reward QR scanner",
       scanDescription:
-        "Scan the QR generated by the customer. The verifier checks store, customer, and claim status before confirmation.",
+        "Scan the QR generated by the customer. The verifier checks store, customer, and reward status before confirmation.",
       manualTitle: "Or validate manually",
       manualDescription:
         "Paste a link, a short code, or just the claimId to load a reward.",
@@ -846,8 +1204,89 @@ const dictionaries: Record<Locale, Dictionary> = {
       detailsTitle: "Reward details",
       detailsDescription:
         "Review the reward, the customer, and the current wallet authorization before consuming.",
+      detailsLoading: "Loading reward...",
+      customerWalletLabel: "Customer wallet",
+      storeWalletLabel: "Store wallet",
+      manualCardTitle: "Manual validation",
+      manualCardDescription: "Paste a link, a short code, or just the claimId.",
+      manualShortPlaceholder: "Ex.: CHOI-0001 or reward 1",
+      scannerFocusedTitle: "Validate reward",
+      scannerFocusedDescription:
+        "Scan the QR generated by the customer to load the reward.",
+      customersLoadingTitle: "Loading customers...",
+      customersEmptyTitle: "No customers found.",
+      merchantRewardsEmptyTitle: "No rewards created yet.",
+      merchantRewardsEmptyDescription:
+        "Rewards created for this store will appear here.",
       emptyState: "No reward loaded yet.",
       connectStoreWallet: "Connect store wallet"
+    },
+    account: {
+      openMenu: "Open account menu",
+      connectedWallet: "Connected wallet",
+      expectedNetwork: "{{current}} · expected {{expected}}",
+      connect: "Connect",
+      connecting: "Connecting..."
+    },
+    profile: {
+      title: "Your noodl3 profile",
+      description:
+        "Add a display name and, if you want, a photo. You can skip this for now.",
+      namePlaceholder: "Your name",
+      avatarPlaceholder: "Profile image URL (optional)"
+    },
+    catalogEditor: {
+      savedTitle: "Saved",
+      saved: "Catalog saved.",
+      savedWithDeploy: "Catalog saved and a fresh Vercel deploy was started.",
+      saveFailed: "Could not save the catalog.",
+      storeDetailsTitle: "Store details",
+      storeDetailsDescription:
+        "Edit the fields that come from the catalog published on Vercel.",
+      storeNameLabel: "Store name",
+      categoryLabel: "Category",
+      cityLabel: "City",
+      summaryLabel: "Summary",
+      logoUrlLabel: "Logo URL",
+      accentGradientLabel: "Accent gradient",
+      menuItemsTitle: "Menu items",
+      menuItemsDescription:
+        "Existing items keep the same id. Archive an item to remove it from the live menu.",
+      archivedLabel: "Archived",
+      nameLabel: "Name",
+      descriptionLabel: "Description",
+      badgeLabel: "Badge",
+      priceLabel: "Price",
+      removeNewItem: "Remove new item",
+      addItem: "Add item",
+      saveCatalog: "Save catalog"
+    },
+    onchainSettings: {
+      title: "Onchain settings",
+      ownerDescription:
+        "You are connected with the contract owner wallet and can reconfigure this store.",
+      lockedDescription:
+        "Only the contract owner wallet can save changes here.",
+      loadFailed: "Could not load the onchain settings.",
+      saveFailed: "Could not save the onchain settings.",
+      saved: "Onchain settings updated and mirrored into the catalog.",
+      managerLabel: "Manager",
+      payoutLabel: "Payout",
+      primaryTokenLabel: "Primary token",
+      acceptedTokensLabel: "Accepted tokens",
+      minimumPurchaseLabel: "Minimum purchase",
+      rewardValueLabel: "Reward value",
+      stampsPerPurchaseLabel: "Stamps per purchase",
+      stampsRequiredLabel: "Stamps required",
+      rewardTypeLabel: "Reward type",
+      fixedAmountLabel: "Fixed amount",
+      freeItemLabel: "Free item",
+      storeStatusLabel: "Store status",
+      activeTitle: "Active",
+      activeDescription: "Accepts purchases and records loyalty as usual.",
+      inactiveTitle: "Inactive",
+      inactiveDescription: "Blocks new purchases until the store is reactivated.",
+      saveOnchain: "Save onchain"
     },
     success: {
       purchaseEyebrow: "Purchase completed",
@@ -857,9 +1296,9 @@ const dictionaries: Record<Locale, Dictionary> = {
       purchaseDescription:
         "The purchase was recorded and the store Stamp balance was updated.",
       consumeDescription:
-        "The claim was consumed onchain and cannot be used again.",
+        "The reward was confirmed onchain and cannot be used again.",
       purchaseDetail: "{{item}} recorded with loyalty enabled.",
-      consumeDetail: "Claim {{claimId}} confirmed at checkout.",
+      consumeDetail: "Reward {{claimId}} confirmed at checkout.",
       nextStepTitle: "What to do next",
       purchaseNextSteps: [
         "Open Rewards to track progress for this store.",

@@ -40,6 +40,7 @@ import {
 } from "../lib/dashboard-route";
 import { getUserFacingErrorMessage } from "../lib/error-message";
 import { formatDateLabel, getInitials } from "../lib/format";
+import { interpolate, type Dictionary } from "../lib/i18n";
 import { useMiniPay } from "../lib/minipay";
 import { useProfile } from "../lib/profile";
 import {
@@ -91,7 +92,7 @@ export function DashboardPage({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { locale } = useLocale();
+  const { locale, dictionary } = useLocale();
   const [stores, setStores] = useState(initialStores);
   const [query, setQuery] = useState("");
   const [scannerError, setScannerError] = useState<string | null>(null);
@@ -484,22 +485,18 @@ export function DashboardPage({
         setClaimId(null);
         setClaimRecord(null);
         setClaimStoreRecord(null);
-        return showLookupError(locale === "pt-BR" ? "Claim inválido." : "Invalid claim.");
+        return showLookupError(dictionary.messages.invalidClaimId);
       }
 
       if (!contractAddress) {
-        return showLookupError(
-          locale === "pt-BR"
-            ? "Contrato indisponível nesta rede."
-            : "Contract unavailable on this network."
-        );
+        return showLookupError(dictionary.messages.contractUnavailable);
       }
 
       if (account && isWrongChain) {
         return showLookupError(
-          locale === "pt-BR"
-            ? `Troque sua carteira para ${expectedChainLabel} antes de continuar.`
-            : `Switch your wallet to ${expectedChainLabel} before continuing.`
+          interpolate(dictionary.messages.switchToNetworkBeforeContinue, {
+            network: expectedChainLabel
+          })
         );
       }
 
@@ -511,16 +508,14 @@ export function DashboardPage({
       if (!nextClaimRecord) {
         setClaimRecord(null);
         setClaimStoreRecord(null);
-        return showLookupError(
-          locale === "pt-BR" ? "Resgate não encontrado." : "Claim not found."
-        );
+        return showLookupError(dictionary.messages.claimNotFound);
       }
 
       const nextStoreRecord = await fetchStore(nextClaimRecord.storeId, initialChainId, contractAddress);
       if (!nextStoreRecord) {
         setClaimRecord(null);
         setClaimStoreRecord(null);
-        return showLookupError(locale === "pt-BR" ? "Loja não encontrada." : "Store not found.");
+        return showLookupError(dictionary.messages.storeNotFound);
       }
 
       if (selectedManagedStore) {
@@ -528,11 +523,7 @@ export function DashboardPage({
         if (nextClaimRecord.storeId.toLowerCase() !== selectedStoreId) {
           setClaimRecord(null);
           setClaimStoreRecord(null);
-          return showLookupError(
-            locale === "pt-BR"
-              ? "Este resgate pertence a outra loja."
-              : "This claim belongs to another store."
-          );
+          return showLookupError(dictionary.messages.claimWrongStore);
         }
       }
 
@@ -542,27 +533,19 @@ export function DashboardPage({
       ) {
         setClaimRecord(null);
         setClaimStoreRecord(null);
-        return showLookupError(
-          locale === "pt-BR"
-            ? "Este resgate pertence a outro cliente."
-            : "This claim belongs to another customer."
-        );
+        return showLookupError(dictionary.messages.claimWrongCustomer);
       }
 
       setClaimRecord(nextClaimRecord);
       setClaimStoreRecord(nextStoreRecord);
 
       if (nextClaimRecord.consumed) {
-        setClaimLookupError(
-          locale === "pt-BR"
-            ? "Este resgate já foi utilizado."
-            : "This claim has already been used."
-        );
+        setClaimLookupError(dictionary.messages.claimAlreadyUsed);
       }
 
       return true;
     },
-    [account, contractAddress, expectedChainLabel, initialChainId, isWrongChain, locale, selectedCustomer, selectedManagedStore]
+    [account, contractAddress, dictionary, expectedChainLabel, initialChainId, isWrongChain, selectedCustomer, selectedManagedStore]
   );
 
   useEffect(() => {
@@ -654,19 +637,15 @@ export function DashboardPage({
     }
 
     if (!contractAddress) {
-      setActionError(
-        locale === "pt-BR"
-          ? "Contrato não configurado nesta rede."
-          : "Contract not configured on this network."
-      );
+      setActionError(dictionary.common.contractMissing);
       return;
     }
 
     if (isWrongChain) {
       setActionError(
-        locale === "pt-BR"
-          ? `Troque sua carteira para ${expectedChainLabel} antes de continuar.`
-          : `Switch your wallet to ${expectedChainLabel} before continuing.`
+        interpolate(dictionary.messages.switchToNetworkBeforeContinue, {
+          network: expectedChainLabel
+        })
       );
       return;
     }
@@ -683,11 +662,7 @@ export function DashboardPage({
       const nextClaimId = extractClaimIdFromReceipt(receipt);
 
       if (nextClaimId === null) {
-        throw new Error(
-          locale === "pt-BR"
-            ? "Não foi possível encontrar o claim criado."
-            : "Could not find the emitted claim id."
-        );
+        throw new Error(dictionary.messages.claimCreatedMissing);
       }
 
       router.push(`/app/claim/${nextClaimId}`);
@@ -695,9 +670,7 @@ export function DashboardPage({
       setActionError(
         getUserFacingErrorMessage(
           error,
-          locale === "pt-BR"
-            ? "Não foi possível gerar o resgate."
-            : "Could not create the reward claim."
+          dictionary.messages.claimFailed
         )
       );
     } finally {
@@ -717,21 +690,13 @@ export function DashboardPage({
       // Ignore malformed URLs and fall through to the friendly error.
     }
 
-    setScannerError(
-      locale === "pt-BR"
-        ? "O QR lido não aponta para um pagamento válido."
-        : "The scanned QR does not point to a valid payment."
-    );
+    setScannerError(dictionary.messages.qrMismatch);
     return false;
   }
 
   async function handleConsume() {
     if (!claimId || !contractAddress) {
-      setClaimLookupError(
-        locale === "pt-BR"
-          ? "Leia um QR ou informe um código antes de confirmar."
-          : "Scan a QR or enter a code before confirming."
-      );
+      setClaimLookupError(dictionary.messages.claimLookupFirst);
       return;
     }
 
@@ -742,19 +707,15 @@ export function DashboardPage({
 
     if (isWrongChain) {
       setClaimLookupError(
-        locale === "pt-BR"
-          ? `Troque sua carteira para ${expectedChainLabel} antes de continuar.`
-          : `Switch your wallet to ${expectedChainLabel} before continuing.`
+        interpolate(dictionary.messages.switchToNetworkBeforeContinue, {
+          network: expectedChainLabel
+        })
       );
       return;
     }
 
     if (selectedCustomer && claimRecord?.user.toLowerCase() !== selectedCustomer.toLowerCase()) {
-      setClaimLookupError(
-        locale === "pt-BR"
-          ? "Este resgate pertence a outro cliente."
-          : "This claim belongs to another customer."
-      );
+      setClaimLookupError(dictionary.messages.claimWrongCustomer);
       return;
     }
 
@@ -775,9 +736,7 @@ export function DashboardPage({
       setClaimLookupError(
         getUserFacingErrorMessage(
           error,
-          locale === "pt-BR"
-            ? "Não foi possível confirmar o resgate."
-            : "Could not confirm the reward."
+          dictionary.messages.consumeFailed
         )
       );
     } finally {
@@ -801,9 +760,7 @@ export function DashboardPage({
       setActionError(
         getUserFacingErrorMessage(
           error,
-          locale === "pt-BR"
-            ? "Não foi possível salvar o perfil."
-            : "Could not save the profile."
+          dictionary.messages.profileSaveFailed
         )
       );
     }
@@ -828,12 +785,8 @@ export function DashboardPage({
   const claimDetailsCard = (
     <Card className={isFocusedRewardVerifier ? "mx-auto w-full max-w-xl" : undefined}>
       <CardHeader>
-        <CardTitle>{locale === "pt-BR" ? "Detalhes do resgate" : "Claim details"}</CardTitle>
-        <CardDescription>
-          {locale === "pt-BR"
-            ? "Confira loja, cliente e status antes de confirmar."
-            : "Review the store, customer, and status before confirming."}
-        </CardDescription>
+        <CardTitle>{dictionary.verifier.detailsTitle}</CardTitle>
+        <CardDescription>{dictionary.verifier.detailsDescription}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
         {claimRecord && claimStoreMeta && claimStoreRecord ? (
@@ -851,33 +804,29 @@ export function DashboardPage({
             </div>
             <div className="space-y-2 border-t border-[#EEE8F5] pt-4 text-sm text-[#625B78]">
               <p>
-                {locale === "pt-BR" ? "Cliente" : "Customer"}:{" "}
+                {dictionary.common.customer}:{" "}
                 <span className="text-[#18122A]">
                   {claimCustomer?.profile?.displayName ?? formatWalletLabel(claimRecord.user)}
                 </span>
               </p>
               {claimCustomer?.profile ? (
                 <p>
-                  {locale === "pt-BR" ? "Carteira" : "Wallet"}:{" "}
+                  {dictionary.verifier.customerWalletLabel}:{" "}
                   <span className="text-[#18122A]">
                     {formatWalletLabel(claimRecord.user)}
                   </span>
                 </p>
               ) : null}
               <p>
-                {locale === "pt-BR" ? "Status" : "Status"}:{" "}
+                {dictionary.common.status}:{" "}
                 <span className="text-[#18122A]">
                   {claimRecord.consumed
-                    ? locale === "pt-BR"
-                      ? "Consumido"
-                      : "Consumed"
-                    : locale === "pt-BR"
-                      ? "Pendente"
-                      : "Pending"}
+                    ? dictionary.common.consumed
+                    : dictionary.common.pending}
                 </span>
               </p>
               <p>
-                {locale === "pt-BR" ? "Carteira da loja" : "Store wallet"}:{" "}
+                {dictionary.verifier.storeWalletLabel}:{" "}
                 <span className="text-[#18122A]">
                   {formatWalletLabel(claimStoreRecord.manager)}
                 </span>
@@ -886,7 +835,7 @@ export function DashboardPage({
           </>
         ) : (
           <p className="text-sm text-[#625B78]">
-            {locale === "pt-BR" ? "Carregando resgate..." : "Loading claim..."}
+            {dictionary.verifier.detailsLoading}
           </p>
         )}
 
@@ -902,12 +851,8 @@ export function DashboardPage({
           disabled={!claimRecord || claimRecord.consumed || !isAuthorizedManager || isConsuming}
         >
           {isConsuming
-            ? locale === "pt-BR"
-              ? "Confirmando..."
-              : "Confirming..."
-            : locale === "pt-BR"
-              ? "Confirmar resgate"
-              : "Confirm reward"}
+            ? `${dictionary.actions.consumeReward}...`
+            : dictionary.actions.consumeReward}
         </Button>
       </CardContent>
     </Card>
@@ -915,12 +860,8 @@ export function DashboardPage({
   const manualClaimValidationCard = (
     <Card className={isRewardVerifierCodeOpen ? "mx-auto w-full max-w-xl" : undefined}>
       <CardHeader>
-        <CardTitle>{locale === "pt-BR" ? "Validar manualmente" : "Manual validation"}</CardTitle>
-        <CardDescription>
-          {locale === "pt-BR"
-            ? "Cole um link, um código ou apenas o claimId."
-            : "Paste a link, a short code, or just the claim id."}
-        </CardDescription>
+        <CardTitle>{dictionary.verifier.manualCardTitle}</CardTitle>
+        <CardDescription>{dictionary.verifier.manualCardDescription}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <Input
@@ -928,11 +869,7 @@ export function DashboardPage({
           onChange={(event) =>
             setClaimInputValue(normalizeClaimInputValue(event.target.value))
           }
-          placeholder={
-            locale === "pt-BR"
-              ? "Ex.: CHOI-0001 ou claim 1"
-              : "Ex.: CHOI-0001 or claim 1"
-          }
+          placeholder={dictionary.verifier.manualShortPlaceholder}
         />
         <Button
           className={isRewardVerifierCodeOpen ? "w-full" : undefined}
@@ -948,7 +885,7 @@ export function DashboardPage({
             }
           }}
         >
-          {locale === "pt-BR" ? "Validar resgate" : "Check claim"}
+          {dictionary.actions.checkClaim}
         </Button>
       </CardContent>
     </Card>
@@ -962,7 +899,7 @@ export function DashboardPage({
       <section className="space-y-8">
         {profileModalMode ? (
           <ProfileModal
-            locale={locale}
+            dictionary={dictionary}
             mode={profileModalMode}
             name={profileName}
             avatarUrl={profileAvatarUrl}
@@ -989,7 +926,7 @@ export function DashboardPage({
           <div className="flex flex-col gap-5">
             <div className="flex items-center justify-between gap-4">
               <h1 className="text-2xl font-semibold tracking-[-0.04em] text-[#18122A] md:text-3xl">
-                {locale === "pt-BR" ? "Seu dashboard" : "Your dashboard"}
+                {dictionary.dashboard.shellTitle}
               </h1>
 
               <div className="flex items-start gap-3">
@@ -1009,21 +946,13 @@ export function DashboardPage({
                   className="flex flex-col items-center gap-2 text-[#241B3C]"
                   aria-label={
                     role === "customer"
-                      ? locale === "pt-BR"
-                        ? "Ler QR de pagamento"
-                        : "Scan payment QR"
-                      : locale === "pt-BR"
-                        ? "Abrir validador de QR"
-                        : "Open QR validator"
+                      ? dictionary.dashboard.paymentScannerAria
+                      : dictionary.dashboard.verifierScannerAria
                   }
                   title={
                     role === "customer"
-                      ? locale === "pt-BR"
-                        ? "Ler QR de pagamento"
-                        : "Scan payment QR"
-                      : locale === "pt-BR"
-                        ? "Abrir validador de QR"
-                        : "Open QR validator"
+                      ? dictionary.dashboard.paymentScannerAria
+                      : dictionary.dashboard.verifierScannerAria
                   }
                 >
                   <span
@@ -1037,12 +966,8 @@ export function DashboardPage({
                   </span>
                   <span className="text-xs font-medium text-[#625B78]">
                     {role === "customer"
-                      ? locale === "pt-BR"
-                        ? "Pagar agora"
-                        : "Pay now"
-                      : locale === "pt-BR"
-                        ? "Validar QR"
-                        : "Validate QR"}
+                      ? dictionary.dashboard.paymentScannerLabel
+                      : dictionary.dashboard.verifierScannerLabel}
                   </span>
                 </button>
 
@@ -1056,8 +981,8 @@ export function DashboardPage({
                       })
                     }
                     className="flex flex-col items-center gap-2 text-[#241B3C]"
-                    aria-label={locale === "pt-BR" ? "Validar código" : "Validate code"}
-                    title={locale === "pt-BR" ? "Validar código" : "Validate code"}
+                    aria-label={dictionary.dashboard.codeValidatorAria}
+                    title={dictionary.dashboard.codeValidatorAria}
                   >
                     <span
                       className={`inline-flex h-14 w-14 items-center justify-center rounded-full border shadow-[0_12px_32px_rgba(23,18,42,0.06)] ${
@@ -1069,7 +994,7 @@ export function DashboardPage({
                       <CodeActionIcon />
                     </span>
                     <span className="text-xs font-medium text-[#625B78]">
-                      {locale === "pt-BR" ? "Validar Código" : "Validate Code"}
+                      {dictionary.dashboard.codeValidatorLabel}
                     </span>
                   </button>
                 ) : null}
@@ -1103,23 +1028,19 @@ export function DashboardPage({
           <>
             <div className="grid gap-5 md:grid-cols-2">
               <KpiCard
-                label={locale === "pt-BR" ? "Recompensas resgatadas" : "Rewards claimed"}
+                label={dictionary.dashboard.kpis.rewardsClaimed}
                 value={customerClaims.length}
               />
               <KpiCard
-                label={locale === "pt-BR" ? "Selos atuais" : "Current stamps"}
+                label={dictionary.dashboard.kpis.currentStamps}
                 value={totalCurrentStamps}
               />
             </div>
 
             {activeScanner === "purchase" ? (
               <QrScanner
-                title={locale === "pt-BR" ? "Pagar agora" : "Pay now"}
-                description={
-                  locale === "pt-BR"
-                    ? "Leia o QR da loja para abrir o item certo e continuar o pagamento."
-                    : "Scan the store QR to open the right item and continue the payment."
-                }
+                title={dictionary.dashboard.payNowTitle}
+                description={dictionary.dashboard.scanDescription}
                 notice={scannerError}
                 onClose={() => replaceDashboardState({ scanner: undefined })}
                 onDetected={handlePurchaseQr}
@@ -1129,17 +1050,17 @@ export function DashboardPage({
             <div className="flex flex-wrap gap-2">
               <DashboardTab
                 active={activeTab === "loyalty"}
-                label={locale === "pt-BR" ? "Fidelidade" : "Loyalty"}
+                label={dictionary.dashboard.tabs.loyalty}
                 onClick={() => replaceDashboardState({ tab: "loyalty" })}
               />
               <DashboardTab
                 active={activeTab === "rewards"}
-                label={locale === "pt-BR" ? "Recompensas" : "Rewards"}
+                label={dictionary.dashboard.tabs.rewards}
                 onClick={() => replaceDashboardState({ tab: "rewards" })}
               />
               <DashboardTab
                 active={activeTab === "stores"}
-                label={locale === "pt-BR" ? "Lojas" : "Stores"}
+                label={dictionary.dashboard.tabs.stores}
                 onClick={() => replaceDashboardState({ tab: "stores" })}
               />
             </div>
@@ -1176,7 +1097,7 @@ export function DashboardPage({
                           </p>
                           <div className="flex flex-wrap gap-3">
                             <Link href={`/app/store/${store.slug}`}>
-                              <Button size="sm">{locale === "pt-BR" ? "Abrir loja" : "Open store"}</Button>
+                              <Button size="sm">{dictionary.rewards.goToStore}</Button>
                             </Link>
                             {claimableBySlug[store.slug] ? (
                               <Button
@@ -1186,12 +1107,8 @@ export function DashboardPage({
                                 disabled={claimingSlug === store.slug}
                               >
                                 {claimingSlug === store.slug
-                                  ? locale === "pt-BR"
-                                    ? "Resgatando..."
-                                    : "Claiming..."
-                                  : locale === "pt-BR"
-                                    ? "Resgatar"
-                                    : "Claim"}
+                                  ? `${dictionary.actions.claimNow}...`
+                                  : dictionary.actions.claimNow}
                               </Button>
                             ) : null}
                           </div>
@@ -1202,12 +1119,8 @@ export function DashboardPage({
                 </div>
               ) : (
                 <EmptyState
-                  title={locale === "pt-BR" ? "Nenhuma fidelidade ativa ainda." : "No active loyalty yet."}
-                  description={
-                    locale === "pt-BR"
-                      ? "Assim que você pagar em uma loja, o progresso aparece aqui."
-                      : "Once you pay at a store, your progress will show up here."
-                  }
+                  title={dictionary.dashboard.loyaltyEmptyTitle}
+                  description={dictionary.dashboard.loyaltyEmptyDescription}
                 />
               )
             ) : null}
@@ -1228,52 +1141,42 @@ export function DashboardPage({
                                 {store ? resolveText(store.name, locale) : decodeStoreId(claim.storeId)}
                               </p>
                               <p className="text-sm text-[#625B78]">
-                                {store ? buildRewardCopy(store, locale) : locale === "pt-BR" ? "Recompensa" : "Reward"}
+                                {store ? buildRewardCopy(store, locale) : dictionary.common.reward}
                               </p>
                             </div>
                             <p className="text-sm text-[#625B78]">
                               {claim.consumed
-                                ? locale === "pt-BR"
-                                  ? "Consumida"
-                                  : "Consumed"
-                                : locale === "pt-BR"
-                                  ? "Pendente"
-                                  : "Pending"}
+                                ? dictionary.common.used
+                                : dictionary.common.pending}
                             </p>
                           </div>
                           <div className="grid gap-3 md:grid-cols-3">
                             <InfoLine
-                              label={locale === "pt-BR" ? "Data" : "Date"}
+                              label={dictionary.common.date}
                               value={formatDateLabel(claim.claimedAt, locale)}
                             />
                             <InfoLine
-                              label={locale === "pt-BR" ? "Código" : "Code"}
+                              label={dictionary.common.code}
                               value={claimCode ?? claim.id.toString()}
                               mono
                             />
                             <InfoLine
-                              label={locale === "pt-BR" ? "Status" : "Status"}
+                              label={dictionary.common.status}
                               value={
                                 claim.consumed
-                                  ? locale === "pt-BR"
-                                    ? "Consumida"
-                                    : "Consumed"
-                                  : locale === "pt-BR"
-                                    ? "Pendente"
-                                    : "Pending"
+                                  ? dictionary.common.used
+                                  : dictionary.common.pending
                               }
                             />
                           </div>
                           <div className="flex flex-wrap gap-3">
                             <Link href={`/app/claim/${claim.id.toString()}`}>
-                              <Button size="sm">
-                                {locale === "pt-BR" ? "Ver QR" : "View QR"}
-                              </Button>
+                              <Button size="sm">{dictionary.actions.viewQr}</Button>
                             </Link>
                             {store ? (
                               <Link href={`/app/store/${store.slug}`}>
                                 <Button size="sm" variant="outline">
-                                  {locale === "pt-BR" ? "Abrir loja" : "Open store"}
+                                  {dictionary.rewards.goToStore}
                                 </Button>
                               </Link>
                             ) : null}
@@ -1285,12 +1188,8 @@ export function DashboardPage({
                 </div>
               ) : (
                 <EmptyState
-                  title={locale === "pt-BR" ? "Nenhuma recompensa resgatada." : "No rewards claimed yet."}
-                  description={
-                    locale === "pt-BR"
-                      ? "Quando você gerar um claim, o histórico aparece aqui."
-                      : "Once you generate a claim, it will appear here."
-                  }
+                  title={dictionary.dashboard.rewardsEmptyTitle}
+                  description={dictionary.dashboard.rewardsEmptyDescription}
                 />
               )
             ) : null}
@@ -1301,7 +1200,7 @@ export function DashboardPage({
                   <Input
                     value={query}
                     onChange={(event) => setQuery(event.target.value)}
-                    placeholder={locale === "pt-BR" ? "Buscar lojas" : "Search stores"}
+                    placeholder={dictionary.dashboard.storesSearchPlaceholder}
                   />
                 </div>
                 <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -1330,7 +1229,7 @@ export function DashboardPage({
                         </p>
                         <div className="flex flex-wrap gap-3">
                           <Link href={`/app/store/${store.slug}`}>
-                            <Button size="sm">{locale === "pt-BR" ? "Comprar" : "Buy"}</Button>
+                            <Button size="sm">{dictionary.actions.buy}</Button>
                           </Link>
                         </div>
                       </CardContent>
@@ -1346,11 +1245,11 @@ export function DashboardPage({
               <>
             <div className="grid gap-5 md:grid-cols-2">
               <KpiCard
-                label={locale === "pt-BR" ? "Usuários ativos" : "Active users"}
+                label={dictionary.dashboard.kpis.activeUsers}
                 value={activeUserCount}
               />
               <KpiCard
-                label={locale === "pt-BR" ? "Recompensas" : "Rewards"}
+                label={dictionary.dashboard.kpis.rewards}
                 value={merchantClaims.length}
               />
             </div>
@@ -1359,33 +1258,29 @@ export function DashboardPage({
               <div className="flex flex-wrap gap-2">
                 <DashboardTab
                   active={activeTab === "users"}
-                  label={locale === "pt-BR" ? "Usuários" : "Users"}
+                  label={dictionary.dashboard.tabs.users}
                   onClick={() => replaceDashboardState({ tab: "users" })}
                 />
                 <DashboardTab
                   active={activeTab === "rewards"}
-                  label={locale === "pt-BR" ? "Recompensas" : "Rewards"}
+                  label={dictionary.dashboard.tabs.rewards}
                   onClick={() => replaceDashboardState({ tab: "rewards" })}
                 />
                 <DashboardTab
                   active={activeTab === "catalog"}
-                  label={locale === "pt-BR" ? "Catálogo" : "Catalog"}
+                  label={dictionary.dashboard.tabs.catalog}
                   onClick={() => replaceDashboardState({ tab: "catalog" })}
                 />
                 <DashboardTab
                   active={activeTab === "onchain"}
-                  label={locale === "pt-BR" ? "Onchain" : "Onchain"}
+                  label={dictionary.dashboard.tabs.onchain}
                   onClick={() => replaceDashboardState({ tab: "onchain" })}
                 />
               </div>
             ) : (
               <EmptyState
-                title={locale === "pt-BR" ? "Conecte uma carteira de loja." : "Connect a store wallet."}
-                description={
-                  locale === "pt-BR"
-                    ? "O modo de loja fica disponível quando a carteira conectada corresponde ao gerente configurado da loja."
-                    : "Merchant mode becomes available when the connected wallet matches a configured store manager."
-                }
+                title={dictionary.dashboard.noStoreWalletTitle}
+                description={dictionary.dashboard.noStoreWalletDescription}
               />
             )}
               </>
@@ -1407,7 +1302,7 @@ export function DashboardPage({
                     <Card>
                       <CardContent className="space-y-2 pt-6">
                         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
-                          {locale === "pt-BR" ? "Cliente selecionado" : "Selected customer"}
+                          {dictionary.verifier.selectedCustomerLabel}
                         </p>
                         <div className="flex items-center gap-3">
                           <CustomerAvatar
@@ -1435,7 +1330,7 @@ export function DashboardPage({
                             size="sm"
                             onClick={() => setSelectedCustomer(null)}
                           >
-                            {locale === "pt-BR" ? "Limpar seleção" : "Clear selection"}
+                            {dictionary.actions.clearSelection}
                           </Button>
                         </div>
                       </CardContent>
@@ -1445,16 +1340,10 @@ export function DashboardPage({
                   <div className="grid gap-6 lg:grid-cols-2">
                     {isRewardVerifierScannerOpen ? (
                       <QrScanner
-                        title={locale === "pt-BR" ? "Validar recompensa" : "Validate reward"}
-                        description={
-                          locale === "pt-BR"
-                            ? "Leia o QR gerado pelo cliente para carregar o claim."
-                            : "Scan the QR generated by the customer to load the claim."
-                        }
+                        title={dictionary.verifier.scannerFocusedTitle}
+                        description={dictionary.verifier.scannerFocusedDescription}
                         notice={claimScannerNotice}
-                        processingLabel={
-                          locale === "pt-BR" ? "Carregando resgate..." : "Loading claim..."
-                        }
+                        processingLabel={dictionary.verifier.detailsLoading}
                         closeOnDetected={false}
                         onClose={() => {
                           setClaimScannerNotice(null);
@@ -1494,9 +1383,7 @@ export function DashboardPage({
                     <Input
                       value={customerQuery}
                       onChange={(event) => setCustomerQuery(event.target.value)}
-                      placeholder={
-                        locale === "pt-BR" ? "Buscar por endereço" : "Search by address"
-                      }
+                      placeholder={dictionary.verifier.customerSearchPlaceholder}
                     />
                   </div>
                   {filteredCustomers.map((customer) => (
@@ -1520,22 +1407,14 @@ export function DashboardPage({
                                 {customer.profile
                                   ? formatWalletLabel(customer.address)
                                   : customer.canClaim
-                                    ? locale === "pt-BR"
-                                      ? "Pronto para resgatar"
-                                      : "Ready to claim"
-                                    : locale === "pt-BR"
-                                      ? "Acumulando selos"
-                                      : "Collecting stamps"}
+                                    ? dictionary.verifier.readyLabel
+                                    : dictionary.verifier.collectingLabel}
                               </p>
                               {customer.profile ? (
                                 <p className="text-sm text-[#625B78]">
                                   {customer.canClaim
-                                    ? locale === "pt-BR"
-                                      ? "Pronto para resgatar"
-                                      : "Ready to claim"
-                                    : locale === "pt-BR"
-                                      ? "Acumulando selos"
-                                      : "Collecting stamps"}
+                                    ? dictionary.verifier.readyLabel
+                                    : dictionary.verifier.collectingLabel}
                                 </p>
                               ) : null}
                             </div>
@@ -1548,17 +1427,13 @@ export function DashboardPage({
                 </div>
               ) : isLoadingMerchantData ? (
                 <EmptyState
-                  title={locale === "pt-BR" ? "Carregando usuários..." : "Loading users..."}
+                  title={dictionary.verifier.customersLoadingTitle}
                   description=""
                 />
               ) : (
                 <EmptyState
-                  title={locale === "pt-BR" ? "Nenhum usuário encontrado." : "No users found."}
-                  description={
-                    locale === "pt-BR"
-                      ? "Assim que a loja registrar compras, os clientes aparecem aqui."
-                      : "Once the store records purchases, customers will show up here."
-                  }
+                  title={dictionary.verifier.customersEmptyTitle}
+                  description={dictionary.verifier.customersEmpty}
                 />
               )
             ) : null}
@@ -1602,40 +1477,30 @@ export function DashboardPage({
                             </div>
                             <p className="text-sm text-[#625B78]">
                               {claim.consumed
-                                ? locale === "pt-BR"
-                                  ? "Consumido"
-                                  : "Consumed"
-                                : locale === "pt-BR"
-                                  ? "Pendente"
-                                  : "Pending"}
+                                ? dictionary.common.consumed
+                                : dictionary.common.pending}
                             </p>
                           </div>
                           <div className="grid gap-3 md:grid-cols-3">
                             <InfoLine
-                              label={locale === "pt-BR" ? "Código" : "Code"}
+                              label={dictionary.common.code}
                               value={rewardCode}
                               mono
                             />
                             <InfoLine
-                              label={locale === "pt-BR" ? "Recompensa" : "Reward"}
+                              label={dictionary.common.reward}
                               value={
                                 store
                                   ? buildRewardCopy(store, locale)
-                                  : locale === "pt-BR"
-                                    ? "Recompensa"
-                                    : "Reward"
+                                  : dictionary.common.reward
                               }
                             />
                             <InfoLine
-                              label={locale === "pt-BR" ? "Status" : "Status"}
+                              label={dictionary.common.status}
                               value={
                                 claim.consumed
-                                  ? locale === "pt-BR"
-                                    ? "Consumido"
-                                    : "Consumed"
-                                  : locale === "pt-BR"
-                                    ? "Pendente"
-                                    : "Pending"
+                                  ? dictionary.common.consumed
+                                  : dictionary.common.pending
                               }
                             />
                           </div>
@@ -1652,7 +1517,7 @@ export function DashboardPage({
                                 });
                               }}
                             >
-                              {locale === "pt-BR" ? "Validar" : "Validate"}
+                              {dictionary.actions.validate}
                             </Button>
                           ) : null}
                         </CardContent>
@@ -1662,12 +1527,8 @@ export function DashboardPage({
                 </div>
               ) : (
                 <EmptyState
-                  title={locale === "pt-BR" ? "Nenhuma recompensa gerada." : "No rewards created yet."}
-                  description={
-                    locale === "pt-BR"
-                      ? "Os claims emitidos para esta loja aparecem aqui."
-                      : "Claims created for this store will appear here."
-                  }
+                  title={dictionary.verifier.merchantRewardsEmptyTitle}
+                  description={dictionary.verifier.merchantRewardsEmptyDescription}
                 />
               )
             ) : null}
@@ -1778,7 +1639,7 @@ function InfoLine({
 }
 
 function ProfileModal({
-  locale,
+  dictionary,
   mode,
   name,
   avatarUrl,
@@ -1790,7 +1651,7 @@ function ProfileModal({
   onSkip,
   onSave
 }: {
-  locale: "pt-BR" | "en";
+  dictionary: Dictionary;
   mode: ProfileModalMode;
   name: string;
   avatarUrl: string;
@@ -1809,12 +1670,10 @@ function ProfileModal({
       <div className="w-full max-w-md rounded-[32px] border border-[#ECEAF4] bg-white p-6 shadow-[0_28px_90px_rgba(23,18,42,0.16)]">
         <div className="space-y-2">
           <h2 className="text-2xl font-semibold tracking-[-0.03em] text-[#18122A]">
-            {locale === "pt-BR" ? "Seu perfil no noodl3" : "Your noodl3 profile"}
+            {dictionary.profile.title}
           </h2>
           <p className="text-sm leading-7 text-[#625B78]">
-            {locale === "pt-BR"
-              ? "Adicione um nome e, se quiser, uma foto. Você pode pular isso por agora."
-              : "Add a display name and, if you want, a photo. You can skip this for now."}
+            {dictionary.profile.description}
           </p>
         </div>
 
@@ -1822,16 +1681,12 @@ function ProfileModal({
           <Input
             value={name}
             onChange={(event) => onNameChange(event.target.value)}
-            placeholder={locale === "pt-BR" ? "Seu nome" : "Your name"}
+            placeholder={dictionary.profile.namePlaceholder}
           />
           <Input
             value={avatarUrl}
             onChange={(event) => onAvatarChange(event.target.value)}
-            placeholder={
-              locale === "pt-BR"
-                ? "Link da foto (opcional)"
-              : "Profile image URL (optional)"
-            }
+            placeholder={dictionary.profile.avatarPlaceholder}
           />
           {error ? (
             <p className="rounded-[20px] border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
@@ -1842,21 +1697,15 @@ function ProfileModal({
 
         <div className="flex flex-wrap gap-3 pt-6">
           <Button onClick={onSave} disabled={!name.trim() || isSaving}>
-            {isSaving
-              ? locale === "pt-BR"
-                ? "Salvando..."
-                : "Saving..."
-              : locale === "pt-BR"
-                ? "Salvar"
-                : "Save"}
+            {isSaving ? dictionary.common.saving : dictionary.actions.save}
           </Button>
           {isSetup ? (
             <Button variant="outline" onClick={onSkip} disabled={isSaving}>
-              {locale === "pt-BR" ? "Pular por agora" : "Skip for now"}
+              {dictionary.actions.skipForNow}
             </Button>
           ) : (
             <Button variant="outline" onClick={onClose} disabled={isSaving}>
-              {locale === "pt-BR" ? "Fechar" : "Close"}
+              {dictionary.common.close}
             </Button>
           )}
         </div>

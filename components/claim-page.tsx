@@ -15,6 +15,7 @@ import { buildClaimCode, buildClaimUrl, buildQrImageUrl, formatWalletLabel } fro
 import { buildDashboardUrl } from "../lib/dashboard-route";
 import { fetchClaim } from "../lib/contract";
 import { resolveContractAddressForChain } from "../lib/chains";
+import { interpolate } from "../lib/i18n";
 import { useMiniPay } from "../lib/minipay";
 import { decodeStoreId } from "../lib/store-id";
 
@@ -108,7 +109,7 @@ export function ClaimPage({
         disconnect
       }}
       backHref={buildDashboardUrl({ role: "customer", tab: "rewards" })}
-      backLabel={locale === "pt-BR" ? "Voltar ao dashboard" : "Back to dashboard"}
+      backLabel={dictionary.actions.backToDashboard}
       eyebrow={dictionary.claim.eyebrow}
       title={dictionary.claim.title}
       description={dictionary.claim.description}
@@ -129,7 +130,7 @@ export function ClaimPage({
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={buildQrImageUrl(claimUrl)}
-                  alt={`QR for claim ${claimId}`}
+                  alt={interpolate(dictionary.claim.qrAlt, { id: claimId })}
                   className="mx-auto aspect-square w-full max-w-[280px] rounded-[28px] animate-pulse"
                 />
               </div>

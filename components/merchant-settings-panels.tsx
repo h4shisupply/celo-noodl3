@@ -232,8 +232,10 @@ function FieldLabel({ children }: { children: string }) {
 }
 
 function SuccessToast({
+  title,
   message
 }: {
+  title: string;
   message: string;
 }) {
   return (
@@ -243,7 +245,7 @@ function SuccessToast({
           ✓
         </span>
         <div className="space-y-1">
-          <p className="text-sm font-semibold text-[#1B1630]">Saved</p>
+          <p className="text-sm font-semibold text-[#1B1630]">{title}</p>
           <p className="text-sm leading-6 text-[#5E6173]">{message}</p>
         </div>
       </div>
@@ -393,7 +395,7 @@ export function MerchantCatalogPanel({
   initialChainId: number;
   onStoresUpdated: (stores: StoreCatalogEntry[]) => void;
 }) {
-  const { locale } = useLocale();
+  const { dictionary } = useLocale();
   const initialDraftState = useMemo(
     () => buildCatalogDraftState(selectedStore),
     [selectedStore]
@@ -509,20 +511,14 @@ export function MerchantCatalogPanel({
       setBaselineSnapshot(nextSnapshot);
       setStatus(
         data.deployment?.url
-          ? locale === "pt-BR"
-            ? "Catálogo salvo e novo deploy enviado ao Vercel."
-            : "Catalog saved and a fresh Vercel deploy was started."
-          : locale === "pt-BR"
-            ? "Catálogo salvo."
-            : "Catalog saved."
+          ? dictionary.catalogEditor.savedWithDeploy
+          : dictionary.catalogEditor.saved
       );
     } catch (nextError) {
       setError(
         getUserFacingErrorMessage(
           nextError,
-          locale === "pt-BR"
-            ? "Não foi possível salvar o catálogo."
-            : "Could not save the catalog."
+          dictionary.catalogEditor.saveFailed
         )
       );
     } finally {
@@ -534,35 +530,29 @@ export function MerchantCatalogPanel({
     <div className="grid gap-6">
       <Card>
         <CardHeader>
-          <CardTitle>
-            {locale === "pt-BR" ? "Dados da loja" : "Store details"}
-          </CardTitle>
-          <CardDescription>
-            {locale === "pt-BR"
-              ? "Edite os campos que vêm do catálogo publicado no Vercel."
-              : "Edit the fields that come from the catalog published on Vercel."}
-          </CardDescription>
+          <CardTitle>{dictionary.catalogEditor.storeDetailsTitle}</CardTitle>
+          <CardDescription>{dictionary.catalogEditor.storeDetailsDescription}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-5">
           <LocalizedFields
-            label={locale === "pt-BR" ? "Nome da loja" : "Store name"}
+            label={dictionary.catalogEditor.storeNameLabel}
             value={storeDraft.name}
             onChange={(localeKey, value) => updateStoreLocalizedField("name", localeKey, value)}
           />
           <LocalizedFields
-            label={locale === "pt-BR" ? "Categoria" : "Category"}
+            label={dictionary.catalogEditor.categoryLabel}
             value={storeDraft.category}
             onChange={(localeKey, value) =>
               updateStoreLocalizedField("category", localeKey, value)
             }
           />
           <LocalizedFields
-            label={locale === "pt-BR" ? "Cidade" : "City"}
+            label={dictionary.catalogEditor.cityLabel}
             value={storeDraft.city}
             onChange={(localeKey, value) => updateStoreLocalizedField("city", localeKey, value)}
           />
           <LocalizedFields
-            label={locale === "pt-BR" ? "Resumo" : "Summary"}
+            label={dictionary.catalogEditor.summaryLabel}
             value={storeDraft.summary}
             onChange={(localeKey, value) =>
               updateStoreLocalizedField("summary", localeKey, value)
@@ -570,13 +560,13 @@ export function MerchantCatalogPanel({
           />
           <SectionGrid>
             <TextField
-              label={locale === "pt-BR" ? "Logo URL" : "Logo URL"}
+              label={dictionary.catalogEditor.logoUrlLabel}
               value={storeDraft.storeLogoUrl}
               onChange={(value) => setStoreDraft((current) => ({ ...current, storeLogoUrl: value }))}
               placeholder="https://..."
             />
             <TextField
-              label={locale === "pt-BR" ? "Accent gradient" : "Accent gradient"}
+              label={dictionary.catalogEditor.accentGradientLabel}
               value={storeDraft.accent}
               onChange={(value) => setStoreDraft((current) => ({ ...current, accent: value }))}
             />
@@ -586,12 +576,8 @@ export function MerchantCatalogPanel({
 
       <Card>
         <CardHeader>
-          <CardTitle>{locale === "pt-BR" ? "Itens do menu" : "Menu items"}</CardTitle>
-          <CardDescription>
-            {locale === "pt-BR"
-              ? "Itens existentes mantêm o mesmo id. Para remover do app, marque como arquivado."
-              : "Existing items keep the same id. Archive an item to remove it from the live menu."}
-          </CardDescription>
+          <CardTitle>{dictionary.catalogEditor.menuItemsTitle}</CardTitle>
+          <CardDescription>{dictionary.catalogEditor.menuItemsDescription}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-5">
           {menuDraft.map((item) => (
@@ -621,12 +607,12 @@ export function MerchantCatalogPanel({
                           }))
                         }
                       />
-                      {locale === "pt-BR" ? "Arquivado" : "Archived"}
+                      {dictionary.catalogEditor.archivedLabel}
                     </label>
                   </div>
                 </SectionGrid>
                 <LocalizedFields
-                  label={locale === "pt-BR" ? "Nome" : "Name"}
+                  label={dictionary.catalogEditor.nameLabel}
                   value={item.name}
                   onChange={(localeKey, value) =>
                     updateMenuItem(item.draftKey, (current) => ({
@@ -639,7 +625,7 @@ export function MerchantCatalogPanel({
                   }
                 />
                 <LocalizedFields
-                  label={locale === "pt-BR" ? "Descrição" : "Description"}
+                  label={dictionary.catalogEditor.descriptionLabel}
                   value={item.description}
                   onChange={(localeKey, value) =>
                     updateMenuItem(item.draftKey, (current) => ({
@@ -652,7 +638,7 @@ export function MerchantCatalogPanel({
                   }
                 />
                 <LocalizedFields
-                  label={locale === "pt-BR" ? "Badge" : "Badge"}
+                  label={dictionary.catalogEditor.badgeLabel}
                   value={item.badge || emptyLocalizedText()}
                   onChange={(localeKey, value) =>
                     updateMenuItem(item.draftKey, (current) => ({
@@ -665,7 +651,7 @@ export function MerchantCatalogPanel({
                   }
                 />
                 <StablecoinValueField
-                  label={locale === "pt-BR" ? "Preço" : "Price"}
+                  label={dictionary.catalogEditor.priceLabel}
                   value={item.price}
                   onChange={(value) =>
                     updateMenuItem(item.draftKey, (current) => ({ ...current, price: value }))
@@ -682,7 +668,7 @@ export function MerchantCatalogPanel({
                         )
                       }
                     >
-                      {locale === "pt-BR" ? "Remover novo item" : "Remove new item"}
+                      {dictionary.catalogEditor.removeNewItem}
                     </Button>
                   </div>
                 ) : null}
@@ -709,16 +695,12 @@ export function MerchantCatalogPanel({
                     ])
                   }
             >
-              {locale === "pt-BR" ? "Adicionar item" : "Add item"}
+              {dictionary.catalogEditor.addItem}
             </Button>
             <Button onClick={() => void handleSaveCatalog()} disabled={isSaving || !isDirty}>
               {isSaving
-                ? locale === "pt-BR"
-                  ? "Salvando..."
-                  : "Saving..."
-                : locale === "pt-BR"
-                  ? "Salvar catálogo"
-                  : "Save catalog"}
+                ? dictionary.common.saving
+                : dictionary.catalogEditor.saveCatalog}
             </Button>
           </div>
 
@@ -729,7 +711,9 @@ export function MerchantCatalogPanel({
           ) : null}
         </CardContent>
       </Card>
-      {status ? <SuccessToast message={status} /> : null}
+      {status ? (
+        <SuccessToast title={dictionary.catalogEditor.savedTitle} message={status} />
+      ) : null}
     </div>
   );
 }
@@ -747,7 +731,7 @@ export function MerchantOnchainPanel({
   isContractOwner: boolean;
   onStoresUpdated: (stores: StoreCatalogEntry[]) => void;
 }) {
-  const { locale } = useLocale();
+  const { dictionary } = useLocale();
   const supportedTokens = useMemo(
     () => getSupportedTokens(initialChainId),
     [initialChainId]
@@ -809,9 +793,7 @@ export function MerchantOnchainPanel({
         setError(
           getUserFacingErrorMessage(
             nextError,
-            locale === "pt-BR"
-              ? "Não foi possível carregar a configuração onchain."
-              : "Could not load the onchain settings."
+            dictionary.onchainSettings.loadFailed
           )
         );
       } finally {
@@ -820,7 +802,7 @@ export function MerchantOnchainPanel({
     }
 
     void loadOnchainValues();
-  }, [contractAddress, initialChainId, locale, selectedStore, supportedTokens]);
+  }, [contractAddress, dictionary.onchainSettings.loadFailed, initialChainId, selectedStore, supportedTokens]);
 
   const isDirty = useMemo(
     () => serializeOnchainForm(form) !== baselineSnapshot,
@@ -829,11 +811,7 @@ export function MerchantOnchainPanel({
 
   async function handleSaveOnchain() {
     if (!contractAddress) {
-      setError(
-        locale === "pt-BR"
-          ? "Contrato indisponível nesta rede."
-          : "Contract unavailable on this network."
-      );
+      setError(dictionary.messages.contractUnavailable);
       return;
     }
 
@@ -916,17 +894,13 @@ export function MerchantOnchainPanel({
       };
       setBaselineSnapshot(serializeOnchainForm(nextForm));
       setStatus(
-        locale === "pt-BR"
-          ? "Configuração onchain atualizada e espelhada no catálogo."
-          : "Onchain settings updated and mirrored into the catalog."
+        dictionary.onchainSettings.saved
       );
     } catch (nextError) {
       setError(
         getUserFacingErrorMessage(
           nextError,
-          locale === "pt-BR"
-            ? "Não foi possível salvar a configuração onchain."
-            : "Could not save the onchain settings."
+          dictionary.onchainSettings.saveFailed
         )
       );
     } finally {
@@ -937,27 +911,23 @@ export function MerchantOnchainPanel({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{locale === "pt-BR" ? "Configuração onchain" : "Onchain settings"}</CardTitle>
+        <CardTitle>{dictionary.onchainSettings.title}</CardTitle>
         <CardDescription>
           {isContractOwner
-            ? locale === "pt-BR"
-              ? "Você está usando a carteira owner do contrato e pode reconfigurar esta loja."
-              : "You are connected with the contract owner wallet and can reconfigure this store."
-            : locale === "pt-BR"
-              ? "Apenas a carteira owner do contrato pode salvar estas mudanças."
-              : "Only the contract owner wallet can save changes here."}
+            ? dictionary.onchainSettings.ownerDescription
+            : dictionary.onchainSettings.lockedDescription}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
         <SectionGrid>
           <TextField
-            label={locale === "pt-BR" ? "Manager" : "Manager"}
+            label={dictionary.onchainSettings.managerLabel}
             value={form.manager}
             onChange={(value) => setForm((current) => ({ ...current, manager: value }))}
             disabled={!isContractOwner}
           />
           <TextField
-            label={locale === "pt-BR" ? "Payout" : "Payout"}
+            label={dictionary.onchainSettings.payoutLabel}
             value={form.payout}
             onChange={(value) => setForm((current) => ({ ...current, payout: value }))}
             disabled={!isContractOwner}
@@ -965,7 +935,7 @@ export function MerchantOnchainPanel({
         </SectionGrid>
 
         <HeadlessSelect
-          label={locale === "pt-BR" ? "Token principal" : "Primary token"}
+          label={dictionary.onchainSettings.primaryTokenLabel}
           value={form.token}
           onChange={(value) => setForm((current) => ({ ...current, token: value }))}
           disabled={!isContractOwner}
@@ -977,7 +947,7 @@ export function MerchantOnchainPanel({
         />
 
         <div className="space-y-2">
-          <FieldLabel>{locale === "pt-BR" ? "Tokens aceitos" : "Accepted tokens"}</FieldLabel>
+          <FieldLabel>{dictionary.onchainSettings.acceptedTokensLabel}</FieldLabel>
           <div className="grid gap-3 md:grid-cols-3">
             {supportedTokens.map((token) => {
               const active = form.acceptedTokens.includes(token.address.toLowerCase());
@@ -1015,13 +985,13 @@ export function MerchantOnchainPanel({
 
         <SectionGrid>
           <StablecoinValueField
-            label={locale === "pt-BR" ? "Compra mínima" : "Minimum purchase"}
+            label={dictionary.onchainSettings.minimumPurchaseLabel}
             value={form.minimumPurchase}
             onChange={(value) => setForm((current) => ({ ...current, minimumPurchase: value }))}
             disabled={!isContractOwner}
           />
           <StablecoinValueField
-            label={locale === "pt-BR" ? "Valor da recompensa" : "Reward value"}
+            label={dictionary.onchainSettings.rewardValueLabel}
             value={form.rewardValue}
             onChange={(value) => setForm((current) => ({ ...current, rewardValue: value }))}
             disabled={!isContractOwner}
@@ -1030,13 +1000,13 @@ export function MerchantOnchainPanel({
 
         <SectionGrid>
           <TextField
-            label={locale === "pt-BR" ? "Selos por compra" : "Stamps per purchase"}
+            label={dictionary.onchainSettings.stampsPerPurchaseLabel}
             value={form.stampsPerPurchase}
             onChange={(value) => setForm((current) => ({ ...current, stampsPerPurchase: value }))}
             disabled={!isContractOwner}
           />
           <TextField
-            label={locale === "pt-BR" ? "Selos para resgatar" : "Stamps required"}
+            label={dictionary.onchainSettings.stampsRequiredLabel}
             value={form.stampsRequired}
             onChange={(value) => setForm((current) => ({ ...current, stampsRequired: value }))}
             disabled={!isContractOwner}
@@ -1045,7 +1015,7 @@ export function MerchantOnchainPanel({
 
         <SectionGrid>
           <HeadlessSelect
-            label={locale === "pt-BR" ? "Tipo de recompensa" : "Reward type"}
+            label={dictionary.onchainSettings.rewardTypeLabel}
             value={form.rewardType}
             onChange={(value) =>
               setForm((current) => ({
@@ -1057,36 +1027,28 @@ export function MerchantOnchainPanel({
             options={[
               {
                 value: "fixed_amount",
-                label: locale === "pt-BR" ? "Valor fixo" : "Fixed amount"
+                label: dictionary.onchainSettings.fixedAmountLabel
               },
               {
                 value: "free_item",
-                label: locale === "pt-BR" ? "Item grátis" : "Free item"
+                label: dictionary.onchainSettings.freeItemLabel
               }
             ]}
           />
           <div className="space-y-2">
-            <FieldLabel>{locale === "pt-BR" ? "Status da loja" : "Store status"}</FieldLabel>
+            <FieldLabel>{dictionary.onchainSettings.storeStatusLabel}</FieldLabel>
             <div className="grid gap-3 sm:grid-cols-2">
               <StatusChoice
                 active={form.active}
-                title={locale === "pt-BR" ? "Ativa" : "Active"}
-                description={
-                  locale === "pt-BR"
-                    ? "Aceita compras e emite progresso normalmente."
-                    : "Accepts purchases and records loyalty as usual."
-                }
+                title={dictionary.onchainSettings.activeTitle}
+                description={dictionary.onchainSettings.activeDescription}
                 onClick={() => setForm((current) => ({ ...current, active: true }))}
                 disabled={!isContractOwner}
               />
               <StatusChoice
                 active={!form.active}
-                title={locale === "pt-BR" ? "Inativa" : "Inactive"}
-                description={
-                  locale === "pt-BR"
-                    ? "Bloqueia novas compras até reativar a loja."
-                    : "Blocks new purchases until the store is reactivated."
-                }
+                title={dictionary.onchainSettings.inactiveTitle}
+                description={dictionary.onchainSettings.inactiveDescription}
                 onClick={() => setForm((current) => ({ ...current, active: false }))}
                 disabled={!isContractOwner}
               />
@@ -1094,7 +1056,7 @@ export function MerchantOnchainPanel({
           </div>
         </SectionGrid>
 
-        {isLoading ? <p className="text-sm text-[#625B78]">Loading...</p> : null}
+        {isLoading ? <p className="text-sm text-[#625B78]">{dictionary.common.loading}</p> : null}
         {error ? (
           <p className="rounded-[24px] border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
             {error}
@@ -1104,16 +1066,14 @@ export function MerchantOnchainPanel({
         {isContractOwner ? (
           <Button onClick={() => void handleSaveOnchain()} disabled={isSaving || !isDirty}>
             {isSaving
-              ? locale === "pt-BR"
-                ? "Salvando..."
-                : "Saving..."
-              : locale === "pt-BR"
-                ? "Salvar onchain"
-                : "Save onchain"}
+              ? dictionary.common.saving
+              : dictionary.onchainSettings.saveOnchain}
           </Button>
         ) : null}
       </CardContent>
-      {status ? <SuccessToast message={status} /> : null}
+      {status ? (
+        <SuccessToast title={dictionary.catalogEditor.savedTitle} message={status} />
+      ) : null}
     </Card>
   );
 }

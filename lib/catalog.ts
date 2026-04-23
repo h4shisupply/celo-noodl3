@@ -180,9 +180,8 @@ const DEFAULT_STORE_INPUT: StoreCatalogInput[] = [
     },
     accent: "from-[#7B3FE4] via-[#9E70F0] to-[#E5DAFF]",
     summary: {
-      "pt-BR":
-        "Cafés, cookies e pausas rápidas com uma jornada de fidelidade simples no MiniPay.",
-      en: "Coffee, cookies, and quick breaks with a simple MiniPay loyalty loop."
+      "pt-BR": "Cafés especiais, cookies e pausas rápidas com Selos a cada compra.",
+      en: "Specialty coffee, cookies, and quick breaks with Stamps on every purchase."
     },
     loyalty: {
       stampsPerPurchase: 1,
@@ -199,7 +198,7 @@ const DEFAULT_STORE_INPUT: StoreCatalogInput[] = [
           en: "House Flat White"
         },
         description: {
-          "pt-BR": "Café especial com leite texturizado.",
+          "pt-BR": "Espresso da casa com leite cremoso.",
           en: "Specialty coffee with silky steamed milk."
         },
         price: "12",
@@ -216,7 +215,7 @@ const DEFAULT_STORE_INPUT: StoreCatalogInput[] = [
         },
         description: {
           "pt-BR": "Cookie macio para acompanhar o café.",
-          en: "Soft cookie designed to pair with coffee."
+          en: "Soft cookie made to pair with coffee."
         },
         price: "8",
         badge: {
@@ -243,9 +242,8 @@ const DEFAULT_STORE_INPUT: StoreCatalogInput[] = [
     },
     accent: "from-[#17122A] via-[#4F46E5] to-[#B7B5FF]",
     summary: {
-      "pt-BR":
-        "Um fluxo rápido para pedidos repetidos e resgate de rodada sem atrito.",
-      en: "A fast flow for repeat orders and frictionless round-based rewards."
+      "pt-BR": "Chopp, petiscos e recompensas simples para quem sempre volta.",
+      en: "Draft beer, snacks, and simple rewards for regulars."
     },
     loyalty: {
       stampsPerPurchase: 1,
@@ -258,23 +256,23 @@ const DEFAULT_STORE_INPUT: StoreCatalogInput[] = [
       {
         id: "promo-mainnet",
         name: {
-          "pt-BR": "Promo mainnet 1 centavo",
-          en: "Mainnet 1 cent promo"
+          "pt-BR": "Degustação da casa",
+          en: "House tasting pour"
         },
         description: {
-          "pt-BR": "Item promocional para validar o fluxo real na mainnet com valor mínimo.",
-          en: "Promo item for validating the real mainnet flow at the minimum amount."
+          "pt-BR": "Porção promocional para experimentar o fluxo no balcão.",
+          en: "Small promo pour for trying the checkout flow at the bar."
         },
         price: "0.01",
         badge: {
-          "pt-BR": "Teste mainnet",
-          en: "Mainnet test"
+          "pt-BR": "Promo",
+          en: "Promo"
         }
       },
       {
         id: "chopp-choices",
         name: {
-          "pt-BR": "Um chopp da loja Choices",
+          "pt-BR": "Chopp Choices",
           en: "Choices draft beer"
         },
         description: {
@@ -322,9 +320,8 @@ const DEFAULT_STORE_INPUT: StoreCatalogInput[] = [
     },
     accent: "from-[#F59E0B] via-[#F6C453] to-[#FFF0B6]",
     summary: {
-      "pt-BR":
-        "Gelato e sobremesas com recompensa visual, rápida de entender e simples de validar.",
-      en: "Gelato and desserts with rewards that are easy to understand and verify."
+      "pt-BR": "Gelatos e sobremesas com Selos fáceis de acompanhar no app.",
+      en: "Gelato and desserts with rewards that are easy to track in the app."
     },
     loyalty: {
       stampsPerPurchase: 1,
@@ -341,7 +338,7 @@ const DEFAULT_STORE_INPUT: StoreCatalogInput[] = [
           en: "Gelato doppio"
         },
         description: {
-          "pt-BR": "Dois sabores sazonais.",
+          "pt-BR": "Dois sabores sazonais no copinho.",
           en: "Two seasonal flavors."
         },
         price: "14",

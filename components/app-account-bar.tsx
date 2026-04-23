@@ -7,6 +7,7 @@ import { LanguageSwitcher } from "./language-switcher";
 import { Button } from "./ui/button";
 import { getChainLabel } from "../lib/chains";
 import { getInitials } from "../lib/format";
+import { interpolate } from "../lib/i18n";
 import { useProfile } from "../lib/profile";
 import { useLocale } from "./locale-provider";
 import { formatWalletLabel } from "../lib/claim-code";
@@ -35,7 +36,7 @@ export function AppAccountBar({
   walletState: AppChromeWalletState;
   onProfileClick?: () => void;
 }) {
-  const { locale } = useLocale();
+  const { locale, dictionary } = useLocale();
   const {
     account,
     chainId,
@@ -92,7 +93,7 @@ export function AppAccountBar({
                 onClick={() => setIsMenuOpen((current) => !current)}
                 className="inline-flex h-11 items-center gap-2 rounded-full border border-[#E6E1F0] bg-white px-3 text-sm text-[#241B3C] shadow-[0_12px_32px_rgba(23,18,42,0.06)]"
                 aria-expanded={isMenuOpen}
-                aria-label={locale === "pt-BR" ? "Abrir menu da conta" : "Open account menu"}
+                aria-label={dictionary.account.openMenu}
               >
                 {profile ? (
                   <>
@@ -114,15 +115,15 @@ export function AppAccountBar({
                 <div className="absolute right-0 top-[calc(100%+0.75rem)] z-30 w-[17rem] rounded-[28px] border border-[#E6E1F0] bg-white p-4 shadow-[0_28px_90px_rgba(23,18,42,0.12)]">
                   <div className="space-y-1 border-b border-[#F0ECF6] pb-4">
                     <p className="text-sm font-semibold text-[#18122A]">
-                      {profile?.displayName ??
-                        (locale === "pt-BR" ? "Carteira conectada" : "Connected wallet")}
+                      {profile?.displayName ?? dictionary.account.connectedWallet}
                     </p>
                     <p className="text-sm text-[#625B78]">{formatWalletLabel(account)}</p>
                     <p className="text-sm text-[#625B78]">
                       {isWrongChain
-                        ? locale === "pt-BR"
-                          ? `${getChainLabel(chainId, locale)} · esperado ${expectedChainLabel}`
-                          : `${getChainLabel(chainId, locale)} · expected ${expectedChainLabel}`
+                        ? interpolate(dictionary.account.expectedNetwork, {
+                            current: getChainLabel(chainId, locale),
+                            expected: expectedChainLabel
+                          })
                         : getChainLabel(chainId, locale)}
                     </p>
                   </div>
@@ -144,12 +145,8 @@ export function AppAccountBar({
                         }}
                       >
                         {isMiniPay
-                          ? locale === "pt-BR"
-                            ? "Já troquei"
-                            : "I switched already"
-                          : locale === "pt-BR"
-                            ? "Trocar rede"
-                            : "Switch network"}
+                          ? dictionary.actions.refreshNetwork
+                          : dictionary.actions.switchNetwork}
                       </Button>
                     ) : null}
                     {onProfileClick ? (
@@ -163,12 +160,8 @@ export function AppAccountBar({
                         }}
                       >
                         {profile
-                          ? locale === "pt-BR"
-                            ? "Editar perfil"
-                            : "Edit profile"
-                          : locale === "pt-BR"
-                            ? "Adicionar perfil"
-                            : "Add profile"}
+                          ? dictionary.actions.editProfile
+                          : dictionary.actions.addProfile}
                       </Button>
                     ) : null}
                     <div className="pt-1">
@@ -185,7 +178,7 @@ export function AppAccountBar({
                       disconnect();
                     }}
                   >
-                    {locale === "pt-BR" ? "Desconectar" : "Disconnect"}
+                    {dictionary.actions.disconnectWallet}
                   </Button>
                 </div>
               ) : null}
@@ -196,12 +189,8 @@ export function AppAccountBar({
               {hasProvider && (!isDisconnectedByUser || !account) ? (
                 <Button size="sm" onClick={() => void connect()}>
                   {isConnecting
-                    ? locale === "pt-BR"
-                      ? "Conectando..."
-                      : "Connecting..."
-                    : locale === "pt-BR"
-                      ? "Conectar"
-                      : "Connect"}
+                    ? dictionary.account.connecting
+                    : dictionary.account.connect}
                 </Button>
               ) : null}
             </>

@@ -32,15 +32,9 @@ export function HomePage({ stores }: { stores: StoreCatalogEntry[] }) {
     clearConnectError
   } = useMiniPay(getDefaultChainId());
   const primaryCtaLabel =
-    locale === "pt-BR"
-      ? account
-        ? "Acessar meu dash"
-        : "Quero participar"
-      : account
-        ? "Open my dashboard"
-        : "Join noodl3";
+    account ? dictionary.landing.connectedCta : dictionary.landing.disconnectedCta;
   const primaryCtaDisplayLabel =
-    isConnecting ? (locale === "pt-BR" ? "Conectando..." : "Connecting...") : primaryCtaLabel;
+    isConnecting ? dictionary.account.connecting : primaryCtaLabel;
   const clearLandingConnectError = useCallback(() => {
     clearConnectError();
     setActivePrimaryCta(null);
