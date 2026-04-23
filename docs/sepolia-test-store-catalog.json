@@ -1,0 +1,191 @@
+[
+  {
+    "slug": "cafe-lina",
+    "shortCode": "LINA",
+    "name": {
+      "pt-BR": "Cafe Lina",
+      "en": "Cafe Lina"
+    },
+    "store_logo_url": "/store-logos/cafe-lina.svg",
+    "category": {
+      "pt-BR": "Café especial",
+      "en": "Specialty coffee"
+    },
+    "city": {
+      "pt-BR": "Bela Vista",
+      "en": "Bela Vista"
+    },
+    "accent": "from-[#7B3FE4] via-[#9E70F0] to-[#E5DAFF]",
+    "summary": {
+      "pt-BR": "Versão de teste para Sepolia com item barato e recompensa rápida.",
+      "en": "Sepolia test version with low-cost items and a fast reward loop."
+    },
+    "loyalty": {
+      "stampsPerPurchase": 1,
+      "stampsRequired": 2,
+      "rewardType": "fixed_amount",
+      "rewardValue": "0.02",
+      "minimumPurchase": "0.01"
+    },
+    "menu": [
+      {
+        "id": "flat-white",
+        "name": {
+          "pt-BR": "Flat White da Casa",
+          "en": "House Flat White"
+        },
+        "description": {
+          "pt-BR": "Item de teste para validar o fluxo com 0.01 em stablecoins.",
+          "en": "Test item to validate the flow with a 0.01 stablecoin purchase."
+        },
+        "price": "0.01",
+        "badge": {
+          "pt-BR": "Teste",
+          "en": "Test"
+        }
+      },
+      {
+        "id": "cookie-lina",
+        "name": {
+          "pt-BR": "Cookie de chocolate",
+          "en": "Chocolate cookie"
+        },
+        "description": {
+          "pt-BR": "Segundo item barato para testes rápidos.",
+          "en": "Second low-cost item for fast testing."
+        },
+        "price": "0.01",
+        "badge": {
+          "pt-BR": "Teste",
+          "en": "Test"
+        }
+      }
+    ]
+  },
+  {
+    "slug": "choices-bar",
+    "shortCode": "CHOI",
+    "name": {
+      "pt-BR": "Choices Bar",
+      "en": "Choices Bar"
+    },
+    "store_logo_url": "/store-logos/choices-bar.svg",
+    "category": {
+      "pt-BR": "Chopp & petiscos",
+      "en": "Draft beer & snacks"
+    },
+    "city": {
+      "pt-BR": "Pinheiros",
+      "en": "Pinheiros"
+    },
+    "accent": "from-[#17122A] via-[#4F46E5] to-[#B7B5FF]",
+    "summary": {
+      "pt-BR": "Loja de teste para validar compra, QR e claim de item grátis.",
+      "en": "Test store to validate purchase, QR, and free-item claims."
+    },
+    "loyalty": {
+      "stampsPerPurchase": 1,
+      "stampsRequired": 2,
+      "rewardType": "free_item",
+      "rewardValue": "1",
+      "minimumPurchase": "0.01"
+    },
+    "menu": [
+      {
+        "id": "chopp-choices",
+        "name": {
+          "pt-BR": "Um chopp da loja Choices",
+          "en": "Choices draft beer"
+        },
+        "description": {
+          "pt-BR": "Versão de teste com valor mínimo.",
+          "en": "Test version with minimum price."
+        },
+        "price": "0.01",
+        "badge": {
+          "pt-BR": "Teste",
+          "en": "Test"
+        }
+      },
+      {
+        "id": "batata-crocante",
+        "name": {
+          "pt-BR": "Batata crocante",
+          "en": "Crispy potatoes"
+        },
+        "description": {
+          "pt-BR": "Petisco de teste para outra compra elegível.",
+          "en": "Test snack for another eligible purchase."
+        },
+        "price": "0.01",
+        "badge": {
+          "pt-BR": "Teste",
+          "en": "Test"
+        }
+      }
+    ]
+  },
+  {
+    "slug": "nubi-gelato",
+    "shortCode": "NUBI",
+    "name": {
+      "pt-BR": "Nubi Gelato",
+      "en": "Nubi Gelato"
+    },
+    "store_logo_url": "/store-logos/nubi-gelato.svg",
+    "category": {
+      "pt-BR": "Sobremesas",
+      "en": "Desserts"
+    },
+    "city": {
+      "pt-BR": "Vila Madalena",
+      "en": "Vila Madalena"
+    },
+    "accent": "from-[#F59E0B] via-[#F6C453] to-[#FFF0B6]",
+    "summary": {
+      "pt-BR": "Loja de teste para validar recompensa de desconto fixo.",
+      "en": "Test store to validate a fixed discount reward."
+    },
+    "loyalty": {
+      "stampsPerPurchase": 1,
+      "stampsRequired": 2,
+      "rewardType": "fixed_amount",
+      "rewardValue": "0.02",
+      "minimumPurchase": "0.01"
+    },
+    "menu": [
+      {
+        "id": "gelato-doppio",
+        "name": {
+          "pt-BR": "Gelato doppio",
+          "en": "Gelato doppio"
+        },
+        "description": {
+          "pt-BR": "Versão de teste com valor mínimo.",
+          "en": "Test version with minimum price."
+        },
+        "price": "0.01",
+        "badge": {
+          "pt-BR": "Teste",
+          "en": "Test"
+        }
+      },
+      {
+        "id": "affogato",
+        "name": {
+          "pt-BR": "Affogato cremoso",
+          "en": "Creamy affogato"
+        },
+        "description": {
+          "pt-BR": "Item barato para repetir a jornada completa.",
+          "en": "Low-cost item to repeat the full journey."
+        },
+        "price": "0.01",
+        "badge": {
+          "pt-BR": "Teste",
+          "en": "Test"
+        }
+      }
+    ]
+  }
+]

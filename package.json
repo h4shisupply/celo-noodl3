@@ -1,0 +1,58 @@
+{
+  "name": "celo-noodl3",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "dev:mobile": "WATCHPACK_POLLING=true next dev -H 0.0.0.0",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --ext .ts,.tsx,.mjs --max-warnings=0",
+    "typegen": "next typegen",
+    "typecheck": "npm run typegen && tsc --noEmit",
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:sepolia": "hardhat run scripts/deploy.ts --network celoSepolia",
+    "deploy:mainnet": "hardhat run scripts/deploy.ts --network celo",
+    "verify:sepolia": "hardhat run scripts/verify.ts --network celoSepolia",
+    "verify:mainnet": "hardhat run scripts/verify.ts --network celo",
+    "seed:sepolia": "hardhat run scripts/seed-sepolia.ts --network celoSepolia",
+    "use:test-catalog": "node scripts/use-test-catalog.mjs",
+    "export:abi": "hardhat run scripts/export-abi.ts"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "ethers": "^6.15.0",
+    "next": "15.5.15",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "viem": "^2.21.53"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@nomicfoundation/hardhat-ethers": "^4.0.8",
+    "@nomicfoundation/hardhat-ethers-chai-matchers": "^3.0.5",
+    "@nomicfoundation/hardhat-mocha": "^3.0.16",
+    "@nomicfoundation/hardhat-verify": "^3.0.14",
+    "@types/chai": "^5.2.2",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.10.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "autoprefixer": "^10.4.20",
+    "chai": "^6.2.0",
+    "dotenv": "^16.4.7",
+    "eslint": "^9.39.0",
+    "eslint-config-next": "15.5.15",
+    "hardhat": "^3.0.12",
+    "mocha": "^11.7.4",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}

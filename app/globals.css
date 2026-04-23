@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --page: #fbfafd;
+  --panel: #ffffff;
+  --panel-soft: #f7f5fb;
+  --line: #ebe6f5;
+  --ink: #17122a;
+  --muted: #6c6582;
+  --accent: #7b3fe4;
+  --accent-soft: #f3ebff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, rgba(123, 63, 228, 0.1), transparent 20%),
+    radial-gradient(circle at bottom left, rgba(245, 158, 11, 0.05), transparent 24%),
+    linear-gradient(180deg, #fcfbfe 0%, #f8f6fb 100%);
+  color: var(--ink);
+  font-family: var(--font-sans), sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(123, 63, 228, 0.18);
+}
+
+.page-shell {
+  min-height: 100vh;
+}
+
+.app-frame {
+  width: 100%;
+  max-width: 82rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 0;
+}
+
+.soft-grid {
+  background-image:
+    linear-gradient(rgba(122, 111, 153, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(122, 111, 153, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.hero-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow::after {
+  content: "";
+  position: absolute;
+  inset: auto -5rem -5rem auto;
+  width: 14rem;
+  height: 14rem;
+  border-radius: 9999px;
+  background: rgba(123, 63, 228, 0.14);
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .app-frame {
+    padding: 1.5rem;
+  }
+}

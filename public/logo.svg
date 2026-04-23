@@ -1,0 +1,6 @@
+<svg width="420" height="96" viewBox="0 0 420 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="4" y="4" width="88" height="88" rx="28" fill="#7B3FE4"/>
+  <path d="M29 48C29 31.431 42.431 18 59 18H79V35H59C51.82 35 46 40.82 46 48C46 55.18 51.82 61 59 61H79V78H59C42.431 78 29 64.569 29 48Z" fill="white"/>
+  <circle cx="79" cy="48" r="13" fill="#B087F9"/>
+  <text x="114" y="56" fill="#18122A" font-family="Arial, sans-serif" font-size="24" font-weight="700">noodl3</text>
+</svg>
