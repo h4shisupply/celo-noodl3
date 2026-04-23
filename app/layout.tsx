@@ -70,6 +70,10 @@ export const metadata: Metadata = {
     description:
       "A clean MiniPay loyalty app for local food and drink merchants on Celo.",
     images: ["/og.svg"]
+  },
+  other: {
+    "talentapp:project_verification":
+      "cc7197afe9c10ac10336321d8760c55be63e6f4cc7cc0a19a9ed6854dcdffbc17a7edff3b97b247ba300d26aba5d98daad2d657c9ef22513f79668fe38458bb0"
   }
 };
 
