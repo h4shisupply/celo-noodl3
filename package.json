@@ -36,7 +36,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@nomicfoundation/hardhat-ethers": "^4.0.8",
     "@nomicfoundation/hardhat-ethers-chai-matchers": "^3.0.5",
-    "@nomicfoundation/hardhat-mocha": "^3.0.16",
+    "@nomicfoundation/hardhat-mocha": "^3.0.17",
     "@nomicfoundation/hardhat-verify": "^3.0.14",
     "@types/chai": "^5.2.2",
     "@types/mocha": "^10.0.10",
