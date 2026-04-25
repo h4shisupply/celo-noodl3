@@ -234,6 +234,17 @@ export type Dictionary = {
     selectItemDescription: string;
     checkoutTitle: string;
     checkoutDescription: string;
+    goToCheckout: string;
+    backToItems: string;
+    selectedItemsTitle: string;
+    subtotalLabel: string;
+    quantityLabel: string;
+    noItemsSelectedLabel: string;
+    itemsSelectedLabel: string;
+    currentStampsBadge: string;
+    connectForStampsBadge: string;
+    increaseQuantityLabel: string;
+    decreaseQuantityLabel: string;
     paymentTokenLabel: string;
     noActiveItems: string;
     qrTitle: string;
@@ -366,6 +377,7 @@ export type Dictionary = {
     purchaseDescription: string;
     consumeDescription: string;
     purchaseDetail: string;
+    purchaseCartLabel: string;
     consumeDetail: string;
     nextStepTitle: string;
     purchaseNextSteps: string[];
@@ -670,6 +682,17 @@ const dictionaries: Record<Locale, Dictionary> = {
       checkoutTitle: "Resumo do checkout",
       checkoutDescription:
         "Revise o item, o valor e a regra de fidelidade antes de confirmar.",
+      goToCheckout: "Ir para checkout",
+      backToItems: "Voltar aos itens",
+      selectedItemsTitle: "Itens selecionados",
+      subtotalLabel: "Subtotal",
+      quantityLabel: "Quantidade",
+      noItemsSelectedLabel: "Nenhum item selecionado",
+      itemsSelectedLabel: "Itens selecionados: {{count}}",
+      currentStampsBadge: "{{stamps}}/{{total}} Selos",
+      connectForStampsBadge: "Conecte para ver Selos",
+      increaseQuantityLabel: "Aumentar quantidade de {{item}}",
+      decreaseQuantityLabel: "Diminuir quantidade de {{item}}",
       paymentTokenLabel: "Token de pagamento",
       noActiveItems: "Nenhum item ativo no momento.",
       qrTitle: "QR do pedido",
@@ -829,6 +852,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       consumeDescription:
         "O resgate foi confirmado onchain e não pode mais ser usado novamente.",
       purchaseDetail: "{{item}} registrado com fidelidade ativa.",
+      purchaseCartLabel: "Pedido",
       consumeDetail: "Resgate {{claimId}} validado no checkout.",
       nextStepTitle: "O que fazer agora",
       purchaseNextSteps: [
@@ -1139,6 +1163,17 @@ const dictionaries: Record<Locale, Dictionary> = {
       checkoutTitle: "Checkout summary",
       checkoutDescription:
         "Review the item, the amount, and the loyalty rule before confirming.",
+      goToCheckout: "Go to checkout",
+      backToItems: "Back to items",
+      selectedItemsTitle: "Selected items",
+      subtotalLabel: "Subtotal",
+      quantityLabel: "Quantity",
+      noItemsSelectedLabel: "No items selected",
+      itemsSelectedLabel: "Selected items: {{count}}",
+      currentStampsBadge: "{{stamps}}/{{total}} Stamps",
+      connectForStampsBadge: "Connect to see Stamps",
+      increaseQuantityLabel: "Increase quantity for {{item}}",
+      decreaseQuantityLabel: "Decrease quantity for {{item}}",
       paymentTokenLabel: "Payment token",
       noActiveItems: "No active items right now.",
       qrTitle: "Purchase QR",
@@ -1298,6 +1333,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       consumeDescription:
         "The reward was confirmed onchain and cannot be used again.",
       purchaseDetail: "{{item}} recorded with loyalty enabled.",
+      purchaseCartLabel: "Order",
       consumeDetail: "Reward {{claimId}} confirmed at checkout.",
       nextStepTitle: "What to do next",
       purchaseNextSteps: [

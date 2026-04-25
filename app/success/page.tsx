@@ -8,6 +8,7 @@ type SuccessRouteProps = {
     tx?: string;
     store?: string;
     item?: string;
+    items?: string;
     claim?: string;
   }>;
 };
@@ -23,6 +24,7 @@ export default async function Page({ searchParams }: SuccessRouteProps) {
       txHash={resolvedSearchParams.tx}
       storeSlug={resolvedSearchParams.store}
       itemId={resolvedSearchParams.item}
+      itemsRef={resolvedSearchParams.items}
       claimId={resolvedSearchParams.claim}
     />
   );

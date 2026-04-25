@@ -5,7 +5,12 @@ import { AppChrome } from "./app-chrome";
 import { useLocale } from "./locale-provider";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { getItemById, findStoreBySlug, resolveText, type StoreCatalogEntry } from "../lib/catalog";
+import {
+  findStoreBySlug,
+  getActiveMenuItems,
+  resolveText,
+  type StoreCatalogEntry
+} from "../lib/catalog";
 import { getExplorerBaseUrl } from "../lib/chains";
 import { buildDashboardUrl } from "../lib/dashboard-route";
 import { interpolate } from "../lib/i18n";
@@ -18,6 +23,7 @@ export function SuccessPage({
   txHash,
   storeSlug,
   itemId,
+  itemsRef,
   claimId
 }: {
   chainId: number;
@@ -26,6 +32,7 @@ export function SuccessPage({
   txHash?: string;
   storeSlug?: string;
   itemId?: string;
+  itemsRef?: string;
   claimId?: string;
 }) {
   const { locale, dictionary } = useLocale();
@@ -45,7 +52,15 @@ export function SuccessPage({
     disconnect
   } = useMiniPay(chainId);
   const store = storeSlug ? findStoreBySlug(stores, storeSlug) : null;
-  const item = storeSlug ? getItemById(stores, storeSlug, itemId) : null;
+  const item =
+    store && itemId
+      ? getActiveMenuItems(store).find((menuItem) => menuItem.id === itemId)
+      : null;
+  const purchaseLabel = item
+    ? resolveText(item.name, locale)
+    : itemsRef
+      ? dictionary.success.purchaseCartLabel
+      : dictionary.common.reward;
   const isConsume = mode === "consume";
 
   return (
@@ -90,7 +105,7 @@ export function SuccessPage({
                     claimId: claimId ?? ""
                   })
                 : interpolate(dictionary.success.purchaseDetail, {
-                    item: item ? resolveText(item.name, locale) : dictionary.common.reward
+                    item: purchaseLabel
                   })}
             </CardDescription>
           </CardHeader>
