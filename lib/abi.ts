@@ -1,276 +1,1145 @@
 export const loyaltyAbi = [
   {
-    type: "function",
-    name: "owner",
-    stateMutability: "view",
-    inputs: [],
-    outputs: [{ name: "", type: "address", internalType: "address" }]
+    "inputs": [],
+    "name": "ClaimAlreadyConsumed",
+    "type": "error"
   },
   {
-    type: "function",
-    name: "nextClaimId",
-    stateMutability: "view",
-    inputs: [],
-    outputs: [{ name: "", type: "uint256", internalType: "uint256" }]
+    "inputs": [],
+    "name": "ClaimNotFound",
+    "type": "error"
   },
   {
-    type: "function",
-    name: "configureStore",
-    stateMutability: "nonpayable",
-    inputs: [
-      { name: "storeId", type: "bytes32", internalType: "bytes32" },
-      { name: "payout", type: "address", internalType: "address" },
-      { name: "manager", type: "address", internalType: "address" },
-      { name: "token", type: "address", internalType: "address" },
-      { name: "minPurchaseAmount", type: "uint256", internalType: "uint256" },
-      { name: "stampsPerPurchase", type: "uint32", internalType: "uint32" },
-      { name: "stampsRequired", type: "uint32", internalType: "uint32" },
-      { name: "rewardType", type: "uint8", internalType: "uint8" },
-      { name: "rewardValue", type: "uint256", internalType: "uint256" },
-      { name: "active", type: "bool", internalType: "bool" }
-    ],
-    outputs: []
+    "inputs": [],
+    "name": "DynamicStampExpired",
+    "type": "error"
   },
   {
-    type: "function",
-    name: "configureStoreAcceptedTokens",
-    stateMutability: "nonpayable",
-    inputs: [
-      { name: "storeId", type: "bytes32", internalType: "bytes32" },
-      { name: "tokens", type: "address[]", internalType: "address[]" },
-      { name: "decimals", type: "uint8[]", internalType: "uint8[]" }
-    ],
-    outputs: []
+    "inputs": [],
+    "name": "DynamicStampUsed",
+    "type": "error"
   },
   {
-    type: "function",
-    name: "purchase",
-    stateMutability: "nonpayable",
-    inputs: [
-      { name: "storeId", type: "bytes32", internalType: "bytes32" },
-      { name: "paymentToken", type: "address", internalType: "address" },
-      { name: "amount", type: "uint256", internalType: "uint256" },
-      { name: "itemRef", type: "string", internalType: "string" }
-    ],
-    outputs: []
+    "inputs": [],
+    "name": "InvalidProfile",
+    "type": "error"
   },
   {
-    type: "function",
-    name: "claimReward",
-    stateMutability: "nonpayable",
-    inputs: [{ name: "storeId", type: "bytes32", internalType: "bytes32" }],
-    outputs: [{ name: "claimId", type: "uint256", internalType: "uint256" }]
+    "inputs": [],
+    "name": "InvalidProgram",
+    "type": "error"
   },
   {
-    type: "function",
-    name: "consumeReward",
-    stateMutability: "nonpayable",
-    inputs: [{ name: "claimId", type: "uint256", internalType: "uint256" }],
-    outputs: []
+    "inputs": [],
+    "name": "InvalidProgramConfig",
+    "type": "error"
   },
   {
-    type: "function",
-    name: "setProfile",
-    stateMutability: "nonpayable",
-    inputs: [
-      { name: "displayName", type: "string", internalType: "string" },
-      { name: "avatarUrl", type: "string", internalType: "string" }
-    ],
-    outputs: []
+    "inputs": [],
+    "name": "InvalidRequest",
+    "type": "error"
   },
   {
-    type: "function",
-    name: "getStore",
-    stateMutability: "view",
-    inputs: [{ name: "storeId", type: "bytes32", internalType: "bytes32" }],
-    outputs: [
+    "inputs": [],
+    "name": "InvalidSignature",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidStaff",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotEnoughStamps",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotProgramOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotProgramStaff",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ProgramInactive",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ProgramNotFound",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RequestAlreadyPending",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RequestNotFound",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RequestResolved",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
       {
-        name: "",
-        type: "tuple",
-        internalType: "struct Noodl3Loyalty.Store",
-        components: [
-          { name: "payout", type: "address", internalType: "address" },
-          { name: "manager", type: "address", internalType: "address" },
-          { name: "token", type: "address", internalType: "address" },
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "displayName",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "avatarUrl",
+        "type": "string"
+      }
+    ],
+    "name": "ProfileUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "rewardDescription",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "stampsRequired",
+        "type": "uint32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "active",
+        "type": "bool"
+      }
+    ],
+    "name": "ProgramCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "staff",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "enabled",
+        "type": "bool"
+      }
+    ],
+    "name": "ProgramStaffUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "rewardDescription",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "stampsRequired",
+        "type": "uint32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "active",
+        "type": "bool"
+      }
+    ],
+    "name": "ProgramUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "claimId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "burnedStamps",
+        "type": "uint32"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "rewardDescription",
+        "type": "string"
+      }
+    ],
+    "name": "RewardClaimed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "claimId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "staff",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "RewardConsumed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "customer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "source",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "totalStamps",
+        "type": "uint32"
+      }
+    ],
+    "name": "StampIssued",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "requestId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "resolvedBy",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "status",
+        "type": "uint8"
+      }
+    ],
+    "name": "VisitRequestResolved",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "requestId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "customer",
+        "type": "address"
+      }
+    ],
+    "name": "VisitRequested",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "requestId",
+        "type": "uint256"
+      }
+    ],
+    "name": "approveVisitRequest",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      }
+    ],
+    "name": "claimReward",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "claimId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "nonce",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "expiresAt",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
+      }
+    ],
+    "name": "collectDynamicStamp",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "claimId",
+        "type": "uint256"
+      }
+    ],
+    "name": "consumeReward",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "rewardDescription",
+        "type": "string"
+      },
+      {
+        "internalType": "uint32",
+        "name": "stampsRequired",
+        "type": "uint32"
+      },
+      {
+        "internalType": "bool",
+        "name": "active",
+        "type": "bool"
+      }
+    ],
+    "name": "createProgram",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "claimId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getClaim",
+    "outputs": [
+      {
+        "components": [
           {
-            name: "minPurchaseAmount",
-            type: "uint256",
-            internalType: "uint256"
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
           },
           {
-            name: "stampsPerPurchase",
-            type: "uint32",
-            internalType: "uint32"
+            "internalType": "uint256",
+            "name": "programId",
+            "type": "uint256"
           },
           {
-            name: "stampsRequired",
-            type: "uint32",
-            internalType: "uint32"
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
           },
-          { name: "rewardType", type: "uint8", internalType: "uint8" },
-          { name: "rewardValue", type: "uint256", internalType: "uint256" },
-          { name: "active", type: "bool", internalType: "bool" },
-          { name: "exists", type: "bool", internalType: "bool" }
-        ]
+          {
+            "internalType": "uint32",
+            "name": "burnedStamps",
+            "type": "uint32"
+          },
+          {
+            "internalType": "string",
+            "name": "rewardDescription",
+            "type": "string"
+          },
+          {
+            "internalType": "uint40",
+            "name": "claimedAt",
+            "type": "uint40"
+          },
+          {
+            "internalType": "uint40",
+            "name": "consumedAt",
+            "type": "uint40"
+          },
+          {
+            "internalType": "bool",
+            "name": "consumed",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "exists",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct Noodl3Loyalty.Claim",
+        "name": "",
+        "type": "tuple"
       }
-    ]
-  },
-  {
-    type: "function",
-    name: "getProgress",
-    stateMutability: "view",
-    inputs: [
-      { name: "user", type: "address", internalType: "address" },
-      { name: "storeId", type: "bytes32", internalType: "bytes32" }
     ],
-    outputs: [
-      { name: "stamps", type: "uint32", internalType: "uint32" },
-      { name: "stampsRequired", type: "uint32", internalType: "uint32" },
-      { name: "stampsPerPurchase", type: "uint32", internalType: "uint32" },
-      { name: "rewardType", type: "uint8", internalType: "uint8" },
-      { name: "rewardValue", type: "uint256", internalType: "uint256" },
-      { name: "canClaim", type: "bool", internalType: "bool" }
-    ]
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    type: "function",
-    name: "getStoreParticipants",
-    stateMutability: "view",
-    inputs: [{ name: "storeId", type: "bytes32", internalType: "bytes32" }],
-    outputs: [{ name: "", type: "address[]", internalType: "address[]" }]
-  },
-  {
-    type: "function",
-    name: "getStoreAcceptedTokens",
-    stateMutability: "view",
-    inputs: [{ name: "storeId", type: "bytes32", internalType: "bytes32" }],
-    outputs: [{ name: "", type: "address[]", internalType: "address[]" }]
-  },
-  {
-    type: "function",
-    name: "getUserClaimIds",
-    stateMutability: "view",
-    inputs: [{ name: "user", type: "address", internalType: "address" }],
-    outputs: [{ name: "", type: "uint256[]", internalType: "uint256[]" }]
-  },
-  {
-    type: "function",
-    name: "getStoreClaimIds",
-    stateMutability: "view",
-    inputs: [{ name: "storeId", type: "bytes32", internalType: "bytes32" }],
-    outputs: [{ name: "", type: "uint256[]", internalType: "uint256[]" }]
-  },
-  {
-    type: "function",
-    name: "getClaim",
-    stateMutability: "view",
-    inputs: [{ name: "claimId", type: "uint256", internalType: "uint256" }],
-    outputs: [
+    "inputs": [
       {
-        name: "",
-        type: "tuple",
-        internalType: "struct Noodl3Loyalty.Claim",
-        components: [
-          { name: "id", type: "uint256", internalType: "uint256" },
-          { name: "storeId", type: "bytes32", internalType: "bytes32" },
-          { name: "user", type: "address", internalType: "address" },
-          { name: "burnedStamps", type: "uint32", internalType: "uint32" },
-          { name: "rewardType", type: "uint8", internalType: "uint8" },
-          { name: "rewardValue", type: "uint256", internalType: "uint256" },
-          { name: "claimedAt", type: "uint40", internalType: "uint40" },
-          { name: "consumedAt", type: "uint40", internalType: "uint40" },
-          { name: "consumed", type: "bool", internalType: "bool" },
-          { name: "exists", type: "bool", internalType: "bool" }
-        ]
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "nonce",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "expiresAt",
+        "type": "uint256"
       }
-    ]
+    ],
+    "name": "getDynamicStampDigest",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    type: "function",
-    name: "getProfile",
-    stateMutability: "view",
-    inputs: [{ name: "user", type: "address", internalType: "address" }],
-    outputs: [
+    "inputs": [
       {
-        name: "",
-        type: "tuple",
-        internalType: "struct Noodl3Loyalty.UserProfile",
-        components: [
-          { name: "displayName", type: "string", internalType: "string" },
-          { name: "avatarUrl", type: "string", internalType: "string" },
-          { name: "updatedAt", type: "uint40", internalType: "uint40" },
-          { name: "exists", type: "bool", internalType: "bool" }
-        ]
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
       }
-    ]
+    ],
+    "name": "getOwnerProgramIds",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    type: "event",
-    name: "RewardClaimed",
-    anonymous: false,
-    inputs: [
+    "inputs": [
       {
-        indexed: true,
-        name: "claimId",
-        type: "uint256",
-        internalType: "uint256"
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
       },
       {
-        indexed: true,
-        name: "storeId",
-        type: "bytes32",
-        internalType: "bytes32"
-      },
-      {
-        indexed: true,
-        name: "user",
-        type: "address",
-        internalType: "address"
-      },
-      {
-        indexed: false,
-        name: "rewardType",
-        type: "uint8",
-        internalType: "uint8"
-      },
-      {
-        indexed: false,
-        name: "rewardValue",
-        type: "uint256",
-        internalType: "uint256"
-      },
-      {
-        indexed: false,
-        name: "burnedStamps",
-        type: "uint32",
-        internalType: "uint32"
+        "internalType": "address",
+        "name": "customer",
+        "type": "address"
       }
-    ]
+    ],
+    "name": "getPendingVisitRequestId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    type: "event",
-    name: "ProfileUpdated",
-    anonymous: false,
-    inputs: [
+    "inputs": [
       {
-        indexed: true,
-        name: "user",
-        type: "address",
-        internalType: "address"
-      },
-      {
-        indexed: false,
-        name: "displayName",
-        type: "string",
-        internalType: "string"
-      },
-      {
-        indexed: false,
-        name: "avatarUrl",
-        type: "string",
-        internalType: "string"
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
       }
-    ]
+    ],
+    "name": "getProfile",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "displayName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "avatarUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "uint40",
+            "name": "updatedAt",
+            "type": "uint40"
+          },
+          {
+            "internalType": "bool",
+            "name": "exists",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct Noodl3Loyalty.UserProfile",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getProgram",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "rewardDescription",
+            "type": "string"
+          },
+          {
+            "internalType": "uint32",
+            "name": "stampsRequired",
+            "type": "uint32"
+          },
+          {
+            "internalType": "bool",
+            "name": "active",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "exists",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct Noodl3Loyalty.Program",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getProgramClaimIds",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getProgramParticipants",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getProgramVisitRequestIds",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getProgress",
+    "outputs": [
+      {
+        "internalType": "uint32",
+        "name": "stamps",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint32",
+        "name": "stampsRequired",
+        "type": "uint32"
+      },
+      {
+        "internalType": "string",
+        "name": "rewardDescription",
+        "type": "string"
+      },
+      {
+        "internalType": "bool",
+        "name": "canClaim",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "staff",
+        "type": "address"
+      }
+    ],
+    "name": "getStaffProgramIds",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getUserClaimIds",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getUserProgramIds",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "requestId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getVisitRequest",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "programId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "customer",
+            "type": "address"
+          },
+          {
+            "internalType": "uint40",
+            "name": "requestedAt",
+            "type": "uint40"
+          },
+          {
+            "internalType": "uint40",
+            "name": "resolvedAt",
+            "type": "uint40"
+          },
+          {
+            "internalType": "address",
+            "name": "resolvedBy",
+            "type": "address"
+          },
+          {
+            "internalType": "enum Noodl3Loyalty.RequestStatus",
+            "name": "status",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bool",
+            "name": "exists",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct Noodl3Loyalty.VisitRequest",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "nonce",
+        "type": "bytes32"
+      }
+    ],
+    "name": "isDynamicStampNonceUsed",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "isProgramStaff",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "customer",
+        "type": "address"
+      }
+    ],
+    "name": "issueManualStamp",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nextClaimId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nextProgramId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nextVisitRequestId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "requestId",
+        "type": "uint256"
+      }
+    ],
+    "name": "rejectVisitRequest",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      }
+    ],
+    "name": "requestVisit",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "requestId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "displayName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "avatarUrl",
+        "type": "string"
+      }
+    ],
+    "name": "setProfile",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "staff",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "enabled",
+        "type": "bool"
+      }
+    ],
+    "name": "setProgramStaff",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "rewardDescription",
+        "type": "string"
+      },
+      {
+        "internalType": "uint32",
+        "name": "stampsRequired",
+        "type": "uint32"
+      },
+      {
+        "internalType": "bool",
+        "name": "active",
+        "type": "bool"
+      }
+    ],
+    "name": "updateProgram",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ] as const;
 
