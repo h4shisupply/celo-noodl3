@@ -1,12 +1,12 @@
 # Demo Script
 
-1. Open the home page and explain the product in one sentence: pay in MiniPay with stablecoins and earn store-specific loyalty onchain.
-2. Show the landing page, the featured stores, and the main CTA into `/app`.
-3. Open `Choices Bar` from the `/app` store list.
-4. Select `Um chopp da loja Choices` and show the item-specific purchase QR preview.
-5. Run the checkout in MiniPay and complete the payment.
-6. Open the customer dashboard in `/app`, switch to `Fidelidade`, and show the updated Stamp / Selo progress for that store.
-7. After enough purchases, redeem the reward and open `/app/claim/[claimId]`.
-8. Show the claim QR and the backup short code.
-9. Switch `/app` into merchant mode, show the customer list, then scan the reward QR and confirm that the store wallet can consume the claim.
-10. End on the success screen and transaction explorer link.
+1. Open the home page and explain the product in one sentence: Web3 stamp-card loyalty for real-world visits.
+2. Open `/app`, connect a wallet, and create a loyalty program.
+3. Open the manager view and show the fixed visit QR.
+4. Open the fixed QR as a customer, request a stamp, then approve the request from the manager view.
+5. Generate a dynamic QR, scan it as a customer, and collect a stamp instantly.
+6. Issue enough stamps to reach the threshold.
+7. Claim the reward from the customer card.
+8. Open `/app/claim/[claimId]`, show the QR and backup code.
+9. Validate the claim as owner or staff and confirm that a second validation fails.
+10. End on the dashboard showing the customer card, program manager, and claim history.

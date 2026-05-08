@@ -25,17 +25,15 @@ export const metadata: Metadata = {
     template: "%s · noodl3"
   },
   description:
-    "A MiniPay-native loyalty app for food and drink shops on Celo. Pay with stablecoins, collect Stamps, and redeem rewards with a clean cashier verifier flow.",
+    "Create Web3 loyalty stamp cards on Celo. Customers collect one stamp per visit and redeem one-time rewards with owner or staff validation.",
   metadataBase: new URL(publicEnv.appUrl),
   keywords: [
     "MiniPay",
     "Celo",
-    "stablecoins",
-    "USDC",
-    "cUSD",
     "loyalty",
-    "food",
-    "merchant rewards"
+    "stamp card",
+    "merchant rewards",
+    "QR"
   ],
   category: "finance",
   icons: {
@@ -51,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "noodl3",
     description:
-      "Search stores, pay in MiniPay with stablecoins, collect onchain loyalty Stamps, and redeem rewards with a verifier QR.",
+      "Create Web3 loyalty stamp cards, collect one stamp per visit, and validate rewards with QR flows on Celo.",
     url: publicEnv.appUrl,
     siteName: "noodl3",
     type: "website",
@@ -68,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "noodl3",
     description:
-      "A clean MiniPay loyalty app for local food and drink merchants on Celo.",
+      "Web3 stamp-card loyalty programs for real-world visits on Celo.",
     images: ["/og.svg"]
   },
   other: {

@@ -1,365 +1,374 @@
 import { expect } from "chai";
-import { encodeBytes32String, parseUnits } from "ethers";
+import {
+  encodeBytes32String,
+  getBytes,
+  solidityPackedKeccak256
+} from "ethers";
 import { network } from "hardhat";
 
 const { ethers } = await network.create();
 
 describe("Noodl3Loyalty", function () {
-  const storeId = encodeBytes32String("choices-bar");
-  const secondStoreId = encodeBytes32String("lapa-cafe");
-  const purchaseAmount = parseUnits("16", 6);
-  const rewardValue = parseUnits("1", 18);
-  const minPurchaseAmount = parseUnits("12", 18);
+  const programName = "Jorge Barber Club";
+  const rewardDescription = "Free beard trim";
+  const stampsRequired = 3;
 
   async function deployFixture() {
-    const [owner, manager, payout, user, stranger] = await ethers.getSigners();
-
-    const usdt = (await ethers.deployContract("MockERC20", [
-      "Tether USD",
-      "USDT",
-      6
-    ])) as any;
-    const usdc = (await ethers.deployContract("MockERC20", [
-      "USD Coin",
-      "USDC",
-      6
-    ])) as any;
-    const cusd = (await ethers.deployContract("MockERC20", [
-      "Celo Dollar",
-      "cUSD",
-      18
-    ])) as any;
-    const otherToken = (await ethers.deployContract("MockERC20", [
-      "Other Dollar",
-      "ODLR",
-      18
-    ])) as any;
+    const [owner, staff, user, stranger] = await ethers.getSigners();
     const loyalty = (await ethers.deployContract("Noodl3Loyalty")) as any;
-
-    await loyalty.configureStore(
-      storeId,
-      payout.address,
-      manager.address,
-      await usdt.getAddress(),
-      minPurchaseAmount,
-      1,
-      10,
-      1,
-      rewardValue,
-      true
-    );
-    await loyalty.configureStoreAcceptedTokens(
-      storeId,
-      [await usdt.getAddress(), await usdc.getAddress(), await cusd.getAddress()],
-      [6, 6, 18]
-    );
-
-    await usdt.mint(user.address, parseUnits("500", 6));
-    await usdc.mint(user.address, parseUnits("500", 6));
-    await cusd.mint(user.address, parseUnits("500", 18));
-    await otherToken.mint(user.address, parseUnits("500", 18));
+    const tx = await loyalty
+      .connect(owner)
+      .createProgram(programName, rewardDescription, stampsRequired, true);
+    await tx.wait();
 
     return {
       loyalty,
-      usdt,
-      usdc,
-      cusd,
-      otherToken,
       owner,
-      manager,
-      payout,
+      staff,
       user,
-      stranger
+      stranger,
+      programId: 1n
     };
   }
 
-  it("creates and updates store config", async function () {
-    const { loyalty, usdt, payout, manager } = await deployFixture();
-
-    let store = await loyalty.getStore(storeId);
-    expect(store.payout).to.equal(payout.address);
-    expect(store.manager).to.equal(manager.address);
-    expect(store.token).to.equal(await usdt.getAddress());
-    expect(store.stampsRequired).to.equal(10);
-    expect(store.rewardType).to.equal(1);
-    expect(store.active).to.equal(true);
-
-    await loyalty.configureStore(
-      storeId,
-      payout.address,
-      manager.address,
-      await usdt.getAddress(),
-      minPurchaseAmount,
-      2,
-      12,
-      0,
-      parseUnits("8", 18),
-      false
+  async function signDynamicStamp(params: {
+    loyalty: any;
+    signer: Awaited<ReturnType<typeof ethers.getSigners>>[number];
+    programId: bigint;
+    nonce: string;
+    expiresAt: bigint;
+  }) {
+    const digest = await params.loyalty.getDynamicStampDigest(
+      params.programId,
+      params.nonce,
+      params.expiresAt
     );
+    return params.signer.signMessage(getBytes(digest));
+  }
 
-    store = await loyalty.getStore(storeId);
-    expect(store.stampsPerPurchase).to.equal(2);
-    expect(store.stampsRequired).to.equal(12);
-    expect(store.rewardType).to.equal(0);
-    expect(store.active).to.equal(false);
-  });
+  async function futureExpiry() {
+    const block = await ethers.provider.getBlock("latest");
+    if (!block) throw new Error("missing latest block");
+    return BigInt(block.timestamp + 300);
+  }
 
-  it("records purchase transfers and stamps progress per store", async function () {
-    const { loyalty, usdt, payout, user } = await deployFixture();
+  it("lets any wallet create a program and indexes it by owner", async function () {
+    const { loyalty, owner, user } = await deployFixture();
 
-    await usdt.connect(user).approve(await loyalty.getAddress(), purchaseAmount);
+    const program = await loyalty.getProgram(1n);
+    expect(program.id).to.equal(1n);
+    expect(program.owner).to.equal(owner.address);
+    expect(program.name).to.equal(programName);
+    expect(program.rewardDescription).to.equal(rewardDescription);
+    expect(program.stampsRequired).to.equal(stampsRequired);
+    expect(program.active).to.equal(true);
+    expect(await loyalty.getOwnerProgramIds(owner.address)).to.deep.equal([1n]);
 
     await expect(
-      loyalty.connect(user).purchase(storeId, await usdt.getAddress(), purchaseAmount, "chopp-choices")
+      loyalty.connect(user).createProgram("Cafe Pass", "Free coffee", 5, true)
     )
-      .to.emit(loyalty, "PurchaseRecorded")
-      .withArgs(
-        storeId,
-        user.address,
-        await usdt.getAddress(),
-        purchaseAmount,
-        "chopp-choices",
-        1,
-        1,
-        payout.address
-      );
+      .to.emit(loyalty, "ProgramCreated")
+      .withArgs(2n, user.address, "Cafe Pass", "Free coffee", 5, true);
 
-    expect(await usdt.balanceOf(payout.address)).to.equal(purchaseAmount);
+    expect(await loyalty.getOwnerProgramIds(user.address)).to.deep.equal([2n]);
+  });
 
-    const progress = await loyalty.getProgress(user.address, storeId);
+  it("only lets the owner update program settings and staff", async function () {
+    const { loyalty, owner, staff, stranger, programId } = await deployFixture();
+
+    await expect(
+      loyalty
+        .connect(stranger)
+        .updateProgram(programId, "Bad edit", "Bad reward", 2, false)
+    ).to.be.revertedWithCustomError(loyalty, "NotProgramOwner");
+
+    await expect(
+      loyalty
+        .connect(owner)
+        .updateProgram(programId, "Updated Club", "Free haircut", 10, false)
+    )
+      .to.emit(loyalty, "ProgramUpdated")
+      .withArgs(programId, "Updated Club", "Free haircut", 10, false);
+
+    await expect(
+      loyalty.connect(stranger).setProgramStaff(programId, staff.address, true)
+    ).to.be.revertedWithCustomError(loyalty, "NotProgramOwner");
+
+    await expect(loyalty.connect(owner).setProgramStaff(programId, staff.address, true))
+      .to.emit(loyalty, "ProgramStaffUpdated")
+      .withArgs(programId, staff.address, true);
+
+    expect(await loyalty.isProgramStaff(programId, staff.address)).to.equal(true);
+    expect(await loyalty.getStaffProgramIds(staff.address)).to.deep.equal([programId]);
+
+    await loyalty.connect(owner).setProgramStaff(programId, staff.address, false);
+    expect(await loyalty.isProgramStaff(programId, staff.address)).to.equal(false);
+    expect(await loyalty.getStaffProgramIds(staff.address)).to.deep.equal([]);
+  });
+
+  it("validates program limits", async function () {
+    const { loyalty, owner } = await deployFixture();
+
+    await expect(
+      loyalty.connect(owner).createProgram("", "Reward", 3, true)
+    ).to.be.revertedWithCustomError(loyalty, "InvalidProgramConfig");
+
+    await expect(
+      loyalty.connect(owner).createProgram("Name", "", 3, true)
+    ).to.be.revertedWithCustomError(loyalty, "InvalidProgramConfig");
+
+    await expect(
+      loyalty.connect(owner).createProgram("Name", "Reward", 0, true)
+    ).to.be.revertedWithCustomError(loyalty, "InvalidProgramConfig");
+
+    await expect(
+      loyalty.connect(owner).createProgram("Name", "Reward", 101, true)
+    ).to.be.revertedWithCustomError(loyalty, "InvalidProgramConfig");
+  });
+
+  it("supports static visit requests with staff approval and rejection", async function () {
+    const { loyalty, owner, staff, user, stranger, programId } = await deployFixture();
+    await loyalty.connect(owner).setProgramStaff(programId, staff.address, true);
+
+    await expect(loyalty.connect(user).requestVisit(programId))
+      .to.emit(loyalty, "VisitRequested")
+      .withArgs(1n, programId, user.address);
+
+    await expect(
+      loyalty.connect(user).requestVisit(programId)
+    ).to.be.revertedWithCustomError(loyalty, "RequestAlreadyPending");
+
+    await expect(
+      loyalty.connect(stranger).approveVisitRequest(1n)
+    ).to.be.revertedWithCustomError(loyalty, "NotProgramStaff");
+
+    await expect(loyalty.connect(staff).approveVisitRequest(1n))
+      .to.emit(loyalty, "StampIssued")
+      .withArgs(programId, user.address, 0, 1);
+
+    const progress = await loyalty.getProgress(user.address, programId);
     expect(progress.stamps).to.equal(1);
-    expect(progress.stampsRequired).to.equal(10);
     expect(progress.canClaim).to.equal(false);
-  });
+    expect(await loyalty.getUserProgramIds(user.address)).to.deep.equal([programId]);
+    expect(await loyalty.getProgramParticipants(programId)).to.deep.equal([user.address]);
 
-  it("tracks store participants once per buyer and keeps them isolated by store", async function () {
-    const { loyalty, usdt, payout, manager, user, stranger } = await deployFixture();
-
-    await loyalty.configureStore(
-      secondStoreId,
-      payout.address,
-      manager.address,
-      await usdt.getAddress(),
-      minPurchaseAmount,
-      1,
-      8,
-      0,
-      parseUnits("6", 18),
-      true
-    );
-    await loyalty.configureStoreAcceptedTokens(
-      secondStoreId,
-      [await usdt.getAddress()],
-      [6]
-    );
-
-    await usdt.connect(user).approve(await loyalty.getAddress(), purchaseAmount * 3n);
-    await usdt.mint(stranger.address, parseUnits("50", 6));
-    await usdt.connect(stranger).approve(await loyalty.getAddress(), purchaseAmount);
-
-    await loyalty.connect(user).purchase(storeId, await usdt.getAddress(), purchaseAmount, "first-order");
-    await loyalty.connect(user).purchase(storeId, await usdt.getAddress(), purchaseAmount, "second-order");
-    await loyalty.connect(stranger).purchase(storeId, await usdt.getAddress(), purchaseAmount, "guest-order");
-    await loyalty.connect(user).purchase(secondStoreId, await usdt.getAddress(), purchaseAmount, "coffee-order");
-
-    const firstStoreParticipants = await loyalty.getStoreParticipants(storeId);
-    expect(firstStoreParticipants).to.deep.equal([user.address, stranger.address]);
-
-    const secondaryStoreParticipants = await loyalty.getStoreParticipants(secondStoreId);
-    expect(secondaryStoreParticipants).to.deep.equal([user.address]);
-  });
-
-  it("fails purchase for inactive store", async function () {
-    const { loyalty, usdt, payout, manager, user } = await deployFixture();
-
-    await loyalty.configureStore(
-      storeId,
-      payout.address,
-      manager.address,
-      await usdt.getAddress(),
-      minPurchaseAmount,
-      1,
-      10,
-      1,
-      rewardValue,
-      false
-    );
-
-    await usdt.connect(user).approve(await loyalty.getAddress(), purchaseAmount);
+    await loyalty.connect(user).requestVisit(programId);
+    await expect(loyalty.connect(owner).rejectVisitRequest(2n))
+      .to.emit(loyalty, "VisitRequestResolved")
+      .withArgs(2n, programId, owner.address, 2);
 
     await expect(
-      loyalty.connect(user).purchase(storeId, await usdt.getAddress(), purchaseAmount, "chopp-choices")
-    ).to.be.revertedWithCustomError(loyalty, "StoreInactive");
+      loyalty.connect(owner).approveVisitRequest(2n)
+    ).to.be.revertedWithCustomError(loyalty, "RequestResolved");
   });
 
-  it("fails purchase when the token is not supported by the store", async function () {
-    const { loyalty, otherToken, user } = await deployFixture();
-
-    await otherToken
-      .connect(user)
-      .approve(await loyalty.getAddress(), purchaseAmount);
-
-    await expect(
-      loyalty.connect(user).purchase(storeId, await otherToken.getAddress(), purchaseAmount, "wrong-token")
-    ).to.be.revertedWithCustomError(loyalty, "UnsupportedToken");
-  });
-
-  it("fails purchase below the store minimum", async function () {
-    const { loyalty, usdt, user } = await deployFixture();
-
-    const smallAmount = parseUnits("5", 6);
-    await usdt.connect(user).approve(await loyalty.getAddress(), smallAmount);
-
-    await expect(
-      loyalty.connect(user).purchase(storeId, await usdt.getAddress(), smallAmount, "tiny-order")
-    ).to.be.revertedWithCustomError(loyalty, "AmountBelowMinimum");
-  });
-
-  it("accepts multiple supported stablecoins equally", async function () {
-    const { loyalty, usdc, cusd, payout, user } = await deployFixture();
-
-    const usdcPurchaseAmount = parseUnits("16", 6);
-    const cusdPurchaseAmount = parseUnits("16", 18);
-
-    await usdc.connect(user).approve(await loyalty.getAddress(), usdcPurchaseAmount);
-    await cusd.connect(user).approve(await loyalty.getAddress(), cusdPurchaseAmount);
+  it("blocks new visit requests and approvals while inactive", async function () {
+    const { loyalty, owner, user, programId } = await deployFixture();
 
     await loyalty
-      .connect(user)
-      .purchase(storeId, await usdc.getAddress(), usdcPurchaseAmount, "usdc-order");
-    await loyalty
-      .connect(user)
-      .purchase(storeId, await cusd.getAddress(), cusdPurchaseAmount, "cusd-order");
-
-    expect(await usdc.balanceOf(payout.address)).to.equal(usdcPurchaseAmount);
-    expect(await cusd.balanceOf(payout.address)).to.equal(cusdPurchaseAmount);
-
-    const progress = await loyalty.getProgress(user.address, storeId);
-    expect(progress.stamps).to.equal(2);
-  });
-
-  it("fails to claim before the threshold is reached", async function () {
-    const { loyalty, usdt, user } = await deployFixture();
-
-    await usdt.connect(user).approve(await loyalty.getAddress(), purchaseAmount);
-    await loyalty.connect(user).purchase(storeId, await usdt.getAddress(), purchaseAmount, "first-order");
+      .connect(owner)
+      .updateProgram(programId, programName, rewardDescription, stampsRequired, false);
 
     await expect(
-      loyalty.connect(user).claimReward(storeId)
-    ).to.be.revertedWithCustomError(loyalty, "NotEnoughStamps");
+      loyalty.connect(user).requestVisit(programId)
+    ).to.be.revertedWithCustomError(loyalty, "ProgramInactive");
+
+    await loyalty
+      .connect(owner)
+      .updateProgram(programId, programName, rewardDescription, stampsRequired, true);
+    await loyalty.connect(user).requestVisit(programId);
+    await loyalty
+      .connect(owner)
+      .updateProgram(programId, programName, rewardDescription, stampsRequired, false);
+
+    await expect(
+      loyalty.connect(owner).approveVisitRequest(1n)
+    ).to.be.revertedWithCustomError(loyalty, "ProgramInactive");
   });
 
-  it("burns stamps on claim and allows a manager to consume once", async function () {
-    const { loyalty, usdt, user, manager } = await deployFixture();
+  it("lets owner or staff issue manual stamps", async function () {
+    const { loyalty, owner, staff, user, stranger, programId } = await deployFixture();
+    await loyalty.connect(owner).setProgramStaff(programId, staff.address, true);
 
-    await usdt
-      .connect(user)
-      .approve(await loyalty.getAddress(), purchaseAmount * 10n);
+    await expect(
+      loyalty.connect(stranger).issueManualStamp(programId, user.address)
+    ).to.be.revertedWithCustomError(loyalty, "NotProgramStaff");
 
-    for (let i = 0; i < 10; i += 1) {
-      await loyalty.connect(user).purchase(storeId, await usdt.getAddress(), purchaseAmount, `order-${i}`);
+    await expect(loyalty.connect(staff).issueManualStamp(programId, user.address))
+      .to.emit(loyalty, "StampIssued")
+      .withArgs(programId, user.address, 2, 1);
+
+    await expect(loyalty.connect(owner).issueManualStamp(programId, user.address))
+      .to.emit(loyalty, "StampIssued")
+      .withArgs(programId, user.address, 2, 2);
+  });
+
+  it("collects a dynamic QR stamp once with a valid staff signature", async function () {
+    const { loyalty, owner, staff, user, programId } = await deployFixture();
+    await loyalty.connect(owner).setProgramStaff(programId, staff.address, true);
+
+    const nonce = encodeBytes32String("visit-1");
+    const expiresAt = await futureExpiry();
+    const signature = await signDynamicStamp({
+      loyalty,
+      signer: staff,
+      programId,
+      nonce,
+      expiresAt
+    });
+
+    await expect(
+      loyalty.connect(user).collectDynamicStamp(programId, nonce, expiresAt, signature)
+    )
+      .to.emit(loyalty, "StampIssued")
+      .withArgs(programId, user.address, 1, 1);
+
+    await expect(
+      loyalty.connect(user).collectDynamicStamp(programId, nonce, expiresAt, signature)
+    ).to.be.revertedWithCustomError(loyalty, "DynamicStampUsed");
+  });
+
+  it("rejects expired, wrong-signer, wrong-program, wrong-chain, and wrong-contract dynamic QR signatures", async function () {
+    const { loyalty, owner, user, stranger, programId } = await deployFixture();
+    const contractAddress = await loyalty.getAddress();
+    const connectedNetwork = await ethers.provider.getNetwork();
+
+    const nonce = encodeBytes32String("expired");
+    await expect(
+      loyalty
+        .connect(user)
+        .collectDynamicStamp(programId, nonce, 1n, await owner.signMessage(getBytes(nonce)))
+    ).to.be.revertedWithCustomError(loyalty, "DynamicStampExpired");
+
+    const validExpiry = await futureExpiry();
+    const wrongSignerSig = await signDynamicStamp({
+      loyalty,
+      signer: stranger,
+      programId,
+      nonce: encodeBytes32String("wrong-signer"),
+      expiresAt: validExpiry
+    });
+    await expect(
+      loyalty
+        .connect(user)
+        .collectDynamicStamp(
+          programId,
+          encodeBytes32String("wrong-signer"),
+          validExpiry,
+          wrongSignerSig
+        )
+    ).to.be.revertedWithCustomError(loyalty, "InvalidSignature");
+
+    const wrongProgramSig = await signDynamicStamp({
+      loyalty,
+      signer: owner,
+      programId: 999n,
+      nonce: encodeBytes32String("wrong-program"),
+      expiresAt: validExpiry
+    });
+    await expect(
+      loyalty
+        .connect(user)
+        .collectDynamicStamp(
+          programId,
+          encodeBytes32String("wrong-program"),
+          validExpiry,
+          wrongProgramSig
+        )
+    ).to.be.revertedWithCustomError(loyalty, "InvalidSignature");
+
+    const wrongChainDigest = solidityPackedKeccak256(
+      ["uint256", "address", "uint256", "bytes32", "uint256"],
+      [
+        BigInt(connectedNetwork.chainId) + 1n,
+        contractAddress,
+        programId,
+        encodeBytes32String("wrong-chain"),
+        validExpiry
+      ]
+    );
+    const wrongChainSig = await owner.signMessage(getBytes(wrongChainDigest));
+    await expect(
+      loyalty
+        .connect(user)
+        .collectDynamicStamp(
+          programId,
+          encodeBytes32String("wrong-chain"),
+          validExpiry,
+          wrongChainSig
+        )
+    ).to.be.revertedWithCustomError(loyalty, "InvalidSignature");
+
+    const wrongContractDigest = solidityPackedKeccak256(
+      ["uint256", "address", "uint256", "bytes32", "uint256"],
+      [
+        connectedNetwork.chainId,
+        user.address,
+        programId,
+        encodeBytes32String("wrong-contract"),
+        validExpiry
+      ]
+    );
+    const wrongContractSig = await owner.signMessage(getBytes(wrongContractDigest));
+    await expect(
+      loyalty
+        .connect(user)
+        .collectDynamicStamp(
+          programId,
+          encodeBytes32String("wrong-contract"),
+          validExpiry,
+          wrongContractSig
+        )
+    ).to.be.revertedWithCustomError(loyalty, "InvalidSignature");
+  });
+
+  it("burns stamps on claim and lets owner or staff consume once", async function () {
+    const { loyalty, owner, staff, user, stranger, programId } = await deployFixture();
+    await loyalty.connect(owner).setProgramStaff(programId, staff.address, true);
+
+    for (let i = 0; i < stampsRequired; i += 1) {
+      await loyalty.connect(owner).issueManualStamp(programId, user.address);
     }
 
-    await expect(loyalty.connect(user).claimReward(storeId))
+    await expect(loyalty.connect(user).claimReward(programId))
       .to.emit(loyalty, "RewardClaimed")
-      .withArgs(1n, storeId, user.address, 1, rewardValue, 10);
+      .withArgs(1n, programId, user.address, stampsRequired, rewardDescription);
 
-    const progress = await loyalty.getProgress(user.address, storeId);
+    const progress = await loyalty.getProgress(user.address, programId);
     expect(progress.stamps).to.equal(0);
     expect(progress.canClaim).to.equal(false);
 
     const claim = await loyalty.getClaim(1n);
     expect(claim.user).to.equal(user.address);
+    expect(claim.rewardDescription).to.equal(rewardDescription);
     expect(claim.consumed).to.equal(false);
     expect(await loyalty.getUserClaimIds(user.address)).to.deep.equal([1n]);
-    expect(await loyalty.getStoreClaimIds(storeId)).to.deep.equal([1n]);
+    expect(await loyalty.getProgramClaimIds(programId)).to.deep.equal([1n]);
 
-    await expect(loyalty.connect(manager).consumeReward(1n))
+    await expect(
+      loyalty.connect(stranger).consumeReward(1n)
+    ).to.be.revertedWithCustomError(loyalty, "NotProgramStaff");
+
+    await expect(loyalty.connect(staff).consumeReward(1n))
       .to.emit(loyalty, "RewardConsumed")
-      .withArgs(1n, storeId, manager.address, user.address);
+      .withArgs(1n, programId, staff.address, user.address);
 
     const consumedClaim = await loyalty.getClaim(1n);
     expect(consumedClaim.consumed).to.equal(true);
     expect(consumedClaim.consumedAt).to.not.equal(0);
-  });
-
-  it("prevents non-managers from consuming claims", async function () {
-    const { loyalty, usdt, user, stranger } = await deployFixture();
-
-    await usdt
-      .connect(user)
-      .approve(await loyalty.getAddress(), purchaseAmount * 10n);
-
-    for (let i = 0; i < 10; i += 1) {
-      await loyalty.connect(user).purchase(storeId, await usdt.getAddress(), purchaseAmount, `order-${i}`);
-    }
-
-    await loyalty.connect(user).claimReward(storeId);
 
     await expect(
-      loyalty.connect(stranger).consumeReward(1n)
-    ).to.be.revertedWithCustomError(loyalty, "NotStoreManager");
-  });
-
-  it("prevents reusing a consumed claim", async function () {
-    const { loyalty, usdt, user, manager } = await deployFixture();
-
-    await usdt
-      .connect(user)
-      .approve(await loyalty.getAddress(), purchaseAmount * 10n);
-
-    for (let i = 0; i < 10; i += 1) {
-      await loyalty.connect(user).purchase(storeId, await usdt.getAddress(), purchaseAmount, `order-${i}`);
-    }
-
-    await loyalty.connect(user).claimReward(storeId);
-    await loyalty.connect(manager).consumeReward(1n);
-
-    await expect(
-      loyalty.connect(manager).consumeReward(1n)
+      loyalty.connect(owner).consumeReward(1n)
     ).to.be.revertedWithCustomError(loyalty, "ClaimAlreadyConsumed");
   });
 
-  it("indexes claim ids by user and by store", async function () {
-    const { loyalty, usdt, payout, manager, user, stranger } = await deployFixture();
+  it("prevents claiming before the threshold is reached", async function () {
+    const { loyalty, owner, user, programId } = await deployFixture();
+    await loyalty.connect(owner).issueManualStamp(programId, user.address);
 
-    await loyalty.configureStore(
-      secondStoreId,
-      payout.address,
-      manager.address,
-      await usdt.getAddress(),
-      minPurchaseAmount,
-      1,
-      5,
-      0,
-      parseUnits("4", 18),
-      true
-    );
-    await loyalty.configureStoreAcceptedTokens(
-      secondStoreId,
-      [await usdt.getAddress()],
-      [6]
-    );
-
-    await usdt.mint(stranger.address, parseUnits("500", 6));
-    await usdt.connect(user).approve(await loyalty.getAddress(), purchaseAmount * 15n);
-    await usdt.connect(stranger).approve(await loyalty.getAddress(), purchaseAmount * 5n);
-
-    for (let i = 0; i < 10; i += 1) {
-      await loyalty.connect(user).purchase(storeId, await usdt.getAddress(), purchaseAmount, `user-main-${i}`);
-    }
-
-    for (let i = 0; i < 5; i += 1) {
-      await loyalty.connect(stranger).purchase(secondStoreId, await usdt.getAddress(), purchaseAmount, `guest-${i}`);
-    }
-
-    await loyalty.connect(user).claimReward(storeId);
-    await loyalty.connect(stranger).claimReward(secondStoreId);
-
-    expect(await loyalty.getUserClaimIds(user.address)).to.deep.equal([1n]);
-    expect(await loyalty.getUserClaimIds(stranger.address)).to.deep.equal([2n]);
-    expect(await loyalty.getStoreClaimIds(storeId)).to.deep.equal([1n]);
-    expect(await loyalty.getStoreClaimIds(secondStoreId)).to.deep.equal([2n]);
+    await expect(
+      loyalty.connect(user).claimReward(programId)
+    ).to.be.revertedWithCustomError(loyalty, "NotEnoughStamps");
   });
 
   it("stores and returns onchain user profiles", async function () {

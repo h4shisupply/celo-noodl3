@@ -1,40 +1,46 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-interface IERC20Minimal {
-    function transferFrom(
-        address from,
-        address to,
-        uint256 amount
-    ) external returns (bool);
-}
-
 contract Noodl3Loyalty {
-    enum RewardType {
-        FixedAmount,
-        FreeItem
+    enum RequestStatus {
+        Pending,
+        Approved,
+        Rejected
     }
 
-    struct Store {
-        address payout;
-        address manager;
-        address token;
-        uint256 minPurchaseAmount;
-        uint32 stampsPerPurchase;
+    enum StampSource {
+        StaticRequest,
+        DynamicQr,
+        Manual
+    }
+
+    struct Program {
+        uint256 id;
+        address owner;
+        string name;
+        string rewardDescription;
         uint32 stampsRequired;
-        RewardType rewardType;
-        uint256 rewardValue;
         bool active;
+        bool exists;
+    }
+
+    struct VisitRequest {
+        uint256 id;
+        uint256 programId;
+        address customer;
+        uint40 requestedAt;
+        uint40 resolvedAt;
+        address resolvedBy;
+        RequestStatus status;
         bool exists;
     }
 
     struct Claim {
         uint256 id;
-        bytes32 storeId;
+        uint256 programId;
         address user;
         uint32 burnedStamps;
-        RewardType rewardType;
-        uint256 rewardValue;
+        string rewardDescription;
         uint40 claimedAt;
         uint40 consumedAt;
         bool consumed;
@@ -50,52 +56,71 @@ contract Noodl3Loyalty {
 
     error ClaimAlreadyConsumed();
     error ClaimNotFound();
-    error AmountBelowMinimum();
-    error InvalidStore();
-    error InvalidStoreConfig();
+    error DynamicStampExpired();
+    error DynamicStampUsed();
+    error InvalidProgram();
+    error InvalidProgramConfig();
     error InvalidProfile();
+    error InvalidRequest();
+    error InvalidSignature();
+    error InvalidStaff();
     error NotEnoughStamps();
-    error NotOwner();
-    error NotStoreManager();
-    error StoreInactive();
-    error StoreNotFound();
-    error TransferFailed();
-    error UnsupportedToken();
+    error NotProgramStaff();
+    error NotProgramOwner();
+    error ProgramInactive();
+    error ProgramNotFound();
+    error RequestAlreadyPending();
+    error RequestNotFound();
+    error RequestResolved();
 
-    event StoreConfigured(
-        bytes32 indexed storeId,
-        address payout,
-        address manager,
-        address token,
-        uint256 minPurchaseAmount,
-        uint32 stampsPerPurchase,
+    event ProgramCreated(
+        uint256 indexed programId,
+        address indexed owner,
+        string name,
+        string rewardDescription,
         uint32 stampsRequired,
-        uint8 rewardType,
-        uint256 rewardValue,
         bool active
     );
-    event PurchaseRecorded(
-        bytes32 indexed storeId,
-        address indexed user,
-        address indexed token,
-        uint256 amount,
-        string itemRef,
-        uint32 stampsEarned,
-        uint32 totalStamps,
-        address payout
+    event ProgramUpdated(
+        uint256 indexed programId,
+        string name,
+        string rewardDescription,
+        uint32 stampsRequired,
+        bool active
+    );
+    event ProgramStaffUpdated(
+        uint256 indexed programId,
+        address indexed staff,
+        bool enabled
+    );
+    event VisitRequested(
+        uint256 indexed requestId,
+        uint256 indexed programId,
+        address indexed customer
+    );
+    event VisitRequestResolved(
+        uint256 indexed requestId,
+        uint256 indexed programId,
+        address indexed resolvedBy,
+        uint8 status
+    );
+    event StampIssued(
+        uint256 indexed programId,
+        address indexed customer,
+        uint8 source,
+        uint32 totalStamps
     );
     event RewardClaimed(
         uint256 indexed claimId,
-        bytes32 indexed storeId,
+        uint256 indexed programId,
         address indexed user,
-        uint8 rewardType,
-        uint256 rewardValue,
-        uint32 burnedStamps
+        uint32 burnedStamps,
+        string rewardDescription
     );
     event RewardConsumed(
         uint256 indexed claimId,
-        bytes32 indexed storeId,
-        address indexed manager,
+        uint256 indexed programId,
+        address indexed staff,
         address user
     );
     event ProfileUpdated(
@@ -104,175 +129,230 @@ contract Noodl3Loyalty {
         string avatarUrl
     );
 
-    address public immutable owner;
+    uint256 public nextProgramId = 1;
+    uint256 public nextVisitRequestId = 1;
     uint256 public nextClaimId = 1;
 
-    mapping(bytes32 => Store) private stores;
-    mapping(address => mapping(bytes32 => uint32)) private userStamps;
+    mapping(uint256 => Program) private programs;
+    mapping(uint256 => mapping(address => bool)) private programStaff;
+    mapping(address => uint256[]) private ownerProgramIds;
+    mapping(address => uint256[]) private staffProgramIds;
+    mapping(address => mapping(uint256 => bool)) private staffProgramIndexed;
+
+    mapping(address => mapping(uint256 => uint32)) private userStamps;
+    mapping(uint256 => address[]) private programParticipants;
+    mapping(uint256 => mapping(address => bool)) private isProgramParticipant;
+    mapping(address => uint256[]) private userProgramIds;
+    mapping(address => mapping(uint256 => bool)) private userProgramIndexed;
+
+    mapping(uint256 => VisitRequest) private visitRequests;
+    mapping(uint256 => uint256[]) private programVisitRequestIds;
+    mapping(uint256 => mapping(address => uint256)) private pendingRequestByCustomer;
+
     mapping(uint256 => Claim) private claims;
-    mapping(bytes32 => address[]) private storeParticipants;
-    mapping(bytes32 => mapping(address => bool)) private isStoreParticipant;
-    mapping(bytes32 => address[]) private storeAcceptedTokens;
-    mapping(bytes32 => mapping(address => uint8)) private storeAcceptedTokenDecimals;
     mapping(address => uint256[]) private userClaimIds;
-    mapping(bytes32 => uint256[]) private storeClaimIds;
+    mapping(uint256 => uint256[]) private programClaimIds;
+
+    mapping(uint256 => mapping(bytes32 => bool)) private usedDynamicStampNonces;
     mapping(address => UserProfile) private userProfiles;
 
-    constructor() {
-        owner = msg.sender;
-    }
-
-    function configureStore(
-        bytes32 storeId,
-        address payout,
-        address manager,
-        address token,
-        uint256 minPurchaseAmount,
-        uint32 stampsPerPurchase,
+    function createProgram(
+        string calldata name,
+        string calldata rewardDescription,
         uint32 stampsRequired,
-        uint8 rewardType,
-        uint256 rewardValue,
         bool active
-    ) external {
-        if (msg.sender != owner) revert NotOwner();
-        if (storeId == bytes32(0)) revert InvalidStore();
-        if (
-            payout == address(0) ||
-            manager == address(0) ||
-            token == address(0) ||
-            stampsPerPurchase == 0 ||
-            stampsRequired == 0 ||
-            rewardValue == 0 ||
-            rewardType > uint8(RewardType.FreeItem)
-        ) {
-            revert InvalidStoreConfig();
-        }
+    ) external returns (uint256 programId) {
+        _validateProgramConfig(name, rewardDescription, stampsRequired);
 
-        stores[storeId] = Store({
-            payout: payout,
-            manager: manager,
-            token: token,
-            minPurchaseAmount: minPurchaseAmount,
-            stampsPerPurchase: stampsPerPurchase,
+        programId = nextProgramId;
+        nextProgramId += 1;
+
+        programs[programId] = Program({
+            id: programId,
+            owner: msg.sender,
+            name: name,
+            rewardDescription: rewardDescription,
             stampsRequired: stampsRequired,
-            rewardType: RewardType(rewardType),
-            rewardValue: rewardValue,
             active: active,
             exists: true
         });
+        ownerProgramIds[msg.sender].push(programId);
 
-        emit StoreConfigured(
-            storeId,
-            payout,
-            manager,
-            token,
-            minPurchaseAmount,
-            stampsPerPurchase,
+        emit ProgramCreated(
+            programId,
+            msg.sender,
+            name,
+            rewardDescription,
             stampsRequired,
-            rewardType,
-            rewardValue,
             active
         );
     }
 
-    function configureStoreAcceptedTokens(
-        bytes32 storeId,
-        address[] calldata tokens,
-        uint8[] calldata decimals
+    function updateProgram(
+        uint256 programId,
+        string calldata name,
+        string calldata rewardDescription,
+        uint32 stampsRequired,
+        bool active
     ) external {
-        if (msg.sender != owner) revert NotOwner();
-        if (tokens.length == 0 || tokens.length != decimals.length) {
-            revert InvalidStoreConfig();
-        }
+        _requireProgramOwner(programId);
+        _validateProgramConfig(name, rewardDescription, stampsRequired);
 
-        _getStoreOrRevert(storeId);
+        Program storage program = programs[programId];
+        program.name = name;
+        program.rewardDescription = rewardDescription;
+        program.stampsRequired = stampsRequired;
+        program.active = active;
 
-        address[] storage currentTokens = storeAcceptedTokens[storeId];
-        for (uint256 i = 0; i < currentTokens.length; i += 1) {
-            delete storeAcceptedTokenDecimals[storeId][currentTokens[i]];
-        }
-        delete storeAcceptedTokens[storeId];
-
-        for (uint256 i = 0; i < tokens.length; i += 1) {
-            if (tokens[i] == address(0) || decimals[i] == 0 || decimals[i] > 18) {
-                revert InvalidStoreConfig();
-            }
-
-            storeAcceptedTokens[storeId].push(tokens[i]);
-            storeAcceptedTokenDecimals[storeId][tokens[i]] = decimals[i];
-        }
-    }
-
-    function purchase(
-        bytes32 storeId,
-        address paymentToken,
-        uint256 amount,
-        string calldata itemRef
-    ) external {
-        Store memory store = _getStoreOrRevert(storeId);
-        if (!store.active) revert StoreInactive();
-        uint8 tokenDecimals = storeAcceptedTokenDecimals[storeId][paymentToken];
-        if (tokenDecimals == 0) revert UnsupportedToken();
-        if (_normalizeAmount(amount, tokenDecimals) < store.minPurchaseAmount) {
-            revert AmountBelowMinimum();
-        }
-
-        _safeTransferFrom(paymentToken, msg.sender, store.payout, amount);
-
-        if (!isStoreParticipant[storeId][msg.sender]) {
-            isStoreParticipant[storeId][msg.sender] = true;
-            storeParticipants[storeId].push(msg.sender);
-        }
-
-        uint32 updatedStamps = userStamps[msg.sender][storeId] +
-            store.stampsPerPurchase;
-        userStamps[msg.sender][storeId] = updatedStamps;
-
-        emit PurchaseRecorded(
-            storeId,
-            msg.sender,
-            paymentToken,
-            amount,
-            itemRef,
-            store.stampsPerPurchase,
-            updatedStamps,
-            store.payout
+        emit ProgramUpdated(
+            programId,
+            name,
+            rewardDescription,
+            stampsRequired,
+            active
         );
     }
 
-    function claimReward(bytes32 storeId) external returns (uint256 claimId) {
-        Store memory store = _getStoreOrRevert(storeId);
-        if (!store.active) revert StoreInactive();
+    function setProgramStaff(
+        uint256 programId,
+        address staff,
+        bool enabled
+    ) external {
+        _requireProgramOwner(programId);
+        if (staff == address(0)) revert InvalidStaff();
 
-        uint32 currentStamps = userStamps[msg.sender][storeId];
-        if (currentStamps < store.stampsRequired) revert NotEnoughStamps();
+        programStaff[programId][staff] = enabled;
+        if (enabled && !staffProgramIndexed[staff][programId]) {
+            staffProgramIndexed[staff][programId] = true;
+            staffProgramIds[staff].push(programId);
+        }
 
-        userStamps[msg.sender][storeId] = currentStamps - store.stampsRequired;
+        emit ProgramStaffUpdated(programId, staff, enabled);
+    }
+
+    function requestVisit(uint256 programId) external returns (uint256 requestId) {
+        Program memory program = _getProgramOrRevert(programId);
+        if (!program.active) revert ProgramInactive();
+        if (pendingRequestByCustomer[programId][msg.sender] != 0) {
+            revert RequestAlreadyPending();
+        }
+
+        requestId = nextVisitRequestId;
+        nextVisitRequestId += 1;
+
+        visitRequests[requestId] = VisitRequest({
+            id: requestId,
+            programId: programId,
+            customer: msg.sender,
+            requestedAt: uint40(block.timestamp),
+            resolvedAt: 0,
+            resolvedBy: address(0),
+            status: RequestStatus.Pending,
+            exists: true
+        });
+        programVisitRequestIds[programId].push(requestId);
+        pendingRequestByCustomer[programId][msg.sender] = requestId;
+
+        emit VisitRequested(requestId, programId, msg.sender);
+    }
+
+    function approveVisitRequest(uint256 requestId) external {
+        VisitRequest storage visitRequest = _getVisitRequestOrRevert(requestId);
+        if (visitRequest.status != RequestStatus.Pending) revert RequestResolved();
+        Program memory program = _getProgramOrRevert(visitRequest.programId);
+        if (!program.active) revert ProgramInactive();
+        _requireProgramStaff(program.id);
+
+        visitRequest.status = RequestStatus.Approved;
+        visitRequest.resolvedAt = uint40(block.timestamp);
+        visitRequest.resolvedBy = msg.sender;
+        pendingRequestByCustomer[program.id][visitRequest.customer] = 0;
+
+        _issueStamp(program.id, visitRequest.customer, StampSource.StaticRequest);
+
+        emit VisitRequestResolved(
+            requestId,
+            program.id,
+            msg.sender,
+            uint8(RequestStatus.Approved)
+        );
+    }
+
+    function rejectVisitRequest(uint256 requestId) external {
+        VisitRequest storage visitRequest = _getVisitRequestOrRevert(requestId);
+        if (visitRequest.status != RequestStatus.Pending) revert RequestResolved();
+        _requireProgramStaff(visitRequest.programId);
+
+        visitRequest.status = RequestStatus.Rejected;
+        visitRequest.resolvedAt = uint40(block.timestamp);
+        visitRequest.resolvedBy = msg.sender;
+        pendingRequestByCustomer[visitRequest.programId][visitRequest.customer] = 0;
+
+        emit VisitRequestResolved(
+            requestId,
+            visitRequest.programId,
+            msg.sender,
+            uint8(RequestStatus.Rejected)
+        );
+    }
+
+    function issueManualStamp(uint256 programId, address customer) external {
+        Program memory program = _getProgramOrRevert(programId);
+        if (!program.active) revert ProgramInactive();
+        if (customer == address(0)) revert InvalidRequest();
+        _requireProgramStaff(programId);
+
+        _issueStamp(program.id, customer, StampSource.Manual);
+    }
+
+    function collectDynamicStamp(
+        uint256 programId,
+        bytes32 nonce,
+        uint256 expiresAt,
+        bytes calldata signature
+    ) external {
+        Program memory program = _getProgramOrRevert(programId);
+        if (!program.active) revert ProgramInactive();
+        if (expiresAt < block.timestamp) revert DynamicStampExpired();
+        if (usedDynamicStampNonces[programId][nonce]) revert DynamicStampUsed();
+
+        bytes32 digest = getDynamicStampDigest(programId, nonce, expiresAt);
+        address signer = _recoverSigner(digest, signature);
+        if (!_isProgramStaff(programId, signer)) revert InvalidSignature();
+
+        usedDynamicStampNonces[programId][nonce] = true;
+        _issueStamp(program.id, msg.sender, StampSource.DynamicQr);
+    }
+
+    function claimReward(uint256 programId) external returns (uint256 claimId) {
+        Program memory program = _getProgramOrRevert(programId);
+        uint32 currentStamps = userStamps[msg.sender][programId];
+        if (currentStamps < program.stampsRequired) revert NotEnoughStamps();
+
+        userStamps[msg.sender][programId] = currentStamps - program.stampsRequired;
         claimId = nextClaimId;
         nextClaimId += 1;
 
         claims[claimId] = Claim({
             id: claimId,
-            storeId: storeId,
+            programId: programId,
             user: msg.sender,
-            burnedStamps: store.stampsRequired,
-            rewardType: store.rewardType,
-            rewardValue: store.rewardValue,
+            burnedStamps: program.stampsRequired,
+            rewardDescription: program.rewardDescription,
             claimedAt: uint40(block.timestamp),
             consumedAt: 0,
             consumed: false,
             exists: true
         });
         userClaimIds[msg.sender].push(claimId);
-        storeClaimIds[storeId].push(claimId);
+        programClaimIds[programId].push(claimId);
 
         emit RewardClaimed(
             claimId,
-            storeId,
+            programId,
             msg.sender,
-            uint8(store.rewardType),
-            store.rewardValue,
-            store.stampsRequired
+            program.stampsRequired,
+            program.rewardDescription
         );
     }
 
@@ -280,14 +360,12 @@ contract Noodl3Loyalty {
         Claim storage claim = claims[claimId];
         if (!claim.exists) revert ClaimNotFound();
         if (claim.consumed) revert ClaimAlreadyConsumed();
-
-        Store memory store = _getStoreOrRevert(claim.storeId);
-        if (msg.sender != store.manager) revert NotStoreManager();
+        _requireProgramStaff(claim.programId);
 
         claim.consumed = true;
         claim.consumedAt = uint40(block.timestamp);
 
-        emit RewardConsumed(claimId, claim.storeId, msg.sender, claim.user);
+        emit RewardConsumed(claimId, claim.programId, msg.sender, claim.user);
     }
 
     function setProfile(
@@ -322,8 +400,28 @@ contract Noodl3Loyalty {
         emit ProfileUpdated(msg.sender, displayName, avatarUrl);
     }
 
-    function getStore(bytes32 storeId) external view returns (Store memory) {
-        return _getStoreOrRevert(storeId);
+    function getDynamicStampDigest(
+        uint256 programId,
+        bytes32 nonce,
+        uint256 expiresAt
+    ) public view returns (bytes32) {
+        return keccak256(abi.encodePacked(block.chainid, address(this), programId, nonce, expiresAt));
+    }
+
+    function getProgram(uint256 programId) external view returns (Program memory) {
+        return _getProgramOrRevert(programId);
+    }
+
+    function getVisitRequest(
+        uint256 requestId
+    ) external view returns (VisitRequest memory) {
+        return _getVisitRequestOrRevert(requestId);
+    }
+
+    function getClaim(uint256 claimId) external view returns (Claim memory) {
+        Claim memory claim = claims[claimId];
+        if (!claim.exists) revert ClaimNotFound();
+        return claim;
     }
 
     function getProfile(
@@ -334,40 +432,88 @@ contract Noodl3Loyalty {
 
     function getProgress(
         address user,
-        bytes32 storeId
+        uint256 programId
     )
         external
         view
         returns (
             uint32 stamps,
             uint32 stampsRequired,
-            uint32 stampsPerPurchase,
-            uint8 rewardType,
-            uint256 rewardValue,
+            string memory rewardDescription,
             bool canClaim
         )
     {
-        Store memory store = _getStoreOrRevert(storeId);
-        stamps = userStamps[user][storeId];
-        stampsRequired = store.stampsRequired;
-        stampsPerPurchase = store.stampsPerPurchase;
-        rewardType = uint8(store.rewardType);
-        rewardValue = store.rewardValue;
-        canClaim = stamps >= store.stampsRequired;
+        Program memory program = _getProgramOrRevert(programId);
+        stamps = userStamps[user][programId];
+        stampsRequired = program.stampsRequired;
+        rewardDescription = program.rewardDescription;
+        canClaim = stamps >= program.stampsRequired;
     }
 
-    function getStoreParticipants(
-        bytes32 storeId
-    ) external view returns (address[] memory) {
-        _getStoreOrRevert(storeId);
-        return storeParticipants[storeId];
+    function isProgramStaff(
+        uint256 programId,
+        address account
+    ) external view returns (bool) {
+        _getProgramOrRevert(programId);
+        return _isProgramStaff(programId, account);
     }
 
-    function getStoreAcceptedTokens(
-        bytes32 storeId
+    function getOwnerProgramIds(
+        address owner
+    ) external view returns (uint256[] memory) {
+        return ownerProgramIds[owner];
+    }
+
+    function getStaffProgramIds(
+        address staff
+    ) external view returns (uint256[] memory) {
+        uint256[] storage indexedIds = staffProgramIds[staff];
+        uint256 activeCount = 0;
+
+        for (uint256 i = 0; i < indexedIds.length; i += 1) {
+            if (programStaff[indexedIds[i]][staff]) {
+                activeCount += 1;
+            }
+        }
+
+        uint256[] memory filteredIds = new uint256[](activeCount);
+        uint256 cursor = 0;
+        for (uint256 i = 0; i < indexedIds.length; i += 1) {
+            if (programStaff[indexedIds[i]][staff]) {
+                filteredIds[cursor] = indexedIds[i];
+                cursor += 1;
+            }
+        }
+
+        return filteredIds;
+    }
+
+    function getUserProgramIds(
+        address user
+    ) external view returns (uint256[] memory) {
+        return userProgramIds[user];
+    }
+
+    function getProgramParticipants(
+        uint256 programId
     ) external view returns (address[] memory) {
-        _getStoreOrRevert(storeId);
-        return storeAcceptedTokens[storeId];
+        _getProgramOrRevert(programId);
+        return programParticipants[programId];
+    }
+
+    function getProgramVisitRequestIds(
+        uint256 programId
+    ) external view returns (uint256[] memory) {
+        _getProgramOrRevert(programId);
+        return programVisitRequestIds[programId];
+    }
+
+    function getPendingVisitRequestId(
+        uint256 programId,
+        address customer
+    ) external view returns (uint256) {
+        _getProgramOrRevert(programId);
+        return pendingRequestByCustomer[programId][customer];
     }
 
     function getUserClaimIds(
@@ -376,49 +522,122 @@ contract Noodl3Loyalty {
         return userClaimIds[user];
     }
 
-    function getStoreClaimIds(
-        bytes32 storeId
+    function getProgramClaimIds(
+        uint256 programId
     ) external view returns (uint256[] memory) {
-        _getStoreOrRevert(storeId);
-        return storeClaimIds[storeId];
+        _getProgramOrRevert(programId);
+        return programClaimIds[programId];
     }
 
-    function getClaim(uint256 claimId) external view returns (Claim memory) {
-        Claim memory claim = claims[claimId];
-        if (!claim.exists) revert ClaimNotFound();
-        return claim;
+    function isDynamicStampNonceUsed(
+        uint256 programId,
+        bytes32 nonce
+    ) external view returns (bool) {
+        _getProgramOrRevert(programId);
+        return usedDynamicStampNonces[programId][nonce];
     }
 
-    function _getStoreOrRevert(
-        bytes32 storeId
-    ) private view returns (Store memory store) {
-        store = stores[storeId];
-        if (!store.exists) revert StoreNotFound();
-    }
-
-    function _safeTransferFrom(
-        address token,
-        address from,
-        address to,
-        uint256 amount
+    function _issueStamp(
+        uint256 programId,
+        address customer,
+        StampSource source
     ) private {
-        (bool success, bytes memory data) = token.call(
-            abi.encodeCall(IERC20Minimal.transferFrom, (from, to, amount))
-        );
-
-        if (!success) revert TransferFailed();
-        if (data.length > 0 && !abi.decode(data, (bool))) revert TransferFailed();
-    }
-
-    function _normalizeAmount(
-        uint256 amount,
-        uint8 decimals
-    ) private pure returns (uint256) {
-        if (decimals == 18) {
-            return amount;
+        if (!isProgramParticipant[programId][customer]) {
+            isProgramParticipant[programId][customer] = true;
+            programParticipants[programId].push(customer);
         }
 
-        return amount * (10 ** uint256(18 - decimals));
+        if (!userProgramIndexed[customer][programId]) {
+            userProgramIndexed[customer][programId] = true;
+            userProgramIds[customer].push(programId);
+        }
+
+        uint32 updatedStamps = userStamps[customer][programId] + 1;
+        userStamps[customer][programId] = updatedStamps;
+
+        emit StampIssued(programId, customer, uint8(source), updatedStamps);
+    }
+
+    function _requireProgramOwner(uint256 programId) private view {
+        Program memory program = _getProgramOrRevert(programId);
+        if (msg.sender != program.owner) revert NotProgramOwner();
+    }
+
+    function _requireProgramStaff(uint256 programId) private view {
+        if (!_isProgramStaff(programId, msg.sender)) revert NotProgramStaff();
+    }
+
+    function _isProgramStaff(
+        uint256 programId,
+        address account
+    ) private view returns (bool) {
+        Program memory program = _getProgramOrRevert(programId);
+        return account == program.owner || programStaff[programId][account];
+    }
+
+    function _getProgramOrRevert(
+        uint256 programId
+    ) private view returns (Program memory program) {
+        program = programs[programId];
+        if (!program.exists) revert ProgramNotFound();
+    }
+
+    function _getVisitRequestOrRevert(
+        uint256 requestId
+    ) private view returns (VisitRequest storage visitRequest) {
+        visitRequest = visitRequests[requestId];
+        if (!visitRequest.exists) revert RequestNotFound();
+    }
+
+    function _validateProgramConfig(
+        string calldata name,
+        string calldata rewardDescription,
+        uint32 stampsRequired
+    ) private pure {
+        bytes memory nameBytes = bytes(name);
+        bytes memory rewardBytes = bytes(rewardDescription);
+        if (
+            nameBytes.length == 0 ||
+            nameBytes.length > 60 ||
+            rewardBytes.length == 0 ||
+            rewardBytes.length > 120 ||
+            stampsRequired == 0 ||
+            stampsRequired > 100
+        ) {
+            revert InvalidProgramConfig();
+        }
+    }
+
+    function _recoverSigner(
+        bytes32 digest,
+        bytes calldata signature
+    ) private pure returns (address) {
+        if (signature.length != 65) revert InvalidSignature();
+
+        bytes32 r;
+        bytes32 s;
+        uint8 v;
+
+        assembly {
+            r := calldataload(signature.offset)
+            s := calldataload(add(signature.offset, 32))
+            v := byte(0, calldataload(add(signature.offset, 64)))
+        }
+
+        if (v < 27) {
+            v += 27;
+        }
+        if (v != 27 && v != 28) revert InvalidSignature();
+
+        address signer = ecrecover(_toEthSignedMessageHash(digest), v, r, s);
+        if (signer == address(0)) revert InvalidSignature();
+        return signer;
+    }
+
+    function _toEthSignedMessageHash(bytes32 digest) private pure returns (bytes32) {
+        return keccak256(
+            abi.encodePacked("\x19Ethereum Signed Message:\n32", digest)
+        );
     }
 
     function _startsWithHttps(

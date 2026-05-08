@@ -1,5 +1,4 @@
 import { ClaimPage } from "../../../../components/claim-page";
-import { getResolvedStoreCatalog } from "../../../../lib/catalog-server";
 import { getDefaultChainId } from "../../../../lib/chains";
 import { publicEnv } from "../../../../lib/env";
 
@@ -13,7 +12,6 @@ export default async function Page({ params }: ClaimRouteProps) {
   return (
     <ClaimPage
       appUrl={publicEnv.appUrl}
-      stores={getResolvedStoreCatalog()}
       claimId={resolvedParams.claimId}
       initialChainId={getDefaultChainId()}
       contractAddresses={{

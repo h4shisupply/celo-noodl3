@@ -158,6 +158,281 @@ export function getBrowserPublicClient(chainId = getDefaultChainId()) {
   });
 }
 
+export async function createProgramTx(params: {
+  contractAddress: Hex;
+  name: string;
+  rewardDescription: string;
+  stampsRequired: number;
+  active: boolean;
+  chainId?: number;
+}) {
+  const { contractAddress, name, rewardDescription, stampsRequired, active, chainId } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+
+  return walletClient.writeContract({
+    account,
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "createProgram",
+    args: [name, rewardDescription, stampsRequired, active]
+  });
+}
+
+export async function updateProgramTx(params: {
+  contractAddress: Hex;
+  programId: bigint;
+  name: string;
+  rewardDescription: string;
+  stampsRequired: number;
+  active: boolean;
+  chainId?: number;
+}) {
+  const {
+    contractAddress,
+    programId,
+    name,
+    rewardDescription,
+    stampsRequired,
+    active,
+    chainId
+  } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+
+  return walletClient.writeContract({
+    account,
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "updateProgram",
+    args: [programId, name, rewardDescription, stampsRequired, active]
+  });
+}
+
+export async function setProgramStaffTx(params: {
+  contractAddress: Hex;
+  programId: bigint;
+  staff: Hex;
+  enabled: boolean;
+  chainId?: number;
+}) {
+  const { contractAddress, programId, staff, enabled, chainId } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+
+  return walletClient.writeContract({
+    account,
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "setProgramStaff",
+    args: [programId, staff, enabled]
+  });
+}
+
+export async function requestVisitTx(params: {
+  contractAddress: Hex;
+  programId: bigint;
+  chainId?: number;
+}) {
+  const { contractAddress, programId, chainId } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+
+  return walletClient.writeContract({
+    account,
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "requestVisit",
+    args: [programId]
+  });
+}
+
+export async function approveVisitRequestTx(params: {
+  contractAddress: Hex;
+  requestId: bigint;
+  chainId?: number;
+}) {
+  const { contractAddress, requestId, chainId } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+
+  return walletClient.writeContract({
+    account,
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "approveVisitRequest",
+    args: [requestId]
+  });
+}
+
+export async function rejectVisitRequestTx(params: {
+  contractAddress: Hex;
+  requestId: bigint;
+  chainId?: number;
+}) {
+  const { contractAddress, requestId, chainId } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+
+  return walletClient.writeContract({
+    account,
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "rejectVisitRequest",
+    args: [requestId]
+  });
+}
+
+export async function issueManualStampTx(params: {
+  contractAddress: Hex;
+  programId: bigint;
+  customer: Hex;
+  chainId?: number;
+}) {
+  const { contractAddress, programId, customer, chainId } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+
+  return walletClient.writeContract({
+    account,
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "issueManualStamp",
+    args: [programId, customer]
+  });
+}
+
+export async function collectDynamicStampTx(params: {
+  contractAddress: Hex;
+  programId: bigint;
+  nonce: Hex;
+  expiresAt: bigint;
+  signature: Hex;
+  chainId?: number;
+}) {
+  const { contractAddress, programId, nonce, expiresAt, signature, chainId } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+
+  return walletClient.writeContract({
+    account,
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "collectDynamicStamp",
+    args: [programId, nonce, expiresAt, signature]
+  });
+}
+
+export async function signDynamicStampPayload(params: {
+  contractAddress: Hex;
+  programId: bigint;
+  nonce: Hex;
+  expiresAt: bigint;
+  chainId?: number;
+}) {
+  const { contractAddress, programId, nonce, expiresAt, chainId } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+  const publicClient = getBrowserPublicClient(activeChainId);
+  const digest = await publicClient.readContract({
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "getDynamicStampDigest",
+    args: [programId, nonce, expiresAt]
+  });
+
+  const signature = await walletClient.signMessage({
+    account,
+    message: { raw: digest }
+  });
+
+  return {
+    account,
+    signature
+  };
+}
+
+export function generateDynamicStampNonce(): Hex {
+  const bytes = new Uint8Array(32);
+  crypto.getRandomValues(bytes);
+  return `0x${Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("")}`;
+}
+
+export async function claimRewardTx(params: {
+  contractAddress: Hex;
+  programId?: bigint;
+  storeId?: Hex;
+  chainId?: number;
+}) {
+  const { contractAddress, programId, storeId, chainId } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+  const normalizedProgramId = programId ?? (storeId ? BigInt(storeId) : 0n);
+
+  return walletClient.writeContract({
+    account,
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "claimReward",
+    args: [normalizedProgramId]
+  });
+}
+
+export async function consumeRewardTx(params: {
+  contractAddress: Hex;
+  claimId: bigint;
+  chainId?: number;
+}) {
+  const { contractAddress, claimId, chainId } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+
+  return walletClient.writeContract({
+    account,
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "consumeReward",
+    args: [claimId]
+  });
+}
+
+export async function updateProfileTx(params: {
+  contractAddress: Hex;
+  displayName: string;
+  avatarUrl: string;
+  chainId?: number;
+}) {
+  const { contractAddress, displayName, avatarUrl, chainId } = params;
+  const [account] = await getInjectedAccounts();
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const walletClient = await getInjectedWalletClient(activeChainId);
+
+  return walletClient.writeContract({
+    account,
+    address: contractAddress,
+    abi: loyaltyAbi,
+    functionName: "setProfile",
+    args: [displayName, avatarUrl]
+  });
+}
+
+export async function waitForTransaction(hash: Hex, chainId?: number) {
+  const activeChainId = chainId ?? (await getInjectedChainId());
+  const client = getBrowserPublicClient(activeChainId);
+  return client.waitForTransactionReceipt({ hash });
+}
+
 export async function readAllowance(
   tokenAddress: Hex,
   owner: Hex,
@@ -207,180 +482,52 @@ export async function approveToken(params: {
   });
 }
 
-export async function purchaseTx(params: {
-  contractAddress: Hex;
-  storeId: Hex;
-  paymentToken: Hex;
-  amount: bigint;
-  itemRef: string;
-  chainId?: number;
-}) {
-  const { contractAddress, storeId, paymentToken, amount, itemRef, chainId } = params;
-  const [account] = await getInjectedAccounts();
-  const activeChainId = chainId ?? (await getInjectedChainId());
-  const walletClient = await getInjectedWalletClient(activeChainId);
-
-  return walletClient.writeContract({
-    account,
-    address: contractAddress,
-    abi: loyaltyAbi,
-    functionName: "purchase",
-    args: [storeId, paymentToken, amount, itemRef]
-  });
+export async function purchaseTx(..._args: unknown[]): Promise<Hex> {
+  throw new Error("Item checkout was removed in the loyalty program pivot.");
 }
 
-export async function claimRewardTx(params: {
-  contractAddress: Hex;
-  storeId: Hex;
-  chainId?: number;
-}) {
-  const { contractAddress, storeId, chainId } = params;
-  const [account] = await getInjectedAccounts();
-  const activeChainId = chainId ?? (await getInjectedChainId());
-  const walletClient = await getInjectedWalletClient(activeChainId);
-
-  return walletClient.writeContract({
-    account,
-    address: contractAddress,
-    abi: loyaltyAbi,
-    functionName: "claimReward",
-    args: [storeId]
-  });
+export async function configureStoreTx(..._args: unknown[]): Promise<Hex> {
+  throw new Error("Store configuration was removed in the loyalty program pivot.");
 }
 
-export async function consumeRewardTx(params: {
-  contractAddress: Hex;
-  claimId: bigint;
-  chainId?: number;
-}) {
-  const { contractAddress, claimId, chainId } = params;
-  const [account] = await getInjectedAccounts();
-  const activeChainId = chainId ?? (await getInjectedChainId());
-  const walletClient = await getInjectedWalletClient(activeChainId);
-
-  return walletClient.writeContract({
-    account,
-    address: contractAddress,
-    abi: loyaltyAbi,
-    functionName: "consumeReward",
-    args: [claimId]
-  });
-}
-
-export async function configureStoreTx(params: {
-  contractAddress: Hex;
-  storeId: Hex;
-  payout: Hex;
-  manager: Hex;
-  token: Hex;
-  minPurchaseAmount: bigint;
-  stampsPerPurchase: number;
-  stampsRequired: number;
-  rewardType: 0 | 1;
-  rewardValue: bigint;
-  active: boolean;
-  chainId?: number;
-}) {
-  const {
-    contractAddress,
-    storeId,
-    payout,
-    manager,
-    token,
-    minPurchaseAmount,
-    stampsPerPurchase,
-    stampsRequired,
-    rewardType,
-    rewardValue,
-    active,
-    chainId
-  } = params;
-  const [account] = await getInjectedAccounts();
-  const activeChainId = chainId ?? (await getInjectedChainId());
-  const walletClient = await getInjectedWalletClient(activeChainId);
-
-  return walletClient.writeContract({
-    account,
-    address: contractAddress,
-    abi: loyaltyAbi,
-    functionName: "configureStore",
-    args: [
-      storeId,
-      payout,
-      manager,
-      token,
-      minPurchaseAmount,
-      stampsPerPurchase,
-      stampsRequired,
-      rewardType,
-      rewardValue,
-      active
-    ]
-  });
-}
-
-export async function configureStoreAcceptedTokensTx(params: {
-  contractAddress: Hex;
-  storeId: Hex;
-  tokens: Hex[];
-  decimals: number[];
-  chainId?: number;
-}) {
-  const { contractAddress, storeId, tokens, decimals, chainId } = params;
-  const [account] = await getInjectedAccounts();
-  const activeChainId = chainId ?? (await getInjectedChainId());
-  const walletClient = await getInjectedWalletClient(activeChainId);
-
-  return walletClient.writeContract({
-    account,
-    address: contractAddress,
-    abi: loyaltyAbi,
-    functionName: "configureStoreAcceptedTokens",
-    args: [storeId, tokens, decimals]
-  });
-}
-
-export async function updateProfileTx(params: {
-  contractAddress: Hex;
-  displayName: string;
-  avatarUrl: string;
-  chainId?: number;
-}) {
-  const { contractAddress, displayName, avatarUrl, chainId } = params;
-  const [account] = await getInjectedAccounts();
-  const activeChainId = chainId ?? (await getInjectedChainId());
-  const walletClient = await getInjectedWalletClient(activeChainId);
-
-  return walletClient.writeContract({
-    account,
-    address: contractAddress,
-    abi: loyaltyAbi,
-    functionName: "setProfile",
-    args: [displayName, avatarUrl]
-  });
-}
-
-export async function waitForTransaction(hash: Hex, chainId?: number) {
-  const activeChainId = chainId ?? (await getInjectedChainId());
-  const client = getBrowserPublicClient(activeChainId);
-  return client.waitForTransactionReceipt({ hash });
+export async function configureStoreAcceptedTokensTx(..._args: unknown[]): Promise<Hex> {
+  throw new Error("Store token configuration was removed in the loyalty program pivot.");
 }
 
 export function parseUsdtAmount(amount: string) {
   return parseUnits(amount, 18);
 }
 
+export function extractProgramIdFromReceipt(receipt: TransactionReceipt) {
+  return extractEventArg(receipt, "ProgramCreated", "programId") as bigint | null;
+}
+
+export function extractVisitRequestIdFromReceipt(receipt: TransactionReceipt) {
+  return extractEventArg(receipt, "VisitRequested", "requestId") as bigint | null;
+}
+
 export function extractClaimIdFromReceipt(receipt: TransactionReceipt) {
+  return extractEventArg(receipt, "RewardClaimed", "claimId") as bigint | null;
+}
+
+function extractEventArg(
+  receipt: TransactionReceipt,
+  eventName: string,
+  argName: string
+) {
   for (const log of receipt.logs) {
     try {
       const decoded = decodeEventLog({
         abi: loyaltyAbi,
         data: log.data,
         topics: log.topics
-      });
+      }) as {
+        eventName: string;
+        args: Record<string, unknown>;
+      };
 
-      if (decoded.eventName === "RewardClaimed") {
-        return decoded.args.claimId;
+      if (decoded.eventName === eventName) {
+        return decoded.args[argName] ?? null;
       }
     } catch {
       // Ignore unrelated logs.

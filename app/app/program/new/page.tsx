@@ -1,10 +1,10 @@
-import { DashboardPage } from "../../components/dashboard-page";
-import { getDefaultChainId } from "../../lib/chains";
-import { publicEnv } from "../../lib/env";
+import { ProgramCreatePage } from "../../../../components/program-create-page";
+import { getDefaultChainId } from "../../../../lib/chains";
+import { publicEnv } from "../../../../lib/env";
 
 export default function Page() {
   return (
-    <DashboardPage
+    <ProgramCreatePage
       initialChainId={getDefaultChainId()}
       contractAddresses={{
         celo: publicEnv.contractAddressMainnet || null,

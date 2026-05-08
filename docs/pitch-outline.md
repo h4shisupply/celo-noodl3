@@ -2,52 +2,57 @@
 
 ## Slide 1
 - noodl3
-- MiniPay-native loyalty for local food and drink shops
+- Web3 loyalty stamp cards for real-world visits
 
 ## Slide 2
 - Problem
-- Small merchants need repeat-purchase loyalty that is easy for staff and customers to use
-- Most loyalty apps break at checkout or require a backend-heavy setup
+- Small merchants still use paper cards because digital loyalty is too heavy
+- Existing apps often force catalogs, checkout, integrations, or custodial point systems
 
 ## Slide 3
 - Product
-- Search a store or scan a purchase QR
-- Pay with `USDT`, `USDC`, or `cUSD`
-- Earn store-specific `Stamps` / `Selos`
-- Redeem a claim with a verifier QR at the cashier
+- Any wallet creates a loyalty program
+- Customers scan a QR and collect one Stamp / Selo per visit
+- Rewards unlock after the configured visit count
+- Owner or staff validates a one-time reward claim
 
 ## Slide 4
 - Why Celo + MiniPay
-- Stablecoin-native checkout
 - Mobile-first wallet context
 - Cheap onchain state changes
-- Easy path to real merchant pilots
+- Portable customer progress
+- No backend points database required
 
 ## Slide 5
 - Onchain design
-- Funds go straight to the store payout wallet
+- Programs are self-created by wallets
 - Stamps are non-transferable contract state
+- Static QR requires staff approval
+- Dynamic QR is signed, expiring, and one-use
 - Rewards become one-time claims
-- Cashier consumes the claim onchain
 
 ## Slide 6
 - Demo loop
-- Browse store
-- Pick item
-- Pay and earn progress
-- Open rewards
-- Claim and verify
+- Create program
+- Show fixed QR
+- Customer requests a visit stamp
+- Staff approves
+- Generate dynamic QR
+- Customer collects instantly
+- Customer claims reward
+- Staff consumes claim
 
 ## Slide 7
 - MVP boundaries
-- Main Celo stablecoins
-- 3 seeded stores in the initial catalog
-- Merchant dashboard for store wallets
+- No catalog or item checkout
+- One stamp per visit
+- Owner and staff roles
+- Direct onchain indexes
 - No NFT layer
 
 ## Slide 8
 - Next steps
-- Real merchant onboarding
-- Per-store staff roles
-- Better QR printing tools
+- Real merchant pilots
+- Staff role UX polish
+- Printable QR kits
 - Analytics and repeat-rate reporting
