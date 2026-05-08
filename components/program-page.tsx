@@ -4,14 +4,14 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Hex } from "viem";
 import { AppChrome } from "./app-chrome";
+import { Avatar } from "./ui/avatar";
 import { ProgressMeter } from "./progress-meter";
 import { useLocale } from "./locale-provider";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { EmptyState } from "./ui/empty-state";
 import {
-  fetchIsProgramStaff,
-  fetchPendingVisitRequestId,
+  fetchLastStaticStampAt,
   fetchProgram,
   fetchProgress,
   type ProgramRecord,
@@ -19,15 +19,17 @@ import {
 } from "../lib/contract";
 import { resolveContractAddressForChain } from "../lib/chains";
 import { getUserFacingErrorMessage } from "../lib/error-message";
-import { formatProgramCode, programCopy } from "../lib/program";
+import { formatDateTime, formatProgramCode, programCopy } from "../lib/program";
 import { useMiniPay } from "../lib/minipay";
 import {
   claimRewardTx,
   collectDynamicStampTx,
+  collectStaticStampTx,
   extractClaimIdFromReceipt,
-  requestVisitTx,
   waitForTransaction
 } from "../lib/wallet";
+
+const STATIC_STAMP_COOLDOWN_SECONDS = 20 * 60 * 60;
 
 export function ProgramPage({
   programId,
@@ -53,8 +55,7 @@ export function ProgramPage({
   const copy = programCopy(locale);
   const [program, setProgram] = useState<ProgramRecord | null>(null);
   const [progress, setProgress] = useState<ProgressRecord | null>(null);
-  const [pendingRequestId, setPendingRequestId] = useState<bigint>(0n);
-  const [isStaff, setIsStaff] = useState(false);
+  const [lastStaticStampAt, setLastStaticStampAt] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
@@ -89,24 +90,19 @@ export function ProgramPage({
     setIsLoading(true);
     setError(null);
     try {
-      const [nextProgram, nextProgress, nextPendingRequestId, nextIsStaff] =
-        await Promise.all([
-          fetchProgram(programId, initialChainId, contractAddress),
-          account && !isWrongChain
-            ? fetchProgress(account, programId, initialChainId, contractAddress)
-            : Promise.resolve(null),
-          account && !isWrongChain
-            ? fetchPendingVisitRequestId(programId, account, initialChainId, contractAddress)
-            : Promise.resolve(0n),
-          account && !isWrongChain
-            ? fetchIsProgramStaff(programId, account, initialChainId, contractAddress)
-            : Promise.resolve(false)
-        ]);
+      const [nextProgram, nextProgress, nextLastStaticStampAt] = await Promise.all([
+        fetchProgram(programId, initialChainId, contractAddress),
+        account && !isWrongChain
+          ? fetchProgress(account, programId, initialChainId, contractAddress)
+          : Promise.resolve(null),
+        account && !isWrongChain
+          ? fetchLastStaticStampAt(account, programId, initialChainId, contractAddress)
+          : Promise.resolve(0)
+      ]);
 
       setProgram(nextProgram);
       setProgress(nextProgress);
-      setPendingRequestId(nextPendingRequestId);
-      setIsStaff(nextIsStaff);
+      setLastStaticStampAt(nextLastStaticStampAt);
     } catch (nextError) {
       setError(getUserFacingErrorMessage(nextError, dictionary.messages.genericActionFailed));
     } finally {
@@ -130,7 +126,7 @@ export function ProgramPage({
     return connect();
   }
 
-  async function handleRequestVisit() {
+  async function handleCollectStatic() {
     const connectedAccount = await ensureAccount();
     if (!connectedAccount || !contractAddress) return;
 
@@ -138,7 +134,7 @@ export function ProgramPage({
     setError(null);
     setStatus(null);
     try {
-      const hash = await requestVisitTx({
+      const hash = await collectStaticStampTx({
         contractAddress,
         programId,
         chainId: initialChainId
@@ -204,7 +200,12 @@ export function ProgramPage({
   }
 
   const canCollectDynamic = visitMode === "dynamic" && nonce && expiresAt && signature;
-  const canRequestStatic = visitMode === "static" || !visitMode;
+  const canCollectStatic = visitMode === "static";
+  const staticNextAvailableAt = lastStaticStampAt + STATIC_STAMP_COOLDOWN_SECONDS;
+  const isStaticCoolingDown =
+    lastStaticStampAt > 0 && Math.floor(Date.now() / 1000) < staticNextAvailableAt;
+  const isOwner =
+    Boolean(program && account && program.owner.toLowerCase() === account.toLowerCase());
 
   return (
     <AppChrome
@@ -237,6 +238,7 @@ export function ProgramPage({
         ) : (
           <Card>
             <CardHeader className="space-y-3">
+              <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
                 {formatProgramCode(program.id)} {!program.active ? `· ${copy.inactive}` : ""}
               </p>
@@ -257,13 +259,18 @@ export function ProgramPage({
                   </Button>
                 ) : null}
 
-                {canRequestStatic ? (
+                {canCollectStatic ? (
                   <Button
                     variant={canCollectDynamic ? "outline" : "primary"}
-                    onClick={() => void handleRequestVisit()}
-                    disabled={isSubmitting || !program.active || pendingRequestId !== 0n}
+                    onClick={() => void handleCollectStatic()}
+                    disabled={
+                      isSubmitting ||
+                      !program.active ||
+                      !program.staticStampEnabled ||
+                      isStaticCoolingDown
+                    }
                   >
-                    {pendingRequestId !== 0n ? copy.requestSent : copy.requestStamp}
+                    {copy.requestStamp}
                   </Button>
                 ) : null}
 
@@ -273,12 +280,18 @@ export function ProgramPage({
                   </Button>
                 ) : null}
 
-                {isStaff ? (
+                {isOwner ? (
                   <Link href={`/app/program/${program.id.toString()}/manage`}>
                     <Button variant="ghost">{copy.manage}</Button>
                   </Link>
                 ) : null}
               </div>
+
+              {canCollectStatic && lastStaticStampAt > 0 ? (
+                <p className="text-sm text-[#625B78]">
+                  {copy.nextStaticStamp}: {formatDateTime(staticNextAvailableAt, locale)}
+                </p>
+              ) : null}
 
               {status ? <p className="text-sm text-[#2D7A46]">{status}</p> : null}
               {error || connectError ? (

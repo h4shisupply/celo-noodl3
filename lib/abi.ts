@@ -26,11 +26,6 @@ export const loyaltyAbi = [
   },
   {
     "inputs": [],
-    "name": "InvalidProgram",
-    "type": "error"
-  },
-  {
-    "inputs": [],
     "name": "InvalidProgramConfig",
     "type": "error"
   },
@@ -46,22 +41,12 @@ export const loyaltyAbi = [
   },
   {
     "inputs": [],
-    "name": "InvalidStaff",
-    "type": "error"
-  },
-  {
-    "inputs": [],
     "name": "NotEnoughStamps",
     "type": "error"
   },
   {
     "inputs": [],
     "name": "NotProgramOwner",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "NotProgramStaff",
     "type": "error"
   },
   {
@@ -75,18 +60,19 @@ export const loyaltyAbi = [
     "type": "error"
   },
   {
-    "inputs": [],
-    "name": "RequestAlreadyPending",
+    "inputs": [
+      {
+        "internalType": "uint40",
+        "name": "nextAvailableAt",
+        "type": "uint40"
+      }
+    ],
+    "name": "StaticStampCooldown",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "RequestNotFound",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "RequestResolved",
+    "name": "StaticStampDisabled",
     "type": "error"
   },
   {
@@ -138,6 +124,12 @@ export const loyaltyAbi = [
       {
         "indexed": false,
         "internalType": "string",
+        "name": "iconUrl",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
         "name": "rewardDescription",
         "type": "string"
       },
@@ -152,34 +144,15 @@ export const loyaltyAbi = [
         "internalType": "bool",
         "name": "active",
         "type": "bool"
-      }
-    ],
-    "name": "ProgramCreated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "programId",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "staff",
-        "type": "address"
       },
       {
         "indexed": false,
         "internalType": "bool",
-        "name": "enabled",
+        "name": "staticStampEnabled",
         "type": "bool"
       }
     ],
-    "name": "ProgramStaffUpdated",
+    "name": "ProgramCreated",
     "type": "event"
   },
   {
@@ -200,6 +173,12 @@ export const loyaltyAbi = [
       {
         "indexed": false,
         "internalType": "string",
+        "name": "iconUrl",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
         "name": "rewardDescription",
         "type": "string"
       },
@@ -213,6 +192,12 @@ export const loyaltyAbi = [
         "indexed": false,
         "internalType": "bool",
         "name": "active",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "staticStampEnabled",
         "type": "bool"
       }
     ],
@@ -274,7 +259,7 @@ export const loyaltyAbi = [
       {
         "indexed": true,
         "internalType": "address",
-        "name": "staff",
+        "name": "operator",
         "type": "address"
       },
       {
@@ -319,72 +304,16 @@ export const loyaltyAbi = [
     "type": "event"
   },
   {
-    "anonymous": false,
-    "inputs": [
+    "inputs": [],
+    "name": "STATIC_STAMP_COOLDOWN",
+    "outputs": [
       {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "requestId",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "programId",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "resolvedBy",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint8",
-        "name": "status",
-        "type": "uint8"
+        "internalType": "uint40",
+        "name": "",
+        "type": "uint40"
       }
     ],
-    "name": "VisitRequestResolved",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "requestId",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "programId",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "customer",
-        "type": "address"
-      }
-    ],
-    "name": "VisitRequested",
-    "type": "event"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "requestId",
-        "type": "uint256"
-      }
-    ],
-    "name": "approveVisitRequest",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -438,6 +367,19 @@ export const loyaltyAbi = [
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      }
+    ],
+    "name": "collectStaticStamp",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "claimId",
         "type": "uint256"
       }
@@ -456,6 +398,11 @@ export const loyaltyAbi = [
       },
       {
         "internalType": "string",
+        "name": "iconUrl",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
         "name": "rewardDescription",
         "type": "string"
       },
@@ -467,6 +414,11 @@ export const loyaltyAbi = [
       {
         "internalType": "bool",
         "name": "active",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "staticStampEnabled",
         "type": "bool"
       }
     ],
@@ -580,6 +532,30 @@ export const loyaltyAbi = [
     "inputs": [
       {
         "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "programId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getLastStaticStampAt",
+    "outputs": [
+      {
+        "internalType": "uint40",
+        "name": "",
+        "type": "uint40"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "owner",
         "type": "address"
       }
@@ -590,30 +566,6 @@ export const loyaltyAbi = [
         "internalType": "uint256[]",
         "name": "",
         "type": "uint256[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "programId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "customer",
-        "type": "address"
-      }
-    ],
-    "name": "getPendingVisitRequestId",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -689,6 +641,11 @@ export const loyaltyAbi = [
           },
           {
             "internalType": "string",
+            "name": "iconUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
             "name": "rewardDescription",
             "type": "string"
           },
@@ -700,6 +657,11 @@ export const loyaltyAbi = [
           {
             "internalType": "bool",
             "name": "active",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "staticStampEnabled",
             "type": "bool"
           },
           {
@@ -757,25 +719,6 @@ export const loyaltyAbi = [
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "programId",
-        "type": "uint256"
-      }
-    ],
-    "name": "getProgramVisitRequestIds",
-    "outputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "",
-        "type": "uint256[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "address",
         "name": "user",
         "type": "address"
@@ -807,25 +750,6 @@ export const loyaltyAbi = [
         "internalType": "bool",
         "name": "canClaim",
         "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "staff",
-        "type": "address"
-      }
-    ],
-    "name": "getStaffProgramIds",
-    "outputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "",
-        "type": "uint256[]"
       }
     ],
     "stateMutability": "view",
@@ -873,67 +797,6 @@ export const loyaltyAbi = [
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "requestId",
-        "type": "uint256"
-      }
-    ],
-    "name": "getVisitRequest",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "programId",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "customer",
-            "type": "address"
-          },
-          {
-            "internalType": "uint40",
-            "name": "requestedAt",
-            "type": "uint40"
-          },
-          {
-            "internalType": "uint40",
-            "name": "resolvedAt",
-            "type": "uint40"
-          },
-          {
-            "internalType": "address",
-            "name": "resolvedBy",
-            "type": "address"
-          },
-          {
-            "internalType": "enum Noodl3Loyalty.RequestStatus",
-            "name": "status",
-            "type": "uint8"
-          },
-          {
-            "internalType": "bool",
-            "name": "exists",
-            "type": "bool"
-          }
-        ],
-        "internalType": "struct Noodl3Loyalty.VisitRequest",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
         "name": "programId",
         "type": "uint256"
       },
@@ -944,30 +807,6 @@ export const loyaltyAbi = [
       }
     ],
     "name": "isDynamicStampNonceUsed",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "programId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "account",
-        "type": "address"
-      }
-    ],
-    "name": "isProgramStaff",
     "outputs": [
       {
         "internalType": "bool",
@@ -1023,51 +862,6 @@ export const loyaltyAbi = [
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "nextVisitRequestId",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "requestId",
-        "type": "uint256"
-      }
-    ],
-    "name": "rejectVisitRequest",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "programId",
-        "type": "uint256"
-      }
-    ],
-    "name": "requestVisit",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "requestId",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "string",
@@ -1093,31 +887,13 @@ export const loyaltyAbi = [
         "type": "uint256"
       },
       {
-        "internalType": "address",
-        "name": "staff",
-        "type": "address"
-      },
-      {
-        "internalType": "bool",
-        "name": "enabled",
-        "type": "bool"
-      }
-    ],
-    "name": "setProgramStaff",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "programId",
-        "type": "uint256"
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
       },
       {
         "internalType": "string",
-        "name": "name",
+        "name": "iconUrl",
         "type": "string"
       },
       {
@@ -1133,6 +909,11 @@ export const loyaltyAbi = [
       {
         "internalType": "bool",
         "name": "active",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "staticStampEnabled",
         "type": "bool"
       }
     ],

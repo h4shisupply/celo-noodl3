@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s · noodl3"
   },
   description:
-    "Create Web3 loyalty stamp cards on Celo. Customers collect one stamp per visit and redeem one-time rewards with owner or staff validation.",
+    "Create Web3 loyalty stamp cards on Celo. Customers collect one stamp per visit and redeem one-time rewards with owner validation.",
   metadataBase: new URL(publicEnv.appUrl),
   keywords: [
     "MiniPay",

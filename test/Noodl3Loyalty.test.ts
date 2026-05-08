@@ -10,21 +10,29 @@ const { ethers } = await network.create();
 
 describe("Noodl3Loyalty", function () {
   const programName = "Jorge Barber Club";
+  const iconUrl = "https://cdn.example.com/barber.png";
   const rewardDescription = "Free beard trim";
   const stampsRequired = 3;
+  const staticCooldown = 20 * 60 * 60;
 
   async function deployFixture() {
-    const [owner, staff, user, stranger] = await ethers.getSigners();
+    const [owner, user, stranger] = await ethers.getSigners();
     const loyalty = (await ethers.deployContract("Noodl3Loyalty")) as any;
     const tx = await loyalty
       .connect(owner)
-      .createProgram(programName, rewardDescription, stampsRequired, true);
+      .createProgram(
+        programName,
+        iconUrl,
+        rewardDescription,
+        stampsRequired,
+        true,
+        true
+      );
     await tx.wait();
 
     return {
       loyalty,
       owner,
-      staff,
       user,
       stranger,
       programId: 1n
@@ -52,166 +60,194 @@ describe("Noodl3Loyalty", function () {
     return BigInt(block.timestamp + 300);
   }
 
-  it("lets any wallet create a program and indexes it by owner", async function () {
+  async function increaseTime(seconds: number) {
+    await ethers.provider.send("evm_increaseTime", [seconds]);
+    await ethers.provider.send("evm_mine", []);
+  }
+
+  it("lets any wallet create a program with an icon URL and indexes it by owner", async function () {
     const { loyalty, owner, user } = await deployFixture();
 
     const program = await loyalty.getProgram(1n);
     expect(program.id).to.equal(1n);
     expect(program.owner).to.equal(owner.address);
     expect(program.name).to.equal(programName);
+    expect(program.iconUrl).to.equal(iconUrl);
     expect(program.rewardDescription).to.equal(rewardDescription);
     expect(program.stampsRequired).to.equal(stampsRequired);
     expect(program.active).to.equal(true);
+    expect(program.staticStampEnabled).to.equal(true);
     expect(await loyalty.getOwnerProgramIds(owner.address)).to.deep.equal([1n]);
 
     await expect(
-      loyalty.connect(user).createProgram("Cafe Pass", "Free coffee", 5, true)
+      loyalty
+        .connect(user)
+        .createProgram(
+          "Cafe Pass",
+          "https://cdn.example.com/cafe.png",
+          "Free coffee",
+          5,
+          true,
+          true
+        )
     )
       .to.emit(loyalty, "ProgramCreated")
-      .withArgs(2n, user.address, "Cafe Pass", "Free coffee", 5, true);
+      .withArgs(
+        2n,
+        user.address,
+        "Cafe Pass",
+        "https://cdn.example.com/cafe.png",
+        "Free coffee",
+        5,
+        true,
+        true
+      );
 
     expect(await loyalty.getOwnerProgramIds(user.address)).to.deep.equal([2n]);
   });
 
-  it("only lets the owner update program settings and staff", async function () {
-    const { loyalty, owner, staff, stranger, programId } = await deployFixture();
+  it("only lets the owner update program settings", async function () {
+    const { loyalty, owner, stranger, programId } = await deployFixture();
 
     await expect(
       loyalty
         .connect(stranger)
-        .updateProgram(programId, "Bad edit", "Bad reward", 2, false)
+        .updateProgram(
+          programId,
+          "Bad edit",
+          iconUrl,
+          "Bad reward",
+          2,
+          false,
+          true
+        )
     ).to.be.revertedWithCustomError(loyalty, "NotProgramOwner");
 
     await expect(
       loyalty
         .connect(owner)
-        .updateProgram(programId, "Updated Club", "Free haircut", 10, false)
+        .updateProgram(
+          programId,
+          "Updated Club",
+          "https://cdn.example.com/updated.png",
+          "Free haircut",
+          10,
+          false,
+          false
+        )
     )
       .to.emit(loyalty, "ProgramUpdated")
-      .withArgs(programId, "Updated Club", "Free haircut", 10, false);
+      .withArgs(
+        programId,
+        "Updated Club",
+        "https://cdn.example.com/updated.png",
+        "Free haircut",
+        10,
+        false,
+        false
+      );
 
-    await expect(
-      loyalty.connect(stranger).setProgramStaff(programId, staff.address, true)
-    ).to.be.revertedWithCustomError(loyalty, "NotProgramOwner");
-
-    await expect(loyalty.connect(owner).setProgramStaff(programId, staff.address, true))
-      .to.emit(loyalty, "ProgramStaffUpdated")
-      .withArgs(programId, staff.address, true);
-
-    expect(await loyalty.isProgramStaff(programId, staff.address)).to.equal(true);
-    expect(await loyalty.getStaffProgramIds(staff.address)).to.deep.equal([programId]);
-
-    await loyalty.connect(owner).setProgramStaff(programId, staff.address, false);
-    expect(await loyalty.isProgramStaff(programId, staff.address)).to.equal(false);
-    expect(await loyalty.getStaffProgramIds(staff.address)).to.deep.equal([]);
+    const program = await loyalty.getProgram(programId);
+    expect(program.iconUrl).to.equal("https://cdn.example.com/updated.png");
+    expect(program.staticStampEnabled).to.equal(false);
   });
 
-  it("validates program limits", async function () {
+  it("validates program limits and HTTPS icon URLs", async function () {
     const { loyalty, owner } = await deployFixture();
 
     await expect(
-      loyalty.connect(owner).createProgram("", "Reward", 3, true)
+      loyalty.connect(owner).createProgram("", iconUrl, "Reward", 3, true, true)
     ).to.be.revertedWithCustomError(loyalty, "InvalidProgramConfig");
 
     await expect(
-      loyalty.connect(owner).createProgram("Name", "", 3, true)
+      loyalty.connect(owner).createProgram("Name", "", "Reward", 3, true, true)
     ).to.be.revertedWithCustomError(loyalty, "InvalidProgramConfig");
 
     await expect(
-      loyalty.connect(owner).createProgram("Name", "Reward", 0, true)
+      loyalty
+        .connect(owner)
+        .createProgram("Name", "http://cdn.example.com/icon.png", "Reward", 3, true, true)
     ).to.be.revertedWithCustomError(loyalty, "InvalidProgramConfig");
 
     await expect(
-      loyalty.connect(owner).createProgram("Name", "Reward", 101, true)
+      loyalty.connect(owner).createProgram("Name", iconUrl, "", 3, true, true)
+    ).to.be.revertedWithCustomError(loyalty, "InvalidProgramConfig");
+
+    await expect(
+      loyalty.connect(owner).createProgram("Name", iconUrl, "Reward", 0, true, true)
+    ).to.be.revertedWithCustomError(loyalty, "InvalidProgramConfig");
+
+    await expect(
+      loyalty.connect(owner).createProgram("Name", iconUrl, "Reward", 101, true, true)
     ).to.be.revertedWithCustomError(loyalty, "InvalidProgramConfig");
   });
 
-  it("supports static visit requests with staff approval and rejection", async function () {
-    const { loyalty, owner, staff, user, stranger, programId } = await deployFixture();
-    await loyalty.connect(owner).setProgramStaff(programId, staff.address, true);
+  it("lets customers collect one static QR stamp per cooldown window", async function () {
+    const { loyalty, user, programId } = await deployFixture();
 
-    await expect(loyalty.connect(user).requestVisit(programId))
-      .to.emit(loyalty, "VisitRequested")
-      .withArgs(1n, programId, user.address);
-
-    await expect(
-      loyalty.connect(user).requestVisit(programId)
-    ).to.be.revertedWithCustomError(loyalty, "RequestAlreadyPending");
-
-    await expect(
-      loyalty.connect(stranger).approveVisitRequest(1n)
-    ).to.be.revertedWithCustomError(loyalty, "NotProgramStaff");
-
-    await expect(loyalty.connect(staff).approveVisitRequest(1n))
+    await expect(loyalty.connect(user).collectStaticStamp(programId))
       .to.emit(loyalty, "StampIssued")
       .withArgs(programId, user.address, 0, 1);
 
-    const progress = await loyalty.getProgress(user.address, programId);
-    expect(progress.stamps).to.equal(1);
-    expect(progress.canClaim).to.equal(false);
-    expect(await loyalty.getUserProgramIds(user.address)).to.deep.equal([programId]);
-    expect(await loyalty.getProgramParticipants(programId)).to.deep.equal([user.address]);
-
-    await loyalty.connect(user).requestVisit(programId);
-    await expect(loyalty.connect(owner).rejectVisitRequest(2n))
-      .to.emit(loyalty, "VisitRequestResolved")
-      .withArgs(2n, programId, owner.address, 2);
+    const lastStaticStampAt = await loyalty.getLastStaticStampAt(user.address, programId);
+    expect(lastStaticStampAt).to.not.equal(0);
 
     await expect(
-      loyalty.connect(owner).approveVisitRequest(2n)
-    ).to.be.revertedWithCustomError(loyalty, "RequestResolved");
+      loyalty.connect(user).collectStaticStamp(programId)
+    ).to.be.revertedWithCustomError(loyalty, "StaticStampCooldown");
+
+    await increaseTime(staticCooldown);
+
+    await expect(loyalty.connect(user).collectStaticStamp(programId))
+      .to.emit(loyalty, "StampIssued")
+      .withArgs(programId, user.address, 0, 2);
+
+    const progress = await loyalty.getProgress(user.address, programId);
+    expect(progress.stamps).to.equal(2);
+    expect(await loyalty.getUserProgramIds(user.address)).to.deep.equal([programId]);
+    expect(await loyalty.getProgramParticipants(programId)).to.deep.equal([user.address]);
   });
 
-  it("blocks new visit requests and approvals while inactive", async function () {
+  it("blocks static QR stamps when inactive or disabled", async function () {
     const { loyalty, owner, user, programId } = await deployFixture();
 
     await loyalty
       .connect(owner)
-      .updateProgram(programId, programName, rewardDescription, stampsRequired, false);
+      .updateProgram(programId, programName, iconUrl, rewardDescription, stampsRequired, false, true);
 
     await expect(
-      loyalty.connect(user).requestVisit(programId)
+      loyalty.connect(user).collectStaticStamp(programId)
     ).to.be.revertedWithCustomError(loyalty, "ProgramInactive");
 
     await loyalty
       .connect(owner)
-      .updateProgram(programId, programName, rewardDescription, stampsRequired, true);
-    await loyalty.connect(user).requestVisit(programId);
-    await loyalty
-      .connect(owner)
-      .updateProgram(programId, programName, rewardDescription, stampsRequired, false);
+      .updateProgram(programId, programName, iconUrl, rewardDescription, stampsRequired, true, false);
 
     await expect(
-      loyalty.connect(owner).approveVisitRequest(1n)
-    ).to.be.revertedWithCustomError(loyalty, "ProgramInactive");
+      loyalty.connect(user).collectStaticStamp(programId)
+    ).to.be.revertedWithCustomError(loyalty, "StaticStampDisabled");
   });
 
-  it("lets owner or staff issue manual stamps", async function () {
-    const { loyalty, owner, staff, user, stranger, programId } = await deployFixture();
-    await loyalty.connect(owner).setProgramStaff(programId, staff.address, true);
+  it("lets only the owner issue manual stamps", async function () {
+    const { loyalty, owner, user, stranger, programId } = await deployFixture();
 
     await expect(
       loyalty.connect(stranger).issueManualStamp(programId, user.address)
-    ).to.be.revertedWithCustomError(loyalty, "NotProgramStaff");
-
-    await expect(loyalty.connect(staff).issueManualStamp(programId, user.address))
-      .to.emit(loyalty, "StampIssued")
-      .withArgs(programId, user.address, 2, 1);
+    ).to.be.revertedWithCustomError(loyalty, "NotProgramOwner");
 
     await expect(loyalty.connect(owner).issueManualStamp(programId, user.address))
       .to.emit(loyalty, "StampIssued")
-      .withArgs(programId, user.address, 2, 2);
+      .withArgs(programId, user.address, 2, 1);
   });
 
-  it("collects a dynamic QR stamp once with a valid staff signature", async function () {
-    const { loyalty, owner, staff, user, programId } = await deployFixture();
-    await loyalty.connect(owner).setProgramStaff(programId, staff.address, true);
+  it("collects a dynamic QR stamp once with a valid owner signature", async function () {
+    const { loyalty, owner, user, programId } = await deployFixture();
 
     const nonce = encodeBytes32String("visit-1");
     const expiresAt = await futureExpiry();
     const signature = await signDynamicStamp({
       loyalty,
-      signer: staff,
+      signer: owner,
       programId,
       nonce,
       expiresAt
@@ -322,9 +358,8 @@ describe("Noodl3Loyalty", function () {
     ).to.be.revertedWithCustomError(loyalty, "InvalidSignature");
   });
 
-  it("burns stamps on claim and lets owner or staff consume once", async function () {
-    const { loyalty, owner, staff, user, stranger, programId } = await deployFixture();
-    await loyalty.connect(owner).setProgramStaff(programId, staff.address, true);
+  it("burns stamps on claim and lets only the owner consume once", async function () {
+    const { loyalty, owner, user, stranger, programId } = await deployFixture();
 
     for (let i = 0; i < stampsRequired; i += 1) {
       await loyalty.connect(owner).issueManualStamp(programId, user.address);
@@ -347,11 +382,11 @@ describe("Noodl3Loyalty", function () {
 
     await expect(
       loyalty.connect(stranger).consumeReward(1n)
-    ).to.be.revertedWithCustomError(loyalty, "NotProgramStaff");
+    ).to.be.revertedWithCustomError(loyalty, "NotProgramOwner");
 
-    await expect(loyalty.connect(staff).consumeReward(1n))
+    await expect(loyalty.connect(owner).consumeReward(1n))
       .to.emit(loyalty, "RewardConsumed")
-      .withArgs(1n, programId, staff.address, user.address);
+      .withArgs(1n, programId, owner.address, user.address);
 
     const consumedClaim = await loyalty.getClaim(1n);
     expect(consumedClaim.consumed).to.equal(true);

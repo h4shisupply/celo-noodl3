@@ -76,6 +76,14 @@ export function getUserFacingErrorMessage(error: unknown, fallback?: string) {
     return dictionary.messages.notEnoughStamps;
   }
 
+  if (normalized.includes("staticstampcooldown")) {
+    return dictionary.messages.staticStampCooldown;
+  }
+
+  if (normalized.includes("staticstampdisabled")) {
+    return dictionary.messages.staticStampDisabled;
+  }
+
   if (
     (normalized.includes("display name") ||
       normalized.includes("avatar") ||

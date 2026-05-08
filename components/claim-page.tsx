@@ -4,12 +4,12 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Hex } from "viem";
 import { AppChrome } from "./app-chrome";
 import { useLocale } from "./locale-provider";
+import { Avatar } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { EmptyState } from "./ui/empty-state";
 import {
   fetchClaim,
-  fetchIsProgramStaff,
   fetchProgram,
   type ClaimRecord,
   type ProgramRecord
@@ -100,17 +100,14 @@ export function ClaimPage({
         return;
       }
 
-      const [nextProgram, nextCanConsume] = await Promise.all([
-        fetchProgram(nextClaim.programId, initialChainId, contractAddress),
-        account && !isWrongChain
-          ? fetchIsProgramStaff(
-              nextClaim.programId,
-              account,
-              initialChainId,
-              contractAddress
-            )
-          : Promise.resolve(false)
-      ]);
+      const nextProgram = await fetchProgram(nextClaim.programId, initialChainId, contractAddress);
+      const nextCanConsume =
+        Boolean(
+          nextProgram &&
+            account &&
+            !isWrongChain &&
+            nextProgram.owner.toLowerCase() === account.toLowerCase()
+        );
       setProgram(nextProgram);
       setCanConsume(nextCanConsume);
     } catch (nextError) {
@@ -188,6 +185,9 @@ export function ClaimPage({
         ) : (
           <Card>
             <CardHeader className="space-y-3">
+              {program ? (
+                <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
+              ) : null}
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
                 {formatClaimCode(claim.id)}
               </p>

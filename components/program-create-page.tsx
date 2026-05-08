@@ -10,6 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/
 import { Input } from "./ui/input";
 import { resolveContractAddressForChain } from "../lib/chains";
 import { getUserFacingErrorMessage } from "../lib/error-message";
+import { normalizeRemoteImageUrl } from "../lib/format";
 import { programCopy } from "../lib/program";
 import { useMiniPay } from "../lib/minipay";
 import {
@@ -32,9 +33,11 @@ export function ProgramCreatePage({
   const { locale, dictionary } = useLocale();
   const copy = programCopy(locale);
   const [name, setName] = useState("");
+  const [iconUrl, setIconUrl] = useState("");
   const [rewardDescription, setRewardDescription] = useState("");
   const [stampsRequired, setStampsRequired] = useState("10");
   const [active, setActive] = useState(true);
+  const [staticStampEnabled, setStaticStampEnabled] = useState(true);
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -70,8 +73,10 @@ export function ProgramCreatePage({
     }
 
     const parsedStampsRequired = Number.parseInt(stampsRequired, 10);
+    const normalizedIconUrl = normalizeRemoteImageUrl(iconUrl);
     if (
       !name.trim() ||
+      !normalizedIconUrl ||
       !rewardDescription.trim() ||
       name.trim().length > 60 ||
       rewardDescription.trim().length > 120 ||
@@ -79,7 +84,7 @@ export function ProgramCreatePage({
       parsedStampsRequired < 1 ||
       parsedStampsRequired > 100
     ) {
-      setError("Use a name up to 60 characters, a reward up to 120 characters, and 1-100 visits.");
+      setError(copy.invalidProgramConfig);
       return;
     }
 
@@ -90,9 +95,11 @@ export function ProgramCreatePage({
       const hash = await createProgramTx({
         contractAddress,
         name: name.trim(),
+        iconUrl: normalizedIconUrl,
         rewardDescription: rewardDescription.trim(),
         stampsRequired: parsedStampsRequired,
         active,
+        staticStampEnabled,
         chainId: initialChainId
       });
       const receipt = await waitForTransaction(hash, initialChainId);
@@ -139,6 +146,15 @@ export function ProgramCreatePage({
             <Field label={copy.programName}>
               <Input value={name} maxLength={60} onChange={(event) => setName(event.target.value)} />
             </Field>
+            <Field label={copy.iconUrl}>
+              <Input
+                value={iconUrl}
+                maxLength={280}
+                placeholder="https://..."
+                onChange={(event) => setIconUrl(event.target.value)}
+              />
+              <p className="text-xs text-[#8B84A1]">{copy.iconUrlHelp}</p>
+            </Field>
             <Field label={copy.rewardDescription}>
               <textarea
                 value={rewardDescription}
@@ -161,6 +177,14 @@ export function ProgramCreatePage({
                 onChange={(event) => setActive(event.target.checked)}
               />
               {copy.active}
+            </label>
+            <label className="flex items-center gap-3 text-sm font-medium text-[#241B3C]">
+              <input
+                type="checkbox"
+                checked={staticStampEnabled}
+                onChange={(event) => setStaticStampEnabled(event.target.checked)}
+              />
+              {copy.staticStampEnabled}
             </label>
 
             <Button onClick={() => void handleSubmit()} disabled={isSaving || !contractAddress}>

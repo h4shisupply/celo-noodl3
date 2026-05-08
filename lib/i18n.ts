@@ -140,6 +140,8 @@ export type Dictionary = {
     invalidProfileInput: string;
     profileSaveFailed: string;
     notEnoughStamps: string;
+    staticStampCooldown: string;
+    staticStampDisabled: string;
     profileContractOutdated: string;
     switchToNetworkBeforeContinue: string;
     checkingTokenAllowance: string;
@@ -529,6 +531,8 @@ const dictionaries: Record<Locale, Dictionary> = {
         "Use um nome válido e, se quiser, uma foto com link https://.",
       profileSaveFailed: "Não foi possível salvar o perfil.",
       notEnoughStamps: "Você ainda não tem Selos suficientes para resgatar.",
+      staticStampCooldown: "O QR fixo libera apenas um selo por carteira a cada 20 horas.",
+      staticStampDisabled: "O QR fixo deste programa está desativado.",
       profileContractOutdated:
         "O contrato atual ainda não suporta perfis onchain. Faça deploy da versão mais recente e atualize o endereço no app.",
       switchToNetworkBeforeContinue:
@@ -1010,6 +1014,8 @@ const dictionaries: Record<Locale, Dictionary> = {
         "Use a valid display name and, if you want, a photo with an https:// link.",
       profileSaveFailed: "Could not save the profile.",
       notEnoughStamps: "You do not have enough Stamps to redeem this reward yet.",
+      staticStampCooldown: "The fixed QR allows only one stamp per wallet every 20 hours.",
+      staticStampDisabled: "Fixed QR stamps are disabled for this program.",
       profileContractOutdated:
         "The current contract does not support onchain profiles yet. Deploy the latest version and update the app contract address.",
       switchToNetworkBeforeContinue:

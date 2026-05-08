@@ -8,16 +8,16 @@
 
 ## Product
 - Confirm a fresh wallet can create a program.
+- Confirm program creation requires a public HTTPS icon URL.
 - Confirm the program manager opens for owner wallets.
 - Confirm fixed QR opens `/app/program/[programId]?visit=static`.
-- Confirm static QR creates a pending visit request.
-- Confirm owner/staff can approve and reject requests.
+- Confirm static QR collects one stamp and immediate reuse fails before 20 hours.
 - Confirm dynamic QR opens `/app/program/[programId]?visit=dynamic&nonce=...&expires=...&sig=...`.
 - Confirm dynamic QR can be collected once and fails on reuse.
-- Confirm manual stamp works for owner/staff only.
+- Confirm manual stamp works for owner only.
 - Confirm customer progress reaches the reward threshold.
 - Confirm customer can create a reward claim.
-- Confirm owner/staff can consume the reward claim once.
+- Confirm owner can consume the reward claim once.
 
 ## Frontend
 - Check mobile and desktop layouts for:

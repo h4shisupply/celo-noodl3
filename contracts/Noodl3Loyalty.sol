@@ -2,14 +2,8 @@
 pragma solidity ^0.8.24;
 
 contract Noodl3Loyalty {
-    enum RequestStatus {
-        Pending,
-        Approved,
-        Rejected
-    }
-
     enum StampSource {
-        StaticRequest,
+        StaticQr,
         DynamicQr,
         Manual
     }
@@ -18,20 +12,11 @@ contract Noodl3Loyalty {
         uint256 id;
         address owner;
         string name;
+        string iconUrl;
         string rewardDescription;
         uint32 stampsRequired;
         bool active;
-        bool exists;
-    }
-
-    struct VisitRequest {
-        uint256 id;
-        uint256 programId;
-        address customer;
-        uint40 requestedAt;
-        uint40 resolvedAt;
-        address resolvedBy;
-        RequestStatus status;
+        bool staticStampEnabled;
         bool exists;
     }
 
@@ -58,51 +43,35 @@ contract Noodl3Loyalty {
     error ClaimNotFound();
     error DynamicStampExpired();
     error DynamicStampUsed();
-    error InvalidProgram();
     error InvalidProgramConfig();
     error InvalidProfile();
     error InvalidRequest();
     error InvalidSignature();
-    error InvalidStaff();
     error NotEnoughStamps();
-    error NotProgramStaff();
     error NotProgramOwner();
     error ProgramInactive();
     error ProgramNotFound();
-    error RequestAlreadyPending();
-    error RequestNotFound();
-    error RequestResolved();
+    error StaticStampCooldown(uint40 nextAvailableAt);
+    error StaticStampDisabled();
 
     event ProgramCreated(
         uint256 indexed programId,
         address indexed owner,
         string name,
+        string iconUrl,
         string rewardDescription,
         uint32 stampsRequired,
-        bool active
+        bool active,
+        bool staticStampEnabled
     );
     event ProgramUpdated(
         uint256 indexed programId,
         string name,
+        string iconUrl,
         string rewardDescription,
         uint32 stampsRequired,
-        bool active
-    );
-    event ProgramStaffUpdated(
-        uint256 indexed programId,
-        address indexed staff,
-        bool enabled
-    );
-    event VisitRequested(
-        uint256 indexed requestId,
-        uint256 indexed programId,
-        address indexed customer
-    );
-    event VisitRequestResolved(
-        uint256 indexed requestId,
-        uint256 indexed programId,
-        address indexed resolvedBy,
-        uint8 status
+        bool active,
+        bool staticStampEnabled
     );
     event StampIssued(
         uint256 indexed programId,
@@ -120,7 +89,7 @@ contract Noodl3Loyalty {
     event RewardConsumed(
         uint256 indexed claimId,
         uint256 indexed programId,
-        address indexed staff,
+        address indexed operator,
         address user
     );
     event ProfileUpdated(
@@ -130,24 +99,18 @@ contract Noodl3Loyalty {
     );
 
     uint256 public nextProgramId = 1;
-    uint256 public nextVisitRequestId = 1;
     uint256 public nextClaimId = 1;
+    uint40 public constant STATIC_STAMP_COOLDOWN = 20 hours;
 
     mapping(uint256 => Program) private programs;
-    mapping(uint256 => mapping(address => bool)) private programStaff;
     mapping(address => uint256[]) private ownerProgramIds;
-    mapping(address => uint256[]) private staffProgramIds;
-    mapping(address => mapping(uint256 => bool)) private staffProgramIndexed;
 
     mapping(address => mapping(uint256 => uint32)) private userStamps;
+    mapping(address => mapping(uint256 => uint40)) private lastStaticStampAt;
     mapping(uint256 => address[]) private programParticipants;
     mapping(uint256 => mapping(address => bool)) private isProgramParticipant;
     mapping(address => uint256[]) private userProgramIds;
     mapping(address => mapping(uint256 => bool)) private userProgramIndexed;
-
-    mapping(uint256 => VisitRequest) private visitRequests;
-    mapping(uint256 => uint256[]) private programVisitRequestIds;
-    mapping(uint256 => mapping(address => uint256)) private pendingRequestByCustomer;
 
     mapping(uint256 => Claim) private claims;
     mapping(address => uint256[]) private userClaimIds;
@@ -158,11 +121,13 @@ contract Noodl3Loyalty {
 
     function createProgram(
         string calldata name,
+        string calldata iconUrl,
         string calldata rewardDescription,
         uint32 stampsRequired,
-        bool active
+        bool active,
+        bool staticStampEnabled
     ) external returns (uint256 programId) {
-        _validateProgramConfig(name, rewardDescription, stampsRequired);
+        _validateProgramConfig(name, iconUrl, rewardDescription, stampsRequired);
 
         programId = nextProgramId;
         nextProgramId += 1;
@@ -171,9 +136,11 @@ contract Noodl3Loyalty {
             id: programId,
             owner: msg.sender,
             name: name,
+            iconUrl: iconUrl,
             rewardDescription: rewardDescription,
             stampsRequired: stampsRequired,
             active: active,
+            staticStampEnabled: staticStampEnabled,
             exists: true
         });
         ownerProgramIds[msg.sender].push(programId);
@@ -182,125 +149,65 @@ contract Noodl3Loyalty {
             programId,
             msg.sender,
             name,
+            iconUrl,
             rewardDescription,
             stampsRequired,
-            active
+            active,
+            staticStampEnabled
         );
     }
 
     function updateProgram(
         uint256 programId,
         string calldata name,
+        string calldata iconUrl,
         string calldata rewardDescription,
         uint32 stampsRequired,
-        bool active
+        bool active,
+        bool staticStampEnabled
     ) external {
         _requireProgramOwner(programId);
-        _validateProgramConfig(name, rewardDescription, stampsRequired);
+        _validateProgramConfig(name, iconUrl, rewardDescription, stampsRequired);
 
         Program storage program = programs[programId];
         program.name = name;
+        program.iconUrl = iconUrl;
         program.rewardDescription = rewardDescription;
         program.stampsRequired = stampsRequired;
         program.active = active;
+        program.staticStampEnabled = staticStampEnabled;
 
         emit ProgramUpdated(
             programId,
             name,
+            iconUrl,
             rewardDescription,
             stampsRequired,
-            active
+            active,
+            staticStampEnabled
         );
     }
 
-    function setProgramStaff(
-        uint256 programId,
-        address staff,
-        bool enabled
-    ) external {
-        _requireProgramOwner(programId);
-        if (staff == address(0)) revert InvalidStaff();
-
-        programStaff[programId][staff] = enabled;
-        if (enabled && !staffProgramIndexed[staff][programId]) {
-            staffProgramIndexed[staff][programId] = true;
-            staffProgramIds[staff].push(programId);
-        }
-
-        emit ProgramStaffUpdated(programId, staff, enabled);
-    }
-
-    function requestVisit(uint256 programId) external returns (uint256 requestId) {
+    function collectStaticStamp(uint256 programId) external {
         Program memory program = _getProgramOrRevert(programId);
         if (!program.active) revert ProgramInactive();
-        if (pendingRequestByCustomer[programId][msg.sender] != 0) {
-            revert RequestAlreadyPending();
+        if (!program.staticStampEnabled) revert StaticStampDisabled();
+
+        uint40 lastCollectedAt = lastStaticStampAt[msg.sender][programId];
+        uint40 nextAvailableAt = lastCollectedAt + STATIC_STAMP_COOLDOWN;
+        if (lastCollectedAt != 0 && block.timestamp < nextAvailableAt) {
+            revert StaticStampCooldown(nextAvailableAt);
         }
 
-        requestId = nextVisitRequestId;
-        nextVisitRequestId += 1;
-
-        visitRequests[requestId] = VisitRequest({
-            id: requestId,
-            programId: programId,
-            customer: msg.sender,
-            requestedAt: uint40(block.timestamp),
-            resolvedAt: 0,
-            resolvedBy: address(0),
-            status: RequestStatus.Pending,
-            exists: true
-        });
-        programVisitRequestIds[programId].push(requestId);
-        pendingRequestByCustomer[programId][msg.sender] = requestId;
-
-        emit VisitRequested(requestId, programId, msg.sender);
-    }
-
-    function approveVisitRequest(uint256 requestId) external {
-        VisitRequest storage visitRequest = _getVisitRequestOrRevert(requestId);
-        if (visitRequest.status != RequestStatus.Pending) revert RequestResolved();
-        Program memory program = _getProgramOrRevert(visitRequest.programId);
-        if (!program.active) revert ProgramInactive();
-        _requireProgramStaff(program.id);
-
-        visitRequest.status = RequestStatus.Approved;
-        visitRequest.resolvedAt = uint40(block.timestamp);
-        visitRequest.resolvedBy = msg.sender;
-        pendingRequestByCustomer[program.id][visitRequest.customer] = 0;
-
-        _issueStamp(program.id, visitRequest.customer, StampSource.StaticRequest);
-
-        emit VisitRequestResolved(
-            requestId,
-            program.id,
-            msg.sender,
-            uint8(RequestStatus.Approved)
-        );
-    }
-
-    function rejectVisitRequest(uint256 requestId) external {
-        VisitRequest storage visitRequest = _getVisitRequestOrRevert(requestId);
-        if (visitRequest.status != RequestStatus.Pending) revert RequestResolved();
-        _requireProgramStaff(visitRequest.programId);
-
-        visitRequest.status = RequestStatus.Rejected;
-        visitRequest.resolvedAt = uint40(block.timestamp);
-        visitRequest.resolvedBy = msg.sender;
-        pendingRequestByCustomer[visitRequest.programId][visitRequest.customer] = 0;
-
-        emit VisitRequestResolved(
-            requestId,
-            visitRequest.programId,
-            msg.sender,
-            uint8(RequestStatus.Rejected)
-        );
+        lastStaticStampAt[msg.sender][programId] = uint40(block.timestamp);
+        _issueStamp(program.id, msg.sender, StampSource.StaticQr);
     }
 
     function issueManualStamp(uint256 programId, address customer) external {
         Program memory program = _getProgramOrRevert(programId);
         if (!program.active) revert ProgramInactive();
         if (customer == address(0)) revert InvalidRequest();
-        _requireProgramStaff(programId);
+        _requireProgramOwner(programId);
 
         _issueStamp(program.id, customer, StampSource.Manual);
     }
@@ -318,7 +225,7 @@ contract Noodl3Loyalty {
 
         bytes32 digest = getDynamicStampDigest(programId, nonce, expiresAt);
         address signer = _recoverSigner(digest, signature);
-        if (!_isProgramStaff(programId, signer)) revert InvalidSignature();
+        if (signer != program.owner) revert InvalidSignature();
 
         usedDynamicStampNonces[programId][nonce] = true;
         _issueStamp(program.id, msg.sender, StampSource.DynamicQr);
@@ -360,7 +267,7 @@ contract Noodl3Loyalty {
         Claim storage claim = claims[claimId];
         if (!claim.exists) revert ClaimNotFound();
         if (claim.consumed) revert ClaimAlreadyConsumed();
-        _requireProgramStaff(claim.programId);
+        _requireProgramOwner(claim.programId);
 
         claim.consumed = true;
         claim.consumedAt = uint40(block.timestamp);
@@ -412,12 +319,6 @@ contract Noodl3Loyalty {
         return _getProgramOrRevert(programId);
     }
 
-    function getVisitRequest(
-        uint256 requestId
-    ) external view returns (VisitRequest memory) {
-        return _getVisitRequestOrRevert(requestId);
-    }
-
     function getClaim(uint256 claimId) external view returns (Claim memory) {
         Claim memory claim = claims[claimId];
         if (!claim.exists) revert ClaimNotFound();
@@ -450,42 +351,10 @@ contract Noodl3Loyalty {
         canClaim = stamps >= program.stampsRequired;
     }
 
-    function isProgramStaff(
-        uint256 programId,
-        address account
-    ) external view returns (bool) {
-        _getProgramOrRevert(programId);
-        return _isProgramStaff(programId, account);
-    }
-
     function getOwnerProgramIds(
         address owner
     ) external view returns (uint256[] memory) {
         return ownerProgramIds[owner];
-    }
-
-    function getStaffProgramIds(
-        address staff
-    ) external view returns (uint256[] memory) {
-        uint256[] storage indexedIds = staffProgramIds[staff];
-        uint256 activeCount = 0;
-
-        for (uint256 i = 0; i < indexedIds.length; i += 1) {
-            if (programStaff[indexedIds[i]][staff]) {
-                activeCount += 1;
-            }
-        }
-
-        uint256[] memory filteredIds = new uint256[](activeCount);
-        uint256 cursor = 0;
-        for (uint256 i = 0; i < indexedIds.length; i += 1) {
-            if (programStaff[indexedIds[i]][staff]) {
-                filteredIds[cursor] = indexedIds[i];
-                cursor += 1;
-            }
-        }
-
-        return filteredIds;
     }
 
     function getUserProgramIds(
@@ -499,21 +368,6 @@ contract Noodl3Loyalty {
     ) external view returns (address[] memory) {
         _getProgramOrRevert(programId);
         return programParticipants[programId];
-    }
-
-    function getProgramVisitRequestIds(
-        uint256 programId
-    ) external view returns (uint256[] memory) {
-        _getProgramOrRevert(programId);
-        return programVisitRequestIds[programId];
-    }
-
-    function getPendingVisitRequestId(
-        uint256 programId,
-        address customer
-    ) external view returns (uint256) {
-        _getProgramOrRevert(programId);
-        return pendingRequestByCustomer[programId][customer];
     }
 
     function getUserClaimIds(
@@ -535,6 +389,14 @@ contract Noodl3Loyalty {
     ) external view returns (bool) {
         _getProgramOrRevert(programId);
         return usedDynamicStampNonces[programId][nonce];
+    }
+
+    function getLastStaticStampAt(
+        address user,
+        uint256 programId
+    ) external view returns (uint40) {
+        _getProgramOrRevert(programId);
+        return lastStaticStampAt[user][programId];
     }
 
     function _issueStamp(
@@ -563,18 +425,6 @@ contract Noodl3Loyalty {
         if (msg.sender != program.owner) revert NotProgramOwner();
     }
 
-    function _requireProgramStaff(uint256 programId) private view {
-        if (!_isProgramStaff(programId, msg.sender)) revert NotProgramStaff();
-    }
-
-    function _isProgramStaff(
-        uint256 programId,
-        address account
-    ) private view returns (bool) {
-        Program memory program = _getProgramOrRevert(programId);
-        return account == program.owner || programStaff[programId][account];
-    }
-
     function _getProgramOrRevert(
         uint256 programId
     ) private view returns (Program memory program) {
@@ -582,23 +432,21 @@ contract Noodl3Loyalty {
         if (!program.exists) revert ProgramNotFound();
     }
 
-    function _getVisitRequestOrRevert(
-        uint256 requestId
-    ) private view returns (VisitRequest storage visitRequest) {
-        visitRequest = visitRequests[requestId];
-        if (!visitRequest.exists) revert RequestNotFound();
-    }
-
     function _validateProgramConfig(
         string calldata name,
+        string calldata iconUrl,
         string calldata rewardDescription,
         uint32 stampsRequired
     ) private pure {
         bytes memory nameBytes = bytes(name);
+        bytes memory iconUrlBytes = bytes(iconUrl);
         bytes memory rewardBytes = bytes(rewardDescription);
         if (
             nameBytes.length == 0 ||
             nameBytes.length > 60 ||
+            iconUrlBytes.length == 0 ||
+            iconUrlBytes.length > 280 ||
+            !_startsWithHttps(iconUrlBytes) ||
             rewardBytes.length == 0 ||
             rewardBytes.length > 120 ||
             stampsRequired == 0 ||
