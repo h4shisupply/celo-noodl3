@@ -82,10 +82,10 @@ const enHomeCopy = {
   create: "Create program",
   openApp: "Open app",
   cardTitle: "7/10 visits",
-  cardDescription: "One QR for daily visits, dynamic QR for fast check-ins, one-time reward claims for staff validation.",
+  cardDescription: "One fixed QR for daily self-stamps, dynamic QR for fast check-ins, one-time reward claims for owner validation.",
   points: [
     "Any wallet can create a program.",
-    "Fixed QR requires staff approval.",
+    "Fixed QR allows one stamp per wallet every 20 hours.",
     "Dynamic QR expires and can be used once."
   ]
 };
@@ -93,14 +93,14 @@ const enHomeCopy = {
 const ptHomeCopy = {
   eyebrow: "Fidelidade Web3 para visitas reais",
   description:
-    "Crie um programa de selos na Celo. Clientes leem um QR, recebem um selo por visita e resgatam recompensas sem catalogo nem checkout.",
+    "Crie um programa de selos na Celo. Clientes leem um QR, recebem um selo por visita e resgatam recompensas sem catálogo nem checkout.",
   create: "Criar programa",
   openApp: "Abrir app",
   cardTitle: "7/10 visitas",
-  cardDescription: "QR fixo para visitas do dia a dia, QR dinamico para check-ins rapidos e recompensas de uso unico para validacao.",
+  cardDescription: "QR fixo para selos diários, QR dinâmico para check-ins rápidos e recompensas de uso único com validação do dono.",
   points: [
     "Qualquer carteira pode criar um programa.",
-    "QR fixo precisa de aprovacao da equipe.",
-    "QR dinamico expira e so pode ser usado uma vez."
+    "QR fixo libera um selo por carteira a cada 20 horas.",
+    "QR dinâmico expira e só pode ser usado uma vez."
   ]
 };

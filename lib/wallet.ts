@@ -161,12 +161,23 @@ export function getBrowserPublicClient(chainId = getDefaultChainId()) {
 export async function createProgramTx(params: {
   contractAddress: Hex;
   name: string;
+  iconUrl: string;
   rewardDescription: string;
   stampsRequired: number;
   active: boolean;
+  staticStampEnabled: boolean;
   chainId?: number;
 }) {
-  const { contractAddress, name, rewardDescription, stampsRequired, active, chainId } = params;
+  const {
+    contractAddress,
+    name,
+    iconUrl,
+    rewardDescription,
+    stampsRequired,
+    active,
+    staticStampEnabled,
+    chainId
+  } = params;
   const [account] = await getInjectedAccounts();
   const activeChainId = chainId ?? (await getInjectedChainId());
   const walletClient = await getInjectedWalletClient(activeChainId);
@@ -176,7 +187,7 @@ export async function createProgramTx(params: {
     address: contractAddress,
     abi: loyaltyAbi,
     functionName: "createProgram",
-    args: [name, rewardDescription, stampsRequired, active]
+    args: [name, iconUrl, rewardDescription, stampsRequired, active, staticStampEnabled]
   });
 }
 
@@ -184,18 +195,22 @@ export async function updateProgramTx(params: {
   contractAddress: Hex;
   programId: bigint;
   name: string;
+  iconUrl: string;
   rewardDescription: string;
   stampsRequired: number;
   active: boolean;
+  staticStampEnabled: boolean;
   chainId?: number;
 }) {
   const {
     contractAddress,
     programId,
     name,
+    iconUrl,
     rewardDescription,
     stampsRequired,
     active,
+    staticStampEnabled,
     chainId
   } = params;
   const [account] = await getInjectedAccounts();
@@ -207,32 +222,11 @@ export async function updateProgramTx(params: {
     address: contractAddress,
     abi: loyaltyAbi,
     functionName: "updateProgram",
-    args: [programId, name, rewardDescription, stampsRequired, active]
+    args: [programId, name, iconUrl, rewardDescription, stampsRequired, active, staticStampEnabled]
   });
 }
 
-export async function setProgramStaffTx(params: {
-  contractAddress: Hex;
-  programId: bigint;
-  staff: Hex;
-  enabled: boolean;
-  chainId?: number;
-}) {
-  const { contractAddress, programId, staff, enabled, chainId } = params;
-  const [account] = await getInjectedAccounts();
-  const activeChainId = chainId ?? (await getInjectedChainId());
-  const walletClient = await getInjectedWalletClient(activeChainId);
-
-  return walletClient.writeContract({
-    account,
-    address: contractAddress,
-    abi: loyaltyAbi,
-    functionName: "setProgramStaff",
-    args: [programId, staff, enabled]
-  });
-}
-
-export async function requestVisitTx(params: {
+export async function collectStaticStampTx(params: {
   contractAddress: Hex;
   programId: bigint;
   chainId?: number;
@@ -246,46 +240,8 @@ export async function requestVisitTx(params: {
     account,
     address: contractAddress,
     abi: loyaltyAbi,
-    functionName: "requestVisit",
+    functionName: "collectStaticStamp",
     args: [programId]
-  });
-}
-
-export async function approveVisitRequestTx(params: {
-  contractAddress: Hex;
-  requestId: bigint;
-  chainId?: number;
-}) {
-  const { contractAddress, requestId, chainId } = params;
-  const [account] = await getInjectedAccounts();
-  const activeChainId = chainId ?? (await getInjectedChainId());
-  const walletClient = await getInjectedWalletClient(activeChainId);
-
-  return walletClient.writeContract({
-    account,
-    address: contractAddress,
-    abi: loyaltyAbi,
-    functionName: "approveVisitRequest",
-    args: [requestId]
-  });
-}
-
-export async function rejectVisitRequestTx(params: {
-  contractAddress: Hex;
-  requestId: bigint;
-  chainId?: number;
-}) {
-  const { contractAddress, requestId, chainId } = params;
-  const [account] = await getInjectedAccounts();
-  const activeChainId = chainId ?? (await getInjectedChainId());
-  const walletClient = await getInjectedWalletClient(activeChainId);
-
-  return walletClient.writeContract({
-    account,
-    address: contractAddress,
-    abi: loyaltyAbi,
-    functionName: "rejectVisitRequest",
-    args: [requestId]
   });
 }
 
@@ -500,10 +456,6 @@ export function parseUsdtAmount(amount: string) {
 
 export function extractProgramIdFromReceipt(receipt: TransactionReceipt) {
   return extractEventArg(receipt, "ProgramCreated", "programId") as bigint | null;
-}
-
-export function extractVisitRequestIdFromReceipt(receipt: TransactionReceipt) {
-  return extractEventArg(receipt, "VisitRequested", "requestId") as bigint | null;
 }
 
 export function extractClaimIdFromReceipt(receipt: TransactionReceipt) {

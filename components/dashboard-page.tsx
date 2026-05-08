@@ -8,6 +8,7 @@ import { AppChrome } from "./app-chrome";
 import { QrScanner } from "./qr-scanner";
 import { ProgressMeter } from "./progress-meter";
 import { useLocale } from "./locale-provider";
+import { Avatar } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { EmptyState } from "./ui/empty-state";
@@ -16,7 +17,6 @@ import {
   fetchOwnerProgramIds,
   fetchPrograms,
   fetchProgress,
-  fetchStaffProgramIds,
   fetchUserClaimIds,
   fetchUserProgramIds,
   type ClaimRecord,
@@ -37,7 +37,7 @@ import { useMiniPay } from "../lib/minipay";
 
 type DashboardProgram = ProgramRecord & {
   progress?: ProgressRecord | null;
-  role: "owner" | "staff" | "customer";
+  role: "owner" | "customer";
 };
 
 export function DashboardPage({
@@ -90,16 +90,14 @@ export function DashboardPage({
     setIsLoading(true);
     setError(null);
     try {
-      const [ownerIds, staffIds, userIds, claimIds] = await Promise.all([
+      const [ownerIds, userIds, claimIds] = await Promise.all([
         fetchOwnerProgramIds(account, initialChainId, contractAddress),
-        fetchStaffProgramIds(account, initialChainId, contractAddress),
         fetchUserProgramIds(account, initialChainId, contractAddress),
         fetchUserClaimIds(account, initialChainId, contractAddress)
       ]);
       const ownerSet = new Set(ownerIds.map((id) => id.toString()));
-      const staffSet = new Set(staffIds.map((id) => id.toString()));
       const userSet = new Set(userIds.map((id) => id.toString()));
-      const allProgramIds = [...new Set([...ownerIds, ...staffIds, ...userIds].map(String))].map(BigInt);
+      const allProgramIds = [...new Set([...ownerIds, ...userIds].map(String))].map(BigInt);
       const nextPrograms = await fetchPrograms(allProgramIds, initialChainId, contractAddress);
       const dashboardPrograms = await Promise.all(
         nextPrograms.map(async (program) => {
@@ -108,9 +106,7 @@ export function DashboardPage({
             : null;
           const role = ownerSet.has(program.id.toString())
             ? "owner"
-            : staffSet.has(program.id.toString())
-              ? "staff"
-              : "customer";
+            : "customer";
 
           return {
             ...program,
@@ -166,9 +162,7 @@ export function DashboardPage({
   }
 
   const customerPrograms = programs.filter((program) => program.progress);
-  const managedPrograms = programs.filter(
-    (program) => program.role === "owner" || program.role === "staff"
-  );
+  const managedPrograms = programs.filter((program) => program.role === "owner");
   const pendingClaims = claims.filter((claim) => !claim.consumed);
 
   return (
@@ -336,6 +330,7 @@ function ProgramCard({ program }: { program: DashboardProgram }) {
   return (
     <Card>
       <CardHeader className="space-y-3">
+        <Avatar name={program.name} imageUrl={program.iconUrl} size="sm" />
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
           {formatProgramCode(program.id)}
         </p>
@@ -374,8 +369,9 @@ function ManagedProgramCard({ program }: { program: DashboardProgram }) {
   return (
     <Card>
       <CardHeader className="space-y-3">
+        <Avatar name={program.name} imageUrl={program.iconUrl} size="sm" />
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
-          {program.role === "owner" ? "Owner" : "Staff"} · {formatProgramCode(program.id)}
+          Owner · {formatProgramCode(program.id)}
         </p>
         <CardTitle>{program.name}</CardTitle>
         <CardDescription>{program.rewardDescription}</CardDescription>

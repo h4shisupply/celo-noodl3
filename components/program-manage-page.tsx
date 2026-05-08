@@ -6,44 +6,38 @@ import { getAddress, isAddress, type Hex } from "viem";
 import { AppChrome } from "./app-chrome";
 import { ProgressMeter } from "./progress-meter";
 import { useLocale } from "./locale-provider";
+import { Avatar } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { EmptyState } from "./ui/empty-state";
 import { Input } from "./ui/input";
 import {
   fetchClaim,
-  fetchIsProgramStaff,
   fetchProgram,
   fetchProgramClaimIds,
   fetchProgramParticipants,
-  fetchProgramVisitRequestIds,
   fetchProgress,
-  fetchVisitRequest,
   type ClaimRecord,
   type ProgramRecord,
-  type ProgressRecord,
-  type VisitRequestRecord
+  type ProgressRecord
 } from "../lib/contract";
 import { resolveContractAddressForChain } from "../lib/chains";
 import { getUserFacingErrorMessage } from "../lib/error-message";
+import { normalizeRemoteImageUrl } from "../lib/format";
 import { formatWalletLabel } from "../lib/claim-code";
 import {
   buildDynamicVisitUrl,
   buildQrImageUrl,
   buildStaticVisitUrl,
   formatClaimCode,
-  formatDateTime,
   formatProgramCode,
   programCopy
 } from "../lib/program";
 import { useMiniPay } from "../lib/minipay";
 import {
-  approveVisitRequestTx,
   consumeRewardTx,
   generateDynamicStampNonce,
   issueManualStampTx,
-  rejectVisitRequestTx,
-  setProgramStaffTx,
   signDynamicStampPayload,
   updateProgramTx,
   waitForTransaction
@@ -72,15 +66,15 @@ export function ProgramManagePage({
   const copy = programCopy(locale);
   const [program, setProgram] = useState<ProgramRecord | null>(null);
   const [canManage, setCanManage] = useState(false);
-  const [requests, setRequests] = useState<VisitRequestRecord[]>([]);
   const [customers, setCustomers] = useState<CustomerSummary[]>([]);
   const [claims, setClaims] = useState<ClaimRecord[]>([]);
   const [name, setName] = useState("");
+  const [iconUrl, setIconUrl] = useState("");
   const [rewardDescription, setRewardDescription] = useState("");
   const [stampsRequired, setStampsRequired] = useState("10");
   const [active, setActive] = useState(true);
+  const [staticStampEnabled, setStaticStampEnabled] = useState(true);
   const [manualCustomer, setManualCustomer] = useState("");
-  const [staffWallet, setStaffWallet] = useState("");
   const [dynamicUrl, setDynamicUrl] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -126,36 +120,25 @@ export function ProgramManagePage({
 
       if (!nextProgram || !account || isWrongChain) {
         setCanManage(false);
-        setRequests([]);
         setCustomers([]);
         setClaims([]);
         return;
       }
 
-      const nextCanManage = await fetchIsProgramStaff(
-        programId,
-        account,
-        initialChainId,
-        contractAddress
-      );
+      const nextCanManage = nextProgram.owner.toLowerCase() === account.toLowerCase();
       setCanManage(nextCanManage);
 
       if (!nextCanManage) {
-        setRequests([]);
         setCustomers([]);
         setClaims([]);
         return;
       }
 
-      const [requestIds, participants, claimIds] = await Promise.all([
-        fetchProgramVisitRequestIds(programId, initialChainId, contractAddress),
+      const [participants, claimIds] = await Promise.all([
         fetchProgramParticipants(programId, initialChainId, contractAddress),
         fetchProgramClaimIds(programId, initialChainId, contractAddress)
       ]);
-      const [nextRequests, nextCustomers, nextClaims] = await Promise.all([
-        Promise.all(
-          requestIds.map((id) => fetchVisitRequest(id, initialChainId, contractAddress))
-        ),
+      const [nextCustomers, nextClaims] = await Promise.all([
         Promise.all(
           participants.map(async (address) => ({
             address,
@@ -167,11 +150,6 @@ export function ProgramManagePage({
         )
       ]);
 
-      setRequests(
-        (nextRequests.filter(Boolean) as VisitRequestRecord[])
-          .filter((request) => request.status === "pending")
-          .sort((a, b) => b.requestedAt - a.requestedAt)
-      );
       setCustomers(nextCustomers);
       setClaims(
         (nextClaims.filter(Boolean) as ClaimRecord[]).sort(
@@ -199,9 +177,11 @@ export function ProgramManagePage({
   useEffect(() => {
     if (!program) return;
     setName(program.name);
+    setIconUrl(program.iconUrl);
     setRewardDescription(program.rewardDescription);
     setStampsRequired(program.stampsRequired.toString());
     setActive(program.active);
+    setStaticStampEnabled(program.staticStampEnabled);
   }, [program]);
 
   async function submitAction(
@@ -260,8 +240,6 @@ export function ProgramManagePage({
     return isAddress(trimmed) ? (getAddress(trimmed) as Hex) : null;
   }
 
-  const owner = program?.owner.toLowerCase() === account?.toLowerCase();
-
   return (
     <AppChrome
       walletState={{
@@ -291,13 +269,26 @@ export function ProgramManagePage({
         ) : !program ? (
           <EmptyState title={copy.notFound} description={formatProgramCode(programId)} />
         ) : !canManage ? (
-          <EmptyState title={dictionary.common.unauthorized} description={copy.connectFirst} />
+          <EmptyState title={dictionary.common.unauthorized} description={copy.ownerOnly} />
         ) : (
           <>
+            <div className="flex flex-wrap items-center gap-4 rounded-[24px] border border-[#ECEAF4] bg-white p-5">
+              <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
+                  {formatProgramCode(program.id)} {!program.active ? `· ${copy.inactive}` : ""}
+                </p>
+                <h1 className="text-2xl font-semibold tracking-tight text-[#18122A]">
+                  {program.name}
+                </h1>
+                <p className="text-sm text-[#625B78]">{program.rewardDescription}</p>
+              </div>
+            </div>
+
             <div className="grid gap-5 md:grid-cols-3">
-              <KpiCard label={copy.pendingRequests} value={requests.length} />
               <KpiCard label={copy.customers} value={customers.length} />
               <KpiCard label={copy.rewardClaims} value={claims.length} />
+              <KpiCard label={copy.visitsRequired} value={program.stampsRequired} />
             </div>
 
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_24rem]">
@@ -315,71 +306,6 @@ export function ProgramManagePage({
                       className="h-64 w-64 rounded-[24px] border border-[#ECEAF4] bg-white p-3"
                     />
                     <p className="break-all text-sm text-[#625B78]">{staticVisitUrl}</p>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{copy.pendingRequests}</CardTitle>
-                    <CardDescription>{copy.staticQrHelp}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    {requests.length > 0 ? (
-                      requests.map((request) => (
-                        <div
-                          key={request.id.toString()}
-                          className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#ECEAF4] bg-[#FBFAFD] p-4"
-                        >
-                          <div>
-                            <p className="text-sm font-semibold text-[#18122A]">
-                              {formatWalletLabel(request.customer)}
-                            </p>
-                            <p className="text-sm text-[#625B78]">
-                              {formatDateTime(request.requestedAt, locale)}
-                            </p>
-                          </div>
-                          <div className="flex flex-wrap gap-2">
-                            <Button
-                              size="sm"
-                              onClick={() =>
-                                void submitAction(async () => {
-                                  if (!contractAddress) return;
-                                  const hash = await approveVisitRequestTx({
-                                    contractAddress,
-                                    requestId: request.id,
-                                    chainId: initialChainId
-                                  });
-                                  await waitForTransaction(hash, initialChainId);
-                                }, copy.requestApproved)
-                              }
-                              disabled={isSubmitting}
-                            >
-                              {copy.approve}
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() =>
-                                void submitAction(async () => {
-                                  if (!contractAddress) return;
-                                  const hash = await rejectVisitRequestTx({
-                                    contractAddress,
-                                    requestId: request.id,
-                                    chainId: initialChainId
-                                  });
-                                  await waitForTransaction(hash, initialChainId);
-                                }, copy.requestRejected)
-                              }
-                              disabled={isSubmitting}
-                            >
-                              {copy.reject}
-                            </Button>
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-sm text-[#625B78]">{copy.emptyCards}</p>
-                    )}
                   </CardContent>
                 </Card>
 
@@ -434,7 +360,9 @@ export function ProgramManagePage({
                           </div>
                         ))}
                       </div>
-                    ) : null}
+                    ) : (
+                      <p className="text-sm text-[#625B78]">{copy.emptyCards}</p>
+                    )}
                   </CardContent>
                 </Card>
               </div>
@@ -463,117 +391,84 @@ export function ProgramManagePage({
                   </CardContent>
                 </Card>
 
-                {owner ? (
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>{copy.staff}</CardTitle>
-                      <CardDescription>{copy.staffWallet}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      <Input
-                        value={staffWallet}
-                        onChange={(event) => setStaffWallet(event.target.value)}
-                        placeholder={copy.staffWallet}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{copy.settings}</CardTitle>
+                    <CardDescription>{copy.updateProgram}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <Input value={name} maxLength={60} onChange={(event) => setName(event.target.value)} />
+                    <Input
+                      value={iconUrl}
+                      maxLength={280}
+                      placeholder="https://..."
+                      onChange={(event) => setIconUrl(event.target.value)}
+                    />
+                    <textarea
+                      value={rewardDescription}
+                      maxLength={120}
+                      onChange={(event) => setRewardDescription(event.target.value)}
+                      className="min-h-[88px] w-full rounded-2xl border border-[#E4DEEF] bg-[#FBFAFD] px-4 py-3 text-sm text-[#1B1630] outline-none transition focus:border-[#B59AF2] focus:bg-white"
+                    />
+                    <Input
+                      value={stampsRequired}
+                      inputMode="numeric"
+                      onChange={(event) => setStampsRequired(event.target.value)}
+                    />
+                    <label className="flex items-center gap-3 text-sm font-medium text-[#241B3C]">
+                      <input
+                        type="checkbox"
+                        checked={active}
+                        onChange={(event) => setActive(event.target.checked)}
                       />
-                      <div className="flex flex-wrap gap-2">
-                        <Button
-                          size="sm"
-                          onClick={() =>
-                            void submitAction(async () => {
-                              const staff = getValidAddress(staffWallet);
-                              if (!contractAddress || !staff) throw new Error("Invalid wallet address.");
-                              const hash = await setProgramStaffTx({
-                                contractAddress,
-                                programId,
-                                staff,
-                                enabled: true,
-                                chainId: initialChainId
-                              });
-                              await waitForTransaction(hash, initialChainId);
-                            }, copy.staffUpdated)
+                      {copy.active}
+                    </label>
+                    <label className="flex items-center gap-3 text-sm font-medium text-[#241B3C]">
+                      <input
+                        type="checkbox"
+                        checked={staticStampEnabled}
+                        onChange={(event) => setStaticStampEnabled(event.target.checked)}
+                      />
+                      {copy.staticStampEnabled}
+                    </label>
+                    <Button
+                      onClick={() =>
+                        void submitAction(async () => {
+                          const parsedStampsRequired = Number.parseInt(stampsRequired, 10);
+                          const normalizedIconUrl = normalizeRemoteImageUrl(iconUrl);
+                          if (
+                            !contractAddress ||
+                            !normalizedIconUrl ||
+                            !name.trim() ||
+                            !rewardDescription.trim() ||
+                            name.trim().length > 60 ||
+                            rewardDescription.trim().length > 120 ||
+                            !Number.isInteger(parsedStampsRequired) ||
+                            parsedStampsRequired < 1 ||
+                            parsedStampsRequired > 100
+                          ) {
+                            throw new Error(copy.invalidProgramConfig);
                           }
-                          disabled={isSubmitting}
-                        >
-                          {copy.addStaff}
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() =>
-                            void submitAction(async () => {
-                              const staff = getValidAddress(staffWallet);
-                              if (!contractAddress || !staff) throw new Error("Invalid wallet address.");
-                              const hash = await setProgramStaffTx({
-                                contractAddress,
-                                programId,
-                                staff,
-                                enabled: false,
-                                chainId: initialChainId
-                              });
-                              await waitForTransaction(hash, initialChainId);
-                            }, copy.staffUpdated)
-                          }
-                          disabled={isSubmitting}
-                        >
-                          {copy.removeStaff}
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ) : null}
-
-                {owner ? (
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>{copy.settings}</CardTitle>
-                      <CardDescription>{copy.updateProgram}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <Input value={name} onChange={(event) => setName(event.target.value)} />
-                      <textarea
-                        value={rewardDescription}
-                        onChange={(event) => setRewardDescription(event.target.value)}
-                        className="min-h-[88px] w-full rounded-2xl border border-[#E4DEEF] bg-[#FBFAFD] px-4 py-3 text-sm text-[#1B1630] outline-none transition focus:border-[#B59AF2] focus:bg-white"
-                      />
-                      <Input
-                        value={stampsRequired}
-                        inputMode="numeric"
-                        onChange={(event) => setStampsRequired(event.target.value)}
-                      />
-                      <label className="flex items-center gap-3 text-sm font-medium text-[#241B3C]">
-                        <input
-                          type="checkbox"
-                          checked={active}
-                          onChange={(event) => setActive(event.target.checked)}
-                        />
-                        {copy.active}
-                      </label>
-                      <Button
-                        onClick={() =>
-                          void submitAction(async () => {
-                            const parsedStampsRequired = Number.parseInt(stampsRequired, 10);
-                            if (!contractAddress || !Number.isInteger(parsedStampsRequired)) {
-                              throw new Error("Invalid settings.");
-                            }
-                            const hash = await updateProgramTx({
-                              contractAddress,
-                              programId,
-                              name: name.trim(),
-                              rewardDescription: rewardDescription.trim(),
-                              stampsRequired: parsedStampsRequired,
-                              active,
-                              chainId: initialChainId
-                            });
-                            await waitForTransaction(hash, initialChainId);
-                          }, copy.settingsSaved)
-                        }
-                        disabled={isSubmitting}
-                      >
-                        {copy.updateProgram}
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ) : null}
+                          const hash = await updateProgramTx({
+                            contractAddress,
+                            programId,
+                            name: name.trim(),
+                            iconUrl: normalizedIconUrl,
+                            rewardDescription: rewardDescription.trim(),
+                            stampsRequired: parsedStampsRequired,
+                            active,
+                            staticStampEnabled,
+                            chainId: initialChainId
+                          });
+                          await waitForTransaction(hash, initialChainId);
+                        }, copy.settingsSaved)
+                      }
+                      disabled={isSubmitting}
+                    >
+                      {copy.updateProgram}
+                    </Button>
+                  </CardContent>
+                </Card>
               </aside>
             </div>
 
