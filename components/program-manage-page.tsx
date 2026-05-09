@@ -1,5 +1,18 @@
 "use client";
 
+import {
+  BadgeCheck,
+  Gift,
+  QrCode,
+  RefreshCw,
+  Save,
+  Send,
+  Settings,
+  Sparkles,
+  Store,
+  UserPlus,
+  Users
+} from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { getAddress, isAddress, type Hex } from "viem";
@@ -7,10 +20,14 @@ import { AppChrome } from "./app-chrome";
 import { ProgressMeter } from "./progress-meter";
 import { useLocale } from "./locale-provider";
 import { Avatar } from "./ui/avatar";
+import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { EmptyState } from "./ui/empty-state";
 import { Input } from "./ui/input";
+import { StatusMessage } from "./ui/status-message";
+import { Textarea } from "./ui/textarea";
+import { ToggleRow } from "./ui/toggle-row";
 import {
   fetchClaim,
   fetchProgram,
@@ -265,30 +282,42 @@ export function ProgramManagePage({
     >
       <section className="space-y-8">
         {isLoading ? (
-          <EmptyState title={dictionary.common.loading} description="" />
+          <EmptyState
+            title={dictionary.common.loading}
+            description={copy.loadingProgram}
+            icon={<Store className="h-5 w-5" />}
+          />
         ) : !program ? (
-          <EmptyState title={copy.notFound} description={formatProgramCode(programId)} />
+          <EmptyState
+            title={copy.notFound}
+            description={formatProgramCode(programId)}
+            icon={<Store className="h-5 w-5" />}
+          />
         ) : !canManage ? (
-          <EmptyState title={dictionary.common.unauthorized} description={copy.ownerOnly} />
+          <EmptyState
+            title={dictionary.common.unauthorized}
+            description={copy.ownerOnly}
+            icon={<Settings className="h-5 w-5" />}
+          />
         ) : (
           <>
-            <div className="flex flex-wrap items-center gap-4 rounded-[24px] border border-[#ECEAF4] bg-white p-5">
+            <div className="surface-panel stamp-pattern flex flex-wrap items-center gap-4 rounded-lg p-5">
               <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
+                <Badge variant={program.active ? "accent" : "danger"}>
                   {formatProgramCode(program.id)} {!program.active ? `· ${copy.inactive}` : ""}
-                </p>
-                <h1 className="text-2xl font-semibold tracking-tight text-[#18122A]">
+                </Badge>
+                <h1 className="mt-2 text-2xl font-semibold text-[#1B172B]">
                   {program.name}
                 </h1>
-                <p className="text-sm text-[#625B78]">{program.rewardDescription}</p>
+                <p className="text-sm text-[#676078]">{program.rewardDescription}</p>
               </div>
             </div>
 
             <div className="grid gap-5 md:grid-cols-3">
-              <KpiCard label={copy.customers} value={customers.length} />
-              <KpiCard label={copy.rewardClaims} value={claims.length} />
-              <KpiCard label={copy.visitsRequired} value={program.stampsRequired} />
+              <KpiCard icon={<Users className="h-5 w-5" />} label={copy.customers} value={customers.length} />
+              <KpiCard icon={<Gift className="h-5 w-5" />} label={copy.rewardClaims} value={claims.length} />
+              <KpiCard icon={<BadgeCheck className="h-5 w-5" />} label={copy.visitsRequired} value={program.stampsRequired} />
             </div>
 
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_24rem]">
@@ -303,9 +332,11 @@ export function ProgramManagePage({
                     <img
                       src={buildQrImageUrl(staticVisitUrl)}
                       alt={copy.fixedQr}
-                      className="h-64 w-64 rounded-[24px] border border-[#ECEAF4] bg-white p-3"
+                      className="h-64 w-64 rounded-lg border border-[#E5E1EE] bg-white p-3 shadow-[0_14px_36px_rgba(27,23,43,0.08)]"
                     />
-                    <p className="break-all text-sm text-[#625B78]">{staticVisitUrl}</p>
+                    <p className="break-all rounded-lg bg-[#FBFCFF] p-3 text-sm text-[#676078]">
+                      {staticVisitUrl}
+                    </p>
                   </CardContent>
                 </Card>
 
@@ -322,6 +353,7 @@ export function ProgramManagePage({
                         placeholder={copy.customerWallet}
                       />
                       <Button
+                        icon={<UserPlus className="h-4 w-4" />}
                         onClick={() =>
                           void submitAction(async () => {
                             const customer = getValidAddress(manualCustomer);
@@ -347,9 +379,9 @@ export function ProgramManagePage({
                         {customers.map((customer) => (
                           <div
                             key={customer.address}
-                            className="rounded-2xl border border-[#ECEAF4] bg-[#FBFAFD] p-4"
+                            className="rounded-lg border border-[#E5E1EE] bg-[#FBFCFF] p-4"
                           >
-                            <p className="mb-3 text-sm font-semibold text-[#18122A]">
+                            <p className="mb-3 text-sm font-semibold text-[#1B172B]">
                               {formatWalletLabel(customer.address)}
                             </p>
                             <ProgressMeter
@@ -361,7 +393,7 @@ export function ProgramManagePage({
                         ))}
                       </div>
                     ) : (
-                      <p className="text-sm text-[#625B78]">{copy.emptyCards}</p>
+                      <p className="text-sm text-[#676078]">{copy.emptyCards}</p>
                     )}
                   </CardContent>
                 </Card>
@@ -374,7 +406,11 @@ export function ProgramManagePage({
                     <CardDescription>{copy.dynamicQrHelp}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <Button onClick={() => void handleGenerateDynamicQr()} disabled={isSubmitting || !program.active}>
+                    <Button
+                      icon={<QrCode className="h-4 w-4" />}
+                      onClick={() => void handleGenerateDynamicQr()}
+                      disabled={isSubmitting || !program.active}
+                    >
                       {copy.generateDynamicQr}
                     </Button>
                     {dynamicUrl ? (
@@ -383,9 +419,11 @@ export function ProgramManagePage({
                         <img
                           src={buildQrImageUrl(dynamicUrl)}
                           alt={copy.dynamicQr}
-                          className="h-64 w-64 rounded-[24px] border border-[#ECEAF4] bg-white p-3"
+                          className="h-64 w-64 rounded-lg border border-[#E5E1EE] bg-white p-3 shadow-[0_14px_36px_rgba(27,23,43,0.08)]"
                         />
-                        <p className="break-all text-sm text-[#625B78]">{dynamicUrl}</p>
+                        <p className="break-all rounded-lg bg-[#FBFCFF] p-3 text-sm text-[#676078]">
+                          {dynamicUrl}
+                        </p>
                       </>
                     ) : null}
                   </CardContent>
@@ -404,34 +442,32 @@ export function ProgramManagePage({
                       placeholder="https://..."
                       onChange={(event) => setIconUrl(event.target.value)}
                     />
-                    <textarea
+                    <Textarea
                       value={rewardDescription}
                       maxLength={120}
                       onChange={(event) => setRewardDescription(event.target.value)}
-                      className="min-h-[88px] w-full rounded-2xl border border-[#E4DEEF] bg-[#FBFAFD] px-4 py-3 text-sm text-[#1B1630] outline-none transition focus:border-[#B59AF2] focus:bg-white"
                     />
                     <Input
                       value={stampsRequired}
                       inputMode="numeric"
                       onChange={(event) => setStampsRequired(event.target.value)}
                     />
-                    <label className="flex items-center gap-3 text-sm font-medium text-[#241B3C]">
-                      <input
-                        type="checkbox"
-                        checked={active}
-                        onChange={(event) => setActive(event.target.checked)}
-                      />
-                      {copy.active}
-                    </label>
-                    <label className="flex items-center gap-3 text-sm font-medium text-[#241B3C]">
-                      <input
-                        type="checkbox"
-                        checked={staticStampEnabled}
-                        onChange={(event) => setStaticStampEnabled(event.target.checked)}
-                      />
-                      {copy.staticStampEnabled}
-                    </label>
+                    <ToggleRow
+                      checked={active}
+                      icon={<Sparkles className="h-4 w-4" />}
+                      label={copy.active}
+                      description={copy.activeHelp}
+                      onChange={(event) => setActive(event.target.checked)}
+                    />
+                    <ToggleRow
+                      checked={staticStampEnabled}
+                      icon={<BadgeCheck className="h-4 w-4" />}
+                      label={copy.staticStampEnabled}
+                      description={copy.staticStampHelp}
+                      onChange={(event) => setStaticStampEnabled(event.target.checked)}
+                    />
                     <Button
+                      icon={<Save className="h-4 w-4" />}
                       onClick={() =>
                         void submitAction(async () => {
                           const parsedStampsRequired = Number.parseInt(stampsRequired, 10);
@@ -482,25 +518,26 @@ export function ProgramManagePage({
                   claims.map((claim) => (
                     <div
                       key={claim.id.toString()}
-                      className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#ECEAF4] bg-[#FBFAFD] p-4"
+                      className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#E5E1EE] bg-[#FBFCFF] p-4"
                     >
                       <div>
-                        <p className="text-sm font-semibold text-[#18122A]">
+                        <p className="text-sm font-semibold text-[#1B172B]">
                           {formatClaimCode(claim.id)} · {formatWalletLabel(claim.user)}
                         </p>
-                        <p className="text-sm text-[#625B78]">
+                        <Badge variant={claim.consumed ? "neutral" : "mint"}>
                           {claim.consumed ? copy.usedClaim : copy.ready}
-                        </p>
+                        </Badge>
                       </div>
                       <div className="flex flex-wrap gap-2">
                         <Link href={`/app/claim/${claim.id.toString()}`}>
-                          <Button size="sm" variant="outline">
+                          <Button size="sm" variant="outline" icon={<Gift className="h-4 w-4" />}>
                             {copy.openCard}
                           </Button>
                         </Link>
                         {!claim.consumed ? (
                           <Button
                             size="sm"
+                            icon={<Send className="h-4 w-4" />}
                             onClick={() =>
                               void submitAction(async () => {
                                 if (!contractAddress) return;
@@ -521,32 +558,43 @@ export function ProgramManagePage({
                     </div>
                   ))
                 ) : (
-                  <p className="text-sm text-[#625B78]">{copy.emptyClaims}</p>
+                  <p className="text-sm text-[#676078]">{copy.emptyClaims}</p>
                 )}
               </CardContent>
             </Card>
           </>
         )}
 
-        {status ? <p className="text-sm text-[#2D7A46]">{status}</p> : null}
+        {status ? <StatusMessage tone="success">{status}</StatusMessage> : null}
         {error || connectError ? (
-          <p className="rounded-2xl border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
-            {error || connectError}
-          </p>
+          <StatusMessage tone="error">{error || connectError}</StatusMessage>
         ) : null}
       </section>
     </AppChrome>
   );
 }
 
-function KpiCard({ label, value }: { label: string; value: number }) {
+function KpiCard({
+  icon,
+  label,
+  value
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: number;
+}) {
   return (
-    <Card>
-      <CardContent className="space-y-2 pt-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
-          {label}
-        </p>
-        <p className="text-3xl font-semibold text-[#18122A]">{value}</p>
+    <Card variant="soft">
+      <CardContent className="flex items-center justify-between gap-4 pt-5">
+        <div className="space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
+            {label}
+          </p>
+          <p className="text-3xl font-semibold text-[#1B172B]">{value}</p>
+        </div>
+        <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#E9FBF7] text-[#146B5E]">
+          {icon}
+        </div>
       </CardContent>
     </Card>
   );

@@ -1,13 +1,16 @@
 "use client";
 
+import { BadgeCheck, Gift, QrCode, TicketCheck } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Hex } from "viem";
 import { AppChrome } from "./app-chrome";
 import { useLocale } from "./locale-provider";
 import { Avatar } from "./ui/avatar";
+import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { EmptyState } from "./ui/empty-state";
+import { StatusMessage } from "./ui/status-message";
 import {
   fetchClaim,
   fetchProgram,
@@ -179,18 +182,26 @@ export function ClaimPage({
     >
       <section className="mx-auto max-w-2xl space-y-6">
         {isLoading ? (
-          <EmptyState title={dictionary.common.loadingReward} description="" />
+          <EmptyState
+            title={dictionary.common.loadingReward}
+            description={copy.loadingClaim}
+            icon={<Gift className="h-5 w-5" />}
+          />
         ) : !claim ? (
-          <EmptyState title={dictionary.messages.rewardNotFound} description={claimId} />
+          <EmptyState
+            title={dictionary.messages.rewardNotFound}
+            description={claimId}
+            icon={<TicketCheck className="h-5 w-5" />}
+          />
         ) : (
           <Card>
-            <CardHeader className="space-y-3">
+            <CardHeader className="stamp-pattern space-y-3 rounded-t-lg border-b border-[#E5E1EE] bg-[#FBFCFF]">
               {program ? (
                 <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
               ) : null}
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
+              <Badge variant={claim.consumed ? "neutral" : "mint"}>
                 {formatClaimCode(claim.id)}
-              </p>
+              </Badge>
               <CardTitle>{claim.rewardDescription}</CardTitle>
               <CardDescription>
                 {program?.name ?? formatProgramCode(claim.programId)}
@@ -202,11 +213,11 @@ export function ClaimPage({
                 <img
                   src={buildQrImageUrl(claimUrl)}
                   alt={formatClaimCode(claim.id)}
-                  className="mx-auto h-72 w-72 rounded-[24px] border border-[#ECEAF4] bg-white p-3"
+                  className="mx-auto h-72 w-72 rounded-lg border border-[#E5E1EE] bg-white p-3 shadow-[0_14px_36px_rgba(27,23,43,0.08)]"
                 />
               ) : null}
 
-              <div className="grid gap-3 rounded-2xl border border-[#ECEAF4] bg-[#FBFAFD] p-4 text-sm text-[#625B78]">
+              <div className="grid gap-3 rounded-lg border border-[#E5E1EE] bg-[#FBFCFF] p-4 text-sm text-[#676078]">
                 <p>
                   {dictionary.common.customer}: {formatWalletLabel(claim.user)}
                 </p>
@@ -219,25 +230,25 @@ export function ClaimPage({
               </div>
 
               {canConsume && !claim.consumed ? (
-                <Button onClick={() => void handleConsume()} disabled={isSubmitting}>
+                <Button
+                  icon={<BadgeCheck className="h-4 w-4" />}
+                  onClick={() => void handleConsume()}
+                  disabled={isSubmitting}
+                >
                   {isSubmitting ? `${copy.validateClaim}...` : copy.validateClaim}
                 </Button>
               ) : null}
 
               {claim.consumed ? (
-                <p className="rounded-2xl border border-[#F5E8C8] bg-[#FFFBF2] px-4 py-3 text-sm text-[#8B6A21]">
-                  {copy.usedClaim}
-                </p>
+                <StatusMessage tone="warning">{copy.usedClaim}</StatusMessage>
               ) : null}
             </CardContent>
           </Card>
         )}
 
-        {status ? <p className="text-sm text-[#2D7A46]">{status}</p> : null}
+        {status ? <StatusMessage tone="success">{status}</StatusMessage> : null}
         {error || connectError ? (
-          <p className="rounded-2xl border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
-            {error || connectError}
-          </p>
+          <StatusMessage tone="error">{error || connectError}</StatusMessage>
         ) : null}
       </section>
     </AppChrome>

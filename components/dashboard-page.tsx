@@ -1,5 +1,16 @@
 "use client";
 
+import {
+  BadgeCheck,
+  Gift,
+  Plus,
+  QrCode,
+  RefreshCw,
+  ScanLine,
+  Store,
+  TicketCheck,
+  WalletCards
+} from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -9,9 +20,11 @@ import { QrScanner } from "./qr-scanner";
 import { ProgressMeter } from "./progress-meter";
 import { useLocale } from "./locale-provider";
 import { Avatar } from "./ui/avatar";
+import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { EmptyState } from "./ui/empty-state";
+import { StatusMessage } from "./ui/status-message";
 import {
   fetchClaim,
   fetchOwnerProgramIds,
@@ -188,22 +201,25 @@ export function DashboardPage({
     >
       <section className="space-y-8">
         {connectError || error ? (
-          <p className="rounded-2xl border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
-            {connectError || error}
-          </p>
+          <StatusMessage tone="error">{connectError || error}</StatusMessage>
         ) : null}
 
         {!contractAddress ? (
-          <EmptyState title={dictionary.common.contractMissing} description={copy.noContract} />
+          <EmptyState
+            title={dictionary.common.contractMissing}
+            description={copy.noContract}
+            icon={<Store className="h-5 w-5" />}
+          />
         ) : null}
 
         {!account ? (
           <EmptyState
             title={copy.connectFirst}
             description={copy.appDescription}
+            icon={<WalletCards className="h-5 w-5" />}
             actions={
               hasProvider ? (
-                <Button onClick={() => void connect()}>
+                <Button icon={<WalletCards className="h-4 w-4" />} onClick={() => void connect()}>
                   {isConnecting ? `${dictionary.actions.connectWallet}...` : dictionary.actions.connectWallet}
                 </Button>
               ) : null
@@ -215,20 +231,40 @@ export function DashboardPage({
           <>
             <div className="flex flex-wrap gap-3">
               <Link href="/app/program/new">
-                <Button>{copy.createProgram}</Button>
+                <Button icon={<Plus className="h-4 w-4" />}>{copy.createProgram}</Button>
               </Link>
-              <Button variant="outline" onClick={() => setIsScannerOpen(true)}>
+              <Button
+                variant="warm"
+                icon={<QrCode className="h-4 w-4" />}
+                onClick={() => setIsScannerOpen(true)}
+              >
                 {copy.scanQr}
               </Button>
-              <Button variant="ghost" onClick={() => void loadDashboard()}>
+              <Button
+                variant="ghost"
+                icon={<RefreshCw className="h-4 w-4" />}
+                onClick={() => void loadDashboard()}
+              >
                 {isLoading ? `${dictionary.common.loading}...` : dictionary.actions.refreshNetwork}
               </Button>
             </div>
 
             <div className="grid gap-5 md:grid-cols-3">
-              <KpiCard label={copy.myCards} value={customerPrograms.length} />
-              <KpiCard label={copy.myPrograms} value={managedPrograms.length} />
-              <KpiCard label={copy.rewardClaims} value={pendingClaims.length} />
+              <KpiCard
+                icon={<WalletCards className="h-5 w-5" />}
+                label={copy.myCards}
+                value={customerPrograms.length}
+              />
+              <KpiCard
+                icon={<Store className="h-5 w-5" />}
+                label={copy.myPrograms}
+                value={managedPrograms.length}
+              />
+              <KpiCard
+                icon={<Gift className="h-5 w-5" />}
+                label={copy.rewardClaims}
+                value={pendingClaims.length}
+              />
             </div>
 
             <DashboardSection title={copy.myCards}>
@@ -239,7 +275,11 @@ export function DashboardPage({
                   ))}
                 </div>
               ) : (
-                <EmptyState title={copy.myCards} description={copy.emptyCards} />
+                <EmptyState
+                  title={copy.myCards}
+                  description={copy.emptyCards}
+                  icon={<ScanLine className="h-5 w-5" />}
+                />
               )}
             </DashboardSection>
 
@@ -254,9 +294,12 @@ export function DashboardPage({
                 <EmptyState
                   title={copy.myPrograms}
                   description={copy.emptyPrograms}
+                  icon={<Store className="h-5 w-5" />}
                   actions={
                     <Link href="/app/program/new">
-                      <Button size="sm">{copy.createProgram}</Button>
+                      <Button size="sm" icon={<Plus className="h-4 w-4" />}>
+                        {copy.createProgram}
+                      </Button>
                     </Link>
                   }
                 />
@@ -271,7 +314,11 @@ export function DashboardPage({
                   ))}
                 </div>
               ) : (
-                <EmptyState title={copy.rewardClaims} description={copy.emptyClaims} />
+                <EmptyState
+                  title={copy.rewardClaims}
+                  description={copy.emptyClaims}
+                  icon={<TicketCheck className="h-5 w-5" />}
+                />
               )}
             </DashboardSection>
           </>
@@ -303,20 +350,33 @@ function DashboardSection({
 }) {
   return (
     <section className="space-y-4">
-      <h2 className="text-xl font-semibold tracking-tight text-[#18122A]">{title}</h2>
+      <h2 className="text-xl font-semibold text-[#1B172B]">{title}</h2>
       {children}
     </section>
   );
 }
 
-function KpiCard({ label, value }: { label: string; value: number }) {
+function KpiCard({
+  icon,
+  label,
+  value
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: number;
+}) {
   return (
-    <Card>
-      <CardContent className="space-y-2 pt-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
-          {label}
-        </p>
-        <p className="text-3xl font-semibold text-[#18122A]">{value}</p>
+    <Card variant="soft">
+      <CardContent className="flex items-center justify-between gap-4 pt-5">
+        <div className="space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
+            {label}
+          </p>
+          <p className="text-3xl font-semibold text-[#1B172B]">{value}</p>
+        </div>
+        <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#E9FBF7] text-[#146B5E]">
+          {icon}
+        </div>
       </CardContent>
     </Card>
   );
@@ -331,7 +391,7 @@ function ProgramCard({ program }: { program: DashboardProgram }) {
     <Card>
       <CardHeader className="space-y-3">
         <Avatar name={program.name} imageUrl={program.iconUrl} size="sm" />
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
+        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
           {formatProgramCode(program.id)}
         </p>
         <CardTitle>{program.name}</CardTitle>
@@ -345,16 +405,14 @@ function ProgramCard({ program }: { program: DashboardProgram }) {
         />
         <div className="flex flex-wrap gap-3">
           <Link href={`/app/program/${program.id.toString()}`}>
-            <Button size="sm">{copy.openCard}</Button>
+            <Button size="sm" icon={<BadgeCheck className="h-4 w-4" />}>
+              {copy.openCard}
+            </Button>
           </Link>
           {progress?.canClaim ? (
-            <span className="rounded-full bg-[#EAF7EF] px-3 py-2 text-sm font-medium text-[#2D7A46]">
-              {copy.ready}
-            </span>
+            <Badge variant="mint">{copy.ready}</Badge>
           ) : (
-            <span className="rounded-full bg-[#F5F3FA] px-3 py-2 text-sm font-medium text-[#625B78]">
-              {copy.collecting}
-            </span>
+            <Badge variant="neutral">{copy.collecting}</Badge>
           )}
         </div>
       </CardContent>
@@ -363,26 +421,26 @@ function ProgramCard({ program }: { program: DashboardProgram }) {
 }
 
 function ManagedProgramCard({ program }: { program: DashboardProgram }) {
-  const { locale } = useLocale();
+  const { locale, dictionary } = useLocale();
   const copy = programCopy(locale);
 
   return (
     <Card>
       <CardHeader className="space-y-3">
         <Avatar name={program.name} imageUrl={program.iconUrl} size="sm" />
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
-          Owner · {formatProgramCode(program.id)}
-        </p>
+        <Badge variant={program.active ? "accent" : "danger"}>
+          {dictionary.common.manager} · {formatProgramCode(program.id)}
+        </Badge>
         <CardTitle>{program.name}</CardTitle>
         <CardDescription>{program.rewardDescription}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <p className="text-sm text-[#625B78]">
+        <p className="text-sm text-[#676078]">
           {program.stampsRequired} {copy.visits}
           {!program.active ? ` · ${copy.inactive}` : ""}
         </p>
         <Link href={`/app/program/${program.id.toString()}/manage`}>
-          <Button size="sm" variant="outline">
+          <Button size="sm" variant="outline" icon={<Store className="h-4 w-4" />}>
             {copy.manage}
           </Button>
         </Link>
@@ -399,20 +457,20 @@ function ClaimSummaryCard({ claim }: { claim: ClaimRecord }) {
     <Card>
       <CardContent className="flex flex-wrap items-center justify-between gap-4 pt-6">
         <div className="space-y-1">
-          <p className="text-sm font-semibold text-[#18122A]">
+          <p className="text-sm font-semibold text-[#1B172B]">
             {formatClaimCode(claim.id)} · {claim.rewardDescription}
           </p>
-          <p className="text-sm text-[#625B78]">
+          <p className="text-sm text-[#676078]">
             {formatProgramCode(claim.programId)} · {formatDateTime(claim.claimedAt, locale)}
           </p>
-          <p className="text-sm text-[#625B78]">{formatWalletLabel(claim.user)}</p>
+          <p className="text-sm text-[#676078]">{formatWalletLabel(claim.user)}</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <span className="rounded-full bg-[#F5F3FA] px-3 py-2 text-sm font-medium text-[#625B78]">
+          <Badge variant={claim.consumed ? "neutral" : "mint"}>
             {claim.consumed ? copy.usedClaim : copy.ready}
-          </span>
+          </Badge>
           <Link href={`/app/claim/${claim.id.toString()}`}>
-            <Button size="sm" variant="outline">
+            <Button size="sm" variant="outline" icon={<Gift className="h-4 w-4" />}>
               {copy.openCard}
             </Button>
           </Link>

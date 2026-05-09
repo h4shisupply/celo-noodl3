@@ -1,5 +1,6 @@
 "use client";
 
+import { Camera, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocale } from "./locale-provider";
 import { Button } from "./ui/button";
@@ -150,13 +151,13 @@ export function QrScanner({
   ]);
 
   return (
-    <div className="fixed inset-0 z-30 flex min-h-[100dvh] flex-col bg-[#FCFBFE] px-5 py-6 md:px-8 md:py-8">
+    <div className="fixed inset-0 z-30 flex min-h-[100dvh] flex-col bg-[#FBFCFF] px-5 py-6 md:px-8 md:py-8">
       <div className="flex items-start justify-between gap-4">
         <div className="max-w-xl space-y-2">
-          <h2 className="text-2xl font-semibold tracking-[-0.04em] text-[#18122A] md:text-3xl">
+          <h2 className="text-2xl font-semibold text-[#1B172B] md:text-3xl">
             {title}
           </h2>
-          <p className="text-sm leading-7 text-[#625B78]">{description}</p>
+          <p className="text-sm leading-7 text-[#676078]">{description}</p>
         </div>
 
         <button
@@ -165,15 +166,15 @@ export function QrScanner({
             stopCamera();
             onClose?.();
           }}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#E6E1F0] bg-white text-[#241B3C] shadow-[0_12px_32px_rgba(23,18,42,0.06)]"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#E6E1F0] bg-white text-[#241B3C] shadow-[0_12px_28px_rgba(27,23,43,0.08)]"
           aria-label={dictionary.actions.closeScanner}
         >
-          <CloseIcon />
+          <X className="h-5 w-5" />
         </button>
       </div>
 
       <div className="flex flex-1 flex-col pt-6">
-        <div className="relative flex-1 overflow-hidden rounded-[32px] border border-[#ECEAF4] bg-[#F4F1FA]">
+        <div className="relative flex-1 overflow-hidden rounded-lg border border-[#E5E1EE] bg-[#F3EFFF]">
           <video
             ref={videoRef}
             className="h-full w-full object-cover"
@@ -182,15 +183,18 @@ export function QrScanner({
           />
 
           {!isActive ? (
-            <div className="absolute inset-0 flex items-center justify-center bg-[#F4F1FA]/88 px-6 text-center">
+            <div className="absolute inset-0 flex items-center justify-center bg-[#F3EFFF]/90 px-6 text-center">
               <div className="space-y-4">
-                <p className="text-sm text-[#625B78]">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-white text-[#7047DF] shadow-[0_12px_28px_rgba(27,23,43,0.08)]">
+                  <Camera className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <p className="text-sm text-[#676078]">
                   {isProcessing
                     ? processingLabel || dictionary.qrScanner.ready
                     : error || notice || dictionary.qrScanner.ready}
                 </p>
                 {isProcessing ? (
-                  <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-[#D8D1EA] border-t-[#17122A]" />
+                  <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-[#D8D1EA] border-t-[#1B172B]" />
                 ) : (
                   <Button onClick={() => void startCamera()}>
                     {qrCopy.openCamera}
@@ -199,7 +203,7 @@ export function QrScanner({
               </div>
             </div>
           ) : (
-            <div className="pointer-events-none absolute inset-0 border-[14px] border-white/14" />
+            <div className="pointer-events-none absolute inset-0 border-[12px] border-white/20" />
           )}
         </div>
 
@@ -208,24 +212,6 @@ export function QrScanner({
         ) : null}
       </div>
     </div>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M6 6 18 18" />
-      <path d="M18 6 6 18" />
-    </svg>
   );
 }
 

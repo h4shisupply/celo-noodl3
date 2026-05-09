@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Web3 stamp-card loyalty programs for real-world visits on Celo.",
     start_url: "/",
     display: "standalone",
-    background_color: "#FBFAFD",
-    theme_color: "#FBFAFD",
+    background_color: "#FBFCFF",
+    theme_color: "#FBFCFF",
     icons: [
       {
         src: "/icon.svg",

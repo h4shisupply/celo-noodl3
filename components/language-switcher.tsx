@@ -23,7 +23,7 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <div className="inline-flex items-center rounded-full border border-[#E6E1F0] bg-white p-1">
+    <div className="inline-flex items-center rounded-lg border border-[#E5E1EE] bg-white p-1 shadow-[0_8px_18px_rgba(27,23,43,0.06)]">
       {localeOptions.map((option) => {
         const active = option.value === locale;
 
@@ -32,10 +32,10 @@ export function LanguageSwitcher() {
             key={option.value}
             type="button"
             onClick={() => changeLocale(option.value)}
-            className={`rounded-full px-3 py-2 text-xs font-semibold tracking-[0.12em] transition ${
+            className={`rounded-md px-3 py-2 text-xs font-semibold tracking-[0.08em] transition ${
               active
-                ? "bg-[#17122A] text-white"
-                : "text-[#6C6582] hover:bg-[#F6F3FC]"
+                ? "bg-[#1B172B] text-white"
+                : "text-[#676078] hover:bg-[#F6F3FC]"
             }`}
           >
             {option.label}

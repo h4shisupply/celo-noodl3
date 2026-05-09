@@ -1,15 +1,18 @@
 "use client";
 
+import { BadgeCheck, Gift, Settings, Stamp, TimerReset } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Hex } from "viem";
 import { AppChrome } from "./app-chrome";
 import { Avatar } from "./ui/avatar";
+import { Badge } from "./ui/badge";
 import { ProgressMeter } from "./progress-meter";
 import { useLocale } from "./locale-provider";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { EmptyState } from "./ui/empty-state";
+import { StatusMessage } from "./ui/status-message";
 import {
   fetchLastStaticStampAt,
   fetchProgram,
@@ -232,18 +235,32 @@ export function ProgramPage({
     >
       <section className="mx-auto max-w-3xl space-y-6">
         {isLoading ? (
-          <EmptyState title={dictionary.common.loading} description="" />
+          <EmptyState
+            title={dictionary.common.loading}
+            description={copy.loadingProgram}
+            icon={<Stamp className="h-5 w-5" />}
+          />
         ) : !program ? (
-          <EmptyState title={copy.notFound} description={formatProgramCode(programId)} />
+          <EmptyState
+            title={copy.notFound}
+            description={formatProgramCode(programId)}
+            icon={<Stamp className="h-5 w-5" />}
+          />
         ) : (
           <Card>
-            <CardHeader className="space-y-3">
-              <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
-                {formatProgramCode(program.id)} {!program.active ? `· ${copy.inactive}` : ""}
-              </p>
-              <CardTitle>{program.name}</CardTitle>
-              <CardDescription>{program.rewardDescription}</CardDescription>
+            <CardHeader className="stamp-pattern space-y-4 rounded-t-lg border-b border-[#E5E1EE] bg-[#FBFCFF]">
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
+                  <div className="min-w-0 space-y-2">
+                    <Badge variant={program.active ? "accent" : "danger"}>
+                      {formatProgramCode(program.id)} {!program.active ? `· ${copy.inactive}` : ""}
+                    </Badge>
+                    <CardTitle>{program.name}</CardTitle>
+                    <CardDescription>{program.rewardDescription}</CardDescription>
+                  </div>
+                </div>
+              </div>
             </CardHeader>
             <CardContent className="space-y-6">
               <ProgressMeter
@@ -254,7 +271,11 @@ export function ProgramPage({
 
               <div className="flex flex-wrap gap-3">
                 {canCollectDynamic ? (
-                  <Button onClick={() => void handleCollectDynamic()} disabled={isSubmitting || !program.active}>
+                  <Button
+                    icon={<Stamp className="h-4 w-4" />}
+                    onClick={() => void handleCollectDynamic()}
+                    disabled={isSubmitting || !program.active}
+                  >
                     {isSubmitting ? `${copy.collectVisit}...` : copy.collectVisit}
                   </Button>
                 ) : null}
@@ -262,6 +283,7 @@ export function ProgramPage({
                 {canCollectStatic ? (
                   <Button
                     variant={canCollectDynamic ? "outline" : "primary"}
+                    icon={<BadgeCheck className="h-4 w-4" />}
                     onClick={() => void handleCollectStatic()}
                     disabled={
                       isSubmitting ||
@@ -275,29 +297,35 @@ export function ProgramPage({
                 ) : null}
 
                 {progress?.canClaim ? (
-                  <Button variant="outline" onClick={() => void handleClaimReward()} disabled={isSubmitting}>
+                  <Button
+                    variant="warm"
+                    icon={<Gift className="h-4 w-4" />}
+                    onClick={() => void handleClaimReward()}
+                    disabled={isSubmitting}
+                  >
                     {copy.claimReward}
                   </Button>
                 ) : null}
 
                 {isOwner ? (
                   <Link href={`/app/program/${program.id.toString()}/manage`}>
-                    <Button variant="ghost">{copy.manage}</Button>
+                    <Button variant="ghost" icon={<Settings className="h-4 w-4" />}>
+                      {copy.manage}
+                    </Button>
                   </Link>
                 ) : null}
               </div>
 
               {canCollectStatic && lastStaticStampAt > 0 ? (
-                <p className="text-sm text-[#625B78]">
+                <p className="flex items-center gap-2 text-sm text-[#676078]">
+                  <TimerReset className="h-4 w-4" aria-hidden="true" />
                   {copy.nextStaticStamp}: {formatDateTime(staticNextAvailableAt, locale)}
                 </p>
               ) : null}
 
-              {status ? <p className="text-sm text-[#2D7A46]">{status}</p> : null}
+              {status ? <StatusMessage tone="success">{status}</StatusMessage> : null}
               {error || connectError ? (
-                <p className="rounded-2xl border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
-                  {error || connectError}
-                </p>
+                <StatusMessage tone="error">{error || connectError}</StatusMessage>
               ) : null}
             </CardContent>
           </Card>
