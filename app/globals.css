@@ -98,3 +98,28 @@ textarea {
     padding: 1.5rem 1.5rem 0;
   }
 }
+
+@media print {
+  body {
+    background: #ffffff;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .print-sheet,
+  .print-sheet * {
+    visibility: visible;
+  }
+
+  .print-sheet {
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    min-height: 100vh;
+    border: 0;
+    box-shadow: none;
+  }
+}

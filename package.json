@@ -28,6 +28,7 @@
     "ethers": "^6.15.0",
     "lucide-react": "^1.14.0",
     "next": "15.5.15",
+    "qrcode.react": "^4.2.0",
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "viem": "^2.21.53"

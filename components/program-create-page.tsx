@@ -147,6 +147,9 @@ export function ProgramCreatePage({
             <CardDescription>{copy.createDescription}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">
+            {!contractAddress ? (
+              <StatusMessage tone="warning">{copy.noContract}</StatusMessage>
+            ) : null}
             <Field label={copy.programName}>
               <Input
                 value={name}

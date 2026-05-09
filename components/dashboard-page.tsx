@@ -170,7 +170,7 @@ export function DashboardPage({
       return;
     }
 
-    setNotice("QR code is not a Noodl3 program link.");
+    setNotice(copy.invalidProgramQr);
     return false;
   }
 
