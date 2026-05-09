@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useLocale } from "./locale-provider";
@@ -30,7 +31,7 @@ export function AppChrome({
   const { locale, dictionary } = useLocale();
 
   return (
-    <main className="space-y-10 pb-20 md:space-y-14 md:pb-24">
+    <main className="space-y-8 pb-20 md:space-y-12 md:pb-24">
       {walletState.account && walletState.isWrongChain ? (
         <NetworkMismatchModal
           eyebrow={dictionary.common.network}
@@ -63,25 +64,25 @@ export function AppChrome({
           {backHref ? (
             <Link
               href={backHref}
-              className="inline-flex items-center gap-2 text-sm font-medium text-[#625B78] transition hover:text-[#18122A]"
+              className="inline-flex items-center gap-2 rounded-lg px-1 py-1 text-sm font-semibold text-[#676078] transition hover:text-[#1B172B]"
             >
-              <span aria-hidden="true">←</span>
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               {backLabel}
             </Link>
           ) : null}
           {eyebrow ? (
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7B3FE4]">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7047DF]">
               {eyebrow}
             </p>
           ) : null}
           <div className="max-w-3xl space-y-3">
             {title ? (
-              <h1 className="text-3xl font-semibold tracking-[-0.04em] text-[#18122A] md:text-5xl">
+              <h1 className="text-3xl font-semibold text-[#1B172B] md:text-5xl">
                 {title}
               </h1>
             ) : null}
             {description ? (
-              <p className="text-base leading-8 text-[#625B78]">{description}</p>
+              <p className="text-base leading-8 text-[#676078]">{description}</p>
             ) : null}
           </div>
         </section>

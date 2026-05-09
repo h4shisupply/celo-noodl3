@@ -63,7 +63,7 @@ export function HeadlessSelect({
   return (
     <div className={clsx("space-y-2", className)} ref={rootRef}>
       {label ? (
-        <span className="block text-xs font-medium uppercase tracking-[0.16em] text-zinc-500">
+        <span className="block text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
           {label}
         </span>
       ) : null}
@@ -78,13 +78,13 @@ export function HeadlessSelect({
           }}
           disabled={disabled}
           className={clsx(
-            "flex min-h-12 w-full items-center justify-between rounded-[22px] border border-[#E7E1F1] bg-white px-4 py-3 text-left shadow-[0_10px_30px_rgba(23,18,42,0.06)] transition hover:border-[#D7CFF0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7B3FE4]/15",
+            "flex min-h-12 w-full items-center justify-between rounded-lg border border-[#E7E1F1] bg-white px-4 py-3 text-left shadow-[0_10px_24px_rgba(27,23,43,0.06)] transition hover:border-[#D7CFF0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7047DF]/15",
             disabled && "cursor-default opacity-70 hover:border-[#E7E1F1]",
             triggerClassName
           )}
         >
           <div className="min-w-0">
-            <p className="truncate text-sm font-medium text-[#18122A]">
+            <p className="truncate text-sm font-medium text-[#1B172B]">
               {selected?.label || placeholder || ""}
             </p>
             {selected?.description ? (
@@ -105,7 +105,7 @@ export function HeadlessSelect({
         {open ? (
           <div
             className={clsx(
-              "absolute z-40 mt-2 w-full min-w-[15rem] rounded-[24px] border border-[#E7E1F1] bg-white p-2 shadow-[0_24px_80px_rgba(23,18,42,0.12)]",
+              "absolute z-40 mt-2 w-full min-w-[15rem] rounded-lg border border-[#E7E1F1] bg-white p-2 shadow-[0_24px_70px_rgba(27,23,43,0.12)]",
               align === "right" ? "right-0" : "left-0"
             )}
             role="listbox"
@@ -124,9 +124,9 @@ export function HeadlessSelect({
                     setOpen(false);
                   }}
                   className={clsx(
-                    "flex w-full flex-col rounded-xl px-3 py-3 text-left transition",
+                    "flex w-full flex-col rounded-md px-3 py-3 text-left transition",
                     active
-                      ? "bg-[#17122A] text-white"
+                      ? "bg-[#1B172B] text-white"
                       : "text-[#241B3C] hover:bg-[#F7F5FF]"
                   )}
                 >

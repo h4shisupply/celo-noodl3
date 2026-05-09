@@ -1,5 +1,6 @@
 "use client";
 
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { BrandMark } from "./brand-mark";
@@ -35,7 +36,7 @@ function NavLink({
       <a
         href={href}
         onClick={onClick}
-        className="text-sm text-[#625B78] transition hover:text-[#17122A]"
+        className="text-sm font-medium text-[#676078] transition hover:text-[#1B172B]"
       >
         {label}
       </a>
@@ -46,7 +47,7 @@ function NavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="text-sm text-[#625B78] transition hover:text-[#17122A]"
+      className="text-sm font-medium text-[#676078] transition hover:text-[#1B172B]"
     >
       {label}
     </Link>
@@ -105,14 +106,15 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
         <button
           type="button"
           onClick={() => setMenuOpen((current) => !current)}
-          className="inline-flex h-11 items-center rounded-full border border-[#E4DEF1] px-4 text-sm font-medium text-[#241B3C] md:hidden"
+          className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#E4DEF1] bg-white px-4 text-sm font-semibold text-[#241B3C] md:hidden"
         >
+          {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           {menuLabel}
         </button>
       </div>
 
       {menuOpen ? (
-        <div className="mt-5 space-y-4 rounded-[28px] border border-[#ECE6F5] bg-white px-5 py-5 shadow-[0_20px_50px_rgba(23,18,42,0.06)] md:hidden">
+        <div className="mt-5 space-y-4 rounded-lg border border-[#ECE6F5] bg-white px-5 py-5 shadow-[0_20px_44px_rgba(27,23,43,0.08)] md:hidden">
           <nav className="grid gap-3">
             {items.map((item) => (
               <NavLink

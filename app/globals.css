@@ -4,14 +4,20 @@
 
 :root {
   color-scheme: light;
-  --page: #fbfafd;
+  --page: #fbfcff;
   --panel: #ffffff;
-  --panel-soft: #f7f5fb;
-  --line: #ebe6f5;
-  --ink: #17122a;
-  --muted: #6c6582;
-  --accent: #7b3fe4;
-  --accent-soft: #f3ebff;
+  --panel-soft: #f7f9ff;
+  --line: #e5e1ee;
+  --ink: #1b172b;
+  --muted: #676078;
+  --accent: #7047df;
+  --accent-soft: #f3efff;
+  --mint: #0f9f8f;
+  --mint-soft: #e9fbf7;
+  --sun: #f5a623;
+  --sun-soft: #fff7e8;
+  --danger: #a23b3b;
+  --success: #257a52;
 }
 
 * {
@@ -26,9 +32,8 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top right, rgba(123, 63, 228, 0.1), transparent 20%),
-    radial-gradient(circle at bottom left, rgba(245, 158, 11, 0.05), transparent 24%),
-    linear-gradient(180deg, #fcfbfe 0%, #f8f6fb 100%);
+    linear-gradient(135deg, rgba(255, 247, 232, 0.72) 0%, rgba(255, 255, 255, 0) 32%),
+    linear-gradient(180deg, #fefcff 0%, #f7fbff 44%, #fbf9ff 100%);
   color: var(--ink);
   font-family: var(--font-sans), sans-serif;
 }
@@ -39,7 +44,8 @@ a {
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
 }
 
@@ -49,6 +55,11 @@ input {
 
 .page-shell {
   min-height: 100vh;
+  background-image:
+    linear-gradient(rgba(27, 23, 43, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 23, 43, 0.035) 1px, transparent 1px);
+  background-position: -1px -1px;
+  background-size: 32px 32px;
 }
 
 .app-frame {
@@ -58,32 +69,32 @@ input {
   padding: 1rem 1rem 0;
 }
 
+.surface-panel {
+  border: 1px solid rgba(229, 225, 238, 0.86);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 18px 48px rgba(27, 23, 43, 0.08);
+  backdrop-filter: blur(14px);
+}
+
 .soft-grid {
   background-image:
-    linear-gradient(rgba(122, 111, 153, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(122, 111, 153, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(27, 23, 43, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 23, 43, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.stamp-pattern {
+  background-image:
+    linear-gradient(45deg, rgba(112, 71, 223, 0.08) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(15, 159, 143, 0.08) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(112, 71, 223, 0.08) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(15, 159, 143, 0.08) 75%);
+  background-position: 0 0, 0 12px, 12px -12px, -12px 0;
   background-size: 24px 24px;
-}
-
-.hero-glow {
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-glow::after {
-  content: "";
-  position: absolute;
-  inset: auto -5rem -5rem auto;
-  width: 14rem;
-  height: 14rem;
-  border-radius: 9999px;
-  background: rgba(123, 63, 228, 0.14);
-  filter: blur(50px);
-  pointer-events: none;
 }
 
 @media (min-width: 768px) {
   .app-frame {
-    padding: 1.5rem;
+    padding: 1.5rem 1.5rem 0;
   }
 }

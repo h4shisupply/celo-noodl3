@@ -1,5 +1,6 @@
 "use client";
 
+import { BadgeCheck, Gift, Image as ImageIcon, Save, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import type { Hex } from "viem";
@@ -8,6 +9,9 @@ import { useLocale } from "./locale-provider";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { Input } from "./ui/input";
+import { StatusMessage } from "./ui/status-message";
+import { Textarea } from "./ui/textarea";
+import { ToggleRow } from "./ui/toggle-row";
 import { resolveContractAddressForChain } from "../lib/chains";
 import { getUserFacingErrorMessage } from "../lib/error-message";
 import { normalizeRemoteImageUrl } from "../lib/format";
@@ -136,7 +140,7 @@ export function ProgramCreatePage({
       title={copy.createTitle}
       description={copy.createDescription}
     >
-      <section className="mx-auto max-w-2xl">
+      <section className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <Card>
           <CardHeader>
             <CardTitle>{copy.createProgram}</CardTitle>
@@ -144,7 +148,12 @@ export function ProgramCreatePage({
           </CardHeader>
           <CardContent className="space-y-5">
             <Field label={copy.programName}>
-              <Input value={name} maxLength={60} onChange={(event) => setName(event.target.value)} />
+              <Input
+                value={name}
+                maxLength={60}
+                placeholder={copy.programNamePlaceholder}
+                onChange={(event) => setName(event.target.value)}
+              />
             </Field>
             <Field label={copy.iconUrl}>
               <Input
@@ -153,14 +162,14 @@ export function ProgramCreatePage({
                 placeholder="https://..."
                 onChange={(event) => setIconUrl(event.target.value)}
               />
-              <p className="text-xs text-[#8B84A1]">{copy.iconUrlHelp}</p>
+              <p className="text-xs text-[#676078]">{copy.iconUrlHelp}</p>
             </Field>
             <Field label={copy.rewardDescription}>
-              <textarea
+              <Textarea
                 value={rewardDescription}
                 maxLength={120}
+                placeholder={copy.rewardPlaceholder}
                 onChange={(event) => setRewardDescription(event.target.value)}
-                className="min-h-[96px] w-full rounded-2xl border border-[#E4DEEF] bg-[#FBFAFD] px-4 py-3 text-sm text-[#1B1630] outline-none transition placeholder:text-[#9A95AD] focus:border-[#B59AF2] focus:bg-white"
               />
             </Field>
             <Field label={copy.visitsRequired}>
@@ -170,35 +179,87 @@ export function ProgramCreatePage({
                 onChange={(event) => setStampsRequired(event.target.value)}
               />
             </Field>
-            <label className="flex items-center gap-3 text-sm font-medium text-[#241B3C]">
-              <input
-                type="checkbox"
+
+            <div className="grid gap-3">
+              <ToggleRow
                 checked={active}
+                icon={<Sparkles className="h-4 w-4" />}
+                label={copy.active}
+                description={copy.activeHelp}
                 onChange={(event) => setActive(event.target.checked)}
               />
-              {copy.active}
-            </label>
-            <label className="flex items-center gap-3 text-sm font-medium text-[#241B3C]">
-              <input
-                type="checkbox"
+              <ToggleRow
                 checked={staticStampEnabled}
+                icon={<BadgeCheck className="h-4 w-4" />}
+                label={copy.staticStampEnabled}
+                description={copy.staticStampHelp}
                 onChange={(event) => setStaticStampEnabled(event.target.checked)}
               />
-              {copy.staticStampEnabled}
-            </label>
+            </div>
 
-            <Button onClick={() => void handleSubmit()} disabled={isSaving || !contractAddress}>
+            <Button
+              icon={<Save className="h-4 w-4" />}
+              onClick={() => void handleSubmit()}
+              disabled={isSaving || !contractAddress}
+            >
               {isSaving ? `${dictionary.common.saving}...` : copy.saveProgram}
             </Button>
 
-            {status ? <p className="text-sm text-[#2D7A46]">{status}</p> : null}
+            {status ? <StatusMessage tone="success">{status}</StatusMessage> : null}
             {error || connectError ? (
-              <p className="rounded-2xl border border-[#F1D9D9] bg-[#FFF6F6] px-4 py-3 text-sm text-[#8C3A3A]">
-                {error || connectError}
-              </p>
+              <StatusMessage tone="error">{error || connectError}</StatusMessage>
             ) : null}
           </CardContent>
         </Card>
+
+        <aside className="surface-panel stamp-pattern h-fit rounded-lg p-5">
+          <div className="space-y-5 rounded-lg bg-white/88 p-5">
+            <div className="flex items-center gap-3">
+              {normalizeRemoteImageUrl(iconUrl) ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={normalizeRemoteImageUrl(iconUrl) ?? ""}
+                  alt=""
+                  className="h-12 w-12 rounded-lg object-cover"
+                />
+              ) : (
+                <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#F3EFFF] text-[#7047DF]">
+                  <ImageIcon className="h-5 w-5" />
+                </span>
+              )}
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-[#1B172B]">
+                  {name || copy.previewProgramName}
+                </p>
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
+                  {copy.previewCard}
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-5 gap-2">
+              {Array.from({
+                length: Math.max(1, Math.min(Number.parseInt(stampsRequired, 10) || 10, 10))
+              }).map((_, index) => (
+                <span
+                  key={index}
+                  className={`flex aspect-square items-center justify-center rounded-lg border text-xs font-semibold ${
+                    index < 3
+                      ? "border-[#0F9F8F] bg-[#E9FBF7] text-[#146B5E]"
+                      : "border-[#DCD6EA] bg-white text-[#8B84A1]"
+                  }`}
+                >
+                  {index + 1}
+                </span>
+              ))}
+            </div>
+
+            <div className="rounded-lg bg-[#FFF7E8] p-3 text-sm font-semibold leading-6 text-[#8B5B00]">
+              <Gift className="mb-2 h-4 w-4" aria-hidden="true" />
+              {rewardDescription || copy.previewReward}
+            </div>
+          </div>
+        </aside>
       </section>
     </AppChrome>
   );
@@ -213,7 +274,7 @@ function Field({
 }) {
   return (
     <label className="block space-y-2">
-      <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B84A1]">
+      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
         {label}
       </span>
       {children}

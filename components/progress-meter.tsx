@@ -12,18 +12,24 @@ export function ProgressMeter({
   const { dictionary } = useLocale();
   const safeTotal = Math.max(total, 1);
   const width = Math.min(100, Math.round((value / safeTotal) * 100));
+  const safeValue = Math.min(value, safeTotal);
 
   return (
-    <div className="space-y-2">
-      <div className="h-3 overflow-hidden rounded-full bg-[#F1EDF8]">
+    <div className="space-y-3">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
+          {unitLabel ?? dictionary.common.stampsLabel}
+        </p>
+        <p className="rounded-full bg-[#FFF7E8] px-2.5 py-1 text-xs font-semibold text-[#8B5B00]">
+          {safeValue}/{total}
+        </p>
+      </div>
+      <div className="h-3 overflow-hidden rounded-full bg-[#EDF1F8]">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-[#7B3FE4] to-[#B087F9] transition-[width]"
+          className="h-full rounded-full bg-gradient-to-r from-[#0F9F8F] via-[#7047DF] to-[#F5A623] transition-[width]"
           style={{ width: `${width}%` }}
         />
       </div>
-      <p className="text-xs uppercase tracking-[0.16em] text-[#8B84A1]">
-        {value}/{total} {unitLabel ?? dictionary.common.stampsLabel}
-      </p>
     </div>
   );
 }

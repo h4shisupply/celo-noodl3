@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDown, LogOut, RefreshCw, UserRound, Wallet } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { Hex } from "viem";
 import { BrandMark } from "./brand-mark";
@@ -91,7 +92,7 @@ export function AppAccountBar({
               <button
                 type="button"
                 onClick={() => setIsMenuOpen((current) => !current)}
-                className="inline-flex h-11 items-center gap-2 rounded-full border border-[#E6E1F0] bg-white px-3 text-sm text-[#241B3C] shadow-[0_12px_32px_rgba(23,18,42,0.06)]"
+                className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#E5E1EE] bg-white px-3 text-sm font-semibold text-[#241B3C] shadow-[0_12px_28px_rgba(27,23,43,0.08)] transition hover:border-[#D9D0F4]"
                 aria-expanded={isMenuOpen}
                 aria-label={dictionary.account.openMenu}
               >
@@ -104,21 +105,24 @@ export function AppAccountBar({
                   </>
                 ) : (
                   <>
-                    <WalletIcon />
+                    <Wallet className="h-5 w-5 text-[#1B172B]" aria-hidden="true" />
                     <span className="hidden sm:block">{formatWalletLabel(account)}</span>
                   </>
                 )}
-                <ChevronIcon open={isMenuOpen} />
+                <ChevronDown
+                  className={`h-4 w-4 text-[#676078] transition ${isMenuOpen ? "rotate-180" : ""}`}
+                  aria-hidden="true"
+                />
               </button>
 
               {isMenuOpen ? (
-                <div className="absolute right-0 top-[calc(100%+0.75rem)] z-30 w-[17rem] rounded-[28px] border border-[#E6E1F0] bg-white p-4 shadow-[0_28px_90px_rgba(23,18,42,0.12)]">
+                <div className="absolute right-0 top-[calc(100%+0.75rem)] z-30 w-[17rem] rounded-lg border border-[#E5E1EE] bg-white p-4 shadow-[0_28px_80px_rgba(27,23,43,0.14)]">
                   <div className="space-y-1 border-b border-[#F0ECF6] pb-4">
-                    <p className="text-sm font-semibold text-[#18122A]">
+                    <p className="text-sm font-semibold text-[#1B172B]">
                       {profile?.displayName ?? dictionary.account.connectedWallet}
                     </p>
-                    <p className="text-sm text-[#625B78]">{formatWalletLabel(account)}</p>
-                    <p className="text-sm text-[#625B78]">
+                    <p className="text-sm text-[#676078]">{formatWalletLabel(account)}</p>
+                    <p className="text-sm text-[#676078]">
                       {isWrongChain
                         ? interpolate(dictionary.account.expectedNetwork, {
                             current: getChainLabel(chainId, locale),
@@ -134,6 +138,7 @@ export function AppAccountBar({
                         variant="outline"
                         size="sm"
                         className="w-full justify-start"
+                        icon={<RefreshCw className="h-4 w-4" />}
                         onClick={() => {
                           setIsMenuOpen(false);
                           if (isMiniPay) {
@@ -154,6 +159,7 @@ export function AppAccountBar({
                         variant="ghost"
                         size="sm"
                         className="w-full justify-start"
+                        icon={<UserRound className="h-4 w-4" />}
                         onClick={() => {
                           setIsMenuOpen(false);
                           onProfileClick();
@@ -173,6 +179,7 @@ export function AppAccountBar({
                     variant="outline"
                     size="sm"
                     className="w-full"
+                    icon={<LogOut className="h-4 w-4" />}
                     onClick={() => {
                       setIsMenuOpen(false);
                       disconnect();
@@ -227,44 +234,8 @@ function ProfileAvatar({
   }
 
   return (
-    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#F5F3FA] text-xs font-semibold text-[#17122A]">
+    <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-[#E9FBF7] text-xs font-semibold text-[#146B5E]">
       {getInitials(name)}
     </span>
-  );
-}
-
-function WalletIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="h-5 w-5 text-[#18122A]"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M4 8.5C4 6.57 5.57 5 7.5 5h10A2.5 2.5 0 0 1 20 7.5V9h-5.5A2.5 2.5 0 0 0 12 11.5v1A2.5 2.5 0 0 0 14.5 15H20v1.5A2.5 2.5 0 0 1 17.5 19h-10A3.5 3.5 0 0 1 4 15.5v-7Z" />
-      <path d="M14 12h6" />
-      <circle cx="16.5" cy="12" r=".75" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-function ChevronIcon({ open }: { open: boolean }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 20 20"
-      className={`h-4 w-4 text-[#6B6482] transition ${open ? "rotate-180" : ""}`}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m5 8 5 5 5-5" />
-    </svg>
   );
 }
