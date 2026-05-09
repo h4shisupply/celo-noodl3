@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Hex } from "viem";
 import { AppChrome } from "./app-chrome";
+import { CountdownBadge } from "./countdown-badge";
 import { Avatar } from "./ui/avatar";
 import { Badge } from "./ui/badge";
 import { ProgressMeter } from "./progress-meter";
@@ -63,6 +64,7 @@ export function ProgramPage({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [nowSeconds, setNowSeconds] = useState(() => Math.floor(Date.now() / 1000));
   const {
     account,
     chainId,
@@ -123,6 +125,20 @@ export function ProgramPage({
   useEffect(() => {
     void loadProgram();
   }, [loadProgram]);
+
+  useEffect(() => {
+    if (visitMode !== "dynamic" || !expiresAt) {
+      return undefined;
+    }
+
+    const interval = window.setInterval(() => {
+      setNowSeconds(Math.floor(Date.now() / 1000));
+    }, 1000);
+
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, [expiresAt, visitMode]);
 
   async function ensureAccount() {
     if (account) return account;
@@ -202,7 +218,13 @@ export function ProgramPage({
     }
   }
 
-  const canCollectDynamic = visitMode === "dynamic" && nonce && expiresAt && signature;
+  const dynamicExpiresAtSeconds = expiresAt ? Number(expiresAt) : null;
+  const isDynamicExpired =
+    dynamicExpiresAtSeconds !== null && dynamicExpiresAtSeconds <= nowSeconds;
+  const hasMalformedDynamicQr =
+    visitMode === "dynamic" && (!nonce || !expiresAt || !signature);
+  const canCollectDynamic =
+    visitMode === "dynamic" && nonce && expiresAt && signature && !isDynamicExpired;
   const canCollectStatic = visitMode === "static";
   const staticNextAvailableAt = lastStaticStampAt + STATIC_STAMP_COOLDOWN_SECONDS;
   const isStaticCoolingDown =
@@ -234,7 +256,13 @@ export function ProgramPage({
       description={program?.rewardDescription ?? copy.appDescription}
     >
       <section className="mx-auto max-w-3xl space-y-6">
-        {isLoading ? (
+        {!contractAddress ? (
+          <EmptyState
+            title={dictionary.common.contractMissing}
+            description={copy.noContract}
+            icon={<Stamp className="h-5 w-5" />}
+          />
+        ) : isLoading ? (
           <EmptyState
             title={dictionary.common.loading}
             description={copy.loadingProgram}
@@ -270,6 +298,14 @@ export function ProgramPage({
               />
 
               <div className="flex flex-wrap gap-3">
+                {dynamicExpiresAtSeconds ? (
+                  <CountdownBadge
+                    expiresAt={dynamicExpiresAtSeconds}
+                    label={copy.liveQrExpiresIn}
+                    expiredLabel={copy.liveQrExpired}
+                  />
+                ) : null}
+
                 {canCollectDynamic ? (
                   <Button
                     icon={<Stamp className="h-4 w-4" />}
@@ -315,6 +351,18 @@ export function ProgramPage({
                   </Link>
                 ) : null}
               </div>
+
+              {hasMalformedDynamicQr ? (
+                <StatusMessage tone="error">{copy.invalidVisitQr}</StatusMessage>
+              ) : null}
+
+              {isDynamicExpired ? (
+                <StatusMessage tone="warning">{copy.dynamicExpiredHelp}</StatusMessage>
+              ) : null}
+
+              {canCollectStatic && !program.staticStampEnabled ? (
+                <StatusMessage tone="warning">{copy.staticDisabledHelp}</StatusMessage>
+              ) : null}
 
               {canCollectStatic && lastStaticStampAt > 0 ? (
                 <p className="flex items-center gap-2 text-sm text-[#676078]">

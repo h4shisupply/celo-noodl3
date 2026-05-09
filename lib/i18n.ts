@@ -321,6 +321,9 @@ export type Dictionary = {
     description: string;
     namePlaceholder: string;
     avatarPlaceholder: string;
+    nameRequired: string;
+    avatarInvalid: string;
+    unavailable: string;
   };
   catalogEditor: {
     savedTitle: string;
@@ -791,7 +794,10 @@ const dictionaries: Record<Locale, Dictionary> = {
       description:
         "Adicione um nome e, se quiser, uma foto. Você pode pular isso por agora.",
       namePlaceholder: "Seu nome",
-      avatarPlaceholder: "Link da foto (opcional)"
+      avatarPlaceholder: "Link da foto (opcional)",
+      nameRequired: "Informe um nome para salvar o perfil.",
+      avatarInvalid: "Use uma URL HTTPS pública para a foto.",
+      unavailable: "Perfil onchain indisponível nesta rede agora."
     },
     catalogEditor: {
       savedTitle: "Salvo",
@@ -1274,7 +1280,10 @@ const dictionaries: Record<Locale, Dictionary> = {
       description:
         "Add a display name and, if you want, a photo. You can skip this for now.",
       namePlaceholder: "Your name",
-      avatarPlaceholder: "Profile image URL (optional)"
+      avatarPlaceholder: "Profile image URL (optional)",
+      nameRequired: "Enter a name to save your profile.",
+      avatarInvalid: "Use a public HTTPS URL for the profile image.",
+      unavailable: "Onchain profiles are unavailable on this network right now."
     },
     catalogEditor: {
       savedTitle: "Saved",

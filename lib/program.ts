@@ -49,12 +49,18 @@ export function buildClaimUrl(appUrl: string, claimId: bigint | number) {
   return new URL(`/app/claim/${claimId.toString()}`, appUrl).toString();
 }
 
-export function buildQrImageUrl(value: string, size = 320) {
-  const url = new URL("https://api.qrserver.com/v1/create-qr-code/");
-  url.searchParams.set("size", `${size}x${size}`);
-  url.searchParams.set("data", value);
-  url.searchParams.set("margin", "0");
-  return url.toString();
+export function formatQrLinkLabel(value: string) {
+  try {
+    const url = new URL(value);
+    return `${url.host}${url.pathname}${url.search}`;
+  } catch {
+    return value;
+  }
+}
+
+export function parseDynamicVisitExpiresAt(value: string | null | undefined) {
+  const parsed = parseProgramId(value);
+  return parsed ? Number(parsed) : null;
 }
 
 export function parseProgramUrl(value: string) {
@@ -89,6 +95,7 @@ const enProgramCopy = {
     "Create a playful Web3 pass, stamp real visits with QR codes, and validate rewards without paper cards or checkout clutter.",
   createProgram: "Create card",
   scanQr: "Scan QR",
+  invalidProgramQr: "This is not a noodl3 stamp-card QR.",
   myCards: "Cards I collect",
   myPrograms: "Cards I run",
   rewardClaims: "Reward tickets",
@@ -154,7 +161,30 @@ const enProgramCopy = {
   previewProgramName: "Your shop name",
   previewReward: "Your reward promise appears here.",
   loadingProgram: "Getting the latest card details from the contract.",
-  loadingClaim: "Checking this reward ticket on-chain."
+  loadingClaim: "Checking this reward ticket on-chain.",
+  qrCopy: "Copy link",
+  qrCopied: "Link copied.",
+  qrShare: "Share",
+  qrDownload: "Download QR",
+  qrPrint: "Print sheet",
+  qrOpen: "Open",
+  qrShareUnavailable: "Sharing is not available in this browser. Copy the link instead.",
+  printedSheetTitle: "Counter stamp sheet",
+  printedSheetDescription: "Put this by the register so customers can scan and stamp their visit.",
+  staticQrRule: "One stamp per wallet every 20 hours.",
+  liveQrExpiresIn: "Expires in",
+  liveQrExpired: "Live QR expired",
+  regenerateDynamicQr: "Regenerate live QR",
+  dynamicQrInactive: "Turn the card active before generating a live QR.",
+  dynamicQrOneUse: "This QR expires in five minutes and works for one customer.",
+  invalidVisitQr: "This live QR is missing required visit data. Ask the owner to generate a fresh QR.",
+  dynamicExpiredHelp: "This live QR has expired. Ask the owner for a new one.",
+  staticDisabledHelp: "Printed QR stamps are currently disabled for this card.",
+  backupCode: "Backup code",
+  ticketReady: "Ready to validate",
+  ticketUsed: "Already used",
+  ownerValidationHint: "Connect the program owner wallet to use this ticket.",
+  rewardTicketSheet: "Reward ticket"
 };
 
 const ptProgramCopy = {
@@ -163,6 +193,7 @@ const ptProgramCopy = {
     "Crie um passe Web3 divertido, carimbe visitas reais com QR codes e valide recompensas sem cartão de papel nem checkout confuso.",
   createProgram: "Criar cartão",
   scanQr: "Ler QR",
+  invalidProgramQr: "Este não é um QR de cartão de selos do noodl3.",
   myCards: "Cartões que coleciono",
   myPrograms: "Cartões que administro",
   rewardClaims: "Tickets de recompensa",
@@ -228,5 +259,28 @@ const ptProgramCopy = {
   previewProgramName: "Nome da sua loja",
   previewReward: "A promessa da recompensa aparece aqui.",
   loadingProgram: "Buscando os detalhes mais recentes do cartão no contrato.",
-  loadingClaim: "Conferindo este ticket de recompensa on-chain."
+  loadingClaim: "Conferindo este ticket de recompensa on-chain.",
+  qrCopy: "Copiar link",
+  qrCopied: "Link copiado.",
+  qrShare: "Compartilhar",
+  qrDownload: "Baixar QR",
+  qrPrint: "Imprimir folha",
+  qrOpen: "Abrir",
+  qrShareUnavailable: "Compartilhamento indisponível neste navegador. Copie o link.",
+  printedSheetTitle: "Folha de balcão",
+  printedSheetDescription: "Deixe no caixa para clientes lerem e carimbarem a visita.",
+  staticQrRule: "Um selo por carteira a cada 20 horas.",
+  liveQrExpiresIn: "Expira em",
+  liveQrExpired: "QR ao vivo expirou",
+  regenerateDynamicQr: "Gerar novo QR ao vivo",
+  dynamicQrInactive: "Ative o cartão antes de gerar um QR ao vivo.",
+  dynamicQrOneUse: "Este QR expira em cinco minutos e funciona para um cliente.",
+  invalidVisitQr: "Este QR ao vivo está sem dados obrigatórios da visita. Peça ao dono para gerar um novo QR.",
+  dynamicExpiredHelp: "Este QR ao vivo expirou. Peça um novo QR ao dono.",
+  staticDisabledHelp: "Selos pelo QR impresso estão desativados neste cartão.",
+  backupCode: "Código de apoio",
+  ticketReady: "Pronto para validar",
+  ticketUsed: "Já usado",
+  ownerValidationHint: "Conecte a carteira dona do programa para usar este ticket.",
+  rewardTicketSheet: "Ticket de recompensa"
 };

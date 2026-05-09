@@ -2,10 +2,11 @@
 
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { useLocale } from "./locale-provider";
 import { AppAccountBar, type AppChromeWalletState } from "./app-account-bar";
 import { NetworkMismatchModal } from "./network-mismatch-modal";
+import { ProfileDialog } from "./profile-dialog";
 
 export function AppChrome({
   eyebrow,
@@ -28,7 +29,8 @@ export function AppChrome({
   backHref?: string;
   backLabel?: string;
 }) {
-  const { locale, dictionary } = useLocale();
+  const { dictionary } = useLocale();
+  const [profileOpen, setProfileOpen] = useState(false);
 
   return (
     <main className="space-y-8 pb-20 md:space-y-12 md:pb-24">
@@ -57,7 +59,23 @@ export function AppChrome({
         />
       ) : null}
 
-      <AppAccountBar walletState={walletState} onProfileClick={onProfileClick} />
+      <AppAccountBar
+        walletState={walletState}
+        onProfileClick={() => {
+          onProfileClick?.();
+          setProfileOpen(true);
+        }}
+      />
+
+      {profileOpen && walletState.account ? (
+        <ProfileDialog
+          account={walletState.account}
+          chainId={walletState.expectedChainId}
+          contractAddress={walletState.contractAddress}
+          enabled={!walletState.isWrongChain && Boolean(walletState.contractAddress)}
+          onClose={() => setProfileOpen(false)}
+        />
+      ) : null}
 
       {title || description || eyebrow ? (
         <section className="space-y-4 pb-2 md:space-y-5">

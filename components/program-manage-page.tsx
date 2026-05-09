@@ -17,7 +17,9 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { getAddress, isAddress, type Hex } from "viem";
 import { AppChrome } from "./app-chrome";
+import { CountdownBadge } from "./countdown-badge";
 import { ProgressMeter } from "./progress-meter";
+import { PrintableQrSheet, QrDisplay } from "./qr-display";
 import { useLocale } from "./locale-provider";
 import { Avatar } from "./ui/avatar";
 import { Badge } from "./ui/badge";
@@ -44,7 +46,6 @@ import { normalizeRemoteImageUrl } from "../lib/format";
 import { formatWalletLabel } from "../lib/claim-code";
 import {
   buildDynamicVisitUrl,
-  buildQrImageUrl,
   buildStaticVisitUrl,
   formatClaimCode,
   formatProgramCode,
@@ -63,6 +64,11 @@ import {
 type CustomerSummary = {
   address: Hex;
   progress: ProgressRecord | null;
+};
+
+type DynamicQrSession = {
+  url: string;
+  expiresAt: number;
 };
 
 export function ProgramManagePage({
@@ -92,7 +98,7 @@ export function ProgramManagePage({
   const [active, setActive] = useState(true);
   const [staticStampEnabled, setStaticStampEnabled] = useState(true);
   const [manualCustomer, setManualCustomer] = useState("");
-  const [dynamicUrl, setDynamicUrl] = useState<string | null>(null);
+  const [dynamicQr, setDynamicQr] = useState<DynamicQrSession | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -121,6 +127,18 @@ export function ProgramManagePage({
   const staticVisitUrl = useMemo(
     () => buildStaticVisitUrl(appUrl, programId),
     [appUrl, programId]
+  );
+  const qrLabels = useMemo(
+    () => ({
+      copy: copy.qrCopy,
+      copied: copy.qrCopied,
+      share: copy.qrShare,
+      download: copy.qrDownload,
+      print: copy.qrPrint,
+      open: copy.qrOpen,
+      shareUnavailable: copy.qrShareUnavailable
+    }),
+    [copy]
   );
 
   const loadManager = useCallback(async () => {
@@ -232,7 +250,8 @@ export function ProgramManagePage({
 
     await submitAction(async () => {
       const nonce = generateDynamicStampNonce();
-      const expiresAt = BigInt(Math.floor(Date.now() / 1000) + 300);
+      const expiresAtSeconds = Math.floor(Date.now() / 1000) + 300;
+      const expiresAt = BigInt(expiresAtSeconds);
       const { signature } = await signDynamicStampPayload({
         contractAddress,
         programId,
@@ -240,15 +259,16 @@ export function ProgramManagePage({
         expiresAt,
         chainId: initialChainId
       });
-      setDynamicUrl(
-        buildDynamicVisitUrl({
+      setDynamicQr({
+        url: buildDynamicVisitUrl({
           appUrl,
           programId,
           nonce,
           expiresAt,
           signature
-        })
-      );
+        }),
+        expiresAt: expiresAtSeconds
+      });
     }, copy.dynamicQrReady);
   }
 
@@ -281,7 +301,13 @@ export function ProgramManagePage({
       description={program?.rewardDescription ?? copy.appDescription}
     >
       <section className="space-y-8">
-        {isLoading ? (
+        {!contractAddress ? (
+          <EmptyState
+            title={dictionary.common.contractMissing}
+            description={copy.noContract}
+            icon={<Store className="h-5 w-5" />}
+          />
+        ) : isLoading ? (
           <EmptyState
             title={dictionary.common.loading}
             description={copy.loadingProgram}
@@ -322,23 +348,26 @@ export function ProgramManagePage({
 
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_24rem]">
               <div className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{copy.fixedQr}</CardTitle>
-                    <CardDescription>{copy.staticQrHelp}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={buildQrImageUrl(staticVisitUrl)}
-                      alt={copy.fixedQr}
-                      className="h-64 w-64 rounded-lg border border-[#E5E1EE] bg-white p-3 shadow-[0_14px_36px_rgba(27,23,43,0.08)]"
-                    />
-                    <p className="break-all rounded-lg bg-[#FBFCFF] p-3 text-sm text-[#676078]">
-                      {staticVisitUrl}
-                    </p>
-                  </CardContent>
-                </Card>
+                <div className="space-y-4">
+                  <QrDisplay
+                    value={staticVisitUrl}
+                    title={copy.fixedQr}
+                    description={copy.staticQrHelp}
+                    code={formatProgramCode(program.id)}
+                    fileName={`noodl3-${formatProgramCode(program.id)}-printed-qr`}
+                    labels={qrLabels}
+                    showPrint
+                  />
+                  <PrintableQrSheet
+                    title={copy.fixedQr}
+                    subtitle={copy.printedSheetDescription}
+                    programName={program.name}
+                    reward={program.rewardDescription}
+                    rule={copy.staticQrRule}
+                    code={formatProgramCode(program.id)}
+                    value={staticVisitUrl}
+                  />
+                </div>
 
                 <Card>
                   <CardHeader>
@@ -400,34 +429,41 @@ export function ProgramManagePage({
               </div>
 
               <aside className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{copy.dynamicQr}</CardTitle>
-                    <CardDescription>{copy.dynamicQrHelp}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
+                <section className="space-y-4">
+                  <div className="space-y-2">
+                    <h2 className="text-xl font-semibold text-[#1B172B]">{copy.dynamicQr}</h2>
+                    <p className="text-sm leading-6 text-[#676078]">{copy.dynamicQrHelp}</p>
+                  </div>
+                  <div className="space-y-4">
                     <Button
-                      icon={<QrCode className="h-4 w-4" />}
+                      icon={dynamicQr ? <RefreshCw className="h-4 w-4" /> : <QrCode className="h-4 w-4" />}
                       onClick={() => void handleGenerateDynamicQr()}
                       disabled={isSubmitting || !program.active}
                     >
-                      {copy.generateDynamicQr}
+                      {dynamicQr ? copy.regenerateDynamicQr : copy.generateDynamicQr}
                     </Button>
-                    {dynamicUrl ? (
-                      <>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={buildQrImageUrl(dynamicUrl)}
-                          alt={copy.dynamicQr}
-                          className="h-64 w-64 rounded-lg border border-[#E5E1EE] bg-white p-3 shadow-[0_14px_36px_rgba(27,23,43,0.08)]"
-                        />
-                        <p className="break-all rounded-lg bg-[#FBFCFF] p-3 text-sm text-[#676078]">
-                          {dynamicUrl}
-                        </p>
-                      </>
+                    {!program.active ? (
+                      <StatusMessage tone="warning">{copy.dynamicQrInactive}</StatusMessage>
                     ) : null}
-                  </CardContent>
-                </Card>
+                    {dynamicQr ? (
+                      <QrDisplay
+                        value={dynamicQr.url}
+                        title={copy.dynamicQr}
+                        description={copy.dynamicQrOneUse}
+                        fileName={`noodl3-${formatProgramCode(program.id)}-live-qr`}
+                        labels={qrLabels}
+                      >
+                        <CountdownBadge
+                          expiresAt={dynamicQr.expiresAt}
+                          label={copy.liveQrExpiresIn}
+                          expiredLabel={copy.liveQrExpired}
+                        />
+                      </QrDisplay>
+                    ) : (
+                      <StatusMessage tone="info">{copy.dynamicQrOneUse}</StatusMessage>
+                    )}
+                  </div>
+                </section>
 
                 <Card>
                   <CardHeader>

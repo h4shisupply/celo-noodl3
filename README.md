@@ -18,12 +18,14 @@ The core loop is simple:
 ## Product Shape
 
 - Self-serve loyalty program creation
+- Local QR rendering, sharing, SVG download, and printable counter sheets
 - No catalog, menu, cart, item checkout, or payment requirement in V1
 - Bilingual runtime copy: `pt-BR` and `English`
 - `Selos` in Portuguese and `Stamps` in English
 - Onchain loyalty progress per program
 - Static visit QR with one stamp per wallet every 20 hours
 - Dynamic visit QR with one-use owner-signed payloads
+- Reward ticket QR with backup codes for counter validation
 - Internal non-transferable claims instead of points tokens or NFTs
 
 ## Routes
@@ -35,6 +37,19 @@ The core loop is simple:
 - `/app/program/[programId]/manage`: owner manager
 - `/app/claim/[claimId]`: reward claim QR and owner validation
 - `/rewards`, `/merchant/verify`, `/verify`, `/success`, and old store URLs redirect into `/app`
+
+## Merchant Pilot Flow
+
+For a real pilot, the owner should:
+
+1. Create a stamp card with a square HTTPS icon, reward text, and visit count.
+2. Open the manager view and print the counter sheet for the fixed visit QR.
+3. Keep the printed QR at the register for customer self-stamps.
+4. Use the live QR for owner-led check-ins; it expires after five minutes and can be regenerated.
+5. Ask customers with full cards to open their reward ticket QR.
+6. Validate the ticket from the owner wallet and confirm the used state before handing out the reward.
+
+The QR UI renders locally in the app. It supports copying, sharing where the browser allows it, downloading the SVG QR, and printing the counter sheet without relying on an external QR image service.
 
 ## Smart Contract
 

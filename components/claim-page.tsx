@@ -1,15 +1,15 @@
 "use client";
 
-import { BadgeCheck, Gift, QrCode, TicketCheck } from "lucide-react";
+import { BadgeCheck, Gift, TicketCheck } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Hex } from "viem";
 import { AppChrome } from "./app-chrome";
 import { useLocale } from "./locale-provider";
-import { Avatar } from "./ui/avatar";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { EmptyState } from "./ui/empty-state";
+import { PrintableQrSheet, QrDisplay } from "./qr-display";
 import { StatusMessage } from "./ui/status-message";
 import {
   fetchClaim,
@@ -22,7 +22,6 @@ import { getUserFacingErrorMessage } from "../lib/error-message";
 import { formatWalletLabel } from "../lib/claim-code";
 import {
   buildClaimUrl,
-  buildQrImageUrl,
   formatClaimCode,
   formatDateTime,
   formatProgramCode,
@@ -81,6 +80,18 @@ export function ClaimPage({
   const contractAddress = useMemo(
     () => resolveContractAddressForChain(initialChainId, contractAddresses),
     [contractAddresses, initialChainId]
+  );
+  const qrLabels = useMemo(
+    () => ({
+      copy: copy.qrCopy,
+      copied: copy.qrCopied,
+      share: copy.qrShare,
+      download: copy.qrDownload,
+      print: copy.qrPrint,
+      open: copy.qrOpen,
+      shareUnavailable: copy.qrShareUnavailable
+    }),
+    [copy]
   );
 
   const claimUrl = parsedClaimId ? buildClaimUrl(appUrl, parsedClaimId) : null;
@@ -181,7 +192,13 @@ export function ClaimPage({
       description={copy.claimDescription}
     >
       <section className="mx-auto max-w-2xl space-y-6">
-        {isLoading ? (
+        {!contractAddress ? (
+          <EmptyState
+            title={dictionary.common.contractMissing}
+            description={copy.noContract}
+            icon={<Gift className="h-5 w-5" />}
+          />
+        ) : isLoading ? (
           <EmptyState
             title={dictionary.common.loadingReward}
             description={copy.loadingClaim}
@@ -194,30 +211,44 @@ export function ClaimPage({
             icon={<TicketCheck className="h-5 w-5" />}
           />
         ) : (
-          <Card>
-            <CardHeader className="stamp-pattern space-y-3 rounded-t-lg border-b border-[#E5E1EE] bg-[#FBFCFF]">
-              {program ? (
-                <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
-              ) : null}
-              <Badge variant={claim.consumed ? "neutral" : "mint"}>
-                {formatClaimCode(claim.id)}
-              </Badge>
-              <CardTitle>{claim.rewardDescription}</CardTitle>
-              <CardDescription>
-                {program?.name ?? formatProgramCode(claim.programId)}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-5">
-              {claimUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={buildQrImageUrl(claimUrl)}
-                  alt={formatClaimCode(claim.id)}
-                  className="mx-auto h-72 w-72 rounded-lg border border-[#E5E1EE] bg-white p-3 shadow-[0_14px_36px_rgba(27,23,43,0.08)]"
+          <>
+            {claimUrl ? (
+              <>
+                <QrDisplay
+                  value={claimUrl}
+                  title={claim.rewardDescription}
+                  description={program?.name ?? formatProgramCode(claim.programId)}
+                  code={formatClaimCode(claim.id)}
+                  fileName={`noodl3-${formatClaimCode(claim.id)}-reward-ticket`}
+                  labels={qrLabels}
+                  showPrint
+                >
+                  <Badge variant={claim.consumed ? "neutral" : "mint"}>
+                    {claim.consumed ? copy.ticketUsed : copy.ticketReady}
+                  </Badge>
+                </QrDisplay>
+                <PrintableQrSheet
+                  title={copy.rewardTicketSheet}
+                  subtitle={program?.name ?? formatProgramCode(claim.programId)}
+                  programName={claim.rewardDescription}
+                  reward={`${copy.backupCode}: ${formatClaimCode(claim.id)}`}
+                  rule={claim.consumed ? copy.ticketUsed : copy.ticketReady}
+                  code={formatClaimCode(claim.id)}
+                  value={claimUrl}
                 />
-              ) : null}
+              </>
+            ) : null}
 
-              <div className="grid gap-3 rounded-lg border border-[#E5E1EE] bg-[#FBFCFF] p-4 text-sm text-[#676078]">
+            <Card>
+              <CardHeader>
+                <CardTitle>{copy.claimTitle}</CardTitle>
+                <CardDescription>{copy.claimDescription}</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                <div className="grid gap-3 rounded-lg border border-[#E5E1EE] bg-[#FBFCFF] p-4 text-sm text-[#676078]">
+                  <p className="text-base font-semibold text-[#1B172B]">
+                    {copy.backupCode}: {formatClaimCode(claim.id)}
+                  </p>
                 <p>
                   {dictionary.common.customer}: {formatWalletLabel(claim.user)}
                 </p>
@@ -225,7 +256,7 @@ export function ClaimPage({
                   {dictionary.common.date}: {formatDateTime(claim.claimedAt, locale)}
                 </p>
                 <p>
-                  {dictionary.common.status}: {claim.consumed ? copy.usedClaim : copy.ready}
+                  {dictionary.common.status}: {claim.consumed ? copy.ticketUsed : copy.ticketReady}
                 </p>
               </div>
 
@@ -239,11 +270,16 @@ export function ClaimPage({
                 </Button>
               ) : null}
 
+              {!canConsume && !claim.consumed ? (
+                <StatusMessage tone="info">{copy.ownerValidationHint}</StatusMessage>
+              ) : null}
+
               {claim.consumed ? (
                 <StatusMessage tone="warning">{copy.usedClaim}</StatusMessage>
               ) : null}
             </CardContent>
           </Card>
+          </>
         )}
 
         {status ? <StatusMessage tone="success">{status}</StatusMessage> : null}
