@@ -24,7 +24,7 @@ type HomeCopy = {
   nav: {
     workflow: string;
     proof: string;
-    pilot: string;
+    launch: string;
     faq: string;
   };
   hero: {
@@ -84,7 +84,7 @@ type HomeCopy = {
       description: string;
     }>;
   };
-  pilot: {
+  launch: {
     eyebrow: string;
     title: string;
     description: string;
@@ -137,7 +137,7 @@ export function HomePage({ locale }: { locale: Locale }) {
           <nav className="hidden items-center gap-5 md:flex" aria-label="Landing page">
             <a className="text-sm font-medium text-[#676078] transition hover:text-[#1B172B]" href="#workflow">{copy.nav.workflow}</a>
             <a className="text-sm font-medium text-[#676078] transition hover:text-[#1B172B]" href="#proof">{copy.nav.proof}</a>
-            <a className="text-sm font-medium text-[#676078] transition hover:text-[#1B172B]" href="#pilot">{copy.nav.pilot}</a>
+            <a className="text-sm font-medium text-[#676078] transition hover:text-[#1B172B]" href="#launch">{copy.nav.launch}</a>
             <a className="text-sm font-medium text-[#676078] transition hover:text-[#1B172B]" href="#faq">{copy.nav.faq}</a>
           </nav>
           <div className="ml-auto flex items-center gap-3">
@@ -300,16 +300,16 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section id="pilot" className="py-12 md:py-16">
+      <section id="launch" className="py-12 md:py-16">
         <div className="rounded-lg border border-[#E5E1EE] bg-white/88 p-5 shadow-[0_18px_52px_rgba(27,23,43,0.08)] md:p-8">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <SectionIntro
-              eyebrow={copy.pilot.eyebrow}
-              title={copy.pilot.title}
-              description={copy.pilot.description}
+              eyebrow={copy.launch.eyebrow}
+              title={copy.launch.title}
+              description={copy.launch.description}
             />
             <div className="grid gap-3 sm:grid-cols-2">
-              {copy.pilot.checklist.map((item) => (
+              {copy.launch.checklist.map((item) => (
                 <div key={item} className="flex gap-3 rounded-lg bg-[#FBFCFF] p-4">
                   <BadgeCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#0F9F8F]" aria-hidden="true" />
                   <p className="text-sm leading-6 text-[#3A344D]">{item}</p>
@@ -493,17 +493,17 @@ const enHomeCopy: HomeCopy = {
   nav: {
     workflow: "Workflow",
     proof: "Product",
-    pilot: "Pilot",
+    launch: "Launch",
     faq: "FAQ"
   },
   hero: {
-    eyebrow: "Merchant pilot ready",
+    eyebrow: "Ready for real counters",
     title: "Wallet-native stamp cards for small merchants.",
     description:
       "noodl3 gives shops a simple QR loyalty loop: print a counter QR, let customers collect stamps in their wallet, and validate rewards at the register.",
     primaryCta: "Create card",
     secondaryCta: "Open app",
-    footnote: "No catalog, checkout rebuild, points backend, or paper cards required.",
+    footnote: "Built for quick setup, repeat visits, and clear counter validation.",
     stats: [
       { value: "QR first", label: "Built for counters and walk-ins" },
       { value: "5 min", label: "Live QR expiry for owner-led check-ins" },
@@ -523,14 +523,14 @@ const enHomeCopy: HomeCopy = {
     ticketCode: "R-0042"
   },
   problem: {
-    eyebrow: "Why this exists",
-    title: "Small shops need loyalty that fits the counter.",
+    eyebrow: "Why merchants use it",
+    title: "Repeat visits become a clear wallet stamp flow.",
     description:
-      "Most digital loyalty tools ask merchants to change too much before they can test one simple idea: reward repeat visits.",
+      "noodl3 turns the familiar stamp-card habit into a wallet-native experience that works naturally at the register.",
     points: [
-      "Paper cards are easy to start but easy to lose, fake, or forget.",
-      "Full POS and catalog systems are too heavy for a fast pilot.",
-      "Custodial points databases hide the customer relationship inside another platform."
+      "Customers scan the shop QR while they are already at the counter.",
+      "Each visit adds visible progress toward the merchant's reward.",
+      "Reward tickets include a QR and backup code for simple validation."
     ]
   },
   workflow: {
@@ -563,21 +563,21 @@ const enHomeCopy: HomeCopy = {
   },
   benefits: {
     eyebrow: "Merchant benefits",
-    title: "A pilotable loyalty system without operational drag.",
+    title: "A loyalty system built for everyday counter use.",
     description:
-      "noodl3 stays intentionally narrow so a merchant can test loyalty before investing in a larger stack.",
+      "The product focuses on the real actions a small shop repeats every day: stamp a visit, show progress, and validate a reward.",
     items: [
       {
-        title: "No paper card cleanup",
-        description: "Customers keep progress in their wallet, not in a punch card that disappears."
+        title: "Fast card setup",
+        description: "Create a branded stamp card with a shop name, logo, reward, and visit target."
       },
       {
-        title: "No checkout rebuild",
-        description: "The QR workflow works beside the register without adding a cart, catalog, or POS integration."
+        title: "Counter-ready QR",
+        description: "Print the visit QR for self-stamps or generate a live QR for owner-led check-ins."
       },
       {
-        title: "No points backend",
-        description: "Program progress and reward usage live onchain instead of in a private spreadsheet."
+        title: "Wallet-held progress",
+        description: "Customers carry their stamp card progress and reward tickets in their wallet."
       },
       {
         title: "Bilingual by default",
@@ -587,9 +587,9 @@ const enHomeCopy: HomeCopy = {
   },
   proof: {
     eyebrow: "Product proof",
-    title: "The important pilot states are already part of the flow.",
+    title: "The key counter states are built into the product.",
     description:
-      "The landing page should show the same concepts a merchant will use inside the app.",
+      "Every core state is designed around the merchant and customer actions happening in person.",
     items: [
       {
         title: "Printed QR",
@@ -605,15 +605,15 @@ const enHomeCopy: HomeCopy = {
       },
       {
         title: "Owner validation",
-        description: "Only the program owner can consume a reward, and used tickets show a clear used state."
+        description: "The owner wallet validates a reward, and used tickets show a clear used state."
       }
     ]
   },
-  pilot: {
-    eyebrow: "Pilot checklist",
-    title: "What a shop can do on day one.",
+  launch: {
+    eyebrow: "Counter launch",
+    title: "What a shop can run today.",
     description:
-      "The V1 scope is deliberately practical: launch the card, place the QR, stamp visits, and validate rewards.",
+      "Create the card, place the QR, stamp real visits, and validate rewards from the owner wallet.",
     checklist: [
       "Create a branded stamp card from a wallet.",
       "Print or download the static counter QR.",
@@ -633,31 +633,31 @@ const enHomeCopy: HomeCopy = {
       },
       {
         question: "Why Celo and MiniPay?",
-        answer: "Celo keeps the mobile wallet experience lightweight and keeps stamp and reward transactions inexpensive enough for pilots."
+        answer: "Celo keeps the mobile wallet experience lightweight and keeps stamp and reward transactions inexpensive for everyday use."
       },
       {
         question: "What is the difference between printed and live QR?",
         answer: "Printed QR is reusable for daily self-stamps. Live QR is owner-generated, expires in minutes, and is for live check-ins."
       },
       {
-        question: "Can a reward be used twice?",
-        answer: "No. The owner consumes the reward ticket once, and the app shows the used state after validation."
+        question: "How is a reward protected?",
+        answer: "Each reward ticket is validated once by the owner wallet, then the app shows the used state."
       },
       {
-        question: "Is there a checkout or catalog?",
-        answer: "Not in V1. noodl3 focuses on real-world visit loyalty, not menus, carts, payments, or POS integrations."
+        question: "What should the merchant place at the counter?",
+        answer: "The merchant can print the visit QR sheet so customers can scan, connect their wallet, and collect a stamp."
       },
       {
-        question: "Can staff validate rewards?",
-        answer: "V1 is owner-only. Delegation can come later after the pilot proves the counter workflow."
+        question: "When should a live QR be used?",
+        answer: "Use live QR for owner-led check-ins when the merchant wants a short-lived QR for the next customer."
       }
     ]
   },
   finalCta: {
-    eyebrow: "Ready for a pilot",
-    title: "Launch the first stamp card and test loyalty at the counter.",
+    eyebrow: "Ready at the counter",
+    title: "Launch a stamp card customers can use today.",
     description:
-      "Start with one reward, one printed QR, and a workflow your staff can understand in minutes.",
+      "Start with one reward, one printed QR, and a workflow built around repeat visits.",
     primaryCta: "Create card",
     secondaryCta: "Open app"
   }
@@ -667,17 +667,17 @@ const ptHomeCopy: HomeCopy = {
   nav: {
     workflow: "Fluxo",
     proof: "Produto",
-    pilot: "Piloto",
+    launch: "Lançar",
     faq: "FAQ"
   },
   hero: {
-    eyebrow: "Pronto para piloto com lojistas",
+    eyebrow: "Pronto para balcões reais",
     title: "Cartões de selo na carteira para pequenos comércios.",
     description:
       "noodl3 entrega um loop simples de fidelidade por QR: imprima o QR do balcão, deixe clientes colecionarem selos na carteira e valide recompensas no caixa.",
     primaryCta: "Criar cartão",
     secondaryCta: "Abrir app",
-    footnote: "Sem catálogo, rebuild de checkout, backend de pontos ou cartões de papel.",
+    footnote: "Feito para configuração rápida, visitas recorrentes e validação clara no balcão.",
     stats: [
       { value: "QR first", label: "Feito para balcão e visitas reais" },
       { value: "5 min", label: "QR ao vivo expira rápido" },
@@ -697,14 +697,14 @@ const ptHomeCopy: HomeCopy = {
     ticketCode: "R-0042"
   },
   problem: {
-    eyebrow: "Por que existe",
-    title: "Pequenas lojas precisam de fidelidade que caiba no balcão.",
+    eyebrow: "Por que lojistas usam",
+    title: "Visitas recorrentes viram um fluxo claro de selos na carteira.",
     description:
-      "A maioria das ferramentas digitais pede mudanças demais antes de testar uma ideia simples: recompensar visitas recorrentes.",
+      "noodl3 transforma o hábito do cartão de selos em uma experiência wallet-native que funciona naturalmente no caixa.",
     points: [
-      "Cartões de papel são fáceis de começar, mas fáceis de perder, esquecer ou fraudar.",
-      "Sistemas completos de POS e catálogo são pesados demais para um piloto rápido.",
-      "Bancos privados de pontos escondem a relação com o cliente dentro de outra plataforma."
+      "Clientes leem o QR da loja enquanto já estão no balcão.",
+      "Cada visita adiciona progresso visível até a recompensa do lojista.",
+      "Tickets de recompensa incluem QR e código de apoio para validação simples."
     ]
   },
   workflow: {
@@ -737,21 +737,21 @@ const ptHomeCopy: HomeCopy = {
   },
   benefits: {
     eyebrow: "Benefícios para lojistas",
-    title: "Fidelidade pilotável sem peso operacional.",
+    title: "Fidelidade construída para o uso diário no balcão.",
     description:
-    "noodl3 fica propositalmente focado para o lojista testar fidelidade antes de investir em uma stack maior.",
+    "O produto foca nas ações que uma pequena loja repete todos os dias: carimbar visita, mostrar progresso e validar recompensa.",
     items: [
       {
-        title: "Sem bagunça de cartão de papel",
-        description: "Clientes guardam o progresso na carteira, não em um cartão que desaparece."
+        title: "Configuração rápida do cartão",
+        description: "Crie um cartão com nome da loja, logo, recompensa e meta de visitas."
       },
       {
-        title: "Sem refazer checkout",
-        description: "O fluxo por QR funciona ao lado do caixa, sem carrinho, catálogo ou integração com POS."
+        title: "QR pronto para o balcão",
+        description: "Imprima o QR de visita para autoatendimento ou gere um QR ao vivo para check-ins conduzidos pelo dono."
       },
       {
-        title: "Sem backend de pontos",
-        description: "Progresso e uso de recompensa ficam onchain em vez de uma planilha privada."
+        title: "Progresso na carteira",
+        description: "Clientes carregam o progresso do cartão e os tickets de recompensa na própria carteira."
       },
       {
         title: "Bilíngue por padrão",
@@ -761,9 +761,9 @@ const ptHomeCopy: HomeCopy = {
   },
   proof: {
     eyebrow: "Prova de produto",
-    title: "Os estados importantes do piloto já fazem parte do fluxo.",
+    title: "Os estados essenciais do balcão fazem parte do produto.",
     description:
-    "A landing page deve mostrar os mesmos conceitos que o lojista usa dentro do app.",
+    "Cada estado principal foi desenhado em torno das ações presenciais do lojista e do cliente.",
     items: [
       {
         title: "QR impresso",
@@ -779,15 +779,15 @@ const ptHomeCopy: HomeCopy = {
       },
       {
         title: "Validação pelo dono",
-        description: "Só o dono do programa consome a recompensa, e tickets usados mostram estado claro."
+        description: "A carteira dona valida a recompensa, e tickets usados mostram estado claro."
       }
     ]
   },
-  pilot: {
-    eyebrow: "Checklist do piloto",
-    title: "O que a loja consegue fazer no primeiro dia.",
+  launch: {
+    eyebrow: "Lançamento no balcão",
+    title: "O que a loja consegue rodar hoje.",
     description:
-      "O escopo V1 é prático: criar o cartão, posicionar o QR, carimbar visitas e validar recompensas.",
+      "Crie o cartão, posicione o QR, carimbe visitas reais e valide recompensas pela carteira dona.",
     checklist: [
       "Criar um cartão de selos com a marca da loja.",
       "Imprimir ou baixar o QR estático de balcão.",
@@ -807,31 +807,31 @@ const ptHomeCopy: HomeCopy = {
       },
       {
         question: "Por que Celo e MiniPay?",
-        answer: "Celo mantém a experiência mobile leve e deixa transações de selo e recompensa baratas para pilotos."
+        answer: "Celo mantém a experiência mobile leve e deixa transações de selo e recompensa baratas para o uso diário."
       },
       {
         question: "Qual a diferença entre QR impresso e QR ao vivo?",
         answer: "QR impresso é reutilizável para selos diários. QR ao vivo é gerado pelo dono, expira em minutos e serve para check-ins presenciais."
       },
       {
-        question: "Uma recompensa pode ser usada duas vezes?",
-        answer: "Não. O dono consome o ticket uma vez, e o app mostra o estado usado depois da validação."
+        question: "Como a recompensa fica protegida?",
+        answer: "Cada ticket de recompensa é validado uma vez pela carteira dona, e depois o app mostra o estado usado."
       },
       {
-        question: "Existe checkout ou catálogo?",
-        answer: "Não no V1. noodl3 foca em fidelidade por visitas reais, não em menus, carrinhos, pagamentos ou integrações com POS."
+        question: "O que o lojista coloca no balcão?",
+        answer: "O lojista pode imprimir a folha do QR de visita para clientes lerem, conectarem a carteira e coletarem um selo."
       },
       {
-        question: "Equipe pode validar recompensas?",
-        answer: "No V1, apenas o dono. Delegação pode vir depois que o piloto provar o fluxo de balcão."
+        question: "Quando usar o QR ao vivo?",
+        answer: "Use o QR ao vivo em check-ins conduzidos pelo dono quando a loja quiser um QR de curta duração para o próximo cliente."
       }
     ]
   },
   finalCta: {
-    eyebrow: "Pronto para piloto",
-    title: "Lance o primeiro cartão e teste fidelidade no balcão.",
+    eyebrow: "Pronto para o balcão",
+    title: "Lance um cartão que clientes podem usar hoje.",
     description:
-      "Comece com uma recompensa, um QR impresso e um fluxo que a equipe entende em minutos.",
+      "Comece com uma recompensa, um QR impresso e um fluxo feito para visitas recorrentes.",
     primaryCta: "Criar cartão",
     secondaryCta: "Abrir app"
   }
