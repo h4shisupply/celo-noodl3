@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "noodl3",
     description:
-      "Wallet-native QR stamp cards for small merchant loyalty pilots on Celo.",
+      "Wallet-native QR stamp cards for small merchant loyalty on Celo.",
     images: ["/og.svg"]
   },
   other: {
