@@ -408,7 +408,7 @@ const dictionaries: Record<Locale, Dictionary> = {
     brand: {
       name: "noodl3",
       shortDescription:
-        "Pague com stablecoins no MiniPay, acompanhe Selos por loja e resgate com verificação no caixa."
+        "Cartões de selos na carteira, QR no balcão e tickets de recompensa validados uma única vez."
     },
     common: {
       storesLabel: "Lojas",
@@ -429,13 +429,13 @@ const dictionaries: Record<Locale, Dictionary> = {
       status: "Status",
       date: "Data",
       code: "Código",
-      manager: "Responsável",
+      manager: "Lojista",
       customer: "Cliente",
       customers: "Clientes",
       backupCode: "Código de apoio",
       searchPlaceholder: "Buscar loja, bairro ou categoria",
       loading: "Carregando...",
-      loadingReward: "Carregando resgate...",
+      loadingReward: "Carregando ticket...",
       loadingUsers: "Carregando clientes...",
       loadingBalance: "carregando...",
       disconnected: "desconectado",
@@ -486,11 +486,11 @@ const dictionaries: Record<Locale, Dictionary> = {
       validateQr: "Validar QR",
       validateCode: "Validar código",
       openPurchaseFlow: "Abrir fluxo de pagamento",
-      checkClaim: "Validar resgate",
-      readRewardQr: "Ler QR da recompensa",
+      checkClaim: "Validar ticket",
+      readRewardQr: "Ler QR do ticket",
       clearSelection: "Limpar seleção",
       switchNetwork: "Trocar rede",
-      refreshNetwork: "Já troquei",
+      refreshNetwork: "Atualizar rede",
       save: "Salvar",
       skipForNow: "Pular por agora",
       editProfile: "Editar perfil",
@@ -503,39 +503,39 @@ const dictionaries: Record<Locale, Dictionary> = {
       miniPayWrongNetwork: "Abra o app em {{network}} dentro do MiniPay.",
       couldNotSwitchNetwork: "Não foi possível trocar de rede.",
       unsupportedNetwork: "Rede não suportada.",
-      qrMismatch: "O QR lido não aponta para um pagamento válido do noodl3.",
+      qrMismatch: "O QR lido não parece ser um QR de visita ou ticket do noodl3.",
       invalidClaimId: "Não foi possível identificar um resgate válido.",
-      claimNotFound: "Resgate não encontrado.",
-      rewardNotFound: "Recompensa não encontrada.",
+      claimNotFound: "Ticket de recompensa não encontrado.",
+      rewardNotFound: "Ticket de recompensa não encontrado.",
       storeNotReady: "Esta loja ainda não foi configurada no contrato desta rede.",
       purchaseFailed: "Não foi possível concluir o pagamento.",
-      claimFailed: "Não foi possível gerar o resgate.",
-      consumeFailed: "Não foi possível confirmar o resgate.",
-      claimLookupFirst: "Leia um QR ou informe um código antes de confirmar.",
+      claimFailed: "Não foi possível gerar o ticket.",
+      consumeFailed: "Não foi possível validar o ticket.",
+      claimLookupFirst: "Leia um QR ou informe um código antes de validar.",
       claimCreatedMissing:
-        "O contrato confirmou a transação, mas o id do resgate não foi encontrado.",
+        "O contrato confirmou a transação, mas o id do ticket não foi encontrado.",
       allowanceCheck: "Checando allowance do pagamento...",
       approving: "Aprovando o token para este pagamento...",
       sendingPayment: "Enviando pagamento e registrando Selos...",
       claimWrongStore: "Este resgate pertence a outra loja.",
       claimWrongCustomer: "Este resgate pertence a outro cliente.",
-      claimAlreadyUsed: "Este resgate já foi utilizado.",
+      claimAlreadyUsed: "Este ticket já foi usado.",
       storeNotFound: "Loja não encontrada.",
       contractUnavailable: "Contrato indisponível nesta rede.",
       noManagedStores: "Nenhuma loja vinculada a esta carteira foi encontrada.",
       wrongNetworkDescription:
-        "Troque sua carteira para a rede correta antes de pagar, resgatar ou validar no noodl3.",
+        "Troque sua carteira para a rede correta antes de coletar selos, gerar tickets ou validar recompensas no noodl3.",
       wrongNetworkMiniPayDescription:
-        "O MiniPay está na rede errada para este app. Abra as configurações do MiniPay, troque para a rede esperada e volte para continuar.",
-      genericActionFailed: "Algo deu errado. Tente mais tarde.",
+        "O MiniPay está na rede errada para este app. Troque para a rede esperada nas configurações e volte para continuar.",
+      genericActionFailed: "Algo saiu do trilho. Tente novamente.",
       walletActionRejected: "Você cancelou a ação na carteira.",
       insufficientBalance: "Saldo insuficiente para concluir este pagamento.",
       invalidProfileInput:
         "Use um nome válido e, se quiser, uma foto com link https://.",
       profileSaveFailed: "Não foi possível salvar o perfil.",
-      notEnoughStamps: "Você ainda não tem Selos suficientes para resgatar.",
-      staticStampCooldown: "O QR fixo libera apenas um selo por carteira a cada 20 horas.",
-      staticStampDisabled: "O QR fixo deste programa está desativado.",
+      notEnoughStamps: "Você ainda não tem selos suficientes para gerar este ticket.",
+      staticStampCooldown: "O QR de balcão libera apenas um selo por carteira a cada 20 horas.",
+      staticStampDisabled: "O QR de balcão deste cartão está desligado.",
       profileContractOutdated:
         "O contrato atual ainda não suporta perfis onchain. Faça deploy da versão mais recente e atualize o endereço no app.",
       switchToNetworkBeforeContinue:
@@ -787,14 +787,14 @@ const dictionaries: Record<Locale, Dictionary> = {
       connectedWallet: "Carteira conectada",
       expectedNetwork: "{{current}} · esperado {{expected}}",
       connect: "Conectar",
-      connecting: "Conectando..."
+      connecting: "Abrindo carteira..."
     },
     profile: {
       title: "Seu perfil no noodl3",
       description:
-        "Adicione um nome e, se quiser, uma foto. Você pode pular isso por agora.",
+        "Adicione um nome e, se quiser, uma foto para deixar seus cartões mais fáceis de reconhecer.",
       namePlaceholder: "Seu nome",
-      avatarPlaceholder: "Link da foto (opcional)",
+      avatarPlaceholder: "Link https:// da foto (opcional)",
       nameRequired: "Informe um nome para salvar o perfil.",
       avatarInvalid: "Use uma URL HTTPS pública para a foto.",
       unavailable: "Perfil onchain indisponível nesta rede agora."
@@ -877,12 +877,12 @@ const dictionaries: Record<Locale, Dictionary> = {
     qrScanner: {
       unsupported: "A leitura por câmera não está disponível neste dispositivo.",
       openCamera: "Abrir câmera",
-      ready: "Toque em Abrir câmera para permitir o acesso e começar a leitura.",
+      ready: "Toque em Abrir câmera para mirar no QR de visita ou ticket.",
       stopCamera: "Parar leitura",
       cameraActive: "Câmera ativa",
       cameraOpenError: "Não foi possível abrir a câmera.",
       cameraPermissionDenied:
-        "A câmera foi bloqueada. Toque em Abrir câmera ou revise a permissão do site no navegador.",
+        "A câmera foi bloqueada. Libere a permissão do site e tente abrir a câmera novamente.",
       cameraSecureContext:
         "A câmera só funciona em um contexto seguro. Use HTTPS ou localhost para testar.",
       cameraNotFound: "Nenhuma câmera foi encontrada neste dispositivo.",
@@ -894,7 +894,7 @@ const dictionaries: Record<Locale, Dictionary> = {
     brand: {
       name: "noodl3",
       shortDescription:
-        "Pay with stablecoins in MiniPay, track store-specific Stamps, and redeem with checkout verification."
+        "Wallet stamp cards, counter QR codes, and reward tickets validated once."
     },
     common: {
       storesLabel: "Stores",
@@ -915,13 +915,13 @@ const dictionaries: Record<Locale, Dictionary> = {
       status: "Status",
       date: "Date",
       code: "Code",
-      manager: "Manager",
+      manager: "Owner",
       customer: "Customer",
       customers: "Customers",
       backupCode: "Backup code",
       searchPlaceholder: "Search store, area, or category",
       loading: "Loading...",
-      loadingReward: "Loading reward...",
+      loadingReward: "Loading ticket...",
       loadingUsers: "Loading customers...",
       loadingBalance: "loading...",
       disconnected: "disconnected",
@@ -972,11 +972,11 @@ const dictionaries: Record<Locale, Dictionary> = {
       validateQr: "Validate QR",
       validateCode: "Validate code",
       openPurchaseFlow: "Open payment flow",
-      checkClaim: "Check reward",
-      readRewardQr: "Read reward QR",
+      checkClaim: "Validate ticket",
+      readRewardQr: "Read ticket QR",
       clearSelection: "Clear selection",
       switchNetwork: "Switch network",
-      refreshNetwork: "I switched already",
+      refreshNetwork: "Refresh network",
       save: "Save",
       skipForNow: "Skip for now",
       editProfile: "Edit profile",
@@ -989,39 +989,39 @@ const dictionaries: Record<Locale, Dictionary> = {
       miniPayWrongNetwork: "Open the app in {{network}} inside MiniPay.",
       couldNotSwitchNetwork: "Could not switch the network.",
       unsupportedNetwork: "Unsupported network.",
-      qrMismatch: "The scanned QR does not point to a valid noodl3 payment.",
+      qrMismatch: "The scanned QR does not look like a noodl3 visit QR or reward ticket.",
       invalidClaimId: "Could not identify a valid reward.",
-      claimNotFound: "Reward not found.",
-      rewardNotFound: "Reward not found.",
+      claimNotFound: "Reward ticket not found.",
+      rewardNotFound: "Reward ticket not found.",
       storeNotReady: "This store has not been configured on this network yet.",
       purchaseFailed: "Could not complete the payment.",
-      claimFailed: "Could not create the reward.",
-      consumeFailed: "Could not confirm the reward.",
-      claimLookupFirst: "Scan a QR or enter a code before confirming.",
+      claimFailed: "Could not make the reward ticket.",
+      consumeFailed: "Could not validate the ticket.",
+      claimLookupFirst: "Scan a QR or enter a code before validating.",
       claimCreatedMissing:
-        "The transaction succeeded, but the emitted reward id could not be found.",
+        "The transaction succeeded, but the emitted ticket id could not be found.",
       allowanceCheck: "Checking payment allowance...",
       approving: "Approving the token for this payment...",
       sendingPayment: "Sending payment and recording Stamps...",
       claimWrongStore: "This reward belongs to a different store.",
       claimWrongCustomer: "This reward belongs to a different customer.",
-      claimAlreadyUsed: "This reward has already been used.",
+      claimAlreadyUsed: "This ticket has already been used.",
       storeNotFound: "Store not found.",
       contractUnavailable: "Contract unavailable on this network.",
       noManagedStores: "No store managed by this wallet was found.",
       wrongNetworkDescription:
-        "Switch your wallet to the required network before paying, redeeming, or validating inside noodl3.",
+        "Switch your wallet to the required network before collecting stamps, making tickets, or validating rewards in noodl3.",
       wrongNetworkMiniPayDescription:
-        "MiniPay is on the wrong network for this app. Open MiniPay settings, switch to the expected network, and come back to continue.",
-      genericActionFailed: "Something went wrong. Please try again later.",
+        "MiniPay is on the wrong network for this app. Switch to the expected network in MiniPay settings, then come back to continue.",
+      genericActionFailed: "Something slipped. Please try again.",
       walletActionRejected: "You cancelled the wallet action.",
       insufficientBalance: "Insufficient balance to complete this payment.",
       invalidProfileInput:
         "Use a valid display name and, if you want, a photo with an https:// link.",
       profileSaveFailed: "Could not save the profile.",
-      notEnoughStamps: "You do not have enough Stamps to redeem this reward yet.",
-      staticStampCooldown: "The fixed QR allows only one stamp per wallet every 20 hours.",
-      staticStampDisabled: "Fixed QR stamps are disabled for this program.",
+      notEnoughStamps: "You do not have enough stamps to make this ticket yet.",
+      staticStampCooldown: "The counter QR allows only one stamp per wallet every 20 hours.",
+      staticStampDisabled: "Counter QR stamps are off for this card.",
       profileContractOutdated:
         "The current contract does not support onchain profiles yet. Deploy the latest version and update the app contract address.",
       switchToNetworkBeforeContinue:
@@ -1273,14 +1273,14 @@ const dictionaries: Record<Locale, Dictionary> = {
       connectedWallet: "Connected wallet",
       expectedNetwork: "{{current}} · expected {{expected}}",
       connect: "Connect",
-      connecting: "Connecting..."
+      connecting: "Opening wallet..."
     },
     profile: {
       title: "Your noodl3 profile",
       description:
-        "Add a display name and, if you want, a photo. You can skip this for now.",
+        "Add a display name and, if you want, a photo so your cards are easier to recognize.",
       namePlaceholder: "Your name",
-      avatarPlaceholder: "Profile image URL (optional)",
+      avatarPlaceholder: "Profile image URL (https://, optional)",
       nameRequired: "Enter a name to save your profile.",
       avatarInvalid: "Use a public HTTPS URL for the profile image.",
       unavailable: "Onchain profiles are unavailable on this network right now."
@@ -1363,12 +1363,12 @@ const dictionaries: Record<Locale, Dictionary> = {
     qrScanner: {
       unsupported: "Camera-based scanning is not available on this device.",
       openCamera: "Open camera",
-      ready: "Tap Open camera to allow access and start scanning.",
+      ready: "Tap Open camera and point it at a visit QR or reward ticket.",
       stopCamera: "Stop scanning",
       cameraActive: "Camera active",
       cameraOpenError: "Could not open the camera.",
       cameraPermissionDenied:
-        "Camera access was blocked. Tap Open camera or review this site's permission in your browser.",
+        "Camera access was blocked. Allow this site to use the camera, then try again.",
       cameraSecureContext:
         "Camera access only works in a secure context. Use HTTPS or localhost when testing.",
       cameraNotFound: "No camera was found on this device.",

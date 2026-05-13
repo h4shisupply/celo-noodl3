@@ -491,174 +491,174 @@ function StampProgress() {
 
 const enHomeCopy: HomeCopy = {
   nav: {
-    workflow: "Workflow",
+    workflow: "Flow",
     proof: "Product",
     launch: "Launch",
     faq: "FAQ"
   },
   hero: {
-    eyebrow: "Ready for real counters",
-    title: "Wallet-native stamp cards for small merchants.",
+    eyebrow: "Tiny card, real visits",
+    title: "Stamp cards that live in your customers' wallets.",
     description:
-      "noodl3 gives shops a simple QR loyalty loop: print a counter QR, let customers collect stamps in their wallet, and validate rewards at the register.",
-    primaryCta: "Create card",
+      "noodl3 turns a counter QR into a cheerful loyalty loop: regulars scan, collect wallet stamps, and bring back reward tickets the owner can validate once.",
+    primaryCta: "Create stamp card",
     secondaryCta: "Open app",
-    footnote: "Built for quick setup, repeat visits, and clear counter validation.",
+    footnote: "Built for quick setup, everyday visits, and no repeat reward surprises.",
     stats: [
-      { value: "QR first", label: "Built for counters and walk-ins" },
-      { value: "5 min", label: "Live QR expiry for owner-led check-ins" },
-      { value: "1 ticket", label: "One-use reward validation" }
+      { value: "Counter QR", label: "One scan for everyday visits" },
+      { value: "5 min", label: "Live QR for owner-led check-ins" },
+      { value: "1 ticket", label: "One-time reward validation" }
     ]
   },
   visual: {
-    program: "Live merchant flow",
-    printedQr: "Printed visit QR",
-    liveQr: "Live visit QR",
+    program: "Shop stamp flow",
+    printedQr: "Counter visit QR",
+    liveQr: "Live check-in QR",
     rewardTicket: "Reward ticket",
-    validate: "Owner validates reward",
+    validate: "Owner validates once",
     stamps: "7 of 10 visits stamped",
     ready: "Active",
-    ownerOnly: "owner only",
+    ownerOnly: "owner wallet",
     expires: "4:58",
     ticketCode: "R-0042"
   },
   problem: {
-    eyebrow: "Why merchants use it",
-    title: "Repeat visits become a clear wallet stamp flow.",
+    eyebrow: "Why shops use it",
+    title: "The classic stamp card, without the lost-card problem.",
     description:
-      "noodl3 turns the familiar stamp-card habit into a wallet-native experience that works naturally at the register.",
+      "Keep the ritual customers already understand, but move the record into the wallet and the validation into the owner flow.",
     points: [
-      "Customers scan the shop QR while they are already at the counter.",
-      "Each visit adds visible progress toward the merchant's reward.",
-      "Reward tickets include a QR and backup code for simple validation."
+      "Customers scan while they are already at the counter.",
+      "Each visit adds visible progress toward the shop's promised treat.",
+      "Reward tickets include a QR and backup code, so the counter has a fallback."
     ]
   },
   workflow: {
     eyebrow: "How it works",
-    title: "One merchant, one QR, one repeat-visit loop.",
+    title: "Print a QR, stamp visits, hand out tiny wins.",
     description:
-      "The product focuses on the exact counter workflow a merchant can run today.",
+      "The product stays close to the real counter routine a small shop can run today.",
     steps: [
       {
-        title: "Create a card",
-        description: "Set the shop name, logo, reward, visit count, and whether printed QR stamps are active."
+        title: "Create the card",
+        description: "Add the shop name, logo, reward, visit goal, and whether the printed QR is active."
       },
       {
-        title: "Print the QR",
-        description: "Place the static QR at the register so customers can self-stamp once every 20 hours."
+        title: "Print the counter QR",
+        description: "Place one reusable QR by the register so each wallet can self-stamp once every 20 hours."
       },
       {
-        title: "Scan and collect",
-        description: "Customers open the QR, connect a wallet, and collect a stamp on their card."
+        title: "Scan and stamp",
+        description: "Customers open the QR, connect a wallet, and add the visit to their card."
       },
       {
-        title: "Unlock reward",
-        description: "A completed card becomes a reward ticket with a QR and backup code."
+        title: "Unlock the treat",
+        description: "A full card becomes a reward ticket with its own QR and backup code."
       },
       {
         title: "Validate once",
-        description: "The owner wallet marks the reward as used, blocking a second validation."
+        description: "The owner wallet marks the ticket as used, closing the loop after one validation."
       }
     ]
   },
   benefits: {
-    eyebrow: "Merchant benefits",
-    title: "A loyalty system built for everyday counter use.",
+    eyebrow: "Shop benefits",
+    title: "Small-shop loyalty with less admin and more delight.",
     description:
-      "The product focuses on the real actions a small shop repeats every day: stamp a visit, show progress, and validate a reward.",
+      "noodl3 focuses on the moves a shop repeats every day: stamp a visit, show progress, and validate a reward clearly.",
     items: [
       {
-        title: "Fast card setup",
-        description: "Create a branded stamp card with a shop name, logo, reward, and visit target."
+        title: "Quick card setup",
+        description: "Create a branded stamp card with a shop name, logo, reward, and visit goal."
       },
       {
         title: "Counter-ready QR",
-        description: "Print the visit QR for self-stamps or generate a live QR for owner-led check-ins."
+        description: "Print the visit QR for self-stamps or generate a live QR when the owner wants to lead the check-in."
       },
       {
         title: "Wallet-held progress",
-        description: "Customers carry their stamp card progress and reward tickets in their wallet."
+        description: "Customers carry their stamp progress and reward tickets in the wallet they already use."
       },
       {
         title: "Bilingual by default",
-        description: "The app supports Portuguese and English across the merchant and customer flow."
+        description: "Portuguese and English copy cover the owner and customer flow from the first scan."
       }
     ]
   },
   proof: {
-    eyebrow: "Product proof",
-    title: "The key counter states are built into the product.",
+    eyebrow: "Built-in moments",
+    title: "The important counter states are already covered.",
     description:
-      "Every core state is designed around the merchant and customer actions happening in person.",
+      "Every core state is designed around the owner and customer actions that happen face to face.",
     items: [
       {
         title: "Printed QR",
-        description: "A reusable counter sheet for daily self-stamps with a 20-hour wallet cooldown."
+        description: "A reusable counter sheet for daily self-stamps, with a 20-hour wallet cooldown."
       },
       {
         title: "Live QR",
-        description: "An owner-signed QR that expires quickly and is intended for one customer check-in."
+        description: "An owner-signed QR that expires quickly and works for one customer check-in."
       },
       {
         title: "Reward ticket",
-        description: "A completed card produces a ticket QR with a backup code for counter validation."
+        description: "A completed card creates a ticket QR plus a backup code for counter validation."
       },
       {
         title: "Owner validation",
-        description: "The owner wallet validates a reward, and used tickets show a clear used state."
+        description: "The owner wallet validates the ticket, and used tickets show a clear used state."
       }
     ]
   },
   launch: {
     eyebrow: "Counter launch",
-    title: "What a shop can run today.",
+    title: "A shop can launch the loop in one sitting.",
     description:
       "Create the card, place the QR, stamp real visits, and validate rewards from the owner wallet.",
     checklist: [
-      "Create a branded stamp card from a wallet.",
-      "Print or download the static counter QR.",
-      "Use live QR for owner-led visits when needed.",
-      "Let customers collect stamps from their own wallet.",
+      "Create a branded stamp card from the owner wallet.",
+      "Print or download the reusable counter QR.",
+      "Use live QR for owner-led check-ins when needed.",
+      "Let customers collect wallet stamps at the counter.",
       "Open reward tickets with QR and backup code.",
       "Validate each reward once from the owner wallet."
     ]
   },
   faq: {
     eyebrow: "FAQ",
-    title: "Merchant questions, answered plainly.",
+    title: "Shop questions, answered plainly.",
     items: [
       {
         question: "Do customers need a wallet?",
-        answer: "Yes. noodl3 is wallet-native, so customers collect stamps and hold reward tickets from a compatible wallet."
+        answer: "Yes. noodl3 is wallet-native, so customers collect stamps and hold reward tickets in a compatible wallet."
       },
       {
         question: "Why Celo and MiniPay?",
-        answer: "Celo keeps the mobile wallet experience lightweight and keeps stamp and reward transactions inexpensive for everyday use."
+        answer: "Celo keeps the mobile wallet experience light, and MiniPay makes the scan-and-stamp flow easy to use on the go."
       },
       {
         question: "What is the difference between printed and live QR?",
-        answer: "Printed QR is reusable for daily self-stamps. Live QR is owner-generated, expires in minutes, and is for live check-ins."
+        answer: "Printed QR is reusable for daily self-stamps. Live QR is owner-generated, expires in minutes, and is best for guided check-ins."
       },
       {
         question: "How is a reward protected?",
-        answer: "Each reward ticket is validated once by the owner wallet, then the app shows the used state."
+        answer: "Each reward ticket is validated once by the owner wallet. After that, the app shows it as used."
       },
       {
-        question: "What should the merchant place at the counter?",
-        answer: "The merchant can print the visit QR sheet so customers can scan, connect their wallet, and collect a stamp."
+        question: "What should the shop place at the counter?",
+        answer: "Print the visit QR sheet and place it where customers can scan, connect their wallet, and collect a stamp."
       },
       {
         question: "When should a live QR be used?",
-        answer: "Use live QR for owner-led check-ins when the merchant wants a short-lived QR for the next customer."
+        answer: "Use live QR when the owner wants a short-lived code for the next customer instead of leaving the printed QR out."
       }
     ]
   },
   finalCta: {
     eyebrow: "Ready at the counter",
-    title: "Launch a stamp card customers can use today.",
+    title: "Launch a stamp card regulars can use today.",
     description:
-      "Start with one reward, one printed QR, and a workflow built around repeat visits.",
-    primaryCta: "Create card",
+      "Start with one reward, one printed QR, and a loop built around the next visit.",
+    primaryCta: "Create stamp card",
     secondaryCta: "Open app"
   }
 };
@@ -671,135 +671,135 @@ const ptHomeCopy: HomeCopy = {
     faq: "FAQ"
   },
   hero: {
-    eyebrow: "Pronto para balcões reais",
-    title: "Cartões de selo na carteira para pequenos comércios.",
+    eyebrow: "Cartão pequeno, visita real",
+    title: "Cartões de selos que moram na carteira dos clientes.",
     description:
-      "noodl3 entrega um loop simples de fidelidade por QR: imprima o QR do balcão, deixe clientes colecionarem selos na carteira e valide recompensas no caixa.",
-    primaryCta: "Criar cartão",
+      "noodl3 transforma um QR de balcão em um loop leve de fidelidade: clientes leem, acumulam selos na carteira e voltam com tickets que o lojista valida uma vez.",
+    primaryCta: "Criar cartão de selos",
     secondaryCta: "Abrir app",
-    footnote: "Feito para configuração rápida, visitas recorrentes e validação clara no balcão.",
+    footnote: "Feito para configurar rápido, registrar visitas reais e evitar recompensa usada duas vezes.",
     stats: [
-      { value: "QR first", label: "Feito para balcão e visitas reais" },
-      { value: "5 min", label: "QR ao vivo expira rápido" },
+      { value: "QR no balcão", label: "Um scan para visitas do dia a dia" },
+      { value: "5 min", label: "QR ao vivo para check-ins guiados" },
       { value: "1 ticket", label: "Validação única de recompensa" }
     ]
   },
   visual: {
-    program: "Fluxo ao vivo da loja",
-    printedQr: "QR impresso de visita",
-    liveQr: "QR ao vivo de visita",
+    program: "Fluxo de selos da loja",
+    printedQr: "QR de visita no balcão",
+    liveQr: "QR ao vivo de check-in",
     rewardTicket: "Ticket de recompensa",
-    validate: "Dono valida recompensa",
+    validate: "Lojista valida uma vez",
     stamps: "7 de 10 visitas carimbadas",
     ready: "Ativo",
-    ownerOnly: "só dono",
+    ownerOnly: "carteira dona",
     expires: "4:58",
     ticketCode: "R-0042"
   },
   problem: {
-    eyebrow: "Por que lojistas usam",
-    title: "Visitas recorrentes viram um fluxo claro de selos na carteira.",
+    eyebrow: "Por que lojas usam",
+    title: "O cartão de selos clássico, sem o problema de perder o papel.",
     description:
-      "noodl3 transforma o hábito do cartão de selos em uma experiência wallet-native que funciona naturalmente no caixa.",
+      "O ritual continua familiar para clientes, mas o registro fica na carteira e a validação fica no fluxo do lojista.",
     points: [
-      "Clientes leem o QR da loja enquanto já estão no balcão.",
-      "Cada visita adiciona progresso visível até a recompensa do lojista.",
-      "Tickets de recompensa incluem QR e código de apoio para validação simples."
+      "Clientes leem o QR enquanto já estão no balcão.",
+      "Cada visita mostra progresso até o mimo prometido pela loja.",
+      "Tickets de recompensa têm QR e código de apoio para o balcão não travar."
     ]
   },
   workflow: {
     eyebrow: "Como funciona",
-    title: "Um lojista, um QR, um loop de visitas recorrentes.",
+    title: "Imprima um QR, carimbe visitas, entregue pequenas vitórias.",
     description:
-      "O produto foca exatamente no fluxo de balcão que uma loja consegue rodar hoje.",
+      "O produto fica perto da rotina real de balcão que uma pequena loja consegue rodar hoje.",
     steps: [
       {
-        title: "Crie um cartão",
-        description: "Defina nome, logo, recompensa, quantidade de visitas e se o QR impresso fica ativo."
+        title: "Crie o cartão",
+        description: "Adicione nome da loja, logo, recompensa, meta de visitas e se o QR impresso fica ativo."
       },
       {
-        title: "Imprima o QR",
-        description: "Deixe o QR estático no caixa para clientes carimbarem uma vez a cada 20 horas."
+        title: "Imprima o QR do balcão",
+        description: "Deixe um QR reutilizável no caixa para cada carteira se carimbar uma vez a cada 20 horas."
       },
       {
-        title: "Leia e colecione",
-        description: "Clientes abrem o QR, conectam a carteira e coletam um selo no cartão."
+        title: "Leia e carimbe",
+        description: "Clientes abrem o QR, conectam a carteira e adicionam a visita ao cartão."
       },
       {
-        title: "Libere a recompensa",
-        description: "Um cartão completo vira ticket de recompensa com QR e código de apoio."
+        title: "Libere o mimo",
+        description: "Um cartão completo vira ticket de recompensa com QR próprio e código de apoio."
       },
       {
         title: "Valide uma vez",
-        description: "A carteira dona marca a recompensa como usada e bloqueia uma segunda validação."
+        description: "A carteira dona marca o ticket como usado e fecha o loop depois de uma validação."
       }
     ]
   },
   benefits: {
-    eyebrow: "Benefícios para lojistas",
-    title: "Fidelidade construída para o uso diário no balcão.",
+    eyebrow: "Benefícios para a loja",
+    title: "Fidelidade de loja pequena, com menos trabalho e mais encanto.",
     description:
-    "O produto foca nas ações que uma pequena loja repete todos os dias: carimbar visita, mostrar progresso e validar recompensa.",
+      "noodl3 foca nos movimentos que a loja repete todos os dias: carimbar visita, mostrar progresso e validar recompensa com clareza.",
     items: [
       {
-        title: "Configuração rápida do cartão",
+        title: "Cartão pronto rápido",
         description: "Crie um cartão com nome da loja, logo, recompensa e meta de visitas."
       },
       {
         title: "QR pronto para o balcão",
-        description: "Imprima o QR de visita para autoatendimento ou gere um QR ao vivo para check-ins conduzidos pelo dono."
+        description: "Imprima o QR de visita para autoatendimento ou gere um QR ao vivo quando o lojista quiser guiar o check-in."
       },
       {
         title: "Progresso na carteira",
-        description: "Clientes carregam o progresso do cartão e os tickets de recompensa na própria carteira."
+        description: "Clientes carregam os selos e tickets de recompensa na carteira que já usam."
       },
       {
         title: "Bilíngue por padrão",
-        description: "O app suporta português e inglês no fluxo do lojista e do cliente."
+        description: "Português e inglês cobrem o fluxo do lojista e do cliente desde o primeiro scan."
       }
     ]
   },
   proof: {
-    eyebrow: "Prova de produto",
-    title: "Os estados essenciais do balcão fazem parte do produto.",
+    eyebrow: "Momentos do produto",
+    title: "Os estados importantes do balcão já estão cobertos.",
     description:
-    "Cada estado principal foi desenhado em torno das ações presenciais do lojista e do cliente.",
+      "Cada estado principal foi desenhado em torno das ações presenciais do lojista e do cliente.",
     items: [
       {
         title: "QR impresso",
-        description: "Folha reutilizável de balcão para selos diários com intervalo de 20 horas por carteira."
+        description: "Folha reutilizável de balcão para selos diários, com intervalo de 20 horas por carteira."
       },
       {
         title: "QR ao vivo",
-        description: "QR assinado pelo dono, com expiração curta, para check-ins ao vivo com um cliente."
+        description: "QR assinado pelo lojista, com expiração curta, para check-in de um cliente."
       },
       {
         title: "Ticket de recompensa",
-        description: "Cartão completo gera QR de ticket com código de apoio para validação no balcão."
+        description: "Cartão completo cria um QR de ticket e um código de apoio para validação no balcão."
       },
       {
-        title: "Validação pelo dono",
-        description: "A carteira dona valida a recompensa, e tickets usados mostram estado claro."
+        title: "Validação pelo lojista",
+        description: "A carteira dona valida o ticket, e tickets usados mostram um estado claro."
       }
     ]
   },
   launch: {
     eyebrow: "Lançamento no balcão",
-    title: "O que a loja consegue rodar hoje.",
+    title: "A loja consegue lançar o loop de uma vez.",
     description:
       "Crie o cartão, posicione o QR, carimbe visitas reais e valide recompensas pela carteira dona.",
     checklist: [
-      "Criar um cartão de selos com a marca da loja.",
-      "Imprimir ou baixar o QR estático de balcão.",
-      "Usar QR ao vivo quando o dono quiser conduzir a visita.",
-      "Permitir que clientes colecionem selos da própria carteira.",
+      "Criar um cartão de selos pela carteira dona.",
+      "Imprimir ou baixar o QR reutilizável de balcão.",
+      "Usar QR ao vivo quando o lojista quiser guiar o check-in.",
+      "Permitir que clientes carimbem visitas no balcão.",
       "Abrir tickets de recompensa com QR e código de apoio.",
       "Validar cada recompensa uma vez pela carteira dona."
     ]
   },
   faq: {
     eyebrow: "FAQ",
-    title: "Perguntas de lojistas, sem enrolação.",
+    title: "Perguntas de lojas, sem enrolação.",
     items: [
       {
         question: "Clientes precisam de carteira?",
@@ -807,32 +807,32 @@ const ptHomeCopy: HomeCopy = {
       },
       {
         question: "Por que Celo e MiniPay?",
-        answer: "Celo mantém a experiência mobile leve e deixa transações de selo e recompensa baratas para o uso diário."
+        answer: "Celo mantém a experiência mobile leve, e MiniPay deixa o fluxo de ler e carimbar fácil de usar em movimento."
       },
       {
         question: "Qual a diferença entre QR impresso e QR ao vivo?",
-        answer: "QR impresso é reutilizável para selos diários. QR ao vivo é gerado pelo dono, expira em minutos e serve para check-ins presenciais."
+        answer: "QR impresso é reutilizável para selos diários. QR ao vivo é gerado pelo lojista, expira em minutos e funciona melhor para check-ins guiados."
       },
       {
         question: "Como a recompensa fica protegida?",
-        answer: "Cada ticket de recompensa é validado uma vez pela carteira dona, e depois o app mostra o estado usado."
+        answer: "Cada ticket de recompensa é validado uma vez pela carteira dona. Depois disso, o app mostra que ele já foi usado."
       },
       {
         question: "O que o lojista coloca no balcão?",
-        answer: "O lojista pode imprimir a folha do QR de visita para clientes lerem, conectarem a carteira e coletarem um selo."
+        answer: "Imprima a folha do QR de visita e deixe onde clientes possam ler, conectar a carteira e coletar um selo."
       },
       {
         question: "Quando usar o QR ao vivo?",
-        answer: "Use o QR ao vivo em check-ins conduzidos pelo dono quando a loja quiser um QR de curta duração para o próximo cliente."
+        answer: "Use o QR ao vivo quando o lojista quiser um código curto para o próximo cliente em vez de deixar o QR impresso disponível."
       }
     ]
   },
   finalCta: {
     eyebrow: "Pronto para o balcão",
-    title: "Lance um cartão que clientes podem usar hoje.",
+    title: "Lance um cartão que clientes recorrentes podem usar hoje.",
     description:
-      "Comece com uma recompensa, um QR impresso e um fluxo feito para visitas recorrentes.",
-    primaryCta: "Criar cartão",
+      "Comece com uma recompensa, um QR impresso e um loop feito para a próxima visita.",
+    primaryCta: "Criar cartão de selos",
     secondaryCta: "Abrir app"
   }
 };
