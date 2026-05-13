@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s · noodl3"
   },
   description:
-    "Wallet-native stamp cards for small merchants. Print QR codes, let customers collect Celo stamps, and validate rewards at the counter.",
+    "Playful wallet stamp cards for small merchants on Celo. Print a counter QR, stamp real visits, and validate reward tickets once.",
   metadataBase: new URL(publicEnv.appUrl),
   keywords: [
     "MiniPay",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "noodl3",
     description:
-      "Wallet-native stamp cards for small merchants, with printed QR, live QR, and one-time reward validation on Celo.",
+      "Wallet stamp cards for small merchants, with counter QR, live check-ins, and one-time reward tickets on Celo.",
     url: publicEnv.appUrl,
     siteName: "noodl3",
     type: "website",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "noodl3",
     description:
-      "Wallet-native QR stamp cards for small merchant loyalty on Celo.",
+      "QR-first wallet stamp cards for small merchant loyalty on Celo.",
     images: ["/og.svg"]
   },
   other: {
