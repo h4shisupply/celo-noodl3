@@ -8,6 +8,7 @@ import { AppChrome } from "./app-chrome";
 import { useLocale } from "./locale-provider";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Field } from "./ui/field";
 import { Input } from "./ui/input";
 import { StatusMessage } from "./ui/status-message";
 import { Textarea } from "./ui/textarea";
@@ -158,14 +159,13 @@ export function ProgramCreatePage({
                 onChange={(event) => setName(event.target.value)}
               />
             </Field>
-            <Field label={copy.iconUrl}>
+            <Field label={copy.iconUrl} description={copy.iconUrlHelp}>
               <Input
                 value={iconUrl}
                 maxLength={280}
                 placeholder="https://..."
                 onChange={(event) => setIconUrl(event.target.value)}
               />
-              <p className="text-xs text-[#676078]">{copy.iconUrlHelp}</p>
             </Field>
             <Field label={copy.rewardDescription}>
               <Textarea
@@ -204,6 +204,7 @@ export function ProgramCreatePage({
               icon={<Save className="h-4 w-4" />}
               onClick={() => void handleSubmit()}
               disabled={isSaving || !contractAddress}
+              className="w-full sm:w-auto"
             >
               {isSaving ? `${dictionary.common.saving}...` : copy.saveProgram}
             </Button>
@@ -215,26 +216,26 @@ export function ProgramCreatePage({
           </CardContent>
         </Card>
 
-        <aside className="surface-panel stamp-pattern h-fit rounded-lg p-5">
-          <div className="space-y-5 rounded-lg bg-white/88 p-5">
+        <aside className="surface-panel stamp-pattern h-fit rounded-lg p-4">
+          <div className="space-y-5 rounded-lg bg-panel p-5">
             <div className="flex items-center gap-3">
               {normalizeRemoteImageUrl(iconUrl) ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={normalizeRemoteImageUrl(iconUrl) ?? ""}
                   alt=""
-                  className="h-12 w-12 rounded-lg object-cover"
+                  className="h-12 w-12 rounded-lg border border-line object-cover"
                 />
               ) : (
-                <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#F3EFFF] text-[#7047DF]">
+                <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-accent-border bg-accent-soft text-accent">
                   <ImageIcon className="h-5 w-5" />
                 </span>
               )}
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-[#1B172B]">
+                <p className="truncate text-sm font-semibold text-ink">
                   {name || copy.previewProgramName}
                 </p>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
                   {copy.previewCard}
                 </p>
               </div>
@@ -248,8 +249,8 @@ export function ProgramCreatePage({
                   key={index}
                   className={`flex aspect-square items-center justify-center rounded-lg border text-xs font-semibold ${
                     index < 3
-                      ? "border-[#0F9F8F] bg-[#E9FBF7] text-[#146B5E]"
-                      : "border-[#DCD6EA] bg-white text-[#8B84A1]"
+                      ? "border-mint bg-mint-soft text-mint-strong"
+                      : "border-line bg-panel text-muted-soft"
                   }`}
                 >
                   {index + 1}
@@ -257,7 +258,7 @@ export function ProgramCreatePage({
               ))}
             </div>
 
-            <div className="rounded-lg bg-[#FFF7E8] p-3 text-sm font-semibold leading-6 text-[#8B5B00]">
+            <div className="rounded-lg border border-sun-border bg-sun-soft p-3 text-sm font-semibold leading-6 text-sun-strong">
               <Gift className="mb-2 h-4 w-4" aria-hidden="true" />
               {rewardDescription || copy.previewReward}
             </div>
@@ -265,22 +266,5 @@ export function ProgramCreatePage({
         </aside>
       </section>
     </AppChrome>
-  );
-}
-
-function Field({
-  label,
-  children
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <label className="block space-y-2">
-      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
-        {label}
-      </span>
-      {children}
-    </label>
   );
 }

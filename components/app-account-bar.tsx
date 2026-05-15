@@ -92,7 +92,7 @@ export function AppAccountBar({
               <button
                 type="button"
                 onClick={() => setIsMenuOpen((current) => !current)}
-                className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#E5E1EE] bg-white px-3 text-sm font-semibold text-[#241B3C] shadow-[0_12px_28px_rgba(27,23,43,0.08)] transition hover:border-[#D9D0F4]"
+                className="inline-flex h-11 max-w-[13rem] items-center gap-2 rounded-lg border border-line bg-panel px-3 text-sm font-semibold text-ink-soft shadow-card transition hover:border-accent-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus sm:max-w-none"
                 aria-expanded={isMenuOpen}
                 aria-label={dictionary.account.openMenu}
               >
@@ -105,24 +105,24 @@ export function AppAccountBar({
                   </>
                 ) : (
                   <>
-                    <Wallet className="h-5 w-5 text-[#1B172B]" aria-hidden="true" />
+                    <Wallet className="h-5 w-5 text-ink" aria-hidden="true" />
                     <span className="hidden sm:block">{formatWalletLabel(account)}</span>
                   </>
                 )}
                 <ChevronDown
-                  className={`h-4 w-4 text-[#676078] transition ${isMenuOpen ? "rotate-180" : ""}`}
+                  className={`h-4 w-4 text-muted transition ${isMenuOpen ? "rotate-180" : ""}`}
                   aria-hidden="true"
                 />
               </button>
 
               {isMenuOpen ? (
-                <div className="absolute right-0 top-[calc(100%+0.75rem)] z-30 w-[17rem] rounded-lg border border-[#E5E1EE] bg-white p-4 shadow-[0_28px_80px_rgba(27,23,43,0.14)]">
-                  <div className="space-y-1 border-b border-[#F0ECF6] pb-4">
-                    <p className="text-sm font-semibold text-[#1B172B]">
+                <div className="absolute right-0 top-[calc(100%+0.75rem)] z-30 w-[min(17rem,calc(100vw-2rem))] rounded-lg border border-line bg-panel p-4 shadow-float">
+                  <div className="space-y-1 border-b border-line-soft pb-4">
+                    <p className="text-sm font-semibold text-ink">
                       {profile?.displayName ?? dictionary.account.connectedWallet}
                     </p>
-                    <p className="text-sm text-[#676078]">{formatWalletLabel(account)}</p>
-                    <p className="text-sm text-[#676078]">
+                    <p className="text-sm text-muted">{formatWalletLabel(account)}</p>
+                    <p className="text-sm text-muted">
                       {isWrongChain
                         ? interpolate(dictionary.account.expectedNetwork, {
                             current: getChainLabel(chainId, locale),
@@ -234,7 +234,7 @@ function ProfileAvatar({
   }
 
   return (
-    <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-[#E9FBF7] text-xs font-semibold text-[#146B5E]">
+    <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-mint-soft text-xs font-semibold text-mint-strong">
       {getInitials(name)}
     </span>
   );

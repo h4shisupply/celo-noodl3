@@ -5,10 +5,10 @@ import type { HTMLAttributes } from "react";
 type StatusTone = "success" | "error" | "warning" | "info";
 
 const toneClasses = {
-  success: "border-[#BDE8D8] bg-[#E9FBF7] text-[#146B5E]",
-  error: "border-[#F1D9D9] bg-[#FFF6F6] text-[#A23B3B]",
-  warning: "border-[#F5DFC1] bg-[#FFF7E8] text-[#8B5B00]",
-  info: "border-[#D9D0F4] bg-[#F3EFFF] text-[#7047DF]"
+  success: "border-mint-border bg-mint-soft text-mint-strong",
+  error: "border-danger-border bg-danger-soft text-danger",
+  warning: "border-sun-border bg-sun-soft text-sun-strong",
+  info: "border-accent-border bg-accent-soft text-accent"
 };
 
 const icons = {

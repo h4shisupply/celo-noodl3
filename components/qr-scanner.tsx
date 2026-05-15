@@ -151,13 +151,13 @@ export function QrScanner({
   ]);
 
   return (
-    <div className="fixed inset-0 z-30 flex min-h-[100dvh] flex-col bg-[#FBFCFF] px-5 py-6 md:px-8 md:py-8">
+    <div className="fixed inset-0 z-30 flex min-h-[100dvh] flex-col bg-panel-soft px-5 py-6 md:px-8 md:py-8">
       <div className="flex items-start justify-between gap-4">
         <div className="max-w-xl space-y-2">
-          <h2 className="text-2xl font-semibold text-[#1B172B] md:text-3xl">
+          <h2 className="text-2xl font-semibold text-ink md:text-3xl">
             {title}
           </h2>
-          <p className="text-sm leading-7 text-[#676078]">{description}</p>
+          <p className="text-sm leading-7 text-muted">{description}</p>
         </div>
 
         <button
@@ -166,7 +166,7 @@ export function QrScanner({
             stopCamera();
             onClose?.();
           }}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#E6E1F0] bg-white text-[#241B3C] shadow-[0_12px_28px_rgba(27,23,43,0.08)]"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-line bg-panel text-ink-soft shadow-card transition hover:border-accent-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
           aria-label={dictionary.actions.closeScanner}
         >
           <X className="h-5 w-5" />
@@ -174,7 +174,7 @@ export function QrScanner({
       </div>
 
       <div className="flex flex-1 flex-col pt-6">
-        <div className="relative flex-1 overflow-hidden rounded-lg border border-[#E5E1EE] bg-[#F3EFFF]">
+        <div className="relative flex-1 overflow-hidden rounded-lg border border-line bg-accent-soft">
           <video
             ref={videoRef}
             className="h-full w-full object-cover"
@@ -183,18 +183,18 @@ export function QrScanner({
           />
 
           {!isActive ? (
-            <div className="absolute inset-0 flex items-center justify-center bg-[#F3EFFF]/90 px-6 text-center">
+            <div className="absolute inset-0 flex items-center justify-center bg-accent-soft px-6 text-center">
               <div className="space-y-4">
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-white text-[#7047DF] shadow-[0_12px_28px_rgba(27,23,43,0.08)]">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-panel text-accent shadow-card">
                   <Camera className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <p className="text-sm text-[#676078]">
+                <p className="text-sm text-muted">
                   {isProcessing
                     ? processingLabel || dictionary.qrScanner.ready
                     : error || notice || dictionary.qrScanner.ready}
                 </p>
                 {isProcessing ? (
-                  <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-[#D8D1EA] border-t-[#1B172B]" />
+                  <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-accent-border border-t-ink" />
                 ) : (
                   <Button onClick={() => void startCamera()}>
                     {qrCopy.openCamera}
@@ -208,7 +208,7 @@ export function QrScanner({
         </div>
 
         {notice && isActive ? (
-          <p className="pt-4 text-sm text-[#8C3A3A]">{notice}</p>
+          <p className="pt-4 text-sm text-danger">{notice}</p>
         ) : null}
       </div>
     </div>

@@ -24,6 +24,7 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { EmptyState } from "./ui/empty-state";
+import { MetricCard } from "./ui/metric-card";
 import { StatusMessage } from "./ui/status-message";
 import {
   fetchClaim,
@@ -229,13 +230,16 @@ export function DashboardPage({
 
         {account && contractAddress ? (
           <>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/app/program/new">
-                <Button icon={<Plus className="h-4 w-4" />}>{copy.createProgram}</Button>
+            <div className="surface-panel flex flex-col gap-3 rounded-lg p-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <Link href="/app/program/new" className="w-full sm:w-auto">
+                <Button icon={<Plus className="h-4 w-4" />} className="w-full sm:w-auto">
+                  {copy.createProgram}
+                </Button>
               </Link>
               <Button
                 variant="warm"
                 icon={<QrCode className="h-4 w-4" />}
+                className="w-full sm:w-auto"
                 onClick={() => setIsScannerOpen(true)}
               >
                 {copy.scanQr}
@@ -243,6 +247,7 @@ export function DashboardPage({
               <Button
                 variant="ghost"
                 icon={<RefreshCw className="h-4 w-4" />}
+                className="w-full sm:w-auto"
                 onClick={() => void loadDashboard()}
               >
                 {isLoading ? `${dictionary.common.loading}...` : dictionary.actions.refreshNetwork}
@@ -250,20 +255,22 @@ export function DashboardPage({
             </div>
 
             <div className="grid gap-5 md:grid-cols-3">
-              <KpiCard
+              <MetricCard
                 icon={<WalletCards className="h-5 w-5" />}
                 label={copy.myCards}
                 value={customerPrograms.length}
               />
-              <KpiCard
+              <MetricCard
                 icon={<Store className="h-5 w-5" />}
                 label={copy.myPrograms}
                 value={managedPrograms.length}
+                tone="accent"
               />
-              <KpiCard
+              <MetricCard
                 icon={<Gift className="h-5 w-5" />}
                 label={copy.rewardClaims}
                 value={pendingClaims.length}
+                tone="sun"
               />
             </div>
 
@@ -350,35 +357,12 @@ function DashboardSection({
 }) {
   return (
     <section className="space-y-4">
-      <h2 className="text-xl font-semibold text-[#1B172B]">{title}</h2>
+      <div className="flex items-center gap-3">
+        <h2 className="text-xl font-semibold text-ink">{title}</h2>
+        <div className="h-px flex-1 bg-line" />
+      </div>
       {children}
     </section>
-  );
-}
-
-function KpiCard({
-  icon,
-  label,
-  value
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: number;
-}) {
-  return (
-    <Card variant="soft">
-      <CardContent className="flex items-center justify-between gap-4 pt-5">
-        <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
-            {label}
-          </p>
-          <p className="text-3xl font-semibold text-[#1B172B]">{value}</p>
-        </div>
-        <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#E9FBF7] text-[#146B5E]">
-          {icon}
-        </div>
-      </CardContent>
-    </Card>
   );
 }
 
@@ -388,10 +372,10 @@ function ProgramCard({ program }: { program: DashboardProgram }) {
   const progress = program.progress;
 
   return (
-    <Card>
+    <Card className="h-full">
       <CardHeader className="space-y-3">
         <Avatar name={program.name} imageUrl={program.iconUrl} size="sm" />
-        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
+        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
           {formatProgramCode(program.id)}
         </p>
         <CardTitle>{program.name}</CardTitle>
@@ -403,9 +387,9 @@ function ProgramCard({ program }: { program: DashboardProgram }) {
           total={program.stampsRequired}
           unitLabel={copy.stamps}
         />
-        <div className="flex flex-wrap gap-3">
-          <Link href={`/app/program/${program.id.toString()}`}>
-            <Button size="sm" icon={<BadgeCheck className="h-4 w-4" />}>
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          <Link href={`/app/program/${program.id.toString()}`} className="w-full sm:w-auto">
+            <Button size="sm" icon={<BadgeCheck className="h-4 w-4" />} className="w-full sm:w-auto">
               {copy.openCard}
             </Button>
           </Link>
@@ -425,7 +409,7 @@ function ManagedProgramCard({ program }: { program: DashboardProgram }) {
   const copy = programCopy(locale);
 
   return (
-    <Card>
+    <Card className="h-full">
       <CardHeader className="space-y-3">
         <Avatar name={program.name} imageUrl={program.iconUrl} size="sm" />
         <Badge variant={program.active ? "accent" : "danger"}>
@@ -435,12 +419,12 @@ function ManagedProgramCard({ program }: { program: DashboardProgram }) {
         <CardDescription>{program.rewardDescription}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <p className="text-sm text-[#676078]">
+        <p className="text-sm text-muted">
           {program.stampsRequired} {copy.visits}
           {!program.active ? ` · ${copy.inactive}` : ""}
         </p>
-        <Link href={`/app/program/${program.id.toString()}/manage`}>
-          <Button size="sm" variant="outline" icon={<Store className="h-4 w-4" />}>
+        <Link href={`/app/program/${program.id.toString()}/manage`} className="block">
+          <Button size="sm" variant="outline" icon={<Store className="h-4 w-4" />} className="w-full sm:w-auto">
             {copy.manage}
           </Button>
         </Link>
@@ -455,22 +439,22 @@ function ClaimSummaryCard({ claim }: { claim: ClaimRecord }) {
 
   return (
     <Card>
-      <CardContent className="flex flex-wrap items-center justify-between gap-4 pt-6">
-        <div className="space-y-1">
-          <p className="text-sm font-semibold text-[#1B172B]">
+      <CardContent className="flex flex-col gap-4 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0 space-y-1">
+          <p className="text-sm font-semibold text-ink">
             {formatClaimCode(claim.id)} · {claim.rewardDescription}
           </p>
-          <p className="text-sm text-[#676078]">
+          <p className="text-sm text-muted">
             {formatProgramCode(claim.programId)} · {formatDateTime(claim.claimedAt, locale)}
           </p>
-          <p className="text-sm text-[#676078]">{formatWalletLabel(claim.user)}</p>
+          <p className="text-sm text-muted">{formatWalletLabel(claim.user)}</p>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           <Badge variant={claim.consumed ? "neutral" : "mint"}>
             {claim.consumed ? copy.usedClaim : copy.ready}
           </Badge>
-          <Link href={`/app/claim/${claim.id.toString()}`}>
-            <Button size="sm" variant="outline" icon={<Gift className="h-4 w-4" />}>
+          <Link href={`/app/claim/${claim.id.toString()}`} className="w-full sm:w-auto">
+            <Button size="sm" variant="outline" icon={<Gift className="h-4 w-4" />} className="w-full sm:w-auto">
               {copy.openCard}
             </Button>
           </Link>

@@ -9,10 +9,10 @@ export function Card({ className, variant = "default", ...props }: CardProps) {
   return (
     <div
       className={clsx(
-        "rounded-lg border shadow-[0_18px_48px_rgba(27,23,43,0.07)]",
-        variant === "default" && "border-[#E5E1EE] bg-white",
-        variant === "soft" && "border-[#E5E1EE] bg-[#FBFCFF]",
-        variant === "accent" && "border-[#D9D0F4] bg-[#F9F6FF]",
+        "rounded-lg border shadow-card",
+        variant === "default" && "border-line bg-panel",
+        variant === "soft" && "border-line bg-panel-soft",
+        variant === "accent" && "border-accent-border bg-accent-soft",
         className
       )}
       {...props}
@@ -40,7 +40,7 @@ export function CardTitle({
 }: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2
-      className={clsx("text-xl font-semibold text-[#1B172B]", className)}
+      className={clsx("text-xl font-semibold leading-tight text-ink", className)}
       {...props}
     />
   );
@@ -52,7 +52,7 @@ export function CardDescription({
 }: HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className={clsx("text-sm leading-6 text-[#676078]", className)}
+      className={clsx("text-sm leading-6 text-muted", className)}
       {...props}
     />
   );

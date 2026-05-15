@@ -63,7 +63,7 @@ export function HeadlessSelect({
   return (
     <div className={clsx("space-y-2", className)} ref={rootRef}>
       {label ? (
-        <span className="block text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
+        <span className="block text-xs font-semibold uppercase tracking-[0.12em] text-muted">
           {label}
         </span>
       ) : null}
@@ -78,17 +78,17 @@ export function HeadlessSelect({
           }}
           disabled={disabled}
           className={clsx(
-            "flex min-h-12 w-full items-center justify-between rounded-lg border border-[#E7E1F1] bg-white px-4 py-3 text-left shadow-[0_10px_24px_rgba(27,23,43,0.06)] transition hover:border-[#D7CFF0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7047DF]/15",
-            disabled && "cursor-default opacity-70 hover:border-[#E7E1F1]",
+            "flex min-h-12 w-full items-center justify-between rounded-lg border border-line bg-panel px-4 py-3 text-left shadow-card transition hover:border-accent-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus",
+            disabled && "cursor-default opacity-70 hover:border-line",
             triggerClassName
           )}
         >
           <div className="min-w-0">
-            <p className="truncate text-sm font-medium text-[#1B172B]">
+            <p className="truncate text-sm font-medium text-ink">
               {selected?.label || placeholder || ""}
             </p>
             {selected?.description ? (
-              <p className="mt-1 truncate text-xs text-[#7A748E]">
+              <p className="mt-1 truncate text-xs text-muted">
                 {selected.description}
               </p>
             ) : null}
@@ -96,7 +96,7 @@ export function HeadlessSelect({
           <span
             aria-hidden="true"
             className={clsx(
-              "ml-4 h-2.5 w-2.5 shrink-0 rotate-45 border-b border-r border-[#6C6582] transition-transform",
+              "ml-4 h-2.5 w-2.5 shrink-0 rotate-45 border-b border-r border-muted transition-transform",
               open ? "-translate-y-[1px] -rotate-135" : "translate-y-[-1px]"
             )}
           />
@@ -105,7 +105,7 @@ export function HeadlessSelect({
         {open ? (
           <div
             className={clsx(
-              "absolute z-40 mt-2 w-full min-w-[15rem] rounded-lg border border-[#E7E1F1] bg-white p-2 shadow-[0_24px_70px_rgba(27,23,43,0.12)]",
+              "absolute z-40 mt-2 w-full min-w-[15rem] rounded-lg border border-line bg-panel p-2 shadow-float",
               align === "right" ? "right-0" : "left-0"
             )}
             role="listbox"
@@ -126,8 +126,8 @@ export function HeadlessSelect({
                   className={clsx(
                     "flex w-full flex-col rounded-md px-3 py-3 text-left transition",
                     active
-                      ? "bg-[#1B172B] text-white"
-                      : "text-[#241B3C] hover:bg-[#F7F5FF]"
+                      ? "bg-ink text-white"
+                      : "text-ink-soft hover:bg-accent-soft"
                   )}
                 >
                   <span className="text-sm font-medium">{option.label}</span>
@@ -135,7 +135,7 @@ export function HeadlessSelect({
                     <span
                       className={clsx(
                         "mt-1 text-xs",
-                        active ? "text-white/72" : "text-[#7A748E]"
+                        active ? "text-white/72" : "text-muted"
                       )}
                     >
                       {option.description}

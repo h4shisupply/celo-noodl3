@@ -79,11 +79,12 @@ export function QrActionBar({
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap gap-2">
+      <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
         <Button
           size="sm"
           variant="outline"
           icon={<Copy className="h-4 w-4" />}
+          className="w-full sm:w-auto"
           onClick={() => void handleCopy()}
         >
           {labels.copy}
@@ -92,6 +93,7 @@ export function QrActionBar({
           size="sm"
           variant="outline"
           icon={<Share2 className="h-4 w-4" />}
+          className="w-full sm:w-auto"
           onClick={() => void handleShare()}
         >
           {labels.share}
@@ -100,6 +102,7 @@ export function QrActionBar({
           size="sm"
           variant="outline"
           icon={<Download className="h-4 w-4" />}
+          className="w-full sm:w-auto"
           onClick={() => {
             if (qrRef.current) {
               downloadSvg(qrRef.current, fileName);
@@ -113,16 +116,18 @@ export function QrActionBar({
             size="sm"
             variant="warm"
             icon={<Printer className="h-4 w-4" />}
+            className="w-full sm:w-auto"
             onClick={() => window.print()}
           >
             {labels.print}
           </Button>
         ) : null}
-        <a href={value} target="_blank" rel="noreferrer">
+        <a href={value} target="_blank" rel="noreferrer" className="w-full sm:w-auto">
           <Button
             size="sm"
             variant="ghost"
             icon={<ExternalLink className="h-4 w-4" />}
+            className="w-full sm:w-auto"
           >
             {labels.open}
           </Button>
@@ -167,11 +172,11 @@ export function QrDisplay({
 
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="stamp-pattern border-b border-[#E5E1EE] bg-[#FBFCFF]">
+      <CardHeader className="stamp-pattern border-b border-line bg-panel-soft">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="space-y-2">
             {code ? (
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#7047DF]">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">
                 {code}
               </p>
             ) : null}
@@ -182,7 +187,7 @@ export function QrDisplay({
         </div>
       </CardHeader>
       <CardContent className="space-y-4 pt-5">
-        <div className="mx-auto flex w-full max-w-[18rem] justify-center rounded-lg border border-[#E5E1EE] bg-white p-4 shadow-[0_14px_36px_rgba(27,23,43,0.08)]">
+        <div className="mx-auto flex w-full max-w-[18rem] justify-center rounded-lg border border-line bg-panel p-4 shadow-card">
           <QRCodeSVG
             ref={qrRef}
             value={value}
@@ -195,7 +200,7 @@ export function QrDisplay({
             className="h-auto w-full"
           />
         </div>
-        <p className="break-all rounded-lg bg-[#FBFCFF] p-3 text-sm text-[#676078]">
+        <p className="break-all rounded-lg border border-line bg-panel-soft p-3 text-sm leading-6 text-muted">
           {value}
         </p>
         <QrActionBar
@@ -228,13 +233,13 @@ export function PrintableQrSheet({
   value: string;
 }) {
   return (
-    <section className="print-sheet hidden rounded-lg border border-[#DCD6EA] bg-white p-8 text-center shadow-[0_18px_48px_rgba(27,23,43,0.08)]">
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7047DF]">
+    <section className="print-sheet hidden rounded-lg border border-line bg-panel p-8 text-center shadow-card">
+      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
         {code}
       </p>
-      <h2 className="mt-3 text-3xl font-semibold text-[#1B172B]">{programName}</h2>
-      <p className="mt-2 text-sm leading-6 text-[#676078]">{subtitle}</p>
-      <div className="mx-auto mt-8 flex max-w-[18rem] justify-center rounded-lg border border-[#E5E1EE] bg-white p-4">
+      <h2 className="mt-3 text-3xl font-semibold text-ink">{programName}</h2>
+      <p className="mt-2 text-sm leading-6 text-muted">{subtitle}</p>
+      <div className="mx-auto mt-8 flex max-w-[18rem] justify-center rounded-lg border border-line bg-panel p-4">
         <QRCodeSVG
           value={value}
           title={title}
@@ -246,11 +251,11 @@ export function PrintableQrSheet({
           className="h-auto w-full"
         />
       </div>
-      <div className="mx-auto mt-8 grid max-w-md gap-3 text-left text-sm text-[#1B172B]">
-        <p className="rounded-lg bg-[#FFF7E8] p-4 font-semibold text-[#8B5B00]">
+      <div className="mx-auto mt-8 grid max-w-md gap-3 text-left text-sm text-ink">
+        <p className="rounded-lg bg-sun-soft p-4 font-semibold text-sun-strong">
           {reward}
         </p>
-        <p className="rounded-lg bg-[#E9FBF7] p-4 font-semibold text-[#146B5E]">
+        <p className="rounded-lg bg-mint-soft p-4 font-semibold text-mint-strong">
           {rule}
         </p>
       </div>

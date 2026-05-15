@@ -36,7 +36,7 @@ function NavLink({
       <a
         href={href}
         onClick={onClick}
-        className="text-sm font-medium text-[#676078] transition hover:text-[#1B172B]"
+        className="rounded-md text-sm font-medium text-muted transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
       >
         {label}
       </a>
@@ -47,7 +47,7 @@ function NavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="text-sm font-medium text-[#676078] transition hover:text-[#1B172B]"
+      className="rounded-md text-sm font-medium text-muted transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
     >
       {label}
     </Link>
@@ -106,7 +106,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
         <button
           type="button"
           onClick={() => setMenuOpen((current) => !current)}
-          className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#E4DEF1] bg-white px-4 text-sm font-semibold text-[#241B3C] md:hidden"
+          className="inline-flex h-11 items-center gap-2 rounded-lg border border-line bg-panel px-4 text-sm font-semibold text-ink-soft shadow-card transition hover:border-accent-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus md:hidden"
         >
           {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           {menuLabel}
@@ -114,7 +114,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
       </div>
 
       {menuOpen ? (
-        <div className="mt-5 space-y-4 rounded-lg border border-[#ECE6F5] bg-white px-5 py-5 shadow-[0_20px_44px_rgba(27,23,43,0.08)] md:hidden">
+        <div className="mt-5 space-y-4 rounded-lg border border-line bg-panel px-5 py-5 shadow-card md:hidden">
           <nav className="grid gap-3">
             {items.map((item) => (
               <NavLink

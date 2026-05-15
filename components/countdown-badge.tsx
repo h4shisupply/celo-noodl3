@@ -38,8 +38,8 @@ export function CountdownBadge({
     <span
       className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold ${
         expired
-          ? "border-[#F1D9D9] bg-[#FFF6F6] text-[#A23B3B]"
-          : "border-[#F5DFC1] bg-[#FFF7E8] text-[#8B5B00]"
+          ? "border-danger-border bg-danger-soft text-danger"
+          : "border-sun-border bg-sun-soft text-sun-strong"
       }`}
     >
       <Clock3 className="h-3.5 w-3.5" aria-hidden="true" />
