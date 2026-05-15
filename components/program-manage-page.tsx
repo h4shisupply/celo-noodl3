@@ -26,7 +26,9 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { EmptyState } from "./ui/empty-state";
+import { Field } from "./ui/field";
 import { Input } from "./ui/input";
+import { MetricCard } from "./ui/metric-card";
 import { StatusMessage } from "./ui/status-message";
 import { Textarea } from "./ui/textarea";
 import { ToggleRow } from "./ui/toggle-row";
@@ -327,23 +329,23 @@ export function ProgramManagePage({
           />
         ) : (
           <>
-            <div className="surface-panel stamp-pattern flex flex-wrap items-center gap-4 rounded-lg p-5">
+            <div className="surface-panel stamp-pattern flex flex-col gap-4 rounded-lg p-5 sm:flex-row sm:items-center">
               <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
-              <div>
+              <div className="min-w-0">
                 <Badge variant={program.active ? "accent" : "danger"}>
                   {formatProgramCode(program.id)} {!program.active ? `· ${copy.inactive}` : ""}
                 </Badge>
-                <h1 className="mt-2 text-2xl font-semibold text-[#1B172B]">
+                <h1 className="mt-2 text-2xl font-semibold leading-tight text-ink">
                   {program.name}
                 </h1>
-                <p className="text-sm text-[#676078]">{program.rewardDescription}</p>
+                <p className="text-sm leading-6 text-muted">{program.rewardDescription}</p>
               </div>
             </div>
 
             <div className="grid gap-5 md:grid-cols-3">
-              <KpiCard icon={<Users className="h-5 w-5" />} label={copy.customers} value={customers.length} />
-              <KpiCard icon={<Gift className="h-5 w-5" />} label={copy.rewardClaims} value={claims.length} />
-              <KpiCard icon={<BadgeCheck className="h-5 w-5" />} label={copy.visitsRequired} value={program.stampsRequired} />
+              <MetricCard icon={<Users className="h-5 w-5" />} label={copy.customers} value={customers.length} />
+              <MetricCard icon={<Gift className="h-5 w-5" />} label={copy.rewardClaims} value={claims.length} tone="sun" />
+              <MetricCard icon={<BadgeCheck className="h-5 w-5" />} label={copy.visitsRequired} value={program.stampsRequired} tone="accent" />
             </div>
 
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_24rem]">
@@ -383,6 +385,7 @@ export function ProgramManagePage({
                       />
                       <Button
                         icon={<UserPlus className="h-4 w-4" />}
+                        className="w-full md:w-auto"
                         onClick={() =>
                           void submitAction(async () => {
                             const customer = getValidAddress(manualCustomer);
@@ -408,9 +411,9 @@ export function ProgramManagePage({
                         {customers.map((customer) => (
                           <div
                             key={customer.address}
-                            className="rounded-lg border border-[#E5E1EE] bg-[#FBFCFF] p-4"
+                            className="rounded-lg border border-line bg-panel-soft p-4"
                           >
-                            <p className="mb-3 text-sm font-semibold text-[#1B172B]">
+                            <p className="mb-3 break-all text-sm font-semibold text-ink">
                               {formatWalletLabel(customer.address)}
                             </p>
                             <ProgressMeter
@@ -422,7 +425,7 @@ export function ProgramManagePage({
                         ))}
                       </div>
                     ) : (
-                      <p className="text-sm text-[#676078]">{copy.emptyCards}</p>
+                      <p className="text-sm text-muted">{copy.emptyCards}</p>
                     )}
                   </CardContent>
                 </Card>
@@ -431,12 +434,13 @@ export function ProgramManagePage({
               <aside className="space-y-6">
                 <section className="space-y-4">
                   <div className="space-y-2">
-                    <h2 className="text-xl font-semibold text-[#1B172B]">{copy.dynamicQr}</h2>
-                    <p className="text-sm leading-6 text-[#676078]">{copy.dynamicQrHelp}</p>
+                    <h2 className="text-xl font-semibold text-ink">{copy.dynamicQr}</h2>
+                    <p className="text-sm leading-6 text-muted">{copy.dynamicQrHelp}</p>
                   </div>
                   <div className="space-y-4">
                     <Button
                       icon={dynamicQr ? <RefreshCw className="h-4 w-4" /> : <QrCode className="h-4 w-4" />}
+                      className="w-full sm:w-auto"
                       onClick={() => void handleGenerateDynamicQr()}
                       disabled={isSubmitting || !program.active}
                     >
@@ -471,23 +475,31 @@ export function ProgramManagePage({
                     <CardDescription>{copy.updateProgram}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <Input value={name} maxLength={60} onChange={(event) => setName(event.target.value)} />
-                    <Input
-                      value={iconUrl}
-                      maxLength={280}
-                      placeholder="https://..."
-                      onChange={(event) => setIconUrl(event.target.value)}
-                    />
-                    <Textarea
-                      value={rewardDescription}
-                      maxLength={120}
-                      onChange={(event) => setRewardDescription(event.target.value)}
-                    />
-                    <Input
-                      value={stampsRequired}
-                      inputMode="numeric"
-                      onChange={(event) => setStampsRequired(event.target.value)}
-                    />
+                    <Field label={copy.programName}>
+                      <Input value={name} maxLength={60} onChange={(event) => setName(event.target.value)} />
+                    </Field>
+                    <Field label={copy.iconUrl}>
+                      <Input
+                        value={iconUrl}
+                        maxLength={280}
+                        placeholder="https://..."
+                        onChange={(event) => setIconUrl(event.target.value)}
+                      />
+                    </Field>
+                    <Field label={copy.rewardDescription}>
+                      <Textarea
+                        value={rewardDescription}
+                        maxLength={120}
+                        onChange={(event) => setRewardDescription(event.target.value)}
+                      />
+                    </Field>
+                    <Field label={copy.visitsRequired}>
+                      <Input
+                        value={stampsRequired}
+                        inputMode="numeric"
+                        onChange={(event) => setStampsRequired(event.target.value)}
+                      />
+                    </Field>
                     <ToggleRow
                       checked={active}
                       icon={<Sparkles className="h-4 w-4" />}
@@ -504,6 +516,7 @@ export function ProgramManagePage({
                     />
                     <Button
                       icon={<Save className="h-4 w-4" />}
+                      className="w-full sm:w-auto"
                       onClick={() =>
                         void submitAction(async () => {
                           const parsedStampsRequired = Number.parseInt(stampsRequired, 10);
@@ -554,19 +567,19 @@ export function ProgramManagePage({
                   claims.map((claim) => (
                     <div
                       key={claim.id.toString()}
-                      className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#E5E1EE] bg-[#FBFCFF] p-4"
+                      className="flex flex-col gap-3 rounded-lg border border-line bg-panel-soft p-4 sm:flex-row sm:items-center sm:justify-between"
                     >
-                      <div>
-                        <p className="text-sm font-semibold text-[#1B172B]">
+                      <div className="min-w-0 space-y-2">
+                        <p className="break-all text-sm font-semibold text-ink">
                           {formatClaimCode(claim.id)} · {formatWalletLabel(claim.user)}
                         </p>
                         <Badge variant={claim.consumed ? "neutral" : "mint"}>
                           {claim.consumed ? copy.usedClaim : copy.ready}
                         </Badge>
                       </div>
-                      <div className="flex flex-wrap gap-2">
-                        <Link href={`/app/claim/${claim.id.toString()}`}>
-                          <Button size="sm" variant="outline" icon={<Gift className="h-4 w-4" />}>
+                      <div className="grid gap-2 sm:flex sm:flex-wrap">
+                        <Link href={`/app/claim/${claim.id.toString()}`} className="w-full sm:w-auto">
+                          <Button size="sm" variant="outline" icon={<Gift className="h-4 w-4" />} className="w-full sm:w-auto">
                             {copy.openCard}
                           </Button>
                         </Link>
@@ -574,6 +587,7 @@ export function ProgramManagePage({
                           <Button
                             size="sm"
                             icon={<Send className="h-4 w-4" />}
+                            className="w-full sm:w-auto"
                             onClick={() =>
                               void submitAction(async () => {
                                 if (!contractAddress) return;
@@ -594,7 +608,7 @@ export function ProgramManagePage({
                     </div>
                   ))
                 ) : (
-                  <p className="text-sm text-[#676078]">{copy.emptyClaims}</p>
+                  <p className="text-sm text-muted">{copy.emptyClaims}</p>
                 )}
               </CardContent>
             </Card>
@@ -607,31 +621,5 @@ export function ProgramManagePage({
         ) : null}
       </section>
     </AppChrome>
-  );
-}
-
-function KpiCard({
-  icon,
-  label,
-  value
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: number;
-}) {
-  return (
-    <Card variant="soft">
-      <CardContent className="flex items-center justify-between gap-4 pt-5">
-        <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
-            {label}
-          </p>
-          <p className="text-3xl font-semibold text-[#1B172B]">{value}</p>
-        </div>
-        <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#E9FBF7] text-[#146B5E]">
-          {icon}
-        </div>
-      </CardContent>
-    </Card>
   );
 }

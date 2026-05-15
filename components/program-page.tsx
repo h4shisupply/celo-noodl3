@@ -275,10 +275,10 @@ export function ProgramPage({
             icon={<Stamp className="h-5 w-5" />}
           />
         ) : (
-          <Card>
-            <CardHeader className="stamp-pattern space-y-4 rounded-t-lg border-b border-[#E5E1EE] bg-[#FBFCFF]">
+          <Card className="overflow-hidden">
+            <CardHeader className="stamp-pattern space-y-4 border-b border-line bg-panel-soft">
               <div className="flex flex-wrap items-start justify-between gap-4">
-                <div className="flex items-center gap-4">
+                <div className="flex min-w-0 items-center gap-4">
                   <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
                   <div className="min-w-0 space-y-2">
                     <Badge variant={program.active ? "accent" : "danger"}>
@@ -297,7 +297,7 @@ export function ProgramPage({
                 unitLabel={copy.stamps}
               />
 
-              <div className="flex flex-wrap gap-3">
+              <div className="grid gap-3 sm:flex sm:flex-wrap sm:items-center">
                 {dynamicExpiresAtSeconds ? (
                   <CountdownBadge
                     expiresAt={dynamicExpiresAtSeconds}
@@ -309,6 +309,7 @@ export function ProgramPage({
                 {canCollectDynamic ? (
                   <Button
                     icon={<Stamp className="h-4 w-4" />}
+                    className="w-full sm:w-auto"
                     onClick={() => void handleCollectDynamic()}
                     disabled={isSubmitting || !program.active}
                   >
@@ -320,6 +321,7 @@ export function ProgramPage({
                   <Button
                     variant={canCollectDynamic ? "outline" : "primary"}
                     icon={<BadgeCheck className="h-4 w-4" />}
+                    className="w-full sm:w-auto"
                     onClick={() => void handleCollectStatic()}
                     disabled={
                       isSubmitting ||
@@ -336,6 +338,7 @@ export function ProgramPage({
                   <Button
                     variant="warm"
                     icon={<Gift className="h-4 w-4" />}
+                    className="w-full sm:w-auto"
                     onClick={() => void handleClaimReward()}
                     disabled={isSubmitting}
                   >
@@ -344,8 +347,8 @@ export function ProgramPage({
                 ) : null}
 
                 {isOwner ? (
-                  <Link href={`/app/program/${program.id.toString()}/manage`}>
-                    <Button variant="ghost" icon={<Settings className="h-4 w-4" />}>
+                  <Link href={`/app/program/${program.id.toString()}/manage`} className="w-full sm:w-auto">
+                    <Button variant="ghost" icon={<Settings className="h-4 w-4" />} className="w-full sm:w-auto">
                       {copy.manage}
                     </Button>
                   </Link>
@@ -365,7 +368,7 @@ export function ProgramPage({
               ) : null}
 
               {canCollectStatic && lastStaticStampAt > 0 ? (
-                <p className="flex items-center gap-2 text-sm text-[#676078]">
+                <p className="flex items-center gap-2 rounded-lg border border-line bg-panel-soft px-3 py-2 text-sm text-muted">
                   <TimerReset className="h-4 w-4" aria-hidden="true" />
                   {copy.nextStaticStamp}: {formatDateTime(staticNextAvailableAt, locale)}
                 </p>

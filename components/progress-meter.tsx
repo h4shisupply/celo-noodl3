@@ -17,16 +17,16 @@ export function ProgressMeter({
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between gap-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#676078]">
+        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
           {unitLabel ?? dictionary.common.stampsLabel}
         </p>
-        <p className="rounded-full bg-[#FFF7E8] px-2.5 py-1 text-xs font-semibold text-[#8B5B00]">
+        <p className="rounded-full bg-sun-soft px-2.5 py-1 text-xs font-semibold text-sun-strong">
           {safeValue}/{total}
         </p>
       </div>
-      <div className="h-3 overflow-hidden rounded-full bg-[#EDF1F8]">
+      <div className="h-3 overflow-hidden rounded-full bg-line-soft">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-[#0F9F8F] via-[#7047DF] to-[#F5A623] transition-[width]"
+          className="h-full rounded-full bg-gradient-to-r from-mint via-accent to-sun transition-[width]"
           style={{ width: `${width}%` }}
         />
       </div>

@@ -82,25 +82,25 @@ export function AppChrome({
           {backHref ? (
             <Link
               href={backHref}
-              className="inline-flex items-center gap-2 rounded-lg px-1 py-1 text-sm font-semibold text-[#676078] transition hover:text-[#1B172B]"
+              className="inline-flex items-center gap-2 rounded-lg px-1 py-1 text-sm font-semibold text-muted transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
             >
               <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               {backLabel}
             </Link>
           ) : null}
           {eyebrow ? (
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7047DF]">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
               {eyebrow}
             </p>
           ) : null}
           <div className="max-w-3xl space-y-3">
             {title ? (
-              <h1 className="text-3xl font-semibold text-[#1B172B] md:text-5xl">
+              <h1 className="text-3xl font-semibold leading-tight text-ink md:text-5xl">
                 {title}
               </h1>
             ) : null}
             {description ? (
-              <p className="text-base leading-8 text-[#676078]">{description}</p>
+              <p className="text-base leading-8 text-muted">{description}</p>
             ) : null}
           </div>
         </section>

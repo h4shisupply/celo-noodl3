@@ -16,7 +16,7 @@ export function EmptyState({
     <Card variant="soft">
       <CardHeader className="space-y-3">
         {icon ? (
-          <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#D9D0F4] bg-[#F3EFFF] text-[#7047DF]">
+          <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-accent-border bg-accent-soft text-accent">
             {icon}
           </div>
         ) : null}

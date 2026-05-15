@@ -245,40 +245,41 @@ export function ClaimPage({
                 <CardDescription>{copy.claimDescription}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-5">
-                <div className="grid gap-3 rounded-lg border border-[#E5E1EE] bg-[#FBFCFF] p-4 text-sm text-[#676078]">
-                  <p className="text-base font-semibold text-[#1B172B]">
+                <div className="grid gap-3 rounded-lg border border-line bg-panel-soft p-4 text-sm text-muted">
+                  <p className="text-base font-semibold text-ink">
                     {copy.backupCode}: {formatClaimCode(claim.id)}
                   </p>
-                <p>
-                  {dictionary.common.customer}: {formatWalletLabel(claim.user)}
-                </p>
-                <p>
-                  {dictionary.common.date}: {formatDateTime(claim.claimedAt, locale)}
-                </p>
-                <p>
-                  {dictionary.common.status}: {claim.consumed ? copy.ticketUsed : copy.ticketReady}
-                </p>
-              </div>
+                  <p className="break-all">
+                    {dictionary.common.customer}: {formatWalletLabel(claim.user)}
+                  </p>
+                  <p>
+                    {dictionary.common.date}: {formatDateTime(claim.claimedAt, locale)}
+                  </p>
+                  <p>
+                    {dictionary.common.status}: {claim.consumed ? copy.ticketUsed : copy.ticketReady}
+                  </p>
+                </div>
 
-              {canConsume && !claim.consumed ? (
-                <Button
-                  icon={<BadgeCheck className="h-4 w-4" />}
-                  onClick={() => void handleConsume()}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? `${copy.validateClaim}...` : copy.validateClaim}
-                </Button>
-              ) : null}
+                {canConsume && !claim.consumed ? (
+                  <Button
+                    icon={<BadgeCheck className="h-4 w-4" />}
+                    onClick={() => void handleConsume()}
+                    disabled={isSubmitting}
+                    className="w-full sm:w-auto"
+                  >
+                    {isSubmitting ? `${copy.validateClaim}...` : copy.validateClaim}
+                  </Button>
+                ) : null}
 
-              {!canConsume && !claim.consumed ? (
-                <StatusMessage tone="info">{copy.ownerValidationHint}</StatusMessage>
-              ) : null}
+                {!canConsume && !claim.consumed ? (
+                  <StatusMessage tone="info">{copy.ownerValidationHint}</StatusMessage>
+                ) : null}
 
-              {claim.consumed ? (
-                <StatusMessage tone="warning">{copy.usedClaim}</StatusMessage>
-              ) : null}
-            </CardContent>
-          </Card>
+                {claim.consumed ? (
+                  <StatusMessage tone="warning">{copy.usedClaim}</StatusMessage>
+                ) : null}
+              </CardContent>
+            </Card>
           </>
         )}
 

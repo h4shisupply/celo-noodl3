@@ -28,7 +28,7 @@ export function Avatar({
   return (
     <div
       className={clsx(
-        "relative flex shrink-0 items-center justify-center overflow-hidden rounded-lg border border-[#D9D0F4] bg-[#7047DF] font-semibold text-white shadow-[0_10px_24px_rgba(112,71,223,0.2)]",
+        "relative flex shrink-0 items-center justify-center overflow-hidden rounded-lg border border-accent-border bg-accent font-semibold text-white shadow-card",
         sizes[size]
       )}
       style={

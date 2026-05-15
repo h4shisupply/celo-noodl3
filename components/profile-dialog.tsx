@@ -80,16 +80,16 @@ export function ProfileDialog({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1B172B]/48 px-4 py-6 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-overlay px-4 py-6 backdrop-blur-sm">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-3">
           <div className="flex items-start justify-between gap-4">
-            <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#D9D0F4] bg-[#F3EFFF] text-[#7047DF]">
+            <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-accent-border bg-accent-soft text-accent">
               <UserRound className="h-5 w-5" aria-hidden="true" />
             </div>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#E5E1EE] bg-white text-[#676078] transition hover:text-[#1B172B]"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-panel text-muted transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
               onClick={onClose}
               aria-label={dictionary.common.close}
             >
@@ -100,7 +100,7 @@ export function ProfileDialog({
             <CardTitle>{dictionary.profile.title}</CardTitle>
             <CardDescription>{dictionary.profile.description}</CardDescription>
           </div>
-          <p className="rounded-lg bg-[#FBFCFF] p-3 text-sm font-medium text-[#676078]">
+          <p className="rounded-lg bg-panel-soft p-3 text-sm font-medium text-muted">
             {formatWalletLabel(account)}
           </p>
         </CardHeader>

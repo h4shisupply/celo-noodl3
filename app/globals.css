@@ -8,16 +8,33 @@
   --panel: #ffffff;
   --panel-soft: #f7f9ff;
   --line: #e5e1ee;
+  --line-soft: #f0ecf6;
   --ink: #1b172b;
+  --ink-overlay: rgba(27, 23, 43, 0.48);
+  --ink-hover: #100c1e;
+  --ink-soft: #241b3c;
   --muted: #676078;
+  --muted-soft: #8b84a1;
   --accent: #7047df;
   --accent-soft: #f3efff;
+  --accent-border: #d9d0f4;
+  --accent-focus: rgba(112, 71, 223, 0.14);
   --mint: #0f9f8f;
   --mint-soft: #e9fbf7;
+  --mint-hover: #ddf7f0;
+  --mint-border: #bde8d8;
+  --mint-strong: #146b5e;
   --sun: #f5a623;
   --sun-soft: #fff7e8;
+  --sun-hover: #ffeecf;
+  --sun-border: #f5dfc1;
+  --sun-strong: #8b5b00;
   --danger: #a23b3b;
+  --danger-soft: #fff6f6;
+  --danger-border: #f1d9d9;
   --success: #257a52;
+  --shadow-card: 0 18px 48px rgba(27, 23, 43, 0.07);
+  --shadow-float: 0 28px 80px rgba(27, 23, 43, 0.14);
 }
 
 * {

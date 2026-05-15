@@ -9,7 +9,7 @@ export const Textarea = forwardRef<
     <textarea
       ref={ref}
       className={clsx(
-        "min-h-[112px] w-full rounded-lg border border-[#DCD6EA] bg-[#FBFCFF] px-4 py-3 text-sm font-medium text-[#1B172B] outline-none transition placeholder:text-[#9A95AD] focus:border-[#9F84EB] focus:bg-white focus:ring-4 focus:ring-[#7047DF]/10 disabled:cursor-not-allowed disabled:opacity-65",
+        "min-h-[112px] w-full min-w-0 rounded-lg border border-line bg-panel-soft px-4 py-3 text-sm font-medium text-ink outline-none transition placeholder:text-muted-soft focus:border-accent-border focus:bg-panel focus:ring-4 focus:ring-accent-focus disabled:cursor-not-allowed disabled:opacity-65",
         className
       )}
       {...props}
