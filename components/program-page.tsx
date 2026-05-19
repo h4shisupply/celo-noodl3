@@ -275,7 +275,7 @@ export function ProgramPage({
             icon={<Stamp className="h-5 w-5" />}
           />
         ) : (
-          <Card className="overflow-hidden">
+          <Card className="overflow-hidden shadow-float">
             <CardHeader className="stamp-pattern space-y-4 border-b border-line bg-panel-soft">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="flex min-w-0 items-center gap-4">

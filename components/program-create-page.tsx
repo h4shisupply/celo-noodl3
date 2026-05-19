@@ -141,8 +141,8 @@ export function ProgramCreatePage({
       title={copy.createTitle}
       description={copy.createDescription}
     >
-      <section className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
-        <Card>
+      <section className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[minmax(0,1fr)_21rem]">
+        <Card className="shadow-float">
           <CardHeader>
             <CardTitle>{copy.createProgram}</CardTitle>
             <CardDescription>{copy.createDescription}</CardDescription>
@@ -216,8 +216,8 @@ export function ProgramCreatePage({
           </CardContent>
         </Card>
 
-        <aside className="surface-panel stamp-pattern h-fit rounded-lg p-4">
-          <div className="space-y-5 rounded-lg bg-panel p-5">
+        <aside className="surface-panel stamp-pattern h-fit rounded-lg p-3 lg:sticky lg:top-6">
+          <div className="space-y-5 rounded-lg bg-panel p-5 shadow-[inset_0_0_0_1px_rgba(221,216,233,0.72)]">
             <div className="flex items-center gap-3">
               {normalizeRemoteImageUrl(iconUrl) ? (
                 // eslint-disable-next-line @next/next/no-img-element

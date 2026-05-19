@@ -13,10 +13,10 @@ export function EmptyState({
   actions?: ReactNode;
 }) {
   return (
-    <Card variant="soft">
-      <CardHeader className="space-y-3">
+    <Card variant="soft" className="overflow-hidden">
+      <CardHeader className="space-y-3 bg-panel">
         {icon ? (
-          <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-accent-border bg-accent-soft text-accent">
+          <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-accent-border bg-accent-soft text-accent shadow-[0_8px_24px_rgba(112,71,223,0.12)]">
             {icon}
           </div>
         ) : null}
