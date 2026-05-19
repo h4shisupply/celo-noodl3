@@ -134,11 +134,14 @@ export function HomePage({ locale }: { locale: Locale }) {
       <header className="py-5 md:py-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <BrandMark href="/" />
-          <nav className="hidden items-center gap-5 md:flex" aria-label="Landing page">
-            <a className="text-sm font-medium text-[#676078] transition hover:text-[#1B172B]" href="#workflow">{copy.nav.workflow}</a>
-            <a className="text-sm font-medium text-[#676078] transition hover:text-[#1B172B]" href="#proof">{copy.nav.proof}</a>
-            <a className="text-sm font-medium text-[#676078] transition hover:text-[#1B172B]" href="#launch">{copy.nav.launch}</a>
-            <a className="text-sm font-medium text-[#676078] transition hover:text-[#1B172B]" href="#faq">{copy.nav.faq}</a>
+          <nav
+            className="hidden items-center gap-1 rounded-lg border border-[#E5E1EE] bg-white/78 p-1 shadow-[0_10px_30px_rgba(27,23,43,0.045)] md:flex"
+            aria-label="Landing page"
+          >
+            <a className="rounded-md px-3 py-2 text-sm font-semibold text-[#676078] transition hover:bg-[#F3EFFF] hover:text-[#1B172B]" href="#workflow">{copy.nav.workflow}</a>
+            <a className="rounded-md px-3 py-2 text-sm font-semibold text-[#676078] transition hover:bg-[#F3EFFF] hover:text-[#1B172B]" href="#proof">{copy.nav.proof}</a>
+            <a className="rounded-md px-3 py-2 text-sm font-semibold text-[#676078] transition hover:bg-[#F3EFFF] hover:text-[#1B172B]" href="#launch">{copy.nav.launch}</a>
+            <a className="rounded-md px-3 py-2 text-sm font-semibold text-[#676078] transition hover:bg-[#F3EFFF] hover:text-[#1B172B]" href="#faq">{copy.nav.faq}</a>
           </nav>
           <div className="ml-auto flex items-center gap-3">
             <LanguageSwitcher />
@@ -149,9 +152,9 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </header>
 
-      <section className="grid min-h-[74dvh] items-center gap-8 py-8 lg:grid-cols-[minmax(0,1fr)_minmax(23rem,31rem)] lg:py-12">
+      <section className="grid min-h-[74dvh] items-center gap-10 py-8 lg:grid-cols-[minmax(0,1fr)_minmax(24rem,31rem)] lg:py-12">
         <div className="max-w-3xl space-y-7">
-          <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#7047DF]">
+          <p className="inline-flex items-center gap-2 rounded-full border border-[#D9D0F4] bg-[#F3EFFF] px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#7047DF]">
             <Sparkles className="h-4 w-4" aria-hidden="true" />
             {copy.hero.eyebrow}
           </p>
@@ -185,7 +188,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             {copy.hero.stats.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-lg border border-[#E5E1EE] bg-white/78 px-4 py-3"
+                className="min-h-[6rem] rounded-lg border border-[#E5E1EE] bg-white/84 px-4 py-3 shadow-[0_10px_30px_rgba(27,23,43,0.045)]"
               >
                 <p className="text-lg font-semibold text-[#1B172B]">{stat.value}</p>
                 <p className="text-sm text-[#676078]">{stat.label}</p>
@@ -208,7 +211,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             {copy.problem.points.map((point) => (
               <div
                 key={point}
-                className="flex gap-3 rounded-lg border border-[#E5E1EE] bg-white/82 p-4"
+                className="flex gap-3 rounded-lg border border-[#E5E1EE] bg-white/86 p-4 shadow-[0_10px_30px_rgba(27,23,43,0.04)]"
               >
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#0F9F8F]" aria-hidden="true" />
                 <p className="text-sm leading-6 text-[#3A344D]">{point}</p>
@@ -230,7 +233,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             return (
               <article
                 key={step.title}
-                className="rounded-lg border border-[#E5E1EE] bg-white/84 p-5 shadow-[0_14px_40px_rgba(27,23,43,0.06)]"
+                className="rounded-lg border border-[#E5E1EE] bg-white/88 p-5 shadow-[0_14px_40px_rgba(27,23,43,0.06)]"
               >
                 <div className="mb-5 flex items-center justify-between gap-3">
                   <span className="grid h-10 w-10 place-items-center rounded-lg border border-[#D9D0F4] bg-[#F3EFFF] text-[#7047DF]">
@@ -261,7 +264,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               return (
                 <article
                   key={item.title}
-                  className="rounded-lg border border-[#E5E1EE] bg-white/84 p-5"
+                  className="rounded-lg border border-[#E5E1EE] bg-white/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)]"
                 >
                   <Icon className="h-5 w-5 text-[#7047DF]" aria-hidden="true" />
                   <h3 className="mt-4 text-base font-semibold text-[#1B172B]">{item.title}</h3>
@@ -281,7 +284,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               return (
                 <article
                   key={item.title}
-                  className="rounded-lg border border-[#E5E1EE] bg-white/84 p-5"
+                  className="rounded-lg border border-[#E5E1EE] bg-white/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)]"
                 >
                   <Icon className="h-5 w-5 text-[#0F9F8F]" aria-hidden="true" />
                   <h3 className="mt-4 text-base font-semibold text-[#1B172B]">{item.title}</h3>
@@ -326,7 +329,7 @@ export function HomePage({ locale }: { locale: Locale }) {
           {copy.faq.items.map((item) => (
             <article
               key={item.question}
-              className="rounded-lg border border-[#E5E1EE] bg-white/84 p-5"
+              className="rounded-lg border border-[#E5E1EE] bg-white/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)]"
             >
               <h3 className="text-base font-semibold text-[#1B172B]">{item.question}</h3>
               <p className="mt-3 text-sm leading-6 text-[#676078]">{item.answer}</p>
@@ -393,9 +396,9 @@ function SectionIntro({
 
 function ProductVisual({ copy }: { copy: HomeCopy["visual"] }) {
   return (
-    <div className="surface-panel stamp-pattern rounded-lg p-3 md:p-4">
-      <div className="space-y-4 rounded-lg bg-white/92 p-4 md:p-5">
-        <div className="flex items-center justify-between gap-3">
+    <div className="surface-panel stamp-pattern rounded-lg p-2 shadow-float md:p-3">
+      <div className="space-y-4 rounded-lg bg-white/94 p-4 md:p-5">
+        <div className="flex items-center justify-between gap-3 rounded-lg border border-[#E5E1EE] bg-white px-4 py-3 shadow-[0_10px_30px_rgba(27,23,43,0.04)]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7047DF]">
               {copy.program}
@@ -408,7 +411,7 @@ function ProductVisual({ copy }: { copy: HomeCopy["visual"] }) {
         </div>
 
         <div className="grid gap-3 sm:grid-cols-[0.92fr_1.08fr]">
-          <div className="rounded-lg border border-[#E5E1EE] bg-[#FBFCFF] p-4">
+          <div className="rounded-lg border border-[#E5E1EE] bg-[#FBFCFF] p-4 shadow-[0_10px_30px_rgba(27,23,43,0.04)]">
             <div className="flex items-center justify-between gap-3">
               <p className="text-sm font-semibold text-[#1B172B]">{copy.printedQr}</p>
               <QrCode className="h-4 w-4 text-[#7047DF]" aria-hidden="true" />
@@ -422,7 +425,7 @@ function ProductVisual({ copy }: { copy: HomeCopy["visual"] }) {
           </div>
 
           <div className="space-y-3">
-            <div className="rounded-lg border border-[#E5E1EE] bg-white p-4">
+            <div className="rounded-lg border border-[#E5E1EE] bg-white p-4 shadow-[0_10px_30px_rgba(27,23,43,0.04)]">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-semibold text-[#1B172B]">{copy.liveQr}</p>
                 <span className="inline-flex items-center gap-1 rounded-full border border-[#F5DFC1] bg-[#FFF7E8] px-2.5 py-1 text-xs font-semibold text-[#8B5B00]">
@@ -433,7 +436,7 @@ function ProductVisual({ copy }: { copy: HomeCopy["visual"] }) {
               <StampProgress />
             </div>
 
-            <div className="rounded-lg border border-[#E5E1EE] bg-white p-4">
+            <div className="rounded-lg border border-[#E5E1EE] bg-white p-4 shadow-[0_10px_30px_rgba(27,23,43,0.04)]">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-sm font-semibold text-[#1B172B]">{copy.rewardTicket}</p>
@@ -443,7 +446,7 @@ function ProductVisual({ copy }: { copy: HomeCopy["visual"] }) {
                 </div>
                 <TicketCheck className="h-5 w-5 text-[#0F9F8F]" aria-hidden="true" />
               </div>
-              <div className="mt-4 flex items-center justify-between gap-3 rounded-lg bg-[#E9FBF7] px-3 py-3">
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg bg-[#E9FBF7] px-3 py-3">
                 <p className="text-sm font-semibold text-[#146B5E]">{copy.validate}</p>
                 <span className="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-[#146B5E]">
                   {copy.ownerOnly}

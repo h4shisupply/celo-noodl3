@@ -329,7 +329,7 @@ export function ProgramManagePage({
           />
         ) : (
           <>
-            <div className="surface-panel stamp-pattern flex flex-col gap-4 rounded-lg p-5 sm:flex-row sm:items-center">
+            <div className="surface-panel stamp-pattern flex flex-col gap-4 rounded-lg p-5 shadow-float sm:flex-row sm:items-center">
               <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
               <div className="min-w-0">
                 <Badge variant={program.active ? "accent" : "danger"}>
@@ -431,7 +431,7 @@ export function ProgramManagePage({
                 </Card>
               </div>
 
-              <aside className="space-y-6">
+              <aside className="space-y-6 xl:sticky xl:top-6 xl:self-start">
                 <section className="space-y-4">
                   <div className="space-y-2">
                     <h2 className="text-xl font-semibold text-ink">{copy.dynamicQr}</h2>

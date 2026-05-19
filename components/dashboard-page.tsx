@@ -200,7 +200,7 @@ export function DashboardPage({
       title={copy.appTitle}
       description={copy.appDescription}
     >
-      <section className="space-y-8">
+      <section className="space-y-9">
         {connectError || error ? (
           <StatusMessage tone="error">{connectError || error}</StatusMessage>
         ) : null}
@@ -230,28 +230,30 @@ export function DashboardPage({
 
         {account && contractAddress ? (
           <>
-            <div className="surface-panel flex flex-col gap-3 rounded-lg p-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <div className="surface-panel flex flex-col gap-3 rounded-lg p-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
               <Link href="/app/program/new" className="w-full sm:w-auto">
                 <Button icon={<Plus className="h-4 w-4" />} className="w-full sm:w-auto">
                   {copy.createProgram}
                 </Button>
               </Link>
-              <Button
-                variant="warm"
-                icon={<QrCode className="h-4 w-4" />}
-                className="w-full sm:w-auto"
-                onClick={() => setIsScannerOpen(true)}
-              >
-                {copy.scanQr}
-              </Button>
-              <Button
-                variant="ghost"
-                icon={<RefreshCw className="h-4 w-4" />}
-                className="w-full sm:w-auto"
-                onClick={() => void loadDashboard()}
-              >
-                {isLoading ? `${dictionary.common.loading}...` : dictionary.actions.refreshNetwork}
-              </Button>
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                <Button
+                  variant="warm"
+                  icon={<QrCode className="h-4 w-4" />}
+                  className="w-full sm:w-auto"
+                  onClick={() => setIsScannerOpen(true)}
+                >
+                  {copy.scanQr}
+                </Button>
+                <Button
+                  variant="ghost"
+                  icon={<RefreshCw className="h-4 w-4" />}
+                  className="w-full sm:w-auto"
+                  onClick={() => void loadDashboard()}
+                >
+                  {isLoading ? `${dictionary.common.loading}...` : dictionary.actions.refreshNetwork}
+                </Button>
+              </div>
             </div>
 
             <div className="grid gap-5 md:grid-cols-3">
@@ -372,7 +374,7 @@ function ProgramCard({ program }: { program: DashboardProgram }) {
   const progress = program.progress;
 
   return (
-    <Card className="h-full">
+    <Card className="h-full transition duration-200 hover:-translate-y-0.5 hover:shadow-float">
       <CardHeader className="space-y-3">
         <Avatar name={program.name} imageUrl={program.iconUrl} size="sm" />
         <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
@@ -409,7 +411,7 @@ function ManagedProgramCard({ program }: { program: DashboardProgram }) {
   const copy = programCopy(locale);
 
   return (
-    <Card className="h-full">
+    <Card className="h-full transition duration-200 hover:-translate-y-0.5 hover:shadow-float">
       <CardHeader className="space-y-3">
         <Avatar name={program.name} imageUrl={program.iconUrl} size="sm" />
         <Badge variant={program.active ? "accent" : "danger"}>
@@ -438,7 +440,7 @@ function ClaimSummaryCard({ claim }: { claim: ClaimRecord }) {
   const copy = programCopy(locale);
 
   return (
-    <Card>
+    <Card className="transition duration-200 hover:shadow-float">
       <CardContent className="flex flex-col gap-4 pt-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0 space-y-1">
           <p className="text-sm font-semibold text-ink">
