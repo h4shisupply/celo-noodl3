@@ -36,7 +36,7 @@ function NavLink({
       <a
         href={href}
         onClick={onClick}
-        className="rounded-md text-sm font-medium text-muted transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
+        className="rounded-md px-3 py-2 text-sm font-semibold text-muted transition hover:bg-accent-soft hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
       >
         {label}
       </a>
@@ -47,7 +47,7 @@ function NavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="rounded-md text-sm font-medium text-muted transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
+      className="rounded-md px-3 py-2 text-sm font-semibold text-muted transition hover:bg-accent-soft hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
     >
       {label}
     </Link>
@@ -66,6 +66,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
     if (cta.onClick) {
       return (
         <Button
+          size="sm"
           onClick={() => {
             onClick?.();
             cta.onClick?.();
@@ -83,7 +84,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
 
     return (
       <Link href={cta.href} onClick={onClick}>
-        <Button>{cta.label}</Button>
+        <Button size="sm">{cta.label}</Button>
       </Link>
     );
   };
@@ -93,8 +94,11 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
       <div className="flex items-center justify-between gap-6">
         <BrandMark href={brandHref} />
 
-        <div className="hidden items-center gap-6 md:flex">
-          <nav className="flex items-center gap-5">
+        <div className="hidden items-center gap-3 md:flex">
+          <nav
+            className="flex items-center gap-1 rounded-lg border border-line bg-panel/80 p-1 shadow-[0_10px_30px_rgba(27,23,43,0.045)] backdrop-blur"
+            aria-label="Landing page"
+          >
             {items.map((item) => (
               <NavLink key={`${item.href}-${item.label}`} {...item} />
             ))}
@@ -107,6 +111,8 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
           type="button"
           onClick={() => setMenuOpen((current) => !current)}
           className="inline-flex h-11 items-center gap-2 rounded-lg border border-line bg-panel px-4 text-sm font-semibold text-ink-soft shadow-card transition hover:border-accent-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus md:hidden"
+          aria-expanded={menuOpen}
+          aria-label={menuLabel}
         >
           {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           {menuLabel}

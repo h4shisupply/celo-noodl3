@@ -13,10 +13,10 @@ import {
   Sparkles,
   Store,
   TicketCheck,
-  WalletCards
+  WalletCards,
+  type LucideIcon
 } from "lucide-react";
-import { BrandMark } from "./brand-mark";
-import { LanguageSwitcher } from "./language-switcher";
+import { SiteHeader } from "./site-header";
 import { Button } from "./ui/button";
 import type { Locale } from "../lib/i18n";
 
@@ -128,70 +128,60 @@ const icons = [
 
 export function HomePage({ locale }: { locale: Locale }) {
   const copy = locale === "en" ? enHomeCopy : ptHomeCopy;
+  const navItems = [
+    { href: "#workflow", label: copy.nav.workflow },
+    { href: "#proof", label: copy.nav.proof },
+    { href: "#launch", label: copy.nav.launch },
+    { href: "#faq", label: copy.nav.faq }
+  ];
 
   return (
-    <main className="pb-20">
-      <header className="py-5 md:py-6">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <BrandMark href="/" />
-          <nav
-            className="hidden items-center gap-1 rounded-lg border border-[#E5E1EE] bg-white/78 p-1 shadow-[0_10px_30px_rgba(27,23,43,0.045)] md:flex"
-            aria-label="Landing page"
-          >
-            <a className="rounded-md px-3 py-2 text-sm font-semibold text-[#676078] transition hover:bg-[#F3EFFF] hover:text-[#1B172B]" href="#workflow">{copy.nav.workflow}</a>
-            <a className="rounded-md px-3 py-2 text-sm font-semibold text-[#676078] transition hover:bg-[#F3EFFF] hover:text-[#1B172B]" href="#proof">{copy.nav.proof}</a>
-            <a className="rounded-md px-3 py-2 text-sm font-semibold text-[#676078] transition hover:bg-[#F3EFFF] hover:text-[#1B172B]" href="#launch">{copy.nav.launch}</a>
-            <a className="rounded-md px-3 py-2 text-sm font-semibold text-[#676078] transition hover:bg-[#F3EFFF] hover:text-[#1B172B]" href="#faq">{copy.nav.faq}</a>
-          </nav>
-          <div className="ml-auto flex items-center gap-3">
-            <LanguageSwitcher />
-            <Link href="/app/program/new">
-              <Button size="sm">{copy.hero.primaryCta}</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+    <main className="pb-16 md:pb-20">
+      <SiteHeader
+        brandHref="/"
+        items={navItems}
+        cta={{ label: copy.hero.primaryCta, href: "/app/program/new" }}
+      />
 
-      <section className="grid min-h-[74dvh] items-center gap-10 py-8 lg:grid-cols-[minmax(0,1fr)_minmax(24rem,31rem)] lg:py-12">
-        <div className="max-w-3xl space-y-7">
-          <p className="inline-flex items-center gap-2 rounded-full border border-[#D9D0F4] bg-[#F3EFFF] px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#7047DF]">
-            <Sparkles className="h-4 w-4" aria-hidden="true" />
-            {copy.hero.eyebrow}
-          </p>
-          <div className="space-y-5">
-            <h1 className="max-w-4xl text-4xl font-semibold leading-[1.02] text-[#1B172B] sm:text-5xl md:text-7xl">
+      <section className="grid min-h-[68dvh] items-center gap-3 py-3 md:gap-8 md:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,29rem)] lg:gap-12 lg:py-4">
+        <div className="max-w-3xl space-y-4 md:space-y-6">
+          <AccentPill icon={Sparkles}>{copy.hero.eyebrow}</AccentPill>
+          <div className="space-y-4">
+            <h1 className="max-w-4xl text-[1.75rem] font-semibold leading-[1.04] text-ink sm:text-5xl lg:text-6xl">
               {copy.hero.title}
             </h1>
-            <p className="max-w-2xl text-lg leading-8 text-[#676078] md:text-xl md:leading-9">
+            <p className="max-w-2xl text-sm leading-6 text-muted sm:text-base sm:leading-8 md:text-lg">
               {copy.hero.description}
             </p>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link href="/app/program/new" className="w-full sm:w-auto">
-              <Button size="lg" icon={<Plus className="h-4 w-4" />} className="w-full sm:w-auto">
+          <div className="flex gap-3">
+            <Link href="/app/program/new" className="min-w-0 flex-1 sm:w-auto sm:flex-none">
+              <Button size="lg" icon={<Plus className="h-4 w-4" />} className="h-full w-full sm:w-auto">
                 {copy.hero.primaryCta}
               </Button>
             </Link>
-            <Link href="/app" className="w-full sm:w-auto">
+            <Link href="/app" className="min-w-0 flex-1 sm:w-auto sm:flex-none">
               <Button
                 size="lg"
                 variant="outline"
                 icon={<AppWindow className="h-4 w-4" />}
-                className="w-full sm:w-auto"
+                className="h-full w-full sm:w-auto"
               >
                 {copy.hero.secondaryCta}
               </Button>
             </Link>
           </div>
-          <p className="text-sm leading-6 text-[#676078]">{copy.hero.footnote}</p>
-          <div className="grid gap-3 sm:grid-cols-3">
+          <p className="hidden max-w-2xl text-sm leading-6 text-muted sm:block">
+            {copy.hero.footnote}
+          </p>
+          <div className="hidden gap-2.5 sm:grid sm:grid-cols-3">
             {copy.hero.stats.map((stat) => (
               <div
                 key={stat.label}
-                className="min-h-[6rem] rounded-lg border border-[#E5E1EE] bg-white/84 px-4 py-3 shadow-[0_10px_30px_rgba(27,23,43,0.045)]"
+                className="rounded-lg border border-line bg-panel/78 px-4 py-3 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur"
               >
-                <p className="text-lg font-semibold text-[#1B172B]">{stat.value}</p>
-                <p className="text-sm text-[#676078]">{stat.label}</p>
+                <p className="text-sm font-semibold text-ink">{stat.value}</p>
+                <p className="mt-1 text-sm leading-5 text-muted">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -200,7 +190,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <ProductVisual copy={copy.visual} />
       </section>
 
-      <section className="py-12 md:py-16">
+      <section className="py-10 md:py-14">
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1fr] lg:items-start">
           <SectionIntro
             eyebrow={copy.problem.eyebrow}
@@ -209,49 +199,29 @@ export function HomePage({ locale }: { locale: Locale }) {
           />
           <div className="grid gap-3">
             {copy.problem.points.map((point) => (
-              <div
-                key={point}
-                className="flex gap-3 rounded-lg border border-[#E5E1EE] bg-white/86 p-4 shadow-[0_10px_30px_rgba(27,23,43,0.04)]"
-              >
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#0F9F8F]" aria-hidden="true" />
-                <p className="text-sm leading-6 text-[#3A344D]">{point}</p>
-              </div>
+              <ProblemPoint key={point}>{point}</ProblemPoint>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="workflow" className="py-12 md:py-16">
+      <section id="workflow" className="scroll-mt-6 py-10 md:py-14">
         <SectionIntro
           eyebrow={copy.workflow.eyebrow}
           title={copy.workflow.title}
           description={copy.workflow.description}
         />
-        <div className="mt-8 grid gap-4 md:grid-cols-5">
+        <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {copy.workflow.steps.map((step, index) => {
             const Icon = icons[index] ?? BadgeCheck;
             return (
-              <article
-                key={step.title}
-                className="rounded-lg border border-[#E5E1EE] bg-white/88 p-5 shadow-[0_14px_40px_rgba(27,23,43,0.06)]"
-              >
-                <div className="mb-5 flex items-center justify-between gap-3">
-                  <span className="grid h-10 w-10 place-items-center rounded-lg border border-[#D9D0F4] bg-[#F3EFFF] text-[#7047DF]">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <span className="font-mono text-xs font-semibold text-[#8B84A1]">
-                    0{index + 1}
-                  </span>
-                </div>
-                <h3 className="text-base font-semibold text-[#1B172B]">{step.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#676078]">{step.description}</p>
-              </article>
+              <StepCard key={step.title} icon={Icon} index={index} {...step} />
             );
           })}
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
+      <section className="py-10 md:py-14">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <SectionIntro
             eyebrow={copy.benefits.eyebrow}
@@ -262,34 +232,32 @@ export function HomePage({ locale }: { locale: Locale }) {
             {copy.benefits.items.map((item, index) => {
               const Icon = icons[index + 5] ?? ShieldCheck;
               return (
-                <article
+                <FeatureCard
                   key={item.title}
-                  className="rounded-lg border border-[#E5E1EE] bg-white/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)]"
-                >
-                  <Icon className="h-5 w-5 text-[#7047DF]" aria-hidden="true" />
-                  <h3 className="mt-4 text-base font-semibold text-[#1B172B]">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#676078]">{item.description}</p>
-                </article>
+                  icon={Icon}
+                  title={item.title}
+                  description={item.description}
+                  tone="accent"
+                />
               );
             })}
           </div>
         </div>
       </section>
 
-      <section id="proof" className="py-12 md:py-16">
+      <section id="proof" className="scroll-mt-6 py-10 md:py-14">
         <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="order-2 grid gap-4 sm:grid-cols-2 lg:order-1">
             {copy.proof.items.map((item, index) => {
               const Icon = icons[index + 1] ?? QrCode;
               return (
-                <article
+                <FeatureCard
                   key={item.title}
-                  className="rounded-lg border border-[#E5E1EE] bg-white/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)]"
-                >
-                  <Icon className="h-5 w-5 text-[#0F9F8F]" aria-hidden="true" />
-                  <h3 className="mt-4 text-base font-semibold text-[#1B172B]">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#676078]">{item.description}</p>
-                </article>
+                  icon={Icon}
+                  title={item.title}
+                  description={item.description}
+                  tone="mint"
+                />
               );
             })}
           </div>
@@ -303,8 +271,8 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section id="launch" className="py-12 md:py-16">
-        <div className="rounded-lg border border-[#E5E1EE] bg-white/88 p-5 shadow-[0_18px_52px_rgba(27,23,43,0.08)] md:p-8">
+      <section id="launch" className="scroll-mt-6 py-10 md:py-14">
+        <div className="rounded-lg border border-line bg-panel/88 p-5 shadow-card backdrop-blur md:p-8">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <SectionIntro
               eyebrow={copy.launch.eyebrow}
@@ -313,9 +281,9 @@ export function HomePage({ locale }: { locale: Locale }) {
             />
             <div className="grid gap-3 sm:grid-cols-2">
               {copy.launch.checklist.map((item) => (
-                <div key={item} className="flex gap-3 rounded-lg bg-[#FBFCFF] p-4">
-                  <BadgeCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#0F9F8F]" aria-hidden="true" />
-                  <p className="text-sm leading-6 text-[#3A344D]">{item}</p>
+                <div key={item} className="flex gap-3 rounded-lg bg-panel-soft p-4">
+                  <BadgeCheck className="mt-0.5 h-5 w-5 shrink-0 text-mint" aria-hidden="true" />
+                  <p className="text-sm leading-6 text-ink-soft">{item}</p>
                 </div>
               ))}
             </div>
@@ -323,30 +291,30 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section id="faq" className="py-12 md:py-16">
+      <section id="faq" className="scroll-mt-6 py-10 md:py-14">
         <SectionIntro eyebrow={copy.faq.eyebrow} title={copy.faq.title} />
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <div className="mt-7 grid gap-4 md:grid-cols-2">
           {copy.faq.items.map((item) => (
             <article
               key={item.question}
-              className="rounded-lg border border-[#E5E1EE] bg-white/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)]"
+              className="rounded-lg border border-line bg-panel/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur"
             >
-              <h3 className="text-base font-semibold text-[#1B172B]">{item.question}</h3>
-              <p className="mt-3 text-sm leading-6 text-[#676078]">{item.answer}</p>
+              <h3 className="text-base font-semibold text-ink">{item.question}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted">{item.answer}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
-        <div className="stamp-pattern rounded-lg border border-[#E5E1EE] bg-white/88 p-6 text-center shadow-[0_18px_52px_rgba(27,23,43,0.08)] md:p-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7047DF]">
+      <section className="py-10 md:py-14">
+        <div className="stamp-pattern rounded-lg border border-line bg-panel/88 p-6 text-center shadow-card backdrop-blur md:p-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
             {copy.finalCta.eyebrow}
           </p>
-          <h2 className="mx-auto mt-4 max-w-3xl text-3xl font-semibold text-[#1B172B] md:text-5xl">
+          <h2 className="mx-auto mt-4 max-w-3xl text-3xl font-semibold text-ink md:text-5xl">
             {copy.finalCta.title}
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-[#676078]">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-muted">
             {copy.finalCta.description}
           </p>
           <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
@@ -383,52 +351,132 @@ function SectionIntro({
 }) {
   return (
     <div className="max-w-3xl space-y-4">
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7047DF]">
+      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
         {eyebrow}
       </p>
-      <h2 className="text-3xl font-semibold text-[#1B172B] md:text-5xl">{title}</h2>
+      <h2 className="text-3xl font-semibold leading-tight text-ink md:text-5xl">
+        {title}
+      </h2>
       {description ? (
-        <p className="text-base leading-8 text-[#676078]">{description}</p>
+        <p className="text-base leading-8 text-muted">{description}</p>
       ) : null}
     </div>
   );
 }
 
+function AccentPill({
+  icon: Icon,
+  children
+}: {
+  icon: LucideIcon;
+  children: string;
+}) {
+  return (
+    <p className="inline-flex max-w-full items-center gap-2 rounded-full border border-accent-border bg-accent-soft px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+      <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+      <span className="min-w-0">{children}</span>
+    </p>
+  );
+}
+
+function ProblemPoint({ children }: { children: string }) {
+  return (
+    <div className="flex gap-3 rounded-lg border border-line bg-panel/86 p-4 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur">
+      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-mint" aria-hidden="true" />
+      <p className="text-sm leading-6 text-ink-soft">{children}</p>
+    </div>
+  );
+}
+
+function StepCard({
+  icon: Icon,
+  index,
+  title,
+  description
+}: {
+  icon: LucideIcon;
+  index: number;
+  title: string;
+  description: string;
+}) {
+  return (
+    <article className="rounded-lg border border-line bg-panel/88 p-4 shadow-[0_12px_34px_rgba(27,23,43,0.05)] backdrop-blur md:p-5">
+      <div className="mb-5 flex items-center justify-between gap-3">
+        <span className="grid h-10 w-10 place-items-center rounded-lg border border-accent-border bg-accent-soft text-accent">
+          <Icon className="h-5 w-5" aria-hidden="true" />
+        </span>
+        <span className="font-mono text-xs font-semibold text-muted-soft">
+          0{index + 1}
+        </span>
+      </div>
+      <h3 className="text-base font-semibold text-ink">{title}</h3>
+      <p className="mt-3 text-sm leading-6 text-muted">{description}</p>
+    </article>
+  );
+}
+
+function FeatureCard({
+  icon: Icon,
+  title,
+  description,
+  tone
+}: {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  tone: "accent" | "mint";
+}) {
+  const iconClasses =
+    tone === "mint"
+      ? "border-mint-border bg-mint-soft text-mint-strong"
+      : "border-accent-border bg-accent-soft text-accent";
+
+  return (
+    <article className="rounded-lg border border-line bg-panel/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur">
+      <span className={`grid h-10 w-10 place-items-center rounded-lg border ${iconClasses}`}>
+        <Icon className="h-5 w-5" aria-hidden="true" />
+      </span>
+      <h3 className="mt-4 text-base font-semibold text-ink">{title}</h3>
+      <p className="mt-2 text-sm leading-6 text-muted">{description}</p>
+    </article>
+  );
+}
+
 function ProductVisual({ copy }: { copy: HomeCopy["visual"] }) {
   return (
-    <div className="surface-panel stamp-pattern rounded-lg p-2 shadow-float md:p-3">
-      <div className="space-y-4 rounded-lg bg-white/94 p-4 md:p-5">
-        <div className="flex items-center justify-between gap-3 rounded-lg border border-[#E5E1EE] bg-white px-4 py-3 shadow-[0_10px_30px_rgba(27,23,43,0.04)]">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7047DF]">
+    <div className="surface-panel stamp-pattern mx-auto w-full max-w-[31rem] rounded-lg p-1.5 shadow-float sm:p-2 lg:max-w-none">
+      <div className="space-y-3 rounded-lg bg-panel/95 p-2 sm:p-3 md:p-4">
+        <div className="flex items-center justify-between gap-3 rounded-lg border border-line bg-panel px-3 py-2.5 shadow-[0_10px_30px_rgba(27,23,43,0.04)] sm:px-4 sm:py-3">
+          <div className="min-w-0">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
               {copy.program}
             </p>
-            <p className="mt-1 text-xl font-semibold text-[#1B172B]">Coffee Club</p>
+            <p className="mt-1 truncate text-lg font-semibold text-ink sm:text-xl">Coffee Club</p>
           </div>
-          <span className="rounded-full border border-[#BDE8D8] bg-[#E9FBF7] px-3 py-1 text-xs font-semibold text-[#146B5E]">
+          <span className="shrink-0 rounded-full border border-mint-border bg-mint-soft px-3 py-1 text-xs font-semibold text-mint-strong">
             {copy.ready}
           </span>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-[0.92fr_1.08fr]">
-          <div className="rounded-lg border border-[#E5E1EE] bg-[#FBFCFF] p-4 shadow-[0_10px_30px_rgba(27,23,43,0.04)]">
+        <div className="grid grid-cols-[0.78fr_1fr] gap-3 sm:grid-cols-[0.9fr_1.1fr]">
+          <div className="rounded-lg border border-line bg-panel-soft p-3 sm:p-4">
             <div className="flex items-center justify-between gap-3">
-              <p className="text-sm font-semibold text-[#1B172B]">{copy.printedQr}</p>
-              <QrCode className="h-4 w-4 text-[#7047DF]" aria-hidden="true" />
+              <p className="text-sm font-semibold text-ink">{copy.printedQr}</p>
+              <QrCode className="hidden h-4 w-4 text-accent sm:block" aria-hidden="true" />
             </div>
-            <div className="mx-auto mt-4 max-w-[9.5rem] rounded-lg border border-[#DCD6EA] bg-white p-3">
+            <div className="mx-auto mt-3 w-full max-w-[6.75rem] rounded-lg border border-line bg-panel p-2 shadow-card sm:mt-4 sm:max-w-[8.75rem] sm:p-3">
               <QrPattern />
             </div>
-            <p className="mt-4 rounded-lg bg-[#FFF7E8] px-3 py-2 text-xs font-semibold text-[#8B5B00]">
+            <p className="mt-3 rounded-lg border border-sun-border bg-sun-soft px-2 py-2 text-center text-xs font-semibold text-sun-strong sm:mt-4 sm:px-3">
               {copy.stamps}
             </p>
           </div>
 
           <div className="space-y-3">
-            <div className="rounded-lg border border-[#E5E1EE] bg-white p-4 shadow-[0_10px_30px_rgba(27,23,43,0.04)]">
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-semibold text-[#1B172B]">{copy.liveQr}</p>
-                <span className="inline-flex items-center gap-1 rounded-full border border-[#F5DFC1] bg-[#FFF7E8] px-2.5 py-1 text-xs font-semibold text-[#8B5B00]">
+            <div className="rounded-lg border border-line bg-panel p-3 shadow-[0_10px_30px_rgba(27,23,43,0.04)] sm:p-4">
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-sm font-semibold text-ink">{copy.liveQr}</p>
+                <span className="inline-flex shrink-0 items-center gap-1 rounded-full border border-sun-border bg-sun-soft px-2.5 py-1 text-xs font-semibold text-sun-strong">
                   <Clock3 className="h-3.5 w-3.5" aria-hidden="true" />
                   {copy.expires}
                 </span>
@@ -436,19 +484,19 @@ function ProductVisual({ copy }: { copy: HomeCopy["visual"] }) {
               <StampProgress />
             </div>
 
-            <div className="rounded-lg border border-[#E5E1EE] bg-white p-4 shadow-[0_10px_30px_rgba(27,23,43,0.04)]">
+            <div className="rounded-lg border border-line bg-panel p-3 shadow-[0_10px_30px_rgba(27,23,43,0.04)] sm:p-4">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-sm font-semibold text-[#1B172B]">{copy.rewardTicket}</p>
-                  <p className="mt-1 font-mono text-xs font-semibold text-[#7047DF]">
+                  <p className="text-sm font-semibold text-ink">{copy.rewardTicket}</p>
+                  <p className="mt-1 font-mono text-xs font-semibold text-accent">
                     {copy.ticketCode}
                   </p>
                 </div>
-                <TicketCheck className="h-5 w-5 text-[#0F9F8F]" aria-hidden="true" />
+                <TicketCheck className="h-5 w-5 text-mint" aria-hidden="true" />
               </div>
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg bg-[#E9FBF7] px-3 py-3">
-                <p className="text-sm font-semibold text-[#146B5E]">{copy.validate}</p>
-                <span className="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-[#146B5E]">
+              <div className="mt-3 hidden flex-wrap items-center justify-between gap-2 rounded-lg bg-mint-soft px-3 py-2.5 sm:mt-4 sm:flex sm:gap-3 sm:py-3">
+                <p className="text-sm font-semibold text-mint-strong">{copy.validate}</p>
+                <span className="rounded-full bg-panel px-2.5 py-1 text-xs font-semibold text-mint-strong">
                   {copy.ownerOnly}
                 </span>
               </div>
@@ -466,7 +514,7 @@ function QrPattern() {
       {Array.from({ length: 81 }).map((_, index) => (
         <span
           key={index}
-          className={`rounded-[2px] ${qrCells.includes(index) ? "bg-[#1B172B]" : "bg-[#F7F9FF]"}`}
+          className={`rounded-[2px] ${qrCells.includes(index) ? "bg-ink" : "bg-panel-soft"}`}
         />
       ))}
     </div>
@@ -475,14 +523,14 @@ function QrPattern() {
 
 function StampProgress() {
   return (
-    <div className="mt-4 grid grid-cols-5 gap-2">
+    <div className="mt-3 grid grid-cols-5 gap-1.5 sm:mt-4 sm:gap-2">
       {Array.from({ length: 10 }).map((_, index) => (
         <span
           key={index}
           className={`flex aspect-square items-center justify-center rounded-lg border text-xs font-semibold ${
             index < 7
-              ? "border-[#0F9F8F] bg-[#E9FBF7] text-[#146B5E]"
-              : "border-[#DCD6EA] bg-[#FBFCFF] text-[#8B84A1]"
+              ? "border-mint bg-mint-soft text-mint-strong"
+              : "border-line bg-panel-soft text-muted-soft"
           }`}
         >
           {index + 1}
