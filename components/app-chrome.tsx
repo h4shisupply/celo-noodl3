@@ -1,12 +1,15 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, WalletCards } from "lucide-react";
 import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { useLocale } from "./locale-provider";
 import { AppAccountBar, type AppChromeWalletState } from "./app-account-bar";
 import { NetworkMismatchModal } from "./network-mismatch-modal";
 import { ProfileDialog } from "./profile-dialog";
+import { Button } from "./ui/button";
+import { EmptyState } from "./ui/empty-state";
+import { StatusMessage } from "./ui/status-message";
 
 export function AppChrome({
   eyebrow,
@@ -31,6 +34,7 @@ export function AppChrome({
 }) {
   const { dictionary } = useLocale();
   const [profileOpen, setProfileOpen] = useState(false);
+  const shouldGateWallet = !walletState.account;
 
   return (
     <main className="space-y-8 pb-20 md:space-y-12 md:pb-24">
@@ -77,43 +81,99 @@ export function AppChrome({
         />
       ) : null}
 
-      {title || description || eyebrow ? (
-        <section className="space-y-4 pb-2 md:space-y-5">
-          {backHref ? (
-            <Link
-              href={backHref}
-              className="inline-flex items-center gap-2 rounded-lg px-1 py-1 text-sm font-semibold text-muted transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
-            >
-              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-              {backLabel}
-            </Link>
-          ) : null}
-          {eyebrow ? (
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
-              {eyebrow}
-            </p>
-          ) : null}
-          <div className="max-w-3xl space-y-3">
-            {title ? (
-              <h1 className="text-3xl font-semibold leading-tight text-ink md:text-5xl">
-                {title}
-              </h1>
-            ) : null}
-            {description ? (
-              <p className="text-base leading-8 text-muted">{description}</p>
-            ) : null}
-          </div>
-        </section>
-      ) : null}
-
-      {aside ? (
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.12fr)_22rem]">
-          {children}
-          <aside>{aside}</aside>
-        </div>
+      {shouldGateWallet ? (
+        <WalletRequiredGate walletState={walletState} />
       ) : (
-        children
+        <>
+          {title || description || eyebrow ? (
+            <section className="space-y-4 pb-2 md:space-y-5">
+              {backHref ? (
+                <Link
+                  href={backHref}
+                  className="inline-flex items-center gap-2 rounded-lg px-1 py-1 text-sm font-semibold text-muted transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
+                >
+                  <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                  {backLabel}
+                </Link>
+              ) : null}
+              {eyebrow ? (
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+                  {eyebrow}
+                </p>
+              ) : null}
+              <div className="max-w-3xl space-y-3">
+                {title ? (
+                  <h1 className="text-3xl font-semibold leading-tight text-ink md:text-5xl">
+                    {title}
+                  </h1>
+                ) : null}
+                {description ? (
+                  <p className="text-base leading-8 text-muted">{description}</p>
+                ) : null}
+              </div>
+            </section>
+          ) : null}
+
+          {aside ? (
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,1.12fr)_22rem]">
+              {children}
+              <aside>{aside}</aside>
+            </div>
+          ) : (
+            children
+          )}
+        </>
       )}
     </main>
+  );
+}
+
+function WalletRequiredGate({
+  walletState
+}: {
+  walletState: AppChromeWalletState;
+}) {
+  const { dictionary } = useLocale();
+  const isChecking = !walletState.hasCheckedProvider;
+  const canConnect = walletState.hasCheckedProvider && walletState.hasProvider;
+  const title = isChecking
+    ? dictionary.account.walletCheckingTitle
+    : canConnect
+      ? dictionary.account.walletRequiredTitle
+      : dictionary.account.noWalletTitle;
+  const gateDescription = isChecking
+    ? dictionary.account.walletCheckingDescription
+    : canConnect
+      ? dictionary.account.walletRequiredDescription
+      : dictionary.account.noWalletDescription;
+
+  return (
+    <section className="mx-auto max-w-xl pt-8 md:pt-14">
+      <EmptyState
+        title={title}
+        description={gateDescription}
+        icon={<WalletCards className="h-5 w-5" />}
+        actions={
+          canConnect || walletState.connectError ? (
+            <div className="flex w-full flex-col items-start gap-3">
+              {canConnect ? (
+                <Button
+                  icon={<WalletCards className="h-4 w-4" />}
+                  onClick={() => void walletState.connect()}
+                  disabled={walletState.isConnecting}
+                >
+                  {walletState.isConnecting
+                    ? `${dictionary.actions.connectWallet}...`
+                    : dictionary.actions.connectWallet}
+                </Button>
+              ) : null}
+              {walletState.connectError ? (
+                <StatusMessage tone="error">{walletState.connectError}</StatusMessage>
+              ) : null}
+            </div>
+          ) : null
+        }
+      />
+    </section>
   );
 }

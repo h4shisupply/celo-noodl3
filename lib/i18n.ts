@@ -315,6 +315,12 @@ export type Dictionary = {
     expectedNetwork: string;
     connect: string;
     connecting: string;
+    walletCheckingTitle: string;
+    walletCheckingDescription: string;
+    walletRequiredTitle: string;
+    walletRequiredDescription: string;
+    noWalletTitle: string;
+    noWalletDescription: string;
   };
   profile: {
     title: string;
@@ -787,7 +793,16 @@ const dictionaries: Record<Locale, Dictionary> = {
       connectedWallet: "Carteira conectada",
       expectedNetwork: "{{current}} · esperado {{expected}}",
       connect: "Conectar",
-      connecting: "Abrindo carteira"
+      connecting: "Abrindo carteira",
+      walletCheckingTitle: "Checando carteira",
+      walletCheckingDescription:
+        "Estamos verificando se há uma carteira compatível antes de abrir o app.",
+      walletRequiredTitle: "Conecte sua carteira para continuar",
+      walletRequiredDescription:
+        "O noodl3 precisa de uma carteira conectada antes de carregar cartões, tickets ou ações do app.",
+      noWalletTitle: "Nenhuma carteira compatível encontrada",
+      noWalletDescription:
+        "Abra o app no MiniPay ou instale uma carteira compatível com Celo para continuar."
     },
     profile: {
       title: "Seu perfil no noodl3",
@@ -1273,7 +1288,16 @@ const dictionaries: Record<Locale, Dictionary> = {
       connectedWallet: "Connected wallet",
       expectedNetwork: "{{current}} · expected {{expected}}",
       connect: "Connect",
-      connecting: "Opening wallet"
+      connecting: "Opening wallet",
+      walletCheckingTitle: "Checking wallet",
+      walletCheckingDescription:
+        "We are checking for a compatible wallet before opening the app.",
+      walletRequiredTitle: "Connect your wallet to continue",
+      walletRequiredDescription:
+        "noodl3 needs a connected wallet before loading cards, tickets, or app actions.",
+      noWalletTitle: "No compatible wallet found",
+      noWalletDescription:
+        "Open the app in MiniPay or install a Celo-compatible browser wallet to continue."
     },
     profile: {
       title: "Your noodl3 profile",

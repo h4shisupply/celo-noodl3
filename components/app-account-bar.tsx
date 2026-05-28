@@ -20,10 +20,12 @@ export type AppChromeWalletState = {
   expectedChainLabel: string;
   contractAddress: Hex | null;
   hasProvider: boolean;
+  hasCheckedProvider: boolean;
   isMiniPay: boolean;
   isConnecting: boolean;
   isDisconnectedByUser: boolean;
   isWrongChain: boolean;
+  connectError?: string | null;
   connect: () => Promise<Hex | null>;
   switchToDefaultChain: () => Promise<number | null>;
   refreshWalletState: () => Promise<void>;
@@ -45,6 +47,7 @@ export function AppAccountBar({
     expectedChainLabel,
     contractAddress,
     hasProvider,
+    hasCheckedProvider,
     isMiniPay,
     isConnecting,
     isDisconnectedByUser,
@@ -193,7 +196,7 @@ export function AppAccountBar({
           ) : (
             <>
               <LanguageSwitcher />
-              {hasProvider && (!isDisconnectedByUser || !account) ? (
+              {hasCheckedProvider && hasProvider && (!isDisconnectedByUser || !account) ? (
                 <Button size="sm" onClick={() => void connect()}>
                   {isConnecting
                     ? dictionary.account.connecting
