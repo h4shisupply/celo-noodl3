@@ -80,7 +80,13 @@ export function ProfileDialog({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-overlay px-4 py-6 backdrop-blur-sm">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-ink-overlay px-4 py-6 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="profile-dialog-title"
+      aria-describedby="profile-dialog-description"
+    >
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-3">
           <div className="flex items-start justify-between gap-4">
@@ -97,8 +103,12 @@ export function ProfileDialog({
             </button>
           </div>
           <div>
-            <CardTitle>{dictionary.profile.title}</CardTitle>
-            <CardDescription>{dictionary.profile.description}</CardDescription>
+            <CardTitle id="profile-dialog-title">
+              {dictionary.profile.title}
+            </CardTitle>
+            <CardDescription id="profile-dialog-description">
+              {dictionary.profile.description}
+            </CardDescription>
           </div>
           <p className="rounded-lg bg-panel-soft p-3 text-sm font-medium text-muted">
             {formatWalletLabel(account)}
