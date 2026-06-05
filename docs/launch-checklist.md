@@ -27,6 +27,7 @@
 - Confirm non-owner wallets see the owner-wallet validation hint.
 
 ## Frontend
+- Confirm `NEXT_PUBLIC_APP_URL` matches the local or deployed base URL before sharing or printing QR links.
 - Check mobile and desktop layouts for:
   - home page
   - `/app`
