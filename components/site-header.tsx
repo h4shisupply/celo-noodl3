@@ -115,7 +115,11 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
           aria-expanded={menuOpen}
           aria-label={menuLabel}
         >
-          {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          {menuOpen ? (
+            <X className="h-4 w-4" aria-hidden="true" />
+          ) : (
+            <Menu className="h-4 w-4" aria-hidden="true" />
+          )}
           {menuLabel}
         </button>
       </div>
