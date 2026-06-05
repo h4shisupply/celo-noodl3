@@ -231,7 +231,7 @@ export function ProgramCreatePage({
                 />
               ) : (
                 <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-accent-border bg-accent-soft text-accent">
-                  <ImageIcon className="h-5 w-5" />
+                  <ImageIcon className="h-5 w-5" aria-hidden="true" />
                 </span>
               )}
               <div className="min-w-0">
