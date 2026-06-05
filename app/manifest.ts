@@ -6,6 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "noodl3",
     description:
       "QR stamp cards, wallet stamps, and one-time reward tickets for real-world visits on Celo.",
+    categories: ["finance", "shopping", "utilities"],
     start_url: "/",
     display: "standalone",
     background_color: "#FBFCFF",
