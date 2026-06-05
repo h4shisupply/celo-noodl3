@@ -21,15 +21,18 @@ const icons = {
 export function StatusMessage({
   children,
   className,
+  role,
   tone = "info",
   ...props
 }: HTMLAttributes<HTMLParagraphElement> & {
   tone?: StatusTone;
 }) {
   const Icon = icons[tone];
+  const liveRole = role ?? (tone === "error" ? "alert" : "status");
 
   return (
     <p
+      role={liveRole}
       className={clsx(
         "flex items-start gap-2 rounded-lg border px-4 py-3 text-sm font-medium leading-6",
         toneClasses[tone],
