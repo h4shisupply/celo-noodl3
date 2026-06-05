@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import { LOCALE_COOKIE_NAME, type Locale } from "../lib/i18n";
 import { useLocale } from "./locale-provider";
 
-const localeOptions: Array<{ value: Locale; label: string }> = [
-  { value: "pt-BR", label: "PT" },
-  { value: "en", label: "EN" }
+const localeOptions: Array<{ value: Locale; label: string; name: string }> = [
+  { value: "pt-BR", label: "PT", name: "Português" },
+  { value: "en", label: "EN", name: "English" }
 ];
 
 export function LanguageSwitcher() {
@@ -31,6 +31,8 @@ export function LanguageSwitcher() {
           <button
             key={option.value}
             type="button"
+            aria-label={`Switch language to ${option.name}`}
+            aria-pressed={active}
             onClick={() => changeLocale(option.value)}
             className={`rounded-md px-3 py-2 text-xs font-semibold tracking-[0.08em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus ${
               active
