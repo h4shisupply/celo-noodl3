@@ -100,6 +100,8 @@ npm run build
 npm run dev
 ```
 
+After the dev server starts, open `http://localhost:3000/app` for the wallet-aware loyalty dashboard.
+
 ## Deploy And Seed
 
 ```bash
