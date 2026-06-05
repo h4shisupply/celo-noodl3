@@ -8,6 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
       "QR stamp cards, wallet stamps, and one-time reward tickets for real-world visits on Celo.",
     categories: ["finance", "shopping", "utilities"],
     start_url: "/",
+    scope: "/",
     display: "standalone",
     background_color: "#FBFCFF",
     theme_color: "#FBFCFF",
