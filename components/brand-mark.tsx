@@ -9,7 +9,12 @@ export function BrandMark({ href }: { href: string }) {
       className="inline-flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/icon.svg" alt="noodl3" className="h-10 w-10 rounded-lg shadow-card" />
+      <img
+        src="/icon.svg"
+        alt=""
+        aria-hidden="true"
+        className="h-10 w-10 rounded-lg shadow-card"
+      />
       <span className="text-lg font-semibold text-ink">
         noodl3
       </span>
