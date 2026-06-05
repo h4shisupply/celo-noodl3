@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 export type HeadlessSelectOption = {
   value: string;
@@ -32,6 +32,7 @@ export function HeadlessSelect({
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const listboxId = useId();
 
   const selected = useMemo(
     () => options.find((option) => option.value === value),
@@ -71,6 +72,9 @@ export function HeadlessSelect({
       <div className="relative">
         <button
           type="button"
+          aria-label={label}
+          aria-haspopup="listbox"
+          aria-controls={open ? listboxId : undefined}
           aria-expanded={open}
           onClick={() => {
             if (disabled) return;
@@ -104,6 +108,7 @@ export function HeadlessSelect({
 
         {open ? (
           <div
+            id={listboxId}
             className={clsx(
               "absolute z-40 mt-2 w-full min-w-[15rem] rounded-lg border border-line bg-panel p-2 shadow-float",
               align === "right" ? "right-0" : "left-0"
