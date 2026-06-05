@@ -151,13 +151,24 @@ export function QrScanner({
   ]);
 
   return (
-    <div className="fixed inset-0 z-30 flex min-h-[100dvh] flex-col bg-panel-soft px-5 py-6 md:px-8 md:py-8">
+    <div
+      className="fixed inset-0 z-30 flex min-h-[100dvh] flex-col bg-panel-soft px-5 py-6 md:px-8 md:py-8"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="qr-scanner-title"
+      aria-describedby="qr-scanner-description"
+    >
       <div className="flex items-start justify-between gap-4">
         <div className="max-w-xl space-y-2">
-          <h2 className="text-2xl font-semibold text-ink md:text-3xl">
+          <h2
+            id="qr-scanner-title"
+            className="text-2xl font-semibold text-ink md:text-3xl"
+          >
             {title}
           </h2>
-          <p className="text-sm leading-7 text-muted">{description}</p>
+          <p id="qr-scanner-description" className="text-sm leading-7 text-muted">
+            {description}
+          </p>
         </div>
 
         <button
