@@ -111,6 +111,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
           type="button"
           onClick={() => setMenuOpen((current) => !current)}
           className="inline-flex h-11 items-center gap-2 rounded-lg border border-line bg-panel px-4 text-sm font-semibold text-ink-soft shadow-card transition hover:border-accent-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus md:hidden"
+          aria-controls="site-mobile-menu"
           aria-expanded={menuOpen}
           aria-label={menuLabel}
         >
@@ -120,8 +121,11 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
       </div>
 
       {menuOpen ? (
-        <div className="mt-5 space-y-4 rounded-lg border border-line bg-panel px-5 py-5 shadow-card md:hidden">
-          <nav className="grid gap-3">
+        <div
+          id="site-mobile-menu"
+          className="mt-5 space-y-4 rounded-lg border border-line bg-panel px-5 py-5 shadow-card md:hidden"
+        >
+          <nav className="grid gap-3" aria-label="Landing page">
             {items.map((item) => (
               <NavLink
                 key={`${item.href}-${item.label}`}
