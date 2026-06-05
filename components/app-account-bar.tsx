@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronDown, LogOut, RefreshCw, UserRound, Wallet } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { Hex } from "viem";
 import { BrandMark } from "./brand-mark";
 import { LanguageSwitcher } from "./language-switcher";
@@ -62,6 +62,7 @@ export function AppAccountBar({
   });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const accountMenuId = useId();
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -96,6 +97,7 @@ export function AppAccountBar({
                 type="button"
                 onClick={() => setIsMenuOpen((current) => !current)}
                 className="inline-flex h-11 max-w-[13rem] items-center gap-2 rounded-lg border border-line bg-panel px-3 text-sm font-semibold text-ink-soft shadow-card transition hover:border-accent-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus sm:max-w-none"
+                aria-controls={isMenuOpen ? accountMenuId : undefined}
                 aria-expanded={isMenuOpen}
                 aria-label={dictionary.account.openMenu}
               >
@@ -119,7 +121,10 @@ export function AppAccountBar({
               </button>
 
               {isMenuOpen ? (
-                <div className="absolute right-0 top-[calc(100%+0.75rem)] z-30 w-[min(17rem,calc(100vw-2rem))] rounded-lg border border-line bg-panel p-4 shadow-float">
+                <div
+                  id={accountMenuId}
+                  className="absolute right-0 top-[calc(100%+0.75rem)] z-30 w-[min(17rem,calc(100vw-2rem))] rounded-lg border border-line bg-panel p-4 shadow-float"
+                >
                   <div className="space-y-1 border-b border-line-soft pb-4">
                     <p className="text-sm font-semibold text-ink">
                       {profile?.displayName ?? dictionary.account.connectedWallet}
