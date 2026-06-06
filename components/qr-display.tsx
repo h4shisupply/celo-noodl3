@@ -176,7 +176,7 @@ export function QrDisplay({
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="space-y-2">
             {code ? (
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">
+              <p dir="ltr" className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">
                 {code}
               </p>
             ) : null}
