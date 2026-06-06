@@ -119,6 +119,7 @@ export function ProfileDialog({
             value={name}
             maxLength={40}
             aria-label={dictionary.profile.namePlaceholder}
+            autoFocus
             autoComplete="name"
             enterKeyHint="next"
             placeholder={dictionary.profile.namePlaceholder}
