@@ -510,7 +510,7 @@ function ProductVisual({ copy }: { copy: HomeCopy["visual"] }) {
 
 function QrPattern() {
   return (
-    <div className="grid aspect-square grid-cols-9 gap-1">
+    <div className="grid aspect-square grid-cols-9 gap-1" aria-hidden="true">
       {Array.from({ length: 81 }).map((_, index) => (
         <span
           key={index}
