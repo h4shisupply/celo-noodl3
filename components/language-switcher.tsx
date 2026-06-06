@@ -23,7 +23,11 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <div className="inline-flex items-center rounded-lg border border-line bg-panel p-1 shadow-card">
+    <div
+      className="inline-flex items-center rounded-lg border border-line bg-panel p-1 shadow-card"
+      role="group"
+      aria-label="Language"
+    >
       {localeOptions.map((option) => {
         const active = option.value === locale;
 
