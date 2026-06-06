@@ -29,10 +29,10 @@ export function MetricCard({
       <CardContent className="relative flex min-h-[7.25rem] items-center justify-between gap-4 pt-5">
         <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-mint via-accent to-sun" />
         <div className="min-w-0 space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+          <p className="break-words text-xs font-semibold uppercase tracking-[0.12em] text-muted">
             {label}
           </p>
-          <p className="text-3xl font-semibold text-ink">{value}</p>
+          <p className="break-words text-3xl font-semibold text-ink tabular-nums">{value}</p>
         </div>
         <div
           aria-hidden="true"
