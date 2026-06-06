@@ -486,7 +486,12 @@ export function ProgramManagePage({
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <Field label={copy.programName}>
-                      <Input value={name} maxLength={60} onChange={(event) => setName(event.target.value)} />
+                      <Input
+                        value={name}
+                        maxLength={60}
+                        autoComplete="organization"
+                        onChange={(event) => setName(event.target.value)}
+                      />
                     </Field>
                     <Field label={copy.iconUrl} description={copy.iconUrlHelp} descriptionId={iconUrlHelpId}>
                       <Input
