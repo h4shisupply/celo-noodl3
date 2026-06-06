@@ -20,7 +20,7 @@ export function ProgressMeter({
         <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
           {unitLabel ?? dictionary.common.stampsLabel}
         </p>
-        <p className="rounded-full bg-sun-soft px-2.5 py-1 text-xs font-semibold text-sun-strong">
+        <p className="rounded-full bg-sun-soft px-2.5 py-1 text-xs font-semibold text-sun-strong tabular-nums">
           {safeValue}/{total}
         </p>
       </div>
