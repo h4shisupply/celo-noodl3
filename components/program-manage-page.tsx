@@ -515,6 +515,7 @@ export function ProgramManagePage({
                       <Textarea
                         value={rewardDescription}
                         autoComplete="off"
+                        enterKeyHint="done"
                         maxLength={120}
                         onChange={(event) => setRewardDescription(event.target.value)}
                       />

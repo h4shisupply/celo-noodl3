@@ -185,6 +185,7 @@ export function ProgramCreatePage({
               <Textarea
                 value={rewardDescription}
                 autoComplete="off"
+                enterKeyHint="done"
                 maxLength={120}
                 placeholder={copy.rewardPlaceholder}
                 onChange={(event) => setRewardDescription(event.target.value)}
