@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   },
   description:
     "Wallet stamp cards for real-world visits on Celo. Print a counter QR, collect stamps, and validate each reward ticket once.",
+  manifest: "/manifest.webmanifest",
   metadataBase: new URL(publicEnv.appUrl),
   keywords: [
     "MiniPay",
