@@ -9,7 +9,7 @@ export function Card({ className, variant = "default", ...props }: CardProps) {
   return (
     <div
       className={clsx(
-        "rounded-lg border shadow-card backdrop-blur-sm",
+        "min-w-0 rounded-lg border shadow-card backdrop-blur-sm",
         variant === "default" && "border-line bg-panel",
         variant === "soft" && "border-line bg-panel-soft",
         variant === "accent" && "border-accent-border bg-accent-soft",
