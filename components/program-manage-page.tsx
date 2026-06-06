@@ -446,8 +446,8 @@ export function ProgramManagePage({
               <aside className="space-y-6 xl:sticky xl:top-6 xl:self-start">
                 <section className="space-y-4">
                   <div className="space-y-2">
-                    <h2 className="text-xl font-semibold text-ink">{copy.dynamicQr}</h2>
-                    <p className="text-sm leading-6 text-muted">{copy.dynamicQrHelp}</p>
+                    <h2 className="break-words text-xl font-semibold text-ink">{copy.dynamicQr}</h2>
+                    <p className="break-words text-sm leading-6 text-muted">{copy.dynamicQrHelp}</p>
                   </div>
                   <div className="space-y-4">
                     <Button
