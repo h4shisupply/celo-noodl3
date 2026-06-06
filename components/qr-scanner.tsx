@@ -215,7 +215,10 @@ export function QrScanner({
           {!isActive ? (
             <div className="absolute inset-0 flex items-center justify-center bg-accent-soft px-6 text-center">
               <div className="space-y-4">
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-panel text-accent shadow-card">
+                <div
+                  className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-panel text-accent shadow-card"
+                  aria-hidden="true"
+                >
                   <Camera className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <p className="text-sm text-muted" role={error ? "alert" : "status"} aria-atomic="true">
