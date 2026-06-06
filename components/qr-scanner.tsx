@@ -177,14 +177,14 @@ export function QrScanner({
       aria-describedby="qr-scanner-description"
     >
       <div className="flex items-start justify-between gap-4">
-        <div className="max-w-xl space-y-2">
+        <div className="min-w-0 max-w-xl space-y-2">
           <h2
             id="qr-scanner-title"
-            className="text-2xl font-semibold text-ink md:text-3xl"
+            className="break-words text-2xl font-semibold text-ink md:text-3xl"
           >
             {title}
           </h2>
-          <p id="qr-scanner-description" className="text-sm leading-7 text-muted">
+          <p id="qr-scanner-description" className="break-words text-sm leading-7 text-muted">
             {description}
           </p>
         </div>
