@@ -173,6 +173,7 @@ export function ProgramCreatePage({
                 autoCapitalize="none"
                 autoCorrect="off"
                 dir="ltr"
+                inputMode="url"
                 placeholder="https://..."
                 spellCheck={false}
                 onChange={(event) => setIconUrl(event.target.value)}

@@ -132,6 +132,7 @@ export function ProfileDialog({
             autoComplete="photo"
             autoCorrect="off"
             dir="ltr"
+            inputMode="url"
             placeholder={dictionary.profile.avatarPlaceholder}
             spellCheck={false}
             onChange={(event) => setAvatarUrl(event.target.value)}
