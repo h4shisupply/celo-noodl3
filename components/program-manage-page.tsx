@@ -336,7 +336,7 @@ export function ProgramManagePage({
             <div className="surface-panel stamp-pattern flex flex-col gap-4 rounded-lg p-5 shadow-float sm:flex-row sm:items-center">
               <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
               <div className="min-w-0">
-                <Badge variant={program.active ? "accent" : "danger"}>
+                <Badge dir="ltr" variant={program.active ? "accent" : "danger"}>
                   {formatProgramCode(program.id)} {!program.active ? `· ${copy.inactive}` : ""}
                 </Badge>
                 <h1 className="mt-2 text-2xl font-semibold leading-tight text-ink">
