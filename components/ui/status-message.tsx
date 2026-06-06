@@ -42,7 +42,7 @@ export function StatusMessage({
       {...props}
     >
       <Icon className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-      <span>{children}</span>
+      <span className="min-w-0 break-words">{children}</span>
     </p>
   );
 }
