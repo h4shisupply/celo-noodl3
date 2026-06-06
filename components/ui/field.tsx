@@ -16,12 +16,12 @@ export function Field({
 }) {
   return (
     <label className={clsx("block min-w-0 space-y-2", className)}>
-      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+      <span className="break-words text-xs font-semibold uppercase tracking-[0.12em] text-muted">
         {label}
       </span>
       {children}
       {description ? (
-        <span id={descriptionId} className="block text-xs leading-5 text-muted">
+        <span id={descriptionId} className="block break-words text-xs leading-5 text-muted">
           {description}
         </span>
       ) : null}
