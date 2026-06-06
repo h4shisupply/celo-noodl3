@@ -252,7 +252,7 @@ export function ProgramCreatePage({
               </div>
             </div>
 
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-5 gap-2" aria-hidden="true">
               {Array.from({
                 length: Math.max(1, Math.min(Number.parseInt(stampsRequired, 10) || 10, 10))
               }).map((_, index) => (
