@@ -523,7 +523,7 @@ function QrPattern() {
 
 function StampProgress() {
   return (
-    <div className="mt-3 grid grid-cols-5 gap-1.5 sm:mt-4 sm:gap-2">
+    <div className="mt-3 grid grid-cols-5 gap-1.5 sm:mt-4 sm:gap-2" aria-hidden="true">
       {Array.from({ length: 10 }).map((_, index) => (
         <span
           key={index}
