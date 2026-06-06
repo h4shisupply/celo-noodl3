@@ -284,7 +284,7 @@ export function ProgramPage({
                 <div className="flex min-w-0 items-center gap-4">
                   <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
                   <div className="min-w-0 space-y-2">
-                    <Badge variant={program.active ? "accent" : "danger"}>
+                    <Badge dir="ltr" variant={program.active ? "accent" : "danger"}>
                       {formatProgramCode(program.id)} {!program.active ? `· ${copy.inactive}` : ""}
                     </Badge>
                     <CardTitle>{program.name}</CardTitle>
