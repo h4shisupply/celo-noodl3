@@ -166,6 +166,7 @@ export function ProgramCreatePage({
             <Field label={copy.iconUrl} description={copy.iconUrlHelp} descriptionId={iconUrlHelpId}>
               <Input
                 value={iconUrl}
+                type="url"
                 maxLength={280}
                 aria-describedby={iconUrlHelpId}
                 placeholder="https://..."

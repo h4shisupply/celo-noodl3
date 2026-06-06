@@ -484,6 +484,7 @@ export function ProgramManagePage({
                     <Field label={copy.iconUrl}>
                       <Input
                         value={iconUrl}
+                        type="url"
                         maxLength={280}
                         placeholder="https://..."
                         onChange={(event) => setIconUrl(event.target.value)}
