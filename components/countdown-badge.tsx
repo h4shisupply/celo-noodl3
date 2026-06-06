@@ -48,7 +48,7 @@ export function CountdownBadge({
     <span
       role="timer"
       aria-atomic="true"
-      className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold tabular-nums ${
+      className={`inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold tabular-nums ${
         expired
           ? "border-danger-border bg-danger-soft text-danger"
           : "border-sun-border bg-sun-soft text-sun-strong"
