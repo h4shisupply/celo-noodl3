@@ -31,7 +31,7 @@ export function ProgressMeter({
         aria-valuemin={0}
         aria-valuemax={safeTotal}
         aria-valuenow={safeValue}
-        aria-valuetext={`${safeValue}/${safeTotal}`}
+        aria-valuetext={`${safeValue}/${total}`}
       >
         <div
           className="h-full rounded-full bg-gradient-to-r from-mint via-accent to-sun transition-[width]"
