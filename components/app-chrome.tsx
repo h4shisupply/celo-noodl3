@@ -101,14 +101,14 @@ export function AppChrome({
                   {eyebrow}
                 </p>
               ) : null}
-              <div className="max-w-3xl space-y-3">
+              <div className="min-w-0 max-w-3xl space-y-3">
                 {title ? (
-                  <h1 className="text-3xl font-semibold leading-tight text-ink md:text-5xl">
+                  <h1 className="break-words text-3xl font-semibold leading-tight text-ink md:text-5xl">
                     {title}
                   </h1>
                 ) : null}
                 {description ? (
-                  <p className="text-base leading-8 text-muted">{description}</p>
+                  <p className="break-words text-base leading-8 text-muted">{description}</p>
                 ) : null}
               </div>
             </section>
