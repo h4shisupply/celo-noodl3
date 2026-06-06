@@ -45,9 +45,9 @@ export function ToggleRow({
         </span>
       ) : null}
       <span className="min-w-0 space-y-1">
-        <span className="block font-semibold text-ink-soft">{label}</span>
+        <span className="block break-words font-semibold text-ink-soft">{label}</span>
         {description ? (
-          <span className="block leading-6 text-muted">{description}</span>
+          <span className="block break-words leading-6 text-muted">{description}</span>
         ) : null}
       </span>
     </label>
