@@ -35,6 +35,7 @@ export function MetricCard({
           <p className="text-3xl font-semibold text-ink">{value}</p>
         </div>
         <div
+          aria-hidden="true"
           className={clsx(
             "flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border",
             toneClasses[tone]
