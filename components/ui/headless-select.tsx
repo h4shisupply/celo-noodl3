@@ -32,7 +32,10 @@ export function HeadlessSelect({
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
-  const listboxId = useId();
+  const selectId = useId();
+  const labelId = `${selectId}-label`;
+  const valueId = `${selectId}-value`;
+  const listboxId = `${selectId}-listbox`;
 
   const selected = useMemo(
     () => options.find((option) => option.value === value),
@@ -64,7 +67,10 @@ export function HeadlessSelect({
   return (
     <div className={clsx("space-y-2", className)} ref={rootRef}>
       {label ? (
-        <span className="block text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+        <span
+          id={labelId}
+          className="block text-xs font-semibold uppercase tracking-[0.12em] text-muted"
+        >
           {label}
         </span>
       ) : null}
@@ -72,7 +78,7 @@ export function HeadlessSelect({
       <div className="relative">
         <button
           type="button"
-          aria-label={label}
+          aria-labelledby={label ? `${labelId} ${valueId}` : valueId}
           aria-haspopup="listbox"
           aria-controls={open ? listboxId : undefined}
           aria-expanded={open}
@@ -88,7 +94,7 @@ export function HeadlessSelect({
           )}
         >
           <div className="min-w-0">
-            <p className="truncate text-sm font-medium text-ink">
+            <p id={valueId} className="truncate text-sm font-medium text-ink">
               {selected?.label || placeholder || ""}
             </p>
             {selected?.description ? (
