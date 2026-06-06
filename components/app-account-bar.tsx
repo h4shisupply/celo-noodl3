@@ -135,11 +135,11 @@ export function AppAccountBar({
                   className="absolute right-0 top-[calc(100%+0.75rem)] z-30 w-[min(17rem,calc(100vw-2rem))] rounded-lg border border-line bg-panel p-4 shadow-float"
                 >
                   <div className="space-y-1 border-b border-line-soft pb-4">
-                    <p className="text-sm font-semibold text-ink">
+                    <p className="break-words text-sm font-semibold text-ink">
                       {profile?.displayName ?? dictionary.account.connectedWallet}
                     </p>
-                    <p dir="ltr" className="text-sm text-muted">{formatWalletLabel(account)}</p>
-                    <p className="text-sm text-muted">
+                    <p dir="ltr" className="break-all text-sm text-muted">{formatWalletLabel(account)}</p>
+                    <p className="break-words text-sm text-muted">
                       {isWrongChain
                         ? interpolate(dictionary.account.expectedNetwork, {
                             current: getChainLabel(chainId, locale),
