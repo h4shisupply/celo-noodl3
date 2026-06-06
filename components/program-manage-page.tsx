@@ -89,6 +89,7 @@ export function ProgramManagePage({
 }) {
   const { locale, dictionary } = useLocale();
   const copy = programCopy(locale);
+  const iconUrlHelpId = "manage-program-icon-url-help";
   const [program, setProgram] = useState<ProgramRecord | null>(null);
   const [canManage, setCanManage] = useState(false);
   const [customers, setCustomers] = useState<CustomerSummary[]>([]);
@@ -481,11 +482,12 @@ export function ProgramManagePage({
                     <Field label={copy.programName}>
                       <Input value={name} maxLength={60} onChange={(event) => setName(event.target.value)} />
                     </Field>
-                    <Field label={copy.iconUrl}>
+                    <Field label={copy.iconUrl} description={copy.iconUrlHelp} descriptionId={iconUrlHelpId}>
                       <Input
                         value={iconUrl}
                         type="url"
                         maxLength={280}
+                        aria-describedby={iconUrlHelpId}
                         placeholder="https://..."
                         onChange={(event) => setIconUrl(event.target.value)}
                       />
