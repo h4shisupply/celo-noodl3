@@ -389,6 +389,7 @@ export function ProgramManagePage({
                         autoComplete="off"
                         autoCorrect="off"
                         dir="ltr"
+                        enterKeyHint="done"
                         spellCheck={false}
                         aria-label={copy.customerWallet}
                         onChange={(event) => setManualCustomer(event.target.value)}
