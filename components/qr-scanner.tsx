@@ -223,7 +223,10 @@ export function QrScanner({
                     : error || notice || dictionary.qrScanner.ready}
                 </p>
                 {isProcessing ? (
-                  <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-accent-border border-t-ink" />
+                  <div
+                    className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-accent-border border-t-ink"
+                    aria-hidden="true"
+                  />
                 ) : (
                   <Button onClick={() => void startCamera()}>
                     {qrCopy.openCamera}
