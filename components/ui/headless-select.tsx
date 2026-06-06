@@ -73,7 +73,7 @@ export function HeadlessSelect({
       {label ? (
         <span
           id={labelId}
-          className="block text-xs font-semibold uppercase tracking-[0.12em] text-muted"
+          className="block break-words text-xs font-semibold uppercase tracking-[0.12em] text-muted"
         >
           {label}
         </span>
