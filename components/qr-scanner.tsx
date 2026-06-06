@@ -206,6 +206,7 @@ export function QrScanner({
         <div className="relative flex-1 overflow-hidden rounded-lg border border-line bg-accent-soft">
           <video
             ref={videoRef}
+            aria-label={title}
             className="h-full w-full object-cover"
             muted
             playsInline
