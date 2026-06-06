@@ -37,6 +37,7 @@ export function LanguageSwitcher() {
           <button
             key={option.value}
             type="button"
+            lang={option.value}
             aria-label={`${switchLanguageLabel} ${option.name}`}
             aria-pressed={active}
             onClick={() => changeLocale(option.value)}
