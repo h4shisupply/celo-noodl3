@@ -128,8 +128,11 @@ export function ProfileDialog({
             type="url"
             maxLength={280}
             aria-label={dictionary.profile.avatarPlaceholder}
+            autoCapitalize="none"
             autoComplete="photo"
+            autoCorrect="off"
             placeholder={dictionary.profile.avatarPlaceholder}
+            spellCheck={false}
             onChange={(event) => setAvatarUrl(event.target.value)}
           />
           <div className="flex flex-wrap gap-3">
