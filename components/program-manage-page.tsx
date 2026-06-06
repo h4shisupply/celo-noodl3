@@ -384,6 +384,7 @@ export function ProgramManagePage({
                     <div className="flex flex-col gap-3 md:flex-row">
                       <Input
                         value={manualCustomer}
+                        maxLength={42}
                         autoCapitalize="none"
                         autoComplete="off"
                         autoCorrect="off"
