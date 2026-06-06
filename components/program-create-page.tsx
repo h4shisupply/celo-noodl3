@@ -279,7 +279,7 @@ export function ProgramCreatePage({
               ))}
             </div>
 
-            <div className="rounded-lg border border-sun-border bg-sun-soft p-3 text-sm font-semibold leading-6 text-sun-strong">
+            <div className="break-words rounded-lg border border-sun-border bg-sun-soft p-3 text-sm font-semibold leading-6 text-sun-strong">
               <Gift className="mb-2 h-4 w-4" aria-hidden="true" />
               {rewardDescription || copy.previewReward}
             </div>
