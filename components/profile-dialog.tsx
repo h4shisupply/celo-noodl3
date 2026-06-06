@@ -110,7 +110,7 @@ export function ProfileDialog({
               {dictionary.profile.description}
             </CardDescription>
           </div>
-          <p className="rounded-lg bg-panel-soft p-3 text-sm font-medium text-muted">
+          <p dir="ltr" className="rounded-lg bg-panel-soft p-3 text-sm font-medium text-muted">
             {formatWalletLabel(account)}
           </p>
         </CardHeader>
