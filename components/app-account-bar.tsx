@@ -244,6 +244,8 @@ function ProfileAvatar({
       <img
         src={avatarUrl}
         alt=""
+        width={28}
+        height={28}
         aria-hidden="true"
         className="h-7 w-7 rounded-full object-cover"
         onError={() => setHasError(true)}
