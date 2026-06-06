@@ -160,6 +160,7 @@ export function ProgramCreatePage({
                 value={name}
                 maxLength={60}
                 autoComplete="organization"
+                enterKeyHint="next"
                 placeholder={copy.programNamePlaceholder}
                 onChange={(event) => setName(event.target.value)}
               />

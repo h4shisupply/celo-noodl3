@@ -491,6 +491,7 @@ export function ProgramManagePage({
                         value={name}
                         maxLength={60}
                         autoComplete="organization"
+                        enterKeyHint="next"
                         onChange={(event) => setName(event.target.value)}
                       />
                     </Field>
