@@ -93,7 +93,7 @@ export default async function RootLayout({
   const dictionary = getDictionary(locale);
 
   return (
-    <html lang={locale} className={`${sans.variable} ${mono.variable}`}>
+    <html lang={locale} dir="ltr" className={`${sans.variable} ${mono.variable}`}>
       <body>
         <div className="page-shell">
           <div className="app-frame">
