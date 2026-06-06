@@ -34,6 +34,7 @@ export function ProgressMeter({
         aria-valuetext={`${safeValue}/${total}`}
       >
         <div
+          aria-hidden="true"
           className="h-full rounded-full bg-gradient-to-r from-mint via-accent to-sun transition-[width]"
           style={{ width: `${width}%` }}
         />
