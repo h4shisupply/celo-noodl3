@@ -243,7 +243,8 @@ function ProfileAvatar({
       // eslint-disable-next-line @next/next/no-img-element
       <img
         src={avatarUrl}
-        alt={name}
+        alt=""
+        aria-hidden="true"
         className="h-7 w-7 rounded-full object-cover"
         onError={() => setHasError(true)}
       />
@@ -251,7 +252,10 @@ function ProfileAvatar({
   }
 
   return (
-    <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-mint-soft text-xs font-semibold text-mint-strong">
+    <span
+      className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-mint-soft text-xs font-semibold text-mint-strong"
+      aria-hidden="true"
+    >
       {getInitials(name)}
     </span>
   );
