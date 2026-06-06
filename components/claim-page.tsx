@@ -249,10 +249,10 @@ export function ClaimPage({
               </CardHeader>
               <CardContent className="space-y-5">
                 <div className="grid gap-3 rounded-lg border border-line bg-panel-soft p-4 text-sm text-muted">
-                  <p className="text-base font-semibold text-ink">
+                  <p dir="ltr" className="text-base font-semibold text-ink">
                     {copy.backupCode}: {formatClaimCode(claim.id)}
                   </p>
-                  <p className="break-all">
+                  <p dir="ltr" className="break-all">
                     {dictionary.common.customer}: {formatWalletLabel(claim.user)}
                   </p>
                   <p>
