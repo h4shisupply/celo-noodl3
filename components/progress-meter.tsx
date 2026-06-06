@@ -17,10 +17,10 @@ export function ProgressMeter({
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between gap-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+        <p className="min-w-0 break-words text-xs font-semibold uppercase tracking-[0.12em] text-muted">
           {unitLabel ?? dictionary.common.stampsLabel}
         </p>
-        <p className="rounded-full bg-sun-soft px-2.5 py-1 text-xs font-semibold text-sun-strong tabular-nums">
+        <p className="shrink-0 rounded-full bg-sun-soft px-2.5 py-1 text-xs font-semibold text-sun-strong tabular-nums">
           {safeValue}/{total}
         </p>
       </div>
