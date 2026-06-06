@@ -250,7 +250,10 @@ export function ProgramCreatePage({
                   className="h-12 w-12 rounded-lg border border-line object-cover"
                 />
               ) : (
-                <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-accent-border bg-accent-soft text-accent">
+                <span
+                  className="flex h-12 w-12 items-center justify-center rounded-lg border border-accent-border bg-accent-soft text-accent"
+                  aria-hidden="true"
+                >
                   <ImageIcon className="h-5 w-5" aria-hidden="true" />
                 </span>
               )}
