@@ -172,6 +172,7 @@ export function ProgramCreatePage({
                 aria-describedby={iconUrlHelpId}
                 autoCapitalize="none"
                 autoCorrect="off"
+                dir="ltr"
                 placeholder="https://..."
                 spellCheck={false}
                 onChange={(event) => setIconUrl(event.target.value)}
