@@ -120,6 +120,7 @@ export function ProfileDialog({
             maxLength={40}
             aria-label={dictionary.profile.namePlaceholder}
             autoComplete="name"
+            enterKeyHint="next"
             placeholder={dictionary.profile.namePlaceholder}
             onChange={(event) => setName(event.target.value)}
           />
@@ -132,6 +133,7 @@ export function ProfileDialog({
             autoComplete="photo"
             autoCorrect="off"
             dir="ltr"
+            enterKeyHint="done"
             inputMode="url"
             placeholder={dictionary.profile.avatarPlaceholder}
             spellCheck={false}
