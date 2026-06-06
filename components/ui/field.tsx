@@ -4,11 +4,13 @@ import type { ReactNode } from "react";
 export function Field({
   label,
   description,
+  descriptionId,
   children,
   className
 }: {
   label: string;
   description?: ReactNode;
+  descriptionId?: string;
   children: ReactNode;
   className?: string;
 }) {
@@ -19,7 +21,9 @@ export function Field({
       </span>
       {children}
       {description ? (
-        <span className="block text-xs leading-5 text-muted">{description}</span>
+        <span id={descriptionId} className="block text-xs leading-5 text-muted">
+          {description}
+        </span>
       ) : null}
     </label>
   );

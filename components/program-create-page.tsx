@@ -46,6 +46,7 @@ export function ProgramCreatePage({
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const iconUrlHelpId = "program-icon-url-help";
   const {
     account,
     chainId,
@@ -162,10 +163,11 @@ export function ProgramCreatePage({
                 onChange={(event) => setName(event.target.value)}
               />
             </Field>
-            <Field label={copy.iconUrl} description={copy.iconUrlHelp}>
+            <Field label={copy.iconUrl} description={copy.iconUrlHelp} descriptionId={iconUrlHelpId}>
               <Input
                 value={iconUrl}
                 maxLength={280}
+                aria-describedby={iconUrlHelpId}
                 placeholder="https://..."
                 onChange={(event) => setIconUrl(event.target.value)}
               />
