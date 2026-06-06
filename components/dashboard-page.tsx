@@ -451,13 +451,13 @@ function ClaimSummaryCard({ claim }: { claim: ClaimRecord }) {
     <Card className="transition duration-200 hover:shadow-float">
       <CardContent className="flex flex-col gap-4 pt-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0 space-y-1">
-          <p className="text-sm font-semibold text-ink">
+          <p dir="ltr" className="text-sm font-semibold text-ink">
             {formatClaimCode(claim.id)} · {claim.rewardDescription}
           </p>
-          <p className="text-sm text-muted">
+          <p dir="ltr" className="text-sm text-muted">
             {formatProgramCode(claim.programId)} · {formatDateTime(claim.claimedAt, locale)}
           </p>
-          <p className="text-sm text-muted">{formatWalletLabel(claim.user)}</p>
+          <p dir="ltr" className="text-sm text-muted">{formatWalletLabel(claim.user)}</p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           <Badge variant={claim.consumed ? "neutral" : "mint"}>
