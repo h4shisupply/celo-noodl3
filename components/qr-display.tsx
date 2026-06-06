@@ -174,7 +174,7 @@ export function QrDisplay({
     <Card className="overflow-hidden">
       <CardHeader className="stamp-pattern border-b border-line bg-panel-soft">
         <div className="flex flex-wrap items-start justify-between gap-3">
-          <div className="space-y-2">
+          <div className="min-w-0 space-y-2">
             {code ? (
               <p dir="ltr" className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">
                 {code}
