@@ -2,7 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrandMark } from "./brand-mark";
 import { LanguageSwitcher } from "./language-switcher";
 import { useLocale } from "./locale-provider";
@@ -58,6 +58,24 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
   const { dictionary } = useLocale();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuLabel = menuOpen ? dictionary.common.close : dictionary.common.menu;
+
+  useEffect(() => {
+    if (!menuOpen) {
+      return;
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [menuOpen]);
+
   const renderCta = (onClick?: () => void) => {
     if (!cta) {
       return null;
