@@ -59,6 +59,7 @@ export type Dictionary = {
     eligible: string;
     saved: string;
     saving: string;
+    menu: string;
     close: string;
   };
   nav: {
@@ -455,6 +456,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       eligible: "Elegível",
       saved: "Salvo",
       saving: "Salvando",
+      menu: "Menu",
       close: "Fechar"
     },
     nav: {
@@ -950,6 +952,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       eligible: "Eligible",
       saved: "Saved",
       saving: "Saving",
+      menu: "Menu",
       close: "Close"
     },
     nav: {
