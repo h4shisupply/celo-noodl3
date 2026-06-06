@@ -24,7 +24,15 @@ export function ProgressMeter({
           {safeValue}/{total}
         </p>
       </div>
-      <div className="h-3 overflow-hidden rounded-full border border-line-soft bg-panel-soft shadow-inner">
+      <div
+        className="h-3 overflow-hidden rounded-full border border-line-soft bg-panel-soft shadow-inner"
+        role="progressbar"
+        aria-label={unitLabel ?? dictionary.common.stampsLabel}
+        aria-valuemin={0}
+        aria-valuemax={safeTotal}
+        aria-valuenow={safeValue}
+        aria-valuetext={`${safeValue}/${safeTotal}`}
+      >
         <div
           className="h-full rounded-full bg-gradient-to-r from-mint via-accent to-sun transition-[width]"
           style={{ width: `${width}%` }}
