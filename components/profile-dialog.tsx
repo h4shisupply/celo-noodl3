@@ -46,6 +46,19 @@ export function ProfileDialog({
     setAvatarUrl(profile?.avatarUrl ?? "");
   }, [profile]);
 
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
   async function handleSave() {
     setStatus(null);
     setLocalError(null);
