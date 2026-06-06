@@ -33,6 +33,7 @@ export function StatusMessage({
   return (
     <p
       role={liveRole}
+      aria-atomic="true"
       className={clsx(
         "flex items-start gap-2 rounded-lg border px-4 py-3 text-sm font-medium leading-6",
         toneClasses[tone],
