@@ -32,6 +32,7 @@
 - Confirm keyboard focus is visible on header links, account menu controls, QR actions, and form fields.
 - Confirm Escape closes temporary overlays such as the account menu and QR scanner.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
+- Confirm language selection persists after refresh through the locale cookie.
 - Confirm the app manifest icon, theme color, and standalone display mode work when installed on mobile.
 - Check mobile and desktop layouts for:
   - home page
