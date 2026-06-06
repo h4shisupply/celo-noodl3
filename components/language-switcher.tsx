@@ -13,6 +13,7 @@ export function LanguageSwitcher() {
   const router = useRouter();
   const { locale } = useLocale();
   const languageLabel = locale === "pt-BR" ? "Idioma" : "Language";
+  const currentLanguageLabel = locale === "pt-BR" ? "Idioma atual" : "Current language";
   const switchLanguageLabel = locale === "pt-BR" ? "Mudar idioma para" : "Switch language to";
 
   function changeLocale(nextLocale: Locale) {
@@ -38,7 +39,11 @@ export function LanguageSwitcher() {
             key={option.value}
             type="button"
             lang={option.value}
-            aria-label={`${switchLanguageLabel} ${option.name}`}
+            aria-label={
+              active
+                ? `${currentLanguageLabel}: ${option.name}`
+                : `${switchLanguageLabel} ${option.name}`
+            }
             aria-pressed={active}
             onClick={() => changeLocale(option.value)}
             className={`rounded-md px-3 py-2 text-xs font-semibold tracking-[0.08em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus ${
