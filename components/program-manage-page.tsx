@@ -388,6 +388,7 @@ export function ProgramManagePage({
                         autoCapitalize="none"
                         autoComplete="off"
                         autoCorrect="off"
+                        dir="ltr"
                         spellCheck={false}
                         aria-label={copy.customerWallet}
                         onChange={(event) => setManualCustomer(event.target.value)}
