@@ -46,7 +46,7 @@ export function Button({
       {...props}
     >
       {icon && iconPosition === "start" ? (
-        <span className="grid h-4 w-4 place-items-center" aria-hidden="true">
+        <span className="grid h-4 w-4 shrink-0 place-items-center" aria-hidden="true">
           {icon}
         </span>
       ) : null}
@@ -56,7 +56,7 @@ export function Button({
         </span>
       ) : null}
       {icon && iconPosition === "end" ? (
-        <span className="grid h-4 w-4 place-items-center" aria-hidden="true">
+        <span className="grid h-4 w-4 shrink-0 place-items-center" aria-hidden="true">
           {icon}
         </span>
       ) : null}
