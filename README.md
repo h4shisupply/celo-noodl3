@@ -130,7 +130,7 @@ npm run verify:mainnet
 ```bash
 npm run compile
 npm run export:abi
-npx hardhat test --no-compile
+npm run test
 npm run lint
 npm run typecheck
 npm run build

@@ -4,7 +4,7 @@
 - Deploy a fresh incompatible `Noodl3Loyalty` contract on Celo Sepolia.
 - Set `NEXT_PUBLIC_NOODL3_CONTRACT_ADDRESS_SEPOLIA`.
 - Set `NOODL3_CONTRACT_ADDRESS_SEPOLIA` for scripts.
-- Run `npm run compile`, `npm run export:abi`, and `npx hardhat test --no-compile`.
+- Run `npm run compile`, `npm run export:abi`, and `npm run test`.
 
 ## Product
 - Confirm a fresh wallet can create a program.
