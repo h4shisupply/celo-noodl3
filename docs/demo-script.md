@@ -5,7 +5,7 @@
 3. Open `/app`, connect a wallet, optionally add a profile name, and create a loyalty program with an HTTPS icon URL.
 4. Open the manager view and show the printed visit QR actions: copy, share, download, and print sheet.
 5. Open the fixed QR as a customer, collect one static stamp, and confirm immediate reuse is blocked.
-6. Generate a live QR, point out the five-minute countdown, scan it as a customer, and collect a stamp instantly.
+6. Generate a live QR on an HTTPS or localhost demo URL, point out the five-minute countdown, scan it as a customer, and collect a stamp instantly.
 7. Regenerate the live QR to show the owner-led counter workflow.
 8. Issue enough stamps to reach the threshold.
 9. Claim the reward from the customer card.
