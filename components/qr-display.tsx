@@ -235,7 +235,7 @@ export function PrintableQrSheet({
 }) {
   return (
     <section className="print-sheet hidden rounded-lg border border-line bg-panel p-8 text-center shadow-card">
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+      <p dir="ltr" className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
         {code}
       </p>
       <h2 className="mt-3 text-3xl font-semibold text-ink">{programName}</h2>
