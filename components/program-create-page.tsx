@@ -184,7 +184,11 @@ export function ProgramCreatePage({
             <Field label={copy.visitsRequired}>
               <Input
                 value={stampsRequired}
+                type="number"
                 inputMode="numeric"
+                min={1}
+                max={100}
+                step={1}
                 onChange={(event) => setStampsRequired(event.target.value)}
               />
             </Field>
