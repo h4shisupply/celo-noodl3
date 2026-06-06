@@ -385,7 +385,7 @@ function ProgramCard({ program }: { program: DashboardProgram }) {
     <Card className="h-full transition duration-200 hover:-translate-y-0.5 hover:shadow-float">
       <CardHeader className="space-y-3">
         <Avatar name={program.name} imageUrl={program.iconUrl} size="sm" />
-        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+        <p dir="ltr" className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
           {formatProgramCode(program.id)}
         </p>
         <CardTitle>{program.name}</CardTitle>
@@ -422,7 +422,7 @@ function ManagedProgramCard({ program }: { program: DashboardProgram }) {
     <Card className="h-full transition duration-200 hover:-translate-y-0.5 hover:shadow-float">
       <CardHeader className="space-y-3">
         <Avatar name={program.name} imageUrl={program.iconUrl} size="sm" />
-        <Badge variant={program.active ? "accent" : "danger"}>
+        <Badge dir="ltr" variant={program.active ? "accent" : "danger"}>
           {dictionary.common.manager} · {formatProgramCode(program.id)}
         </Badge>
         <CardTitle>{program.name}</CardTitle>
