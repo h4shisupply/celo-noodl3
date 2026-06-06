@@ -87,7 +87,7 @@ export function ProfileDialog({
       aria-labelledby="profile-dialog-title"
       aria-describedby="profile-dialog-description"
     >
-      <Card className="w-full max-w-md">
+      <Card className="max-h-[calc(100dvh-3rem)] w-full max-w-md overflow-y-auto">
         <CardHeader className="space-y-3">
           <div className="flex items-start justify-between gap-4">
             <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-accent-border bg-accent-soft text-accent">
