@@ -24,14 +24,14 @@ export function CardHeader({
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={clsx("px-5 pt-5 md:px-6 md:pt-6", className)} {...props} />;
+  return <div className={clsx("min-w-0 px-5 pt-5 md:px-6 md:pt-6", className)} {...props} />;
 }
 
 export function CardContent({
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={clsx("px-5 pb-5 md:px-6 md:pb-6", className)} {...props} />;
+  return <div className={clsx("min-w-0 px-5 pb-5 md:px-6 md:pb-6", className)} {...props} />;
 }
 
 export function CardTitle({
