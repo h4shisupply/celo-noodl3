@@ -12,6 +12,8 @@ export function BrandMark({ href }: { href: string }) {
       <img
         src="/icon.svg"
         alt=""
+        width={40}
+        height={40}
         aria-hidden="true"
         className="h-10 w-10 rounded-lg shadow-card"
       />
