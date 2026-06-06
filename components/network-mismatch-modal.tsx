@@ -27,13 +27,13 @@ export function NetworkMismatchModal({
     >
       <Card className="w-full max-w-md border-line bg-panel shadow-float">
         <CardContent className="px-6 py-7 text-center sm:px-8 sm:py-8">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+          <p className="break-words text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
             {eyebrow}
           </p>
-          <h2 id="network-mismatch-title" className="mt-4 text-3xl font-semibold text-ink">
+          <h2 id="network-mismatch-title" className="mt-4 break-words text-3xl font-semibold text-ink">
             {title}
           </h2>
-          <p id="network-mismatch-description" className="mt-4 text-sm leading-7 text-muted">
+          <p id="network-mismatch-description" className="mt-4 break-words text-sm leading-7 text-muted">
             {description}
           </p>
           <Button
