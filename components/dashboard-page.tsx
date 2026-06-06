@@ -252,6 +252,7 @@ export function DashboardPage({
                   variant="ghost"
                   icon={<RefreshCw className="h-4 w-4" />}
                   className="w-full sm:w-auto"
+                  disabled={isLoading}
                   onClick={() => void loadDashboard()}
                 >
                   {isLoading ? `${dictionary.common.loading}...` : dictionary.actions.refreshNetwork}
