@@ -25,14 +25,24 @@ export function CountdownBadge({
   const display = useMemo(() => formatSeconds(remaining), [remaining]);
 
   useEffect(() => {
+    const currentNow = Math.floor(Date.now() / 1000);
+    setNow(currentNow);
+    if (currentNow >= expiresAt) {
+      return;
+    }
+
     const interval = window.setInterval(() => {
-      setNow(Math.floor(Date.now() / 1000));
+      const nextNow = Math.floor(Date.now() / 1000);
+      setNow(nextNow);
+      if (nextNow >= expiresAt) {
+        window.clearInterval(interval);
+      }
     }, 1000);
 
     return () => {
       window.clearInterval(interval);
     };
-  }, []);
+  }, [expiresAt]);
 
   return (
     <span
