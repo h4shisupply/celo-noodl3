@@ -29,6 +29,7 @@
 ## Frontend
 - Confirm `NEXT_PUBLIC_APP_URL` matches the local or deployed base URL before sharing or printing QR links.
 - Confirm keyboard focus is visible on header links, account menu controls, QR actions, and form fields.
+- Confirm Escape closes temporary overlays such as the account menu and QR scanner.
 - Check mobile and desktop layouts for:
   - home page
   - `/app`
