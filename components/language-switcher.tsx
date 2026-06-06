@@ -12,6 +12,8 @@ const localeOptions: Array<{ value: Locale; label: string; name: string }> = [
 export function LanguageSwitcher() {
   const router = useRouter();
   const { locale } = useLocale();
+  const languageLabel = locale === "pt-BR" ? "Idioma" : "Language";
+  const switchLanguageLabel = locale === "pt-BR" ? "Mudar idioma para" : "Switch language to";
 
   function changeLocale(nextLocale: Locale) {
     if (nextLocale === locale) {
@@ -26,7 +28,7 @@ export function LanguageSwitcher() {
     <div
       className="inline-flex items-center rounded-lg border border-line bg-panel p-1 shadow-card"
       role="group"
-      aria-label="Language"
+      aria-label={languageLabel}
     >
       {localeOptions.map((option) => {
         const active = option.value === locale;
@@ -35,7 +37,7 @@ export function LanguageSwitcher() {
           <button
             key={option.value}
             type="button"
-            aria-label={`Switch language to ${option.name}`}
+            aria-label={`${switchLanguageLabel} ${option.name}`}
             aria-pressed={active}
             onClick={() => changeLocale(option.value)}
             className={`rounded-md px-3 py-2 text-xs font-semibold tracking-[0.08em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus ${
