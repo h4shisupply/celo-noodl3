@@ -122,7 +122,7 @@ export function QrActionBar({
             {labels.print}
           </Button>
         ) : null}
-        <a href={value} target="_blank" rel="noreferrer" className="w-full sm:w-auto">
+        <a href={value} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
           <Button
             size="sm"
             variant="ghost"
