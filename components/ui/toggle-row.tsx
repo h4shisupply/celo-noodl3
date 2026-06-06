@@ -21,7 +21,7 @@ export function ToggleRow({
   return (
     <label
       className={clsx(
-        "flex cursor-pointer items-start gap-3 rounded-lg border border-line bg-panel p-3 text-sm shadow-[0_8px_24px_rgba(27,23,43,0.035)] transition hover:border-accent-border hover:bg-accent-soft",
+        "flex cursor-pointer items-start gap-3 rounded-lg border border-line bg-panel p-3 text-sm shadow-[0_8px_24px_rgba(27,23,43,0.035)] transition hover:border-accent-border hover:bg-accent-soft focus-within:ring-2 focus-within:ring-accent-focus",
         checked && "border-mint-border bg-mint-soft shadow-[0_8px_24px_rgba(15,159,143,0.1)]",
         props.disabled && "cursor-not-allowed opacity-65",
         className
