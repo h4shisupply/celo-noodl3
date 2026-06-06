@@ -119,13 +119,16 @@ export function ProfileDialog({
             value={name}
             maxLength={40}
             aria-label={dictionary.profile.namePlaceholder}
+            autoComplete="name"
             placeholder={dictionary.profile.namePlaceholder}
             onChange={(event) => setName(event.target.value)}
           />
           <Input
             value={avatarUrl}
+            type="url"
             maxLength={280}
             aria-label={dictionary.profile.avatarPlaceholder}
+            autoComplete="photo"
             placeholder={dictionary.profile.avatarPlaceholder}
             onChange={(event) => setAvatarUrl(event.target.value)}
           />
