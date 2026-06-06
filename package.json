@@ -2,6 +2,12 @@
   "name": "celo-noodl3",
   "version": "0.1.0",
   "description": "Celo-native stamp-card loyalty for real-world visits.",
+  "keywords": [
+    "celo",
+    "loyalty",
+    "qr",
+    "stamp-card"
+  ],
   "private": true,
   "type": "module",
   "engines": {
