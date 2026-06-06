@@ -40,7 +40,7 @@ export function CardTitle({
 }: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2
-      className={clsx("text-xl font-semibold leading-tight text-ink", className)}
+      className={clsx("min-w-0 break-words text-xl font-semibold leading-tight text-ink", className)}
       {...props}
     />
   );
@@ -52,7 +52,7 @@ export function CardDescription({
 }: HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className={clsx("text-sm leading-6 text-muted", className)}
+      className={clsx("min-w-0 break-words text-sm leading-6 text-muted", className)}
       {...props}
     />
   );
