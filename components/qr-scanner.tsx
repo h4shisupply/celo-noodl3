@@ -198,7 +198,7 @@ export function QrScanner({
           className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-line bg-panel text-ink-soft shadow-card transition hover:border-accent-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
           aria-label={dictionary.actions.closeScanner}
         >
-          <X className="h-5 w-5" />
+          <X className="h-5 w-5" aria-hidden="true" />
         </button>
       </div>
 
