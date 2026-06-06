@@ -43,6 +43,10 @@ export function HeadlessSelect({
   );
 
   useEffect(() => {
+    if (!open) {
+      return;
+    }
+
     function handlePointerDown(event: MouseEvent) {
       if (!rootRef.current?.contains(event.target as Node)) {
         setOpen(false);
@@ -62,7 +66,7 @@ export function HeadlessSelect({
       document.removeEventListener("mousedown", handlePointerDown);
       document.removeEventListener("keydown", handleEscape);
     };
-  }, []);
+  }, [open]);
 
   return (
     <div className={clsx("space-y-2", className)} ref={rootRef}>
