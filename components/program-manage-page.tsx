@@ -519,6 +519,7 @@ export function ProgramManagePage({
                         autoComplete="off"
                         enterKeyHint="done"
                         maxLength={120}
+                        placeholder={copy.rewardPlaceholder}
                         onChange={(event) => setRewardDescription(event.target.value)}
                       />
                     </Field>
