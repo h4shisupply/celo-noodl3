@@ -27,7 +27,10 @@ export function MetricCard({
   return (
     <Card variant="soft" className={clsx("h-full overflow-hidden", className)}>
       <CardContent className="relative flex min-h-[7.25rem] items-center justify-between gap-4 pt-5">
-        <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-mint via-accent to-sun" />
+        <span
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-mint via-accent to-sun"
+        />
         <div className="min-w-0 space-y-2">
           <p className="break-words text-xs font-semibold uppercase tracking-[0.12em] text-muted">
             {label}
