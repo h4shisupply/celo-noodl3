@@ -223,7 +223,11 @@ export function DashboardPage({
             icon={<WalletCards className="h-5 w-5" />}
             actions={
               hasProvider ? (
-                <Button icon={<WalletCards className="h-4 w-4" />} onClick={() => void connect()}>
+                <Button
+                  icon={<WalletCards className="h-4 w-4" />}
+                  onClick={() => void connect()}
+                  disabled={isConnecting}
+                >
                   {isConnecting ? `${dictionary.actions.connectWallet}...` : dictionary.actions.connectWallet}
                 </Button>
               ) : null
