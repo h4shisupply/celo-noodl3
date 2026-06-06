@@ -120,7 +120,7 @@ export function AppAccountBar({
                 ) : (
                   <>
                     <Wallet className="h-5 w-5 text-ink" aria-hidden="true" />
-                    <span className="hidden sm:block">{formatWalletLabel(account)}</span>
+                    <span dir="ltr" className="hidden sm:block">{formatWalletLabel(account)}</span>
                   </>
                 )}
                 <ChevronDown
@@ -138,7 +138,7 @@ export function AppAccountBar({
                     <p className="text-sm font-semibold text-ink">
                       {profile?.displayName ?? dictionary.account.connectedWallet}
                     </p>
-                    <p className="text-sm text-muted">{formatWalletLabel(account)}</p>
+                    <p dir="ltr" className="text-sm text-muted">{formatWalletLabel(account)}</p>
                     <p className="text-sm text-muted">
                       {isWrongChain
                         ? interpolate(dictionary.account.expectedNetwork, {
