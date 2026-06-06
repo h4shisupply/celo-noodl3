@@ -141,7 +141,7 @@ export function QrActionBar({
               {notice}
             </span>
           ) : (
-            notice
+            <span dir="ltr" className="break-all">{notice}</span>
           )}
         </StatusMessage>
       ) : null}
