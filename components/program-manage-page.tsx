@@ -514,6 +514,7 @@ export function ProgramManagePage({
                     <Field label={copy.rewardDescription}>
                       <Textarea
                         value={rewardDescription}
+                        autoComplete="off"
                         maxLength={120}
                         onChange={(event) => setRewardDescription(event.target.value)}
                       />
