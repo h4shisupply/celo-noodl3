@@ -384,6 +384,10 @@ export function ProgramManagePage({
                     <div className="flex flex-col gap-3 md:flex-row">
                       <Input
                         value={manualCustomer}
+                        autoCapitalize="none"
+                        autoComplete="off"
+                        autoCorrect="off"
+                        spellCheck={false}
                         onChange={(event) => setManualCustomer(event.target.value)}
                         placeholder={copy.customerWallet}
                       />
