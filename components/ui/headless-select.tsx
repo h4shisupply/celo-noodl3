@@ -140,17 +140,17 @@ export function HeadlessSelect({
                     setOpen(false);
                   }}
                   className={clsx(
-                    "flex w-full flex-col rounded-md px-3 py-3 text-left transition",
+                    "flex w-full min-w-0 flex-col rounded-md px-3 py-3 text-left transition",
                     active
                       ? "bg-ink text-white"
                       : "text-ink-soft hover:bg-accent-soft"
                   )}
                 >
-                  <span className="text-sm font-medium">{option.label}</span>
+                  <span className="break-words text-sm font-medium">{option.label}</span>
                   {option.description ? (
                     <span
                       className={clsx(
-                        "mt-1 text-xs",
+                        "mt-1 break-words text-xs",
                         active ? "text-white/72" : "text-muted"
                       )}
                     >
