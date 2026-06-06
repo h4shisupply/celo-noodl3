@@ -499,7 +499,10 @@ export function ProgramManagePage({
                         type="url"
                         maxLength={280}
                         aria-describedby={iconUrlHelpId}
+                        autoCapitalize="none"
+                        autoCorrect="off"
                         placeholder="https://..."
+                        spellCheck={false}
                         onChange={(event) => setIconUrl(event.target.value)}
                       />
                     </Field>
