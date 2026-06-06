@@ -451,7 +451,7 @@ function ClaimSummaryCard({ claim }: { claim: ClaimRecord }) {
     <Card className="transition duration-200 hover:shadow-float">
       <CardContent className="flex flex-col gap-4 pt-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0 space-y-1">
-          <p dir="ltr" className="text-sm font-semibold text-ink">
+          <p dir="ltr" className="break-words text-sm font-semibold text-ink">
             {formatClaimCode(claim.id)} · {claim.rewardDescription}
           </p>
           <p dir="ltr" className="text-sm text-muted">
