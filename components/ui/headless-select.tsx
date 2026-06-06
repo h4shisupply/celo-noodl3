@@ -120,7 +120,7 @@ export function HeadlessSelect({
           <div
             id={listboxId}
             className={clsx(
-              "absolute z-40 mt-2 w-full min-w-[15rem] rounded-lg border border-line bg-panel p-2 shadow-float",
+              "absolute z-40 mt-2 max-h-72 w-full min-w-[15rem] overflow-y-auto rounded-lg border border-line bg-panel p-2 shadow-float",
               align === "right" ? "right-0" : "left-0"
             )}
             role="listbox"
