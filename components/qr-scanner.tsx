@@ -74,6 +74,24 @@ export function QrScanner({
     };
   }, [stopCamera]);
 
+  useEffect(() => {
+    if (!onClose) {
+      return;
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        stopCamera();
+        onClose?.();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose, stopCamera]);
+
   const startCamera = useCallback(async () => {
     setIsProcessing(false);
 
