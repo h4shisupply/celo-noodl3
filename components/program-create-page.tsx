@@ -174,6 +174,7 @@ export function ProgramCreatePage({
                 autoCapitalize="none"
                 autoCorrect="off"
                 dir="ltr"
+                enterKeyHint="next"
                 inputMode="url"
                 placeholder="https://..."
                 spellCheck={false}
