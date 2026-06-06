@@ -13,12 +13,13 @@ export function ProgressMeter({
   const safeTotal = Math.max(total, 1);
   const width = Math.min(100, Math.round((value / safeTotal) * 100));
   const safeValue = Math.min(value, safeTotal);
+  const label = unitLabel ?? dictionary.common.stampsLabel;
 
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between gap-3">
         <p className="min-w-0 break-words text-xs font-semibold uppercase tracking-[0.12em] text-muted">
-          {unitLabel ?? dictionary.common.stampsLabel}
+          {label}
         </p>
         <p className="shrink-0 rounded-full bg-sun-soft px-2.5 py-1 text-xs font-semibold text-sun-strong tabular-nums">
           {safeValue}/{total}
@@ -27,11 +28,11 @@ export function ProgressMeter({
       <div
         className="h-3 overflow-hidden rounded-full border border-line-soft bg-panel-soft shadow-inner"
         role="progressbar"
-        aria-label={unitLabel ?? dictionary.common.stampsLabel}
+        aria-label={label}
         aria-valuemin={0}
         aria-valuemax={safeTotal}
         aria-valuenow={safeValue}
-        aria-valuetext={`${safeValue}/${total}`}
+        aria-valuetext={`${safeValue}/${total} ${label}`}
       >
         <div
           aria-hidden="true"
