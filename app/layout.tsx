@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     "QR"
   ],
   category: "finance",
+  formatDetection: {
+    telephone: false
+  },
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     shortcut: ["/icon.svg"],
