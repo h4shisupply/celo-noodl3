@@ -191,6 +191,7 @@ export function ProgramCreatePage({
               <Input
                 value={stampsRequired}
                 type="number"
+                enterKeyHint="done"
                 inputMode="numeric"
                 min={1}
                 max={100}
