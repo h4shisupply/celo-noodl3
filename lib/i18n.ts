@@ -48,6 +48,7 @@ export type Dictionary = {
     loadingReward: string;
     loadingUsers: string;
     loadingBalance: string;
+    landingPage: string;
     disconnected: string;
     used: string;
     pending: string;
@@ -445,6 +446,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       loadingReward: "Carregando ticket",
       loadingUsers: "Carregando clientes...",
       loadingBalance: "carregando...",
+      landingPage: "Página inicial",
       disconnected: "desconectado",
       used: "utilizado",
       pending: "pendente",
@@ -941,6 +943,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       loadingReward: "Loading ticket",
       loadingUsers: "Loading customers...",
       loadingBalance: "loading...",
+      landingPage: "Landing page",
       disconnected: "disconnected",
       used: "used",
       pending: "pending",
