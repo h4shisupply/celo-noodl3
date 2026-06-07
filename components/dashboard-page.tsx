@@ -319,10 +319,16 @@ export function DashboardPage({
                   description={copy.emptyPrograms}
                   icon={<Store className="h-5 w-5" />}
                   actions={
-                    <Link href="/app/program/new">
-                      <Button size="sm" icon={<Plus className="h-4 w-4" />}>
+                    <Link
+                      href="/app/program/new"
+                      className="inline-flex min-h-9 max-w-full shrink-0 select-none items-center justify-center gap-2 rounded-lg border border-transparent bg-ink px-3.5 py-2 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(27,23,43,0.18)] transition duration-200 hover:bg-ink-hover hover:shadow-[0_16px_34px_rgba(27,23,43,0.22)] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
+                    >
+                      <span className="grid h-4 w-4 shrink-0 place-items-center" aria-hidden="true">
+                        <Plus className="h-4 w-4" />
+                      </span>
+                      <span className="min-w-0 whitespace-normal text-center leading-tight">
                         {copy.createProgram}
-                      </Button>
+                      </span>
                     </Link>
                   }
                 />
