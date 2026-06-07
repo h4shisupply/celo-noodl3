@@ -90,7 +90,7 @@ export function AppChrome({
               {backHref ? (
                 <Link
                   href={backHref}
-                  className="inline-flex items-center gap-2 rounded-lg px-1 py-1 text-sm font-semibold text-muted transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
+                  className="inline-flex max-w-full flex-wrap items-center gap-2 break-words rounded-lg px-1 py-1 text-sm font-semibold text-muted transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
                 >
                   <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                   {backLabel}
