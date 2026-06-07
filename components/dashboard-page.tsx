@@ -381,7 +381,7 @@ function DashboardSection({
     <section className="space-y-4">
       <div className="flex items-center gap-3">
         <h2 className="text-xl font-semibold text-ink">{title}</h2>
-        <div className="h-px flex-1 bg-line" />
+        <div className="h-px flex-1 bg-line" aria-hidden="true" />
       </div>
       {children}
     </section>
