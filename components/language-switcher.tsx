@@ -46,7 +46,7 @@ export function LanguageSwitcher() {
             }
             aria-pressed={active}
             onClick={() => changeLocale(option.value)}
-            className={`rounded-md px-3 py-2 text-xs font-semibold tracking-[0.08em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus ${
+            className={`shrink-0 rounded-md px-3 py-2 text-xs font-semibold tracking-[0.08em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus ${
               active
                 ? "bg-ink text-white"
                 : "text-muted hover:bg-accent-soft"
