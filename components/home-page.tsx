@@ -336,15 +336,16 @@ export function HomePage({ locale }: { locale: Locale }) {
                 {copy.finalCta.primaryCta}
               </span>
             </Link>
-            <Link href="/app" className="w-full sm:w-auto">
-              <Button
-                size="lg"
-                variant="outline"
-                icon={<AppWindow className="h-4 w-4" />}
-                className="w-full sm:w-auto"
-              >
+            <Link
+              href="/app"
+              className="inline-flex min-h-12 w-full max-w-full shrink-0 select-none items-center justify-center gap-2 rounded-lg border border-line bg-panel px-5 py-3 text-base font-semibold text-ink-soft shadow-[0_8px_24px_rgba(27,23,43,0.045)] transition duration-200 hover:border-accent-border hover:bg-accent-soft active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus sm:w-auto"
+            >
+              <span className="grid h-4 w-4 shrink-0 place-items-center" aria-hidden="true">
+                <AppWindow className="h-4 w-4" />
+              </span>
+              <span className="min-w-0 whitespace-normal text-center leading-tight">
                 {copy.finalCta.secondaryCta}
-              </Button>
+              </span>
             </Link>
           </div>
         </div>
