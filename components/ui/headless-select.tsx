@@ -35,6 +35,7 @@ export function HeadlessSelect({
   const selectId = useId();
   const labelId = `${selectId}-label`;
   const valueId = `${selectId}-value`;
+  const selectedDescriptionId = `${selectId}-description`;
   const listboxId = `${selectId}-listbox`;
 
   const selected = useMemo(
@@ -83,6 +84,7 @@ export function HeadlessSelect({
         <button
           type="button"
           aria-labelledby={label ? `${labelId} ${valueId}` : valueId}
+          aria-describedby={selected?.description ? selectedDescriptionId : undefined}
           aria-haspopup="listbox"
           aria-controls={listboxId}
           aria-expanded={open}
@@ -102,7 +104,7 @@ export function HeadlessSelect({
               {selected?.label || placeholder || ""}
             </p>
             {selected?.description ? (
-              <p className="mt-1 truncate text-xs text-muted">
+              <p id={selectedDescriptionId} className="mt-1 truncate text-xs text-muted">
                 {selected.description}
               </p>
             ) : null}
