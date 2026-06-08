@@ -170,6 +170,7 @@ export function QrScanner({
 
   return (
     <div
+      id="qr-scanner-dialog"
       className="fixed inset-0 z-30 flex min-h-[100dvh] flex-col bg-panel-soft px-5 py-6 md:px-8 md:py-8"
       role="dialog"
       aria-modal="true"
