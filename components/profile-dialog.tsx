@@ -160,6 +160,7 @@ export function ProfileDialog({
             <Button
               icon={<Save className="h-4 w-4" />}
               onClick={() => void handleSave()}
+              aria-busy={isSaving}
               disabled={isSaving || profileUnavailable}
             >
               {isSaving ? `${dictionary.common.saving}...` : dictionary.actions.save}
