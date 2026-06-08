@@ -176,6 +176,7 @@ export function AppAccountBar({
                         size="sm"
                         className="w-full justify-start"
                         icon={<UserRound className="h-4 w-4" />}
+                        aria-haspopup="dialog"
                         onClick={() => {
                           setIsMenuOpen(false);
                           onProfileClick();
