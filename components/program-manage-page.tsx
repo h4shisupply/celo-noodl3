@@ -455,6 +455,7 @@ export function ProgramManagePage({
                       icon={dynamicQr ? <RefreshCw className="h-4 w-4" /> : <QrCode className="h-4 w-4" />}
                       className="w-full sm:w-auto"
                       onClick={() => void handleGenerateDynamicQr()}
+                      aria-busy={isSubmitting}
                       disabled={isSubmitting || !program.active}
                     >
                       {dynamicQr ? copy.regenerateDynamicQr : copy.generateDynamicQr}
