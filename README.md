@@ -144,6 +144,7 @@ npm run build
 
 - [SECURITY.md](./SECURITY.md)
 - [LICENSE](./LICENSE)
+- [.env.example](./.env.example)
 - [docs/pitch-outline.md](./docs/pitch-outline.md)
 - [docs/demo-script.md](./docs/demo-script.md)
 - [docs/launch-checklist.md](./docs/launch-checklist.md)
