@@ -232,7 +232,7 @@ export function QrScanner({
                     aria-hidden="true"
                   />
                 ) : (
-                  <Button onClick={() => void startCamera()}>
+                  <Button autoFocus onClick={() => void startCamera()}>
                     {qrCopy.openCamera}
                   </Button>
                 )}
