@@ -94,6 +94,7 @@ export function ProfileDialog({
 
   return (
     <div
+      id="profile-dialog"
       className="fixed inset-0 z-50 flex items-center justify-center bg-ink-overlay px-4 py-6 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
