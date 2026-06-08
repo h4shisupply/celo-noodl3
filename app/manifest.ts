@@ -15,6 +15,21 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: "en",
     background_color: "#FBFCFF",
     theme_color: "#FBFCFF",
+    shortcuts: [
+      {
+        name: "Dashboard",
+        short_name: "Dashboard",
+        description: "Open the wallet-aware loyalty dashboard.",
+        url: "/app",
+        icons: [
+          {
+            src: "/icon.svg",
+            type: "image/svg+xml",
+            sizes: "any"
+          }
+        ]
+      }
+    ],
     icons: [
       {
         src: "/icon.svg",
