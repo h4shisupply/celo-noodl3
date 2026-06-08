@@ -84,7 +84,7 @@ export function HeadlessSelect({
           type="button"
           aria-labelledby={label ? `${labelId} ${valueId}` : valueId}
           aria-haspopup="listbox"
-          aria-controls={open ? listboxId : undefined}
+          aria-controls={listboxId}
           aria-expanded={open}
           onClick={() => {
             if (disabled) return;
