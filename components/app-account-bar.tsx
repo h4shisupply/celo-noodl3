@@ -105,7 +105,7 @@ export function AppAccountBar({
                 type="button"
                 onClick={() => setIsMenuOpen((current) => !current)}
                 className="inline-flex h-11 max-w-[13rem] items-center gap-2 rounded-lg border border-line bg-panel px-3 text-sm font-semibold text-ink-soft shadow-card transition hover:border-accent-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus sm:max-w-none"
-                aria-controls={isMenuOpen ? accountMenuId : undefined}
+                aria-controls={accountMenuId}
                 aria-expanded={isMenuOpen}
                 aria-label={dictionary.account.openMenu}
               >
