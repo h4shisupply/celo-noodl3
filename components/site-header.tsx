@@ -89,6 +89,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
             onClick?.();
             cta.onClick?.();
           }}
+          aria-busy={cta.isLoading}
           disabled={cta.isLoading}
         >
           {cta.label}
