@@ -31,6 +31,9 @@ export const metadata: Metadata = {
     "Wallet stamp cards for real-world visits on Celo. Print a counter QR, collect stamps, and validate each reward ticket once.",
   manifest: "/manifest.webmanifest",
   metadataBase: new URL(publicEnv.appUrl),
+  alternates: {
+    canonical: "/"
+  },
   keywords: [
     "MiniPay",
     "Celo",
