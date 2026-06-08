@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Copy, Download, ExternalLink, Printer, Share2 } from "lucide-react";
+import { Copy, Download, ExternalLink, Printer, Share2 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { useRef, useState, type ReactNode, type RefObject } from "react";
 import { Button } from "./ui/button";
@@ -139,10 +139,7 @@ export function QrActionBar({
       {notice ? (
         <StatusMessage tone={notice === labels.copied ? "success" : "info"}>
           {notice === labels.copied ? (
-            <span className="inline-flex min-w-0 flex-wrap items-center gap-2 break-words">
-              <Check className="h-4 w-4" aria-hidden="true" />
-              {notice}
-            </span>
+            notice
           ) : (
             <span dir="ltr" className="break-all">{notice}</span>
           )}
