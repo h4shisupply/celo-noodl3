@@ -34,6 +34,7 @@
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
 - Confirm language selection persists after refresh through the locale cookie.
 - Confirm the app manifest icon, language, theme color, and standalone display mode work when installed on mobile.
+- Confirm social preview metadata resolves against `NEXT_PUBLIC_APP_URL` and shows the expected title, description, and image.
 - Check mobile and desktop layouts for:
   - home page
   - `/app`
