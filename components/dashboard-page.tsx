@@ -226,6 +226,7 @@ export function DashboardPage({
                 <Button
                   icon={<WalletCards className="h-4 w-4" />}
                   onClick={() => void connect()}
+                  aria-busy={isConnecting}
                   disabled={isConnecting}
                 >
                   {isConnecting ? `${dictionary.actions.connectWallet}...` : dictionary.actions.connectWallet}
