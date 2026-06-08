@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Celo-native stamp-card loyalty for real-world visits.",
   "license": "MIT",
+  "author": "H4shi",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/h4shisupply/celo-noodl3.git"
