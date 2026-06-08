@@ -11,6 +11,7 @@
 - Confirm a fresh wallet can create a program.
 - Confirm program creation requires a public HTTPS icon URL.
 - Confirm the program manager opens for owner wallets.
+- Confirm the program manager back link returns to the program card.
 - Confirm the account menu can open the profile dialog, save a display name, and skip profile setup.
 - Confirm fixed QR opens `/app/program/[programId]?visit=static`.
 - Confirm fixed QR renders locally without a third-party QR image URL.
