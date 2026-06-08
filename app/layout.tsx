@@ -79,7 +79,12 @@ export const metadata: Metadata = {
     title: "noodl3",
     description:
       "QR stamp cards for real visits, wallet stamps, and one-time reward tickets on Celo.",
-    images: ["/og.svg"]
+    images: [
+      {
+        url: "/og.svg",
+        alt: "noodl3 stamp-card loyalty preview"
+      }
+    ]
   },
   other: {
     "talentapp:project_verification":
