@@ -327,6 +327,7 @@ export function ProgramPage({
                     icon={<BadgeCheck className="h-4 w-4" />}
                     className="w-full sm:w-auto"
                     onClick={() => void handleCollectStatic()}
+                    aria-busy={isSubmitting}
                     disabled={
                       isSubmitting ||
                       !program.active ||
