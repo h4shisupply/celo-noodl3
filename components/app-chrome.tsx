@@ -160,6 +160,7 @@ function WalletRequiredGate({
                 <Button
                   icon={<WalletCards className="h-4 w-4" />}
                   onClick={() => void walletState.connect()}
+                  aria-busy={walletState.isConnecting}
                   disabled={walletState.isConnecting}
                 >
                   {walletState.isConnecting
