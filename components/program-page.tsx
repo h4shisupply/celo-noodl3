@@ -345,6 +345,7 @@ export function ProgramPage({
                     icon={<Gift className="h-4 w-4" />}
                     className="w-full sm:w-auto"
                     onClick={() => void handleClaimReward()}
+                    aria-busy={isSubmitting}
                     disabled={isSubmitting}
                   >
                     {copy.claimReward}
