@@ -643,6 +643,7 @@ export function ProgramManagePage({
                                 await waitForTransaction(hash, initialChainId);
                               }, copy.rewardConsumed)
                             }
+                            aria-busy={isSubmitting}
                             disabled={isSubmitting}
                           >
                             {copy.consume}
