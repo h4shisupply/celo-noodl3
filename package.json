@@ -8,6 +8,9 @@
     "url": "git+ssh://git@github.com/h4shisupply/celo-noodl3.git"
   },
   "homepage": "https://github.com/h4shisupply/celo-noodl3#readme",
+  "bugs": {
+    "url": "https://github.com/h4shisupply/celo-noodl3/issues"
+  },
   "keywords": [
     "celo",
     "loyalty",
