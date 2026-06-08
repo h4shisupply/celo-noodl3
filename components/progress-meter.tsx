@@ -11,8 +11,8 @@ export function ProgressMeter({
 }) {
   const { dictionary } = useLocale();
   const safeTotal = Math.max(total, 1);
-  const width = Math.min(100, Math.round((value / safeTotal) * 100));
-  const safeValue = Math.min(value, safeTotal);
+  const safeValue = Math.min(Math.max(value, 0), safeTotal);
+  const width = Math.min(100, Math.round((safeValue / safeTotal) * 100));
   const label = unitLabel ?? dictionary.common.stampsLabel;
 
   return (
