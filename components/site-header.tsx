@@ -135,7 +135,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
           type="button"
           onClick={() => setMenuOpen((current) => !current)}
           className="inline-flex h-11 items-center gap-2 rounded-lg border border-line bg-panel px-4 text-sm font-semibold text-ink-soft shadow-card transition hover:border-accent-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus md:hidden"
-          aria-controls={menuOpen ? "site-mobile-menu" : undefined}
+          aria-controls="site-mobile-menu"
           aria-expanded={menuOpen}
           aria-label={menuLabel}
         >
