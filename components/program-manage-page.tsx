@@ -302,7 +302,7 @@ export function ProgramManagePage({
         disconnect
       }}
       backHref={`/app/program/${programId.toString()}`}
-      backLabel={dictionary.actions.backToDashboard}
+      backLabel={dictionary.actions.backToStore}
       title={program?.name ?? copy.manage}
       description={program?.rewardDescription ?? copy.appDescription}
     >
