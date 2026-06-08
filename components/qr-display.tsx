@@ -85,6 +85,7 @@ export function QrActionBar({
           variant="outline"
           icon={<Copy className="h-4 w-4" />}
           className="w-full sm:w-auto"
+          aria-label={`${labels.copy}: ${fileName}`}
           onClick={() => void handleCopy()}
         >
           {labels.copy}
