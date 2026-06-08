@@ -2,6 +2,7 @@
   "name": "celo-noodl3",
   "version": "0.1.0",
   "description": "Celo-native stamp-card loyalty for real-world visits.",
+  "license": "MIT",
   "keywords": [
     "celo",
     "loyalty",
