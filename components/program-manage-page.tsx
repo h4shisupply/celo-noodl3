@@ -412,6 +412,7 @@ export function ProgramManagePage({
                             setManualCustomer("");
                           }, copy.manualIssued)
                         }
+                        aria-busy={isSubmitting}
                         disabled={isSubmitting}
                       >
                         {copy.issueManual}
