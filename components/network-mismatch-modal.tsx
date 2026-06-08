@@ -40,6 +40,7 @@ export function NetworkMismatchModal({
             size="lg"
             className="mt-8 min-w-[13rem]"
             icon={<RefreshCw className="h-4 w-4" />}
+            autoFocus
             onClick={onAction}
           >
             {actionLabel}
