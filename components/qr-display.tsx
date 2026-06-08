@@ -120,6 +120,7 @@ export function QrActionBar({
             variant="warm"
             icon={<Printer className="h-4 w-4" />}
             className="w-full sm:w-auto"
+            aria-label={`${labels.print}: ${fileName}`}
             onClick={() => window.print()}
           >
             {labels.print}
