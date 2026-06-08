@@ -267,6 +267,7 @@ export function ClaimPage({
                   <Button
                     icon={<BadgeCheck className="h-4 w-4" />}
                     onClick={() => void handleConsume()}
+                    aria-busy={isSubmitting}
                     disabled={isSubmitting}
                     className="w-full sm:w-auto"
                   >
