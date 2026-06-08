@@ -103,6 +103,7 @@ export function QrActionBar({
           variant="outline"
           icon={<Download className="h-4 w-4" />}
           className="w-full sm:w-auto"
+          aria-label={`${labels.download}: ${fileName}`}
           onClick={() => {
             if (qrRef.current) {
               downloadSvg(qrRef.current, fileName);
