@@ -583,6 +583,7 @@ export function ProgramManagePage({
                           await waitForTransaction(hash, initialChainId);
                         }, copy.settingsSaved)
                       }
+                      aria-busy={isSubmitting}
                       disabled={isSubmitting}
                     >
                       {copy.updateProgram}
