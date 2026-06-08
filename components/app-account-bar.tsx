@@ -211,7 +211,12 @@ export function AppAccountBar({
             <>
               <LanguageSwitcher />
               {hasCheckedProvider && hasProvider && (!isDisconnectedByUser || !account) ? (
-                <Button size="sm" onClick={() => void connect()} disabled={isConnecting}>
+                <Button
+                  size="sm"
+                  onClick={() => void connect()}
+                  aria-busy={isConnecting}
+                  disabled={isConnecting}
+                >
                   {isConnecting
                     ? dictionary.account.connecting
                     : dictionary.account.connect}
