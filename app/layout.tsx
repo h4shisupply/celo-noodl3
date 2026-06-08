@@ -21,6 +21,7 @@ const mono = localFont({
 export const metadata: Metadata = {
   applicationName: "noodl3",
   authors: [{ name: "H4shi" }],
+  publisher: "H4shi",
   title: {
     default: "noodl3",
     template: "%s · noodl3"
