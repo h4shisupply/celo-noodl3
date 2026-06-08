@@ -314,6 +314,7 @@ export function ProgramPage({
                     icon={<Stamp className="h-4 w-4" />}
                     className="w-full sm:w-auto"
                     onClick={() => void handleCollectDynamic()}
+                    aria-busy={isSubmitting}
                     disabled={isSubmitting || !program.active}
                   >
                     {isSubmitting ? `${copy.collectVisit}...` : copy.collectVisit}
