@@ -128,8 +128,9 @@ export function HeadlessSelect({
             )}
             role="listbox"
           >
-            {options.map((option) => {
+            {options.map((option, index) => {
               const active = option.value === value;
+              const optionDescriptionId = `${selectId}-option-${index}-description`;
 
               return (
                 <button
@@ -137,6 +138,7 @@ export function HeadlessSelect({
                   type="button"
                   role="option"
                   aria-selected={active}
+                  aria-describedby={option.description ? optionDescriptionId : undefined}
                   onClick={() => {
                     onChange(option.value);
                     setOpen(false);
@@ -151,6 +153,7 @@ export function HeadlessSelect({
                   <span className="break-words text-sm font-medium">{option.label}</span>
                   {option.description ? (
                     <span
+                      id={optionDescriptionId}
                       className={clsx(
                         "mt-1 break-words text-xs",
                         active ? "text-white/72" : "text-muted"
