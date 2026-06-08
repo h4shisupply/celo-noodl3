@@ -63,6 +63,8 @@ export const metadata: Metadata = {
     url: publicEnv.appUrl,
     siteName: "noodl3",
     type: "website",
+    locale: "en_US",
+    alternateLocale: ["pt_BR"],
     images: [
       {
         url: "/og.svg",
