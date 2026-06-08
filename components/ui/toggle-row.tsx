@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import { Check } from "lucide-react";
-import type { InputHTMLAttributes, ReactNode } from "react";
+import { useId, type InputHTMLAttributes, type ReactNode } from "react";
 
 type ToggleRowProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
   label: string;
@@ -18,6 +18,8 @@ export function ToggleRow({
   checked,
   ...props
 }: ToggleRowProps) {
+  const descriptionId = useId();
+
   return (
     <label
       className={clsx(
@@ -27,7 +29,13 @@ export function ToggleRow({
         className
       )}
     >
-      <input type="checkbox" className="sr-only" checked={checked} {...props} />
+      <input
+        type="checkbox"
+        className="sr-only"
+        checked={checked}
+        aria-describedby={description ? descriptionId : undefined}
+        {...props}
+      />
       <span
         className={clsx(
           "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border transition",
@@ -47,7 +55,12 @@ export function ToggleRow({
       <span className="min-w-0 space-y-1">
         <span className="block break-words font-semibold text-ink-soft">{label}</span>
         {description ? (
-          <span className="block break-words leading-6 text-muted">{description}</span>
+          <span
+            id={descriptionId}
+            className="block break-words leading-6 text-muted"
+          >
+            {description}
+          </span>
         ) : null}
       </span>
     </label>
