@@ -43,7 +43,7 @@
 - Confirm dashboard cards, reward tickets, customer summaries, and metrics use semantic list or description-list markup.
 - Confirm progress meters show matching visible and announced totals.
 - Confirm status updates and QR scanner feedback announce through live regions.
-- Confirm QR scanner announces the active camera state after permission is granted.
+- Confirm QR scanner announces the active camera state after permission is granted and associates it with the scanner video.
 - Confirm menu toggles expose expanded state and announce the close action while open.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative and remote UI images stay non-blocking and hidden from assistive tech when appropriate.
