@@ -616,58 +616,60 @@ export function ProgramManagePage({
               </CardHeader>
               <CardContent className="space-y-3">
                 {claims.length > 0 ? (
-                  claims.map((claim) => (
-                    <div
-                      key={claim.id.toString()}
-                      className="flex flex-col gap-3 rounded-lg border border-line bg-panel-soft p-4 sm:flex-row sm:items-center sm:justify-between"
-                    >
-                      <div className="min-w-0 space-y-2">
-                        <p dir="ltr" className="break-all text-sm font-semibold text-ink">
-                          {formatClaimCode(claim.id)} · {formatWalletLabel(claim.user)}
-                        </p>
-                        <Badge variant={claim.consumed ? "neutral" : "mint"}>
-                          {claim.consumed ? copy.usedClaim : copy.ready}
-                        </Badge>
-                      </div>
-                      <div className="grid gap-2 sm:flex sm:flex-wrap">
-                        <Link
-                          href={`/app/claim/${claim.id.toString()}`}
-                          aria-label={`${copy.openCard}: ${formatClaimCode(claim.id)}`}
-                          className="inline-flex min-h-9 w-full max-w-full shrink-0 select-none items-center justify-center gap-2 rounded-lg border border-line bg-panel px-3.5 py-2 text-sm font-semibold text-ink-soft shadow-[0_8px_24px_rgba(27,23,43,0.045)] transition duration-200 hover:border-accent-border hover:bg-accent-soft active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus sm:w-auto"
-                        >
-                          <span className="grid h-4 w-4 shrink-0 place-items-center" aria-hidden="true">
-                            <Gift className="h-4 w-4" />
-                          </span>
-                          <span className="min-w-0 whitespace-normal text-center leading-tight">
-                            {copy.openCard}
-                          </span>
-                        </Link>
-                        {!claim.consumed ? (
-                          <Button
-                            size="sm"
-                            icon={<Send className="h-4 w-4" />}
-                            className="w-full sm:w-auto"
-                            aria-label={`${copy.consume}: ${formatClaimCode(claim.id)}`}
-                            onClick={() =>
-                              void submitAction(async () => {
-                                if (!contractAddress) return;
-                                const hash = await consumeRewardTx({
-                                  contractAddress,
-                                  claimId: claim.id,
-                                  chainId: initialChainId
-                                });
-                                await waitForTransaction(hash, initialChainId);
-                              }, copy.rewardConsumed)
-                            }
-                            aria-busy={isSubmitting}
-                            disabled={isSubmitting}
+                  <ul className="space-y-3">
+                    {claims.map((claim) => (
+                      <li
+                        key={claim.id.toString()}
+                        className="flex flex-col gap-3 rounded-lg border border-line bg-panel-soft p-4 sm:flex-row sm:items-center sm:justify-between"
+                      >
+                        <div className="min-w-0 space-y-2">
+                          <p dir="ltr" className="break-all text-sm font-semibold text-ink">
+                            {formatClaimCode(claim.id)} · {formatWalletLabel(claim.user)}
+                          </p>
+                          <Badge variant={claim.consumed ? "neutral" : "mint"}>
+                            {claim.consumed ? copy.usedClaim : copy.ready}
+                          </Badge>
+                        </div>
+                        <div className="grid gap-2 sm:flex sm:flex-wrap">
+                          <Link
+                            href={`/app/claim/${claim.id.toString()}`}
+                            aria-label={`${copy.openCard}: ${formatClaimCode(claim.id)}`}
+                            className="inline-flex min-h-9 w-full max-w-full shrink-0 select-none items-center justify-center gap-2 rounded-lg border border-line bg-panel px-3.5 py-2 text-sm font-semibold text-ink-soft shadow-[0_8px_24px_rgba(27,23,43,0.045)] transition duration-200 hover:border-accent-border hover:bg-accent-soft active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus sm:w-auto"
                           >
-                            {isSubmitting ? `${copy.consume}...` : copy.consume}
-                          </Button>
-                        ) : null}
-                      </div>
-                    </div>
-                  ))
+                            <span className="grid h-4 w-4 shrink-0 place-items-center" aria-hidden="true">
+                              <Gift className="h-4 w-4" />
+                            </span>
+                            <span className="min-w-0 whitespace-normal text-center leading-tight">
+                              {copy.openCard}
+                            </span>
+                          </Link>
+                          {!claim.consumed ? (
+                            <Button
+                              size="sm"
+                              icon={<Send className="h-4 w-4" />}
+                              className="w-full sm:w-auto"
+                              aria-label={`${copy.consume}: ${formatClaimCode(claim.id)}`}
+                              onClick={() =>
+                                void submitAction(async () => {
+                                  if (!contractAddress) return;
+                                  const hash = await consumeRewardTx({
+                                    contractAddress,
+                                    claimId: claim.id,
+                                    chainId: initialChainId
+                                  });
+                                  await waitForTransaction(hash, initialChainId);
+                                }, copy.rewardConsumed)
+                              }
+                              aria-busy={isSubmitting}
+                              disabled={isSubmitting}
+                            >
+                              {isSubmitting ? `${copy.consume}...` : copy.consume}
+                            </Button>
+                          ) : null}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
                 ) : (
                   <p className="text-sm text-muted">{copy.emptyClaims}</p>
                 )}
