@@ -38,6 +38,7 @@
 - Confirm loading actions expose their busy state while disabled.
 - Confirm app pages expose a named main landmark from the visible page heading.
 - Confirm landing page grouped stats, checklists, and card grids use semantic list or description-list markup.
+- Confirm dashboard cards, reward tickets, customer summaries, and metrics use semantic list or description-list markup.
 - Confirm status updates and QR scanner feedback announce through live regions.
 - Confirm menu toggles expose expanded state and announce the close action while open.
 - Confirm decorative and remote UI images stay non-blocking and hidden from assistive tech when appropriate.
