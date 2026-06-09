@@ -250,7 +250,7 @@ export function QrScanner({
         </div>
 
         {notice && isActive ? (
-          <p className="pt-4 text-sm text-danger" role="alert" aria-atomic="true">
+          <p className="pt-4 text-sm text-danger" role="alert" aria-live="assertive" aria-atomic="true">
             {notice}
           </p>
         ) : null}
