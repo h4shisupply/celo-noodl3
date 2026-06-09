@@ -275,25 +275,31 @@ export function DashboardPage({
               </div>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-3">
-              <MetricCard
-                icon={<WalletCards className="h-5 w-5" />}
-                label={copy.myCards}
-                value={customerPrograms.length}
-              />
-              <MetricCard
-                icon={<Store className="h-5 w-5" />}
-                label={copy.myPrograms}
-                value={managedPrograms.length}
-                tone="accent"
-              />
-              <MetricCard
-                icon={<Gift className="h-5 w-5" />}
-                label={copy.rewardClaims}
-                value={pendingClaims.length}
-                tone="sun"
-              />
-            </div>
+            <ul className="grid gap-5 md:grid-cols-3">
+              <li>
+                <MetricCard
+                  icon={<WalletCards className="h-5 w-5" />}
+                  label={copy.myCards}
+                  value={customerPrograms.length}
+                />
+              </li>
+              <li>
+                <MetricCard
+                  icon={<Store className="h-5 w-5" />}
+                  label={copy.myPrograms}
+                  value={managedPrograms.length}
+                  tone="accent"
+                />
+              </li>
+              <li>
+                <MetricCard
+                  icon={<Gift className="h-5 w-5" />}
+                  label={copy.rewardClaims}
+                  value={pendingClaims.length}
+                  tone="sun"
+                />
+              </li>
+            </ul>
 
             <DashboardSection title={copy.myCards}>
               {customerPrograms.length > 0 ? (
