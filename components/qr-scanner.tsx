@@ -207,6 +207,7 @@ export function QrScanner({
         <div className="relative flex-1 overflow-hidden rounded-lg border border-line bg-accent-soft">
           <video
             ref={videoRef}
+            aria-describedby={isActive ? "qr-scanner-active-status" : undefined}
             aria-label={title}
             className="h-full w-full object-cover"
             muted
@@ -252,7 +253,12 @@ export function QrScanner({
           ) : (
             <>
               <div className="pointer-events-none absolute inset-0 border-[12px] border-white/20" />
-              <p className="sr-only" role="status" aria-live="polite">
+              <p
+                id="qr-scanner-active-status"
+                className="sr-only"
+                role="status"
+                aria-live="polite"
+              >
                 {qrCopy.cameraActive}
               </p>
             </>
