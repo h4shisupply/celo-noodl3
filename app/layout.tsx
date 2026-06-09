@@ -43,6 +43,10 @@ export const metadata: Metadata = {
     "QR"
   ],
   category: "finance",
+  robots: {
+    index: true,
+    follow: true
+  },
   formatDetection: {
     telephone: false,
     date: false,
