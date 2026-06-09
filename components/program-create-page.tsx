@@ -199,6 +199,7 @@ export function ProgramCreatePage({
               <Input
                 value={stampsRequired}
                 type="number"
+                autoComplete="off"
                 enterKeyHint="done"
                 inputMode="numeric"
                 min={1}
