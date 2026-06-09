@@ -244,7 +244,10 @@ export function ProgramCreatePage({
           </CardContent>
         </Card>
 
-        <aside className="surface-panel stamp-pattern h-fit rounded-lg p-3 lg:sticky lg:top-6">
+        <aside
+          aria-label={copy.previewCard}
+          className="surface-panel stamp-pattern h-fit rounded-lg p-3 lg:sticky lg:top-6"
+        >
           <div className="space-y-5 rounded-lg bg-panel p-5 shadow-[inset_0_0_0_1px_rgba(221,216,233,0.72)]">
             <div className="flex items-center gap-3">
               {normalizeRemoteImageUrl(iconUrl) ? (
