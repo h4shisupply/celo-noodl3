@@ -31,12 +31,12 @@ export function MetricCard({
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-mint via-accent to-sun"
         />
-        <div className="min-w-0 space-y-2">
-          <p className="break-words text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+        <dl className="min-w-0 space-y-2">
+          <dt className="break-words text-xs font-semibold uppercase tracking-[0.12em] text-muted">
             {label}
-          </p>
-          <p className="break-words text-3xl font-semibold text-ink tabular-nums">{value}</p>
-        </div>
+          </dt>
+          <dd className="break-words text-3xl font-semibold text-ink tabular-nums">{value}</dd>
+        </dl>
         <div
           aria-hidden="true"
           className={clsx(
