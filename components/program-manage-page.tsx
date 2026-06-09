@@ -459,7 +459,11 @@ export function ProgramManagePage({
                       aria-busy={isSubmitting}
                       disabled={isSubmitting || !program.active}
                     >
-                      {dynamicQr ? copy.regenerateDynamicQr : copy.generateDynamicQr}
+                      {isSubmitting
+                        ? `${dictionary.common.loading}...`
+                        : dynamicQr
+                          ? copy.regenerateDynamicQr
+                          : copy.generateDynamicQr}
                     </Button>
                     {!program.active ? (
                       <StatusMessage tone="warning">{copy.dynamicQrInactive}</StatusMessage>
