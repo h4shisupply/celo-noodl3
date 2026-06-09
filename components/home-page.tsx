@@ -235,7 +235,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             title={copy.benefits.title}
             description={copy.benefits.description}
           />
-          <div className="grid gap-4 sm:grid-cols-2">
+          <ul className="grid gap-4 sm:grid-cols-2">
             {copy.benefits.items.map((item, index) => {
               const Icon = icons[index + 5] ?? ShieldCheck;
               return (
@@ -248,13 +248,13 @@ export function HomePage({ locale }: { locale: Locale }) {
                 />
               );
             })}
-          </div>
+          </ul>
         </div>
       </section>
 
       <section id="proof" className="scroll-mt-6 py-10 md:py-14">
         <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div className="order-2 grid gap-4 sm:grid-cols-2 lg:order-1">
+          <ul className="order-2 grid gap-4 sm:grid-cols-2 lg:order-1">
             {copy.proof.items.map((item, index) => {
               const Icon = icons[index + 1] ?? QrCode;
               return (
@@ -267,7 +267,7 @@ export function HomePage({ locale }: { locale: Locale }) {
                 />
               );
             })}
-          </div>
+          </ul>
           <div className="order-1 lg:order-2">
             <SectionIntro
               eyebrow={copy.proof.eyebrow}
@@ -446,13 +446,13 @@ function FeatureCard({
       : "border-accent-border bg-accent-soft text-accent";
 
   return (
-    <article className="rounded-lg border border-line bg-panel/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur">
+    <li className="rounded-lg border border-line bg-panel/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur">
       <span className={`grid h-10 w-10 place-items-center rounded-lg border ${iconClasses}`}>
         <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
       <h3 className="mt-4 text-base font-semibold text-ink">{title}</h3>
       <p className="mt-2 text-sm leading-6 text-muted">{description}</p>
-    </article>
+    </li>
   );
 }
 
