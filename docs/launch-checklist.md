@@ -37,7 +37,7 @@
 - Confirm Escape closes temporary overlays such as the mobile menu, account menu, profile dialog, and QR scanner.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
 - Confirm language selection persists after refresh through the locale cookie.
-- Confirm the app manifest icon, dashboard shortcut, language, theme color, standalone display mode, and portrait orientation work when installed on mobile.
+- Confirm the app manifest icon, dashboard and create-program shortcuts, language, theme color, standalone display mode, and portrait orientation work when installed on mobile.
 - Confirm social preview metadata resolves against `NEXT_PUBLIC_APP_URL` and shows the expected title, description, and image.
 - Check mobile and desktop layouts for:
   - home page
