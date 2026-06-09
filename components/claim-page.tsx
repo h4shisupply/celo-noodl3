@@ -248,23 +248,28 @@ export function ClaimPage({
                 <CardDescription>{copy.claimDescription}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-5">
-                <div className="grid gap-3 rounded-lg border border-line bg-panel-soft p-4 text-sm text-muted">
-                  <p dir="ltr" className="text-base font-semibold text-ink">
-                    {copy.backupCode}: {formatClaimCode(claim.id)}
-                  </p>
-                  <p dir="ltr" className="break-all">
-                    {dictionary.common.customer}: {formatWalletLabel(claim.user)}
-                  </p>
-                  <p>
-                    {dictionary.common.date}:{" "}
-                    <time dateTime={claim.claimedAt ? new Date(claim.claimedAt * 1000).toISOString() : undefined}>
-                      {formatDateTime(claim.claimedAt, locale)}
-                    </time>
-                  </p>
-                  <p>
-                    {dictionary.common.status}: {claim.consumed ? copy.ticketUsed : copy.ticketReady}
-                  </p>
-                </div>
+                <dl className="grid gap-3 rounded-lg border border-line bg-panel-soft p-4 text-sm text-muted">
+                  <div dir="ltr" className="text-base font-semibold text-ink">
+                    <dt className="inline">{copy.backupCode}: </dt>
+                    <dd className="inline">{formatClaimCode(claim.id)}</dd>
+                  </div>
+                  <div dir="ltr" className="break-all">
+                    <dt className="inline">{dictionary.common.customer}: </dt>
+                    <dd className="inline">{formatWalletLabel(claim.user)}</dd>
+                  </div>
+                  <div>
+                    <dt className="inline">{dictionary.common.date}: </dt>
+                    <dd className="inline">
+                      <time dateTime={claim.claimedAt ? new Date(claim.claimedAt * 1000).toISOString() : undefined}>
+                        {formatDateTime(claim.claimedAt, locale)}
+                      </time>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="inline">{dictionary.common.status}: </dt>
+                    <dd className="inline">{claim.consumed ? copy.ticketUsed : copy.ticketReady}</dd>
+                  </div>
+                </dl>
 
                 {canConsume && !claim.consumed ? (
                   <Button
