@@ -140,6 +140,7 @@ export function ProfileDialog({
             autoComplete="name"
             enterKeyHint="next"
             placeholder={dictionary.profile.namePlaceholder}
+            required
             onChange={(event) => setName(event.target.value)}
           />
           <Input
