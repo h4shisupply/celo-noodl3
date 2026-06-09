@@ -286,14 +286,14 @@ export function HomePage({ locale }: { locale: Locale }) {
               title={copy.launch.title}
               description={copy.launch.description}
             />
-            <div className="grid gap-3 sm:grid-cols-2">
+            <ul className="grid gap-3 sm:grid-cols-2">
               {copy.launch.checklist.map((item) => (
-                <div key={item} className="flex gap-3 rounded-lg bg-panel-soft p-4">
+                <li key={item} className="flex gap-3 rounded-lg bg-panel-soft p-4">
                   <BadgeCheck className="mt-0.5 h-5 w-5 shrink-0 text-mint" aria-hidden="true" />
                   <p className="text-sm leading-6 text-ink-soft">{item}</p>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </section>
