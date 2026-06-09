@@ -32,6 +32,7 @@
 
 ## Frontend
 - Confirm `NEXT_PUBLIC_APP_URL` matches the local or deployed base URL before sharing or printing QR links.
+- Confirm wallet addresses, dates, and reward codes do not get auto-linked by mobile browser format detection.
 - Confirm keyboard focus is visible on header links, account menu controls, QR actions, and form fields.
 - Confirm loading actions expose their busy state while disabled.
 - Confirm app pages expose a named main landmark from the visible page heading.
