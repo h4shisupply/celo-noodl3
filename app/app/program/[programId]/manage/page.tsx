@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProgramManagePage } from "../../../../../components/program-manage-page";
 import { getDefaultChainId } from "../../../../../lib/chains";
 import { publicEnv } from "../../../../../lib/env";
 import { parseProgramId } from "../../../../../lib/program";
+
+export const metadata: Metadata = {
+  title: "Manage stamp card"
+};
 
 type ManageRouteProps = {
   params: Promise<{ programId: string }>;
