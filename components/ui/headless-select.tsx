@@ -112,8 +112,8 @@ export function HeadlessSelect({
           <span
             aria-hidden="true"
             className={clsx(
-              "ml-4 h-2.5 w-2.5 shrink-0 rotate-45 border-b border-r border-muted transition-transform",
-              open ? "-translate-y-[1px] -rotate-135" : "translate-y-[-1px]"
+              "ml-4 h-2.5 w-2.5 shrink-0 border-b border-r border-muted transition-transform",
+              open ? "-translate-y-[1px] -rotate-[135deg]" : "translate-y-[-1px] rotate-45"
             )}
           />
         </button>
