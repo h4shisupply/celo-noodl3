@@ -204,11 +204,11 @@ export function HomePage({ locale }: { locale: Locale }) {
             title={copy.problem.title}
             description={copy.problem.description}
           />
-          <div className="grid gap-3">
+          <ul className="grid gap-3">
             {copy.problem.points.map((point) => (
               <ProblemPoint key={point}>{point}</ProblemPoint>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
@@ -395,10 +395,10 @@ function AccentPill({
 
 function ProblemPoint({ children }: { children: string }) {
   return (
-    <div className="flex gap-3 rounded-lg border border-line bg-panel/86 p-4 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur">
+    <li className="flex gap-3 rounded-lg border border-line bg-panel/86 p-4 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur">
       <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-mint" aria-hidden="true" />
       <p className="text-sm leading-6 text-ink-soft">{children}</p>
-    </div>
+    </li>
   );
 }
 
