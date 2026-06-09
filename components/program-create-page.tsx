@@ -173,6 +173,7 @@ export function ProgramCreatePage({
                 maxLength={280}
                 aria-describedby={iconUrlHelpId}
                 autoCapitalize="none"
+                autoComplete="url"
                 autoCorrect="off"
                 dir="ltr"
                 enterKeyHint="next"
