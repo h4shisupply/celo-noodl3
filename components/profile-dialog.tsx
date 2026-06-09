@@ -40,6 +40,9 @@ export function ProfileDialog({
   const [status, setStatus] = useState<string | null>(null);
   const [localError, setLocalError] = useState<string | null>(null);
   const profileUnavailable = !enabled || !contractAddress;
+  const localErrorId = "profile-dialog-error";
+  const isNameInvalid = localError === dictionary.profile.nameRequired;
+  const isAvatarInvalid = localError === dictionary.profile.avatarInvalid;
 
   useEffect(() => {
     setName(profile?.displayName ?? "");
@@ -135,6 +138,8 @@ export function ProfileDialog({
           <Input
             value={name}
             maxLength={40}
+            aria-describedby={isNameInvalid ? localErrorId : undefined}
+            aria-invalid={isNameInvalid || undefined}
             aria-label={dictionary.profile.namePlaceholder}
             autoFocus
             autoComplete="name"
@@ -147,6 +152,8 @@ export function ProfileDialog({
             value={avatarUrl}
             type="url"
             maxLength={280}
+            aria-describedby={isAvatarInvalid ? localErrorId : undefined}
+            aria-invalid={isAvatarInvalid || undefined}
             aria-label={dictionary.profile.avatarPlaceholder}
             autoCapitalize="none"
             autoComplete="photo"
@@ -175,7 +182,9 @@ export function ProfileDialog({
             <StatusMessage tone="warning">{dictionary.profile.unavailable}</StatusMessage>
           ) : null}
           {status ? <StatusMessage tone="success">{status}</StatusMessage> : null}
-          {localError ? <StatusMessage tone="error">{localError}</StatusMessage> : null}
+          {localError ? (
+            <StatusMessage id={localErrorId} tone="error">{localError}</StatusMessage>
+          ) : null}
           {profileError && !localError ? (
             <StatusMessage tone="error">{profileError}</StatusMessage>
           ) : null}
