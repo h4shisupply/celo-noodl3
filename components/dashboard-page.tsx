@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useState } from "react";
 import type { Hex } from "viem";
 import { AppChrome } from "./app-chrome";
 import { QrScanner } from "./qr-scanner";
@@ -382,10 +382,14 @@ function DashboardSection({
   title: string;
   children: React.ReactNode;
 }) {
+  const titleId = useId();
+
   return (
-    <section className="space-y-4">
+    <section aria-labelledby={titleId} className="space-y-4">
       <div className="flex items-center gap-3">
-        <h2 className="text-xl font-semibold text-ink">{title}</h2>
+        <h2 id={titleId} className="text-xl font-semibold text-ink">
+          {title}
+        </h2>
         <div className="h-px flex-1 bg-line" aria-hidden="true" />
       </div>
       {children}
