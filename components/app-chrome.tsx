@@ -2,7 +2,7 @@
 
 import { ArrowLeft, WalletCards } from "lucide-react";
 import Link from "next/link";
-import { useState, type ReactNode } from "react";
+import { useId, useState, type ReactNode } from "react";
 import { useLocale } from "./locale-provider";
 import { AppAccountBar, type AppChromeWalletState } from "./app-account-bar";
 import { NetworkMismatchModal } from "./network-mismatch-modal";
@@ -34,10 +34,14 @@ export function AppChrome({
 }) {
   const { dictionary } = useLocale();
   const [profileOpen, setProfileOpen] = useState(false);
+  const titleId = useId();
   const shouldGateWallet = !walletState.account;
 
   return (
-    <main className="space-y-8 pb-20 md:space-y-12 md:pb-24">
+    <main
+      aria-labelledby={title ? titleId : undefined}
+      className="space-y-8 pb-20 md:space-y-12 md:pb-24"
+    >
       {walletState.account && walletState.isWrongChain ? (
         <NetworkMismatchModal
           eyebrow={dictionary.common.network}
@@ -103,7 +107,10 @@ export function AppChrome({
               ) : null}
               <div className="min-w-0 max-w-3xl space-y-3">
                 {title ? (
-                  <h1 className="break-words text-3xl font-semibold leading-tight text-ink md:text-5xl">
+                  <h1
+                    id={titleId}
+                    className="break-words text-3xl font-semibold leading-tight text-ink md:text-5xl"
+                  >
                     {title}
                   </h1>
                 ) : null}
