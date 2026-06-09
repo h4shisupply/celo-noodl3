@@ -197,6 +197,7 @@ export function QrDisplay({
           <QRCodeSVG
             ref={qrRef}
             value={value}
+            aria-label={title}
             role="img"
             title={title}
             size={256}
@@ -249,6 +250,7 @@ export function PrintableQrSheet({
       <div className="mx-auto mt-8 flex max-w-[18rem] justify-center rounded-lg border border-line bg-panel p-4">
         <QRCodeSVG
           value={value}
+          aria-label={title}
           role="img"
           title={title}
           size={256}
