@@ -223,6 +223,7 @@ export function QrScanner({
                   <Camera className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <p
+                  id="qr-scanner-camera-status"
                   className="text-sm text-muted"
                   role={error ? "alert" : "status"}
                   aria-live={error ? "assertive" : "polite"}
@@ -238,7 +239,11 @@ export function QrScanner({
                     aria-hidden="true"
                   />
                 ) : (
-                  <Button autoFocus onClick={() => void startCamera()}>
+                  <Button
+                    autoFocus
+                    aria-describedby="qr-scanner-camera-status"
+                    onClick={() => void startCamera()}
+                  >
                     {qrCopy.openCamera}
                   </Button>
                 )}
