@@ -458,7 +458,10 @@ function FeatureCard({
 
 function ProductVisual({ copy }: { copy: HomeCopy["visual"] }) {
   return (
-    <div className="surface-panel stamp-pattern mx-auto w-full max-w-[31rem] rounded-lg p-1.5 shadow-float sm:p-2 lg:max-w-none">
+    <div
+      className="surface-panel stamp-pattern mx-auto w-full max-w-[31rem] rounded-lg p-1.5 shadow-float sm:p-2 lg:max-w-none"
+      aria-hidden="true"
+    >
       <div className="space-y-3 rounded-lg bg-panel/95 p-2 sm:p-3 md:p-4">
         <div className="flex items-center justify-between gap-3 rounded-lg border border-line bg-panel px-3 py-2.5 shadow-[0_10px_30px_rgba(27,23,43,0.04)] sm:px-4 sm:py-3">
           <div className="min-w-0">
