@@ -496,6 +496,7 @@ export function ProgramManagePage({
                         autoComplete="organization"
                         enterKeyHint="next"
                         placeholder={copy.programNamePlaceholder}
+                        required
                         onChange={(event) => setName(event.target.value)}
                       />
                     </Field>
@@ -511,6 +512,7 @@ export function ProgramManagePage({
                         enterKeyHint="next"
                         inputMode="url"
                         placeholder="https://..."
+                        required
                         spellCheck={false}
                         onChange={(event) => setIconUrl(event.target.value)}
                       />
@@ -522,6 +524,7 @@ export function ProgramManagePage({
                         enterKeyHint="done"
                         maxLength={120}
                         placeholder={copy.rewardPlaceholder}
+                        required
                         onChange={(event) => setRewardDescription(event.target.value)}
                       />
                     </Field>
@@ -533,6 +536,7 @@ export function ProgramManagePage({
                         inputMode="numeric"
                         min={1}
                         max={100}
+                        required
                         step={1}
                         onChange={(event) => setStampsRequired(event.target.value)}
                       />
