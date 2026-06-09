@@ -383,7 +383,10 @@ export function ProgramPage({
               {canCollectStatic && lastStaticStampAt > 0 ? (
                 <p className="flex items-center gap-2 rounded-lg border border-line bg-panel-soft px-3 py-2 text-sm text-muted">
                   <TimerReset className="h-4 w-4" aria-hidden="true" />
-                  {copy.nextStaticStamp}: {formatDateTime(staticNextAvailableAt, locale)}
+                  {copy.nextStaticStamp}:{" "}
+                  <time dateTime={new Date(staticNextAvailableAt * 1000).toISOString()}>
+                    {formatDateTime(staticNextAvailableAt, locale)}
+                  </time>
                 </p>
               ) : null}
 
