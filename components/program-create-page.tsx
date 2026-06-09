@@ -162,6 +162,7 @@ export function ProgramCreatePage({
                 autoComplete="organization"
                 enterKeyHint="next"
                 placeholder={copy.programNamePlaceholder}
+                required
                 onChange={(event) => setName(event.target.value)}
               />
             </Field>
@@ -177,6 +178,7 @@ export function ProgramCreatePage({
                 enterKeyHint="next"
                 inputMode="url"
                 placeholder="https://..."
+                required
                 spellCheck={false}
                 onChange={(event) => setIconUrl(event.target.value)}
               />
@@ -188,6 +190,7 @@ export function ProgramCreatePage({
                 enterKeyHint="done"
                 maxLength={120}
                 placeholder={copy.rewardPlaceholder}
+                required
                 onChange={(event) => setRewardDescription(event.target.value)}
               />
             </Field>
@@ -199,6 +202,7 @@ export function ProgramCreatePage({
                 inputMode="numeric"
                 min={1}
                 max={100}
+                required
                 step={1}
                 onChange={(event) => setStampsRequired(event.target.value)}
               />
