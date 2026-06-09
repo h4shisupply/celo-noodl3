@@ -599,7 +599,7 @@ export function ProgramManagePage({
                       aria-busy={isSubmitting}
                       disabled={isSubmitting}
                     >
-                      {copy.updateProgram}
+                      {isSubmitting ? `${dictionary.common.saving}...` : copy.updateProgram}
                     </Button>
                   </CardContent>
                 </Card>
