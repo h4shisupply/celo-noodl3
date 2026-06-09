@@ -65,6 +65,8 @@ export function QrActionBar({
   }
 
   async function handleShare() {
+    setNotice(null);
+
     if (!navigator.share) {
       setNotice(labels.shareUnavailable);
       return;
