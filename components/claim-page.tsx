@@ -256,7 +256,10 @@ export function ClaimPage({
                     {dictionary.common.customer}: {formatWalletLabel(claim.user)}
                   </p>
                   <p>
-                    {dictionary.common.date}: {formatDateTime(claim.claimedAt, locale)}
+                    {dictionary.common.date}:{" "}
+                    <time dateTime={claim.claimedAt ? new Date(claim.claimedAt * 1000).toISOString() : undefined}>
+                      {formatDateTime(claim.claimedAt, locale)}
+                    </time>
                   </p>
                   <p>
                     {dictionary.common.status}: {claim.consumed ? copy.ticketUsed : copy.ticketReady}
