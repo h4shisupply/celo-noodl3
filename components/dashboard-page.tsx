@@ -346,11 +346,13 @@ export function DashboardPage({
 
             <DashboardSection title={copy.rewardClaims}>
               {claims.length > 0 ? (
-                <div className="grid gap-4">
+                <ul className="grid gap-4">
                   {claims.map((claim) => (
-                    <ClaimSummaryCard key={claim.id.toString()} claim={claim} />
+                    <li key={claim.id.toString()}>
+                      <ClaimSummaryCard claim={claim} />
+                    </li>
                   ))}
-                </div>
+                </ul>
               ) : (
                 <EmptyState
                   title={copy.rewardClaims}
