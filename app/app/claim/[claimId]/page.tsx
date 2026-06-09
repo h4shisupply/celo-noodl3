@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import { ClaimPage } from "../../../../components/claim-page";
 import { getDefaultChainId } from "../../../../lib/chains";
 import { publicEnv } from "../../../../lib/env";
+
+export const metadata: Metadata = {
+  title: "Reward claim"
+};
 
 type ClaimRouteProps = {
   params: Promise<{ claimId: string }>;
