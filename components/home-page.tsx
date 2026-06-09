@@ -181,17 +181,17 @@ export function HomePage({ locale }: { locale: Locale }) {
           <p className="hidden max-w-2xl text-sm leading-6 text-muted sm:block">
             {copy.hero.footnote}
           </p>
-          <div className="hidden gap-2.5 sm:grid sm:grid-cols-3">
+          <dl className="hidden gap-2.5 sm:grid sm:grid-cols-3">
             {copy.hero.stats.map((stat) => (
               <div
                 key={stat.label}
                 className="rounded-lg border border-line bg-panel/78 px-4 py-3 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur"
               >
-                <p className="text-sm font-semibold text-ink">{stat.value}</p>
-                <p className="mt-1 text-sm leading-5 text-muted">{stat.label}</p>
+                <dt className="text-sm font-semibold text-ink">{stat.value}</dt>
+                <dd className="mt-1 text-sm leading-5 text-muted">{stat.label}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
 
         <ProductVisual copy={copy.visual} />
