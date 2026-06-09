@@ -1,9 +1,14 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { Hex } from "viem";
 import { ProgramPage } from "../../../../components/program-page";
 import { getDefaultChainId } from "../../../../lib/chains";
 import { publicEnv } from "../../../../lib/env";
 import { parseProgramId } from "../../../../lib/program";
+
+export const metadata: Metadata = {
+  title: "Stamp card"
+};
 
 type ProgramRouteProps = {
   params: Promise<{ programId: string }>;
