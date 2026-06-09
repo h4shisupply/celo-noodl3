@@ -33,6 +33,7 @@ export function StatusMessage({
   return (
     <p
       role={liveRole}
+      aria-live={tone === "error" ? "assertive" : "polite"}
       aria-atomic="true"
       className={clsx(
         "flex min-w-0 max-w-full items-start gap-2 rounded-lg border px-4 py-3 text-sm font-medium leading-6",
