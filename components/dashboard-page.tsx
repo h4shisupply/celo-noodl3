@@ -490,7 +490,10 @@ function ClaimSummaryCard({ claim }: { claim: ClaimRecord }) {
             {formatClaimCode(claim.id)} · {claim.rewardDescription}
           </p>
           <p dir="ltr" className="text-sm text-muted">
-            {formatProgramCode(claim.programId)} · {formatDateTime(claim.claimedAt, locale)}
+            {formatProgramCode(claim.programId)} ·{" "}
+            <time dateTime={claim.claimedAt ? new Date(claim.claimedAt * 1000).toISOString() : undefined}>
+              {formatDateTime(claim.claimedAt, locale)}
+            </time>
           </p>
           <p dir="ltr" className="text-sm text-muted">{formatWalletLabel(claim.user)}</p>
         </div>
