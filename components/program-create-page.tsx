@@ -252,6 +252,7 @@ export function ProgramCreatePage({
                   alt=""
                   width={48}
                   height={48}
+                  aria-hidden="true"
                   className="h-12 w-12 rounded-lg border border-line object-cover"
                 />
               ) : (
