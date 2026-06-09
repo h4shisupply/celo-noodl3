@@ -392,6 +392,7 @@ export function ProgramManagePage({
                         enterKeyHint="done"
                         spellCheck={false}
                         aria-label={copy.customerWallet}
+                        required
                         onChange={(event) => setManualCustomer(event.target.value)}
                         placeholder={copy.customerWallet}
                       />
