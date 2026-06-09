@@ -421,9 +421,9 @@ export function ProgramManagePage({
                     </div>
 
                     {customers.length > 0 ? (
-                      <div className="grid gap-3">
+                      <ul className="grid gap-3">
                         {customers.map((customer) => (
-                          <div
+                          <li
                             key={customer.address}
                             className="rounded-lg border border-line bg-panel-soft p-4"
                           >
@@ -435,9 +435,9 @@ export function ProgramManagePage({
                               total={program.stampsRequired}
                               unitLabel={copy.stamps}
                             />
-                          </div>
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     ) : (
                       <p className="text-sm text-muted">{copy.emptyCards}</p>
                     )}
