@@ -297,11 +297,13 @@ export function DashboardPage({
 
             <DashboardSection title={copy.myCards}>
               {customerPrograms.length > 0 ? (
-                <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                <ul className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
                   {customerPrograms.map((program) => (
-                    <ProgramCard key={program.id.toString()} program={program} />
+                    <li key={program.id.toString()}>
+                      <ProgramCard program={program} />
+                    </li>
                   ))}
-                </div>
+                </ul>
               ) : (
                 <EmptyState
                   title={copy.myCards}
