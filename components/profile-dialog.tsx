@@ -167,7 +167,7 @@ export function ProfileDialog({
             >
               {isSaving ? `${dictionary.common.saving}...` : dictionary.actions.save}
             </Button>
-            <Button variant="ghost" onClick={handleSkip}>
+            <Button variant="ghost" onClick={handleSkip} disabled={isSaving}>
               {dictionary.actions.skipForNow}
             </Button>
           </div>
