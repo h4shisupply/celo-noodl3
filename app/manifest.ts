@@ -29,6 +29,19 @@ export default function manifest(): MetadataRoute.Manifest {
             sizes: "any"
           }
         ]
+      },
+      {
+        name: "Create program",
+        short_name: "Create",
+        description: "Create a new noodl3 stamp card.",
+        url: "/app/program/new",
+        icons: [
+          {
+            src: "/icon.svg",
+            type: "image/svg+xml",
+            sizes: "any"
+          }
+        ]
       }
     ],
     icons: [
