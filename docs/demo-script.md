@@ -6,9 +6,10 @@
 4. Open the manager view and show the printed visit QR actions: copy, share, download, and print sheet.
 5. Open the fixed QR as a customer, collect one static stamp, and confirm immediate reuse is blocked.
 6. Generate a live QR on an HTTPS or localhost demo URL, point out the five-minute countdown, scan it as a customer, and collect a stamp instantly.
-7. Regenerate the live QR to show the owner-led counter workflow.
-8. Issue enough stamps to reach the threshold.
-9. Claim the reward from the customer card.
-10. Open `/app/claim/[claimId]`, show the QR, backup code, and owner-wallet validation hint.
-11. Validate the claim as owner and confirm that a second validation fails.
-12. End on the dashboard showing the customer card, program manager, and claim history.
+7. Call out the scanner camera-state message before the scan and the success feedback after the stamp lands.
+8. Regenerate the live QR to show the owner-led counter workflow.
+9. Issue enough stamps to reach the threshold.
+10. Claim the reward from the customer card.
+11. Open `/app/claim/[claimId]`, show the QR, backup code, and owner-wallet validation hint.
+12. Validate the claim as owner and confirm that a second validation fails.
+13. End on the dashboard showing the customer card, program manager, and claim history.
