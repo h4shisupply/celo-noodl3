@@ -35,6 +35,7 @@
 - Confirm loading actions expose their busy state while disabled.
 - Confirm app pages expose a named main landmark from the visible page heading.
 - Confirm status updates and QR scanner feedback announce through live regions.
+- Confirm menu toggles expose expanded state and announce the close action while open.
 - Confirm decorative and remote UI images stay non-blocking and hidden from assistive tech when appropriate.
 - Confirm Escape closes temporary overlays such as the mobile menu, account menu, profile dialog, and QR scanner.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
