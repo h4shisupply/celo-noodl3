@@ -222,7 +222,12 @@ export function QrScanner({
                 >
                   <Camera className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <p className="text-sm text-muted" role={error ? "alert" : "status"} aria-atomic="true">
+                <p
+                  className="text-sm text-muted"
+                  role={error ? "alert" : "status"}
+                  aria-live={error ? "assertive" : "polite"}
+                  aria-atomic="true"
+                >
                   {isProcessing
                     ? processingLabel || dictionary.qrScanner.ready
                     : error || notice || dictionary.qrScanner.ready}
