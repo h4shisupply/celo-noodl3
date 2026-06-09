@@ -218,14 +218,14 @@ export function HomePage({ locale }: { locale: Locale }) {
           title={copy.workflow.title}
           description={copy.workflow.description}
         />
-        <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <ol className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {copy.workflow.steps.map((step, index) => {
             const Icon = icons[index] ?? BadgeCheck;
             return (
               <StepCard key={step.title} icon={Icon} index={index} {...step} />
             );
           })}
-        </div>
+        </ol>
       </section>
 
       <section className="py-10 md:py-14">
@@ -414,7 +414,7 @@ function StepCard({
   description: string;
 }) {
   return (
-    <article className="rounded-lg border border-line bg-panel/88 p-4 shadow-[0_12px_34px_rgba(27,23,43,0.05)] backdrop-blur md:p-5">
+    <li className="rounded-lg border border-line bg-panel/88 p-4 shadow-[0_12px_34px_rgba(27,23,43,0.05)] backdrop-blur md:p-5">
       <div className="mb-5 flex items-center justify-between gap-3">
         <span className="grid h-10 w-10 place-items-center rounded-lg border border-accent-border bg-accent-soft text-accent">
           <Icon className="h-5 w-5" aria-hidden="true" />
@@ -425,7 +425,7 @@ function StepCard({
       </div>
       <h3 className="text-base font-semibold text-ink">{title}</h3>
       <p className="mt-3 text-sm leading-6 text-muted">{description}</p>
-    </article>
+    </li>
   );
 }
 
