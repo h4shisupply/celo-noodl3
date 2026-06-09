@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import { ProgramCreatePage } from "../../../../components/program-create-page";
 import { getDefaultChainId } from "../../../../lib/chains";
 import { publicEnv } from "../../../../lib/env";
+
+export const metadata: Metadata = {
+  title: "Create program"
+};
 
 export default function Page() {
   return (
