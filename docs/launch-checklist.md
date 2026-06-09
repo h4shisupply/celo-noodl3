@@ -33,6 +33,7 @@
 - Confirm `NEXT_PUBLIC_APP_URL` matches the local or deployed base URL before sharing or printing QR links.
 - Confirm keyboard focus is visible on header links, account menu controls, QR actions, and form fields.
 - Confirm loading actions expose their busy state while disabled.
+- Confirm app pages expose a named main landmark from the visible page heading.
 - Confirm status updates and QR scanner feedback announce through live regions.
 - Confirm Escape closes temporary overlays such as the mobile menu, account menu, profile dialog, and QR scanner.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
