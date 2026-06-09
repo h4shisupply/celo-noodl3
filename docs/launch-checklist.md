@@ -45,6 +45,7 @@
 - Confirm menu toggles expose expanded state and announce the close action while open.
 - Confirm decorative and remote UI images stay non-blocking and hidden from assistive tech when appropriate.
 - Confirm Escape closes temporary overlays such as the mobile menu, account menu, profile dialog, and QR scanner.
+- Confirm modal overlays expose dialog names and descriptions to assistive tech.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
 - Confirm the language switcher announces the current language and selected state.
 - Confirm language selection persists after refresh through the locale cookie.
