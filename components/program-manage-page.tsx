@@ -445,7 +445,10 @@ export function ProgramManagePage({
                 </Card>
               </div>
 
-              <aside className="space-y-6 xl:sticky xl:top-6 xl:self-start">
+              <aside
+                aria-label={`${copy.dynamicQr} ${copy.settings}`}
+                className="space-y-6 xl:sticky xl:top-6 xl:self-start"
+              >
                 <section className="space-y-4">
                   <div className="space-y-2">
                     <h2 className="break-words text-xl font-semibold text-ink">{copy.dynamicQr}</h2>
