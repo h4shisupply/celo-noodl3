@@ -22,6 +22,7 @@ The core loop is simple:
 - No catalog, menu, cart, item checkout, or payment requirement in V1
 - Bilingual runtime copy: `pt-BR` and `English`
 - `Selos` in Portuguese and `Stamps` in English
+- Accessible app structure with named landmarks, visible focus, and live QR scanner feedback
 - Onchain loyalty progress per program
 - Static visit QR with one stamp per wallet every 20 hours
 - Dynamic visit QR with one-use owner-signed payloads
