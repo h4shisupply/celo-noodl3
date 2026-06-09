@@ -44,7 +44,10 @@ export const metadata: Metadata = {
   ],
   category: "finance",
   formatDetection: {
-    telephone: false
+    telephone: false,
+    date: false,
+    address: false,
+    email: false
   },
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
