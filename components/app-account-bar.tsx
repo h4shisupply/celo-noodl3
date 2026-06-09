@@ -108,7 +108,7 @@ export function AppAccountBar({
                 aria-controls={accountMenuId}
                 aria-expanded={isMenuOpen}
                 aria-haspopup="menu"
-                aria-label={dictionary.account.openMenu}
+                aria-label={isMenuOpen ? dictionary.common.close : dictionary.account.openMenu}
               >
                 {profile ? (
                   <>
