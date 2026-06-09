@@ -416,7 +416,7 @@ export function ProgramManagePage({
                         aria-busy={isSubmitting}
                         disabled={isSubmitting}
                       >
-                        {copy.issueManual}
+                        {isSubmitting ? `${dictionary.common.loading}...` : copy.issueManual}
                       </Button>
                     </div>
 
