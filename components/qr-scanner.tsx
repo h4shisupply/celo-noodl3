@@ -250,7 +250,12 @@ export function QrScanner({
               </div>
             </div>
           ) : (
-            <div className="pointer-events-none absolute inset-0 border-[12px] border-white/20" />
+            <>
+              <div className="pointer-events-none absolute inset-0 border-[12px] border-white/20" />
+              <p className="sr-only" role="status" aria-live="polite">
+                {qrCopy.cameraActive}
+              </p>
+            </>
           )}
         </div>
 
