@@ -22,7 +22,7 @@ export function ProgressMeter({
           {label}
         </p>
         <p className="shrink-0 rounded-full bg-sun-soft px-2.5 py-1 text-xs font-semibold text-sun-strong tabular-nums">
-          {safeValue}/{total}
+          {safeValue}/{safeTotal}
         </p>
       </div>
       <div
@@ -32,7 +32,7 @@ export function ProgressMeter({
         aria-valuemin={0}
         aria-valuemax={safeTotal}
         aria-valuenow={safeValue}
-        aria-valuetext={`${safeValue}/${total} ${label}`}
+        aria-valuetext={`${safeValue}/${safeTotal} ${label}`}
       >
         <div
           aria-hidden="true"
