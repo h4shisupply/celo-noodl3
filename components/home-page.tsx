@@ -136,7 +136,11 @@ export function HomePage({ locale }: { locale: Locale }) {
   ];
 
   return (
-    <main className="pb-16 md:pb-20" aria-labelledby="home-hero-title">
+    <main
+      className="pb-16 md:pb-20"
+      aria-labelledby="home-hero-title"
+      aria-describedby="home-hero-description"
+    >
       <SiteHeader
         brandHref="/"
         items={navItems}
