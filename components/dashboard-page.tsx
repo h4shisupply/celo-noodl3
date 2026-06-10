@@ -414,11 +414,13 @@ function ProgramCard({ program }: { program: DashboardProgram }) {
   const copy = programCopy(locale);
   const progress = program.progress;
   const titleId = useId();
+  const descriptionId = useId();
 
   return (
     <Card
       role="article"
       aria-labelledby={titleId}
+      aria-describedby={descriptionId}
       className="h-full transition duration-200 hover:-translate-y-0.5 hover:shadow-float"
     >
       <CardHeader className="space-y-3">
@@ -427,7 +429,7 @@ function ProgramCard({ program }: { program: DashboardProgram }) {
           {formatProgramCode(program.id)}
         </p>
         <CardTitle id={titleId}>{program.name}</CardTitle>
-        <CardDescription>{program.rewardDescription}</CardDescription>
+        <CardDescription id={descriptionId}>{program.rewardDescription}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
         <ProgressMeter
