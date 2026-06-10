@@ -503,12 +503,17 @@ function ManagedProgramCard({ program }: { program: DashboardProgram }) {
 function ClaimSummaryCard({ claim }: { claim: ClaimRecord }) {
   const { locale } = useLocale();
   const copy = programCopy(locale);
+  const titleId = useId();
 
   return (
-    <Card className="transition duration-200 hover:shadow-float">
+    <Card
+      role="article"
+      aria-labelledby={titleId}
+      className="transition duration-200 hover:shadow-float"
+    >
       <CardContent className="flex flex-col gap-4 pt-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0 space-y-1">
-          <p dir="ltr" className="break-words text-sm font-semibold text-ink">
+          <p id={titleId} dir="ltr" className="break-words text-sm font-semibold text-ink">
             {formatClaimCode(claim.id)} · {claim.rewardDescription}
           </p>
           <p dir="ltr" className="text-sm text-muted">
