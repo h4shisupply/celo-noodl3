@@ -42,6 +42,7 @@ export const metadata: Metadata = {
     "counter QR",
     "dynamic QR",
     "static QR",
+    "visit QR",
     "stamp card",
     "wallet stamps",
     "merchant rewards",
