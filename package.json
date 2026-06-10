@@ -27,6 +27,7 @@
     "reward-ticket",
     "rewards",
     "stamp-card",
+    "static-qr",
     "wallet"
   ],
   "private": true,
