@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     id: "/",
     description:
       "QR stamp cards, wallet stamps, and one-time reward tickets for real-world visits on Celo.",
-    categories: ["finance", "shopping", "utilities"],
+    categories: ["business", "finance", "shopping", "utilities"],
     start_url: "/",
     scope: "/",
     display: "standalone",
