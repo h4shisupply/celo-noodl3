@@ -22,6 +22,7 @@ export function CountdownBadge({
   const [now, setNow] = useState(() => Math.floor(Date.now() / 1000));
   const remaining = expiresAt - now;
   const expired = remaining <= 0;
+  const safeRemaining = Math.max(remaining, 0);
   const display = useMemo(() => formatSeconds(remaining), [remaining]);
 
   useEffect(() => {
@@ -56,7 +57,11 @@ export function CountdownBadge({
       }`}
     >
       <Clock3 className="h-3.5 w-3.5" aria-hidden="true" />
-      {expired ? expiredLabel : `${label} ${display}`}
+      {expired ? expiredLabel : (
+        <>
+          {label} <time dateTime={`PT${safeRemaining}S`}>{display}</time>
+        </>
+      )}
     </span>
   );
 }
