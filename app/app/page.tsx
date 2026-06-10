@@ -4,7 +4,8 @@ import { getDefaultChainId } from "../../lib/chains";
 import { publicEnv } from "../../lib/env";
 
 export const metadata: Metadata = {
-  title: "Dashboard"
+  title: "Dashboard",
+  description: "Track stamp cards, owned programs, and reward claims in noodl3."
 };
 
 export default function Page() {
