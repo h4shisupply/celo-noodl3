@@ -286,6 +286,7 @@ export function PrintableQrSheet({
         <QRCodeSVG
           value={value}
           aria-label={title}
+          aria-describedby={subtitleId}
           role="img"
           title={title}
           size={256}
