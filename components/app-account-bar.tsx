@@ -258,6 +258,7 @@ function ProfileAvatar({
         aria-hidden="true"
         decoding="async"
         draggable={false}
+        loading="lazy"
         referrerPolicy="no-referrer"
         className="h-7 w-7 rounded-full object-cover"
         onError={() => setHasError(true)}
