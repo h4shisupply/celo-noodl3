@@ -252,7 +252,10 @@ export function QrScanner({
             </div>
           ) : (
             <>
-              <div className="pointer-events-none absolute inset-0 border-[12px] border-white/20" />
+              <div
+                className="pointer-events-none absolute inset-0 border-[12px] border-white/20"
+                aria-hidden="true"
+              />
               <p
                 id="qr-scanner-active-status"
                 className="sr-only"
