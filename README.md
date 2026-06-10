@@ -35,7 +35,7 @@ The core loop is simple:
 
 - `/`: landing page
 - `/app`: unified dashboard
-- `/app/program/new`: create a loyalty program
+- `/app/program/new`: create a QR stamp card
 - `/app/program/[programId]`: customer stamp card and QR landing page
 - `/app/program/[programId]/manage`: owner manager
 - `/app/claim/[claimId]`: reward claim QR and owner validation
