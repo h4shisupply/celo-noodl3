@@ -23,6 +23,7 @@ The core loop is simple:
 - Bilingual runtime copy: `pt-BR` and `English`
 - `Selos` in Portuguese and `Stamps` in English
 - Accessible app structure with named landmarks, visible focus, and live QR scanner feedback
+- Installable app manifest with dashboard/create shortcuts and maskable icons
 - Onchain loyalty progress per program
 - Static visit QR with one stamp per wallet every 20 hours
 - Dynamic visit QR with one-use owner-signed payloads
