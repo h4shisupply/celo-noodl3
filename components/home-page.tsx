@@ -197,12 +197,13 @@ export function HomePage({ locale }: { locale: Locale }) {
         <ProductVisual copy={copy.visual} />
       </section>
 
-      <section className="py-10 md:py-14">
+      <section className="py-10 md:py-14" aria-labelledby="home-problem-title">
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1fr] lg:items-start">
           <SectionIntro
             eyebrow={copy.problem.eyebrow}
             title={copy.problem.title}
             description={copy.problem.description}
+            titleId="home-problem-title"
           />
           <ul className="grid gap-3">
             {copy.problem.points.map((point) => (
