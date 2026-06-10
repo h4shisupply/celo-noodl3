@@ -208,13 +208,18 @@ export function HomePage({ locale }: { locale: Locale }) {
         <ProductVisual copy={copy.visual} />
       </section>
 
-      <section className="py-10 md:py-14" aria-labelledby="home-problem-title">
+      <section
+        className="py-10 md:py-14"
+        aria-labelledby="home-problem-title"
+        aria-describedby="home-problem-description"
+      >
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1fr] lg:items-start">
           <SectionIntro
             eyebrow={copy.problem.eyebrow}
             title={copy.problem.title}
             description={copy.problem.description}
             titleId="home-problem-title"
+            descriptionId="home-problem-description"
           />
           <ul className="grid gap-3">
             {copy.problem.points.map((point) => (
@@ -377,12 +382,14 @@ function SectionIntro({
   eyebrow,
   title,
   description,
-  titleId
+  titleId,
+  descriptionId
 }: {
   eyebrow: string;
   title: string;
   description?: string;
   titleId?: string;
+  descriptionId?: string;
 }) {
   return (
     <div className="max-w-3xl space-y-4">
@@ -393,7 +400,9 @@ function SectionIntro({
         {title}
       </h2>
       {description ? (
-        <p className="text-base leading-8 text-muted">{description}</p>
+        <p id={descriptionId} className="text-base leading-8 text-muted">
+          {description}
+        </p>
       ) : null}
     </div>
   );
