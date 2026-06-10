@@ -476,8 +476,15 @@ function StepCard({
   title: string;
   description: string;
 }) {
+  const titleId = `home-workflow-step-${index}-title`;
+  const descriptionId = `home-workflow-step-${index}-description`;
+
   return (
-    <li className="rounded-lg border border-line bg-panel/88 p-4 shadow-[0_12px_34px_rgba(27,23,43,0.05)] backdrop-blur md:p-5">
+    <li
+      className="rounded-lg border border-line bg-panel/88 p-4 shadow-[0_12px_34px_rgba(27,23,43,0.05)] backdrop-blur md:p-5"
+      aria-labelledby={titleId}
+      aria-describedby={descriptionId}
+    >
       <div className="mb-5 flex items-center justify-between gap-3">
         <span
           className="grid h-10 w-10 place-items-center rounded-lg border border-accent-border bg-accent-soft text-accent"
@@ -489,8 +496,12 @@ function StepCard({
           0{index + 1}
         </span>
       </div>
-      <h3 className="text-base font-semibold text-ink">{title}</h3>
-      <p className="mt-3 text-sm leading-6 text-muted">{description}</p>
+      <h3 id={titleId} className="text-base font-semibold text-ink">
+        {title}
+      </h3>
+      <p id={descriptionId} className="mt-3 text-sm leading-6 text-muted">
+        {description}
+      </p>
     </li>
   );
 }
