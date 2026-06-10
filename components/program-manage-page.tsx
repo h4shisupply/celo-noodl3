@@ -333,18 +333,24 @@ export function ProgramManagePage({
           />
         ) : (
           <>
-            <div className="surface-panel stamp-pattern flex flex-col gap-4 rounded-lg p-5 shadow-float sm:flex-row sm:items-center">
+            <section
+              aria-labelledby="program-manage-summary-title"
+              className="surface-panel stamp-pattern flex flex-col gap-4 rounded-lg p-5 shadow-float sm:flex-row sm:items-center"
+            >
               <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
               <div className="min-w-0">
                 <Badge dir="ltr" variant={program.active ? "accent" : "danger"}>
                   {formatProgramCode(program.id)} {!program.active ? `· ${copy.inactive}` : ""}
                 </Badge>
-                <h2 className="mt-2 break-words text-2xl font-semibold leading-tight text-ink">
+                <h2
+                  id="program-manage-summary-title"
+                  className="mt-2 break-words text-2xl font-semibold leading-tight text-ink"
+                >
                   {program.name}
                 </h2>
                 <p className="break-words text-sm leading-6 text-muted">{program.rewardDescription}</p>
               </div>
-            </div>
+            </section>
 
             <div className="grid gap-5 md:grid-cols-3">
               <MetricCard icon={<Users className="h-5 w-5" />} label={copy.customers} value={customers.length} />
