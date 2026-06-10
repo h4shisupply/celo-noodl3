@@ -43,6 +43,7 @@ export const metadata: Metadata = {
     "stamp card",
     "wallet stamps",
     "merchant rewards",
+    "reward ticket",
     "QR"
   ],
   category: "finance",
