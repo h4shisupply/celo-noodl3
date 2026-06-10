@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Verify reward",
+  description: "Redirect legacy verification links to the matching noodl3 reward claim."
+};
 
 type VerifyRouteProps = {
   searchParams: Promise<{ claim?: string }>;
