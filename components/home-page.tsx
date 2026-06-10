@@ -143,14 +143,21 @@ export function HomePage({ locale }: { locale: Locale }) {
         cta={{ label: copy.hero.primaryCta, href: "/app/program/new" }}
       />
 
-      <section className="grid min-h-[68dvh] items-center gap-3 py-3 md:gap-8 md:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,29rem)] lg:gap-12 lg:py-4" aria-labelledby="home-hero-title">
+      <section
+        className="grid min-h-[68dvh] items-center gap-3 py-3 md:gap-8 md:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,29rem)] lg:gap-12 lg:py-4"
+        aria-labelledby="home-hero-title"
+        aria-describedby="home-hero-description"
+      >
         <div className="max-w-3xl space-y-4 md:space-y-6">
           <AccentPill icon={Sparkles}>{copy.hero.eyebrow}</AccentPill>
           <div className="space-y-4">
             <h1 id="home-hero-title" className="max-w-4xl text-[1.75rem] font-semibold leading-[1.04] text-ink sm:text-5xl lg:text-6xl">
               {copy.hero.title}
             </h1>
-            <p className="max-w-2xl text-sm leading-6 text-muted sm:text-base sm:leading-8 md:text-lg">
+            <p
+              id="home-hero-description"
+              className="max-w-2xl text-sm leading-6 text-muted sm:text-base sm:leading-8 md:text-lg"
+            >
               {copy.hero.description}
             </p>
           </div>
