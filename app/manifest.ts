@@ -27,7 +27,8 @@ export default function manifest(): MetadataRoute.Manifest {
           {
             src: "/icon.svg",
             type: "image/svg+xml",
-            sizes: "any"
+            sizes: "any",
+            purpose: "any maskable"
           }
         ]
       },
@@ -40,7 +41,8 @@ export default function manifest(): MetadataRoute.Manifest {
           {
             src: "/icon.svg",
             type: "image/svg+xml",
-            sizes: "any"
+            sizes: "any",
+            purpose: "any maskable"
           }
         ]
       }
