@@ -12,6 +12,9 @@ export default function manifest(): MetadataRoute.Manifest {
     scope: "/",
     display: "standalone",
     display_override: ["standalone", "minimal-ui"],
+    launch_handler: {
+      client_mode: "focus-existing"
+    },
     orientation: "portrait",
     dir: "ltr",
     lang: "en",
