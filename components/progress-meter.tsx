@@ -21,7 +21,10 @@ export function ProgressMeter({
         <p className="min-w-0 break-words text-xs font-semibold uppercase tracking-[0.12em] text-muted">
           {label}
         </p>
-        <p className="shrink-0 rounded-full bg-sun-soft px-2.5 py-1 text-xs font-semibold text-sun-strong tabular-nums">
+        <p
+          aria-hidden="true"
+          className="shrink-0 rounded-full bg-sun-soft px-2.5 py-1 text-xs font-semibold text-sun-strong tabular-nums"
+        >
           {safeValue}/{safeTotal}
         </p>
       </div>
