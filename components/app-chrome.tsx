@@ -39,7 +39,7 @@ export function AppChrome({
 
   return (
     <main
-      aria-labelledby={title ? titleId : undefined}
+      aria-labelledby={title || shouldGateWallet ? titleId : undefined}
       className="space-y-8 pb-20 md:space-y-12 md:pb-24"
     >
       {walletState.account && walletState.isWrongChain ? (
