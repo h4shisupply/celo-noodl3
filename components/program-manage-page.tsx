@@ -381,10 +381,16 @@ export function ProgramManagePage({
                   />
                 </div>
 
-                <Card role="region" aria-labelledby="program-manage-customers-title">
+                <Card
+                  role="region"
+                  aria-labelledby="program-manage-customers-title"
+                  aria-describedby="program-manage-customers-description"
+                >
                   <CardHeader>
                     <CardTitle id="program-manage-customers-title">{copy.customers}</CardTitle>
-                    <CardDescription>{copy.issueManual}</CardDescription>
+                    <CardDescription id="program-manage-customers-description">
+                      {copy.issueManual}
+                    </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-5">
                     <div className="flex flex-col gap-3 md:flex-row">
