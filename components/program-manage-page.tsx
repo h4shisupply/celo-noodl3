@@ -502,6 +502,7 @@ export function ProgramManagePage({
                       <Input
                         value={name}
                         maxLength={60}
+                        autoCapitalize="words"
                         autoComplete="organization"
                         enterKeyHint="next"
                         placeholder={copy.programNamePlaceholder}
