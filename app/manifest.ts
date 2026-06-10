@@ -38,7 +38,7 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         name: "Create program",
         short_name: "Create",
-        description: "Create a new noodl3 stamp card.",
+        description: "Create a new noodl3 stamp card with a visit goal.",
         url: "/app/program/new",
         icons: [
           {
