@@ -85,7 +85,7 @@
 - Confirm language selection persists after refresh through the locale cookie.
 - Confirm custom select controls show their open and closed state visually.
 - Confirm the app manifest icon, dashboard and create-program shortcut descriptions, categories, language, theme color, standalone display mode, and portrait orientation work when installed on mobile.
-- Confirm package metadata keywords match the Celo, MiniPay, QR, wallet, and merchant reward surfaces.
+- Confirm package metadata keywords match the Celo, MiniPay, QR, visit QR, wallet, and merchant reward surfaces.
 - Confirm package repository, homepage, and issue links point to the public noodl3 project.
 - Confirm root metadata keywords cover customer loyalty, QR code, visit QR, wallet stamps, and merchant rewards.
 - Confirm installed app launches focus the existing app window when the platform supports launch handlers.
