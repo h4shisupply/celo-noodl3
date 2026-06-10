@@ -413,15 +413,20 @@ function ProgramCard({ program }: { program: DashboardProgram }) {
   const { locale } = useLocale();
   const copy = programCopy(locale);
   const progress = program.progress;
+  const titleId = useId();
 
   return (
-    <Card className="h-full transition duration-200 hover:-translate-y-0.5 hover:shadow-float">
+    <Card
+      role="article"
+      aria-labelledby={titleId}
+      className="h-full transition duration-200 hover:-translate-y-0.5 hover:shadow-float"
+    >
       <CardHeader className="space-y-3">
         <Avatar name={program.name} imageUrl={program.iconUrl} size="sm" />
         <p dir="ltr" className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
           {formatProgramCode(program.id)}
         </p>
-        <CardTitle>{program.name}</CardTitle>
+        <CardTitle id={titleId}>{program.name}</CardTitle>
         <CardDescription>{program.rewardDescription}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
