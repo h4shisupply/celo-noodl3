@@ -298,8 +298,8 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section id="faq" className="scroll-mt-6 py-10 md:py-14">
-        <SectionIntro eyebrow={copy.faq.eyebrow} title={copy.faq.title} />
+      <section id="faq" className="scroll-mt-6 py-10 md:py-14" aria-labelledby="home-faq-title">
+        <SectionIntro eyebrow={copy.faq.eyebrow} title={copy.faq.title} titleId="home-faq-title" />
         <div className="mt-7 grid gap-4 md:grid-cols-2">
           {copy.faq.items.map((item) => (
             <article
@@ -357,18 +357,20 @@ export function HomePage({ locale }: { locale: Locale }) {
 function SectionIntro({
   eyebrow,
   title,
-  description
+  description,
+  titleId
 }: {
   eyebrow: string;
   title: string;
   description?: string;
+  titleId?: string;
 }) {
   return (
     <div className="max-w-3xl space-y-4">
       <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
         {eyebrow}
       </p>
-      <h2 className="text-3xl font-semibold leading-tight text-ink md:text-5xl">
+      <h2 id={titleId} className="text-3xl font-semibold leading-tight text-ink md:text-5xl">
         {title}
       </h2>
       {description ? (
