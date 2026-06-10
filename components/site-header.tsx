@@ -58,7 +58,10 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
   const { dictionary } = useLocale();
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
-  const menuLabel = menuOpen ? dictionary.common.close : dictionary.common.menu;
+  const menuLabel = menuOpen
+    ? `${dictionary.common.close}: ${dictionary.common.landingPage}`
+    : dictionary.common.menu;
+  const menuText = menuOpen ? dictionary.common.close : dictionary.common.menu;
 
   useEffect(() => {
     if (!menuOpen) {
@@ -154,7 +157,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
           ) : (
             <Menu className="h-4 w-4" aria-hidden="true" />
           )}
-          {menuLabel}
+          {menuText}
         </button>
       </div>
 
