@@ -91,7 +91,7 @@ Design choices:
 
 ## Quick Start
 
-Use Node `22.13.0` or newer.
+Use Node `22.13.0` or newer; `.nvmrc` pins the local development version.
 
 ```bash
 npm install
