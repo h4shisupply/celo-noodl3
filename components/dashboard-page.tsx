@@ -462,15 +462,20 @@ function ProgramCard({ program }: { program: DashboardProgram }) {
 function ManagedProgramCard({ program }: { program: DashboardProgram }) {
   const { locale, dictionary } = useLocale();
   const copy = programCopy(locale);
+  const titleId = useId();
 
   return (
-    <Card className="h-full transition duration-200 hover:-translate-y-0.5 hover:shadow-float">
+    <Card
+      role="article"
+      aria-labelledby={titleId}
+      className="h-full transition duration-200 hover:-translate-y-0.5 hover:shadow-float"
+    >
       <CardHeader className="space-y-3">
         <Avatar name={program.name} imageUrl={program.iconUrl} size="sm" />
         <Badge dir="ltr" variant={program.active ? "accent" : "danger"}>
           {dictionary.common.manager} · {formatProgramCode(program.id)}
         </Badge>
-        <CardTitle>{program.name}</CardTitle>
+        <CardTitle id={titleId}>{program.name}</CardTitle>
         <CardDescription>{program.rewardDescription}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
