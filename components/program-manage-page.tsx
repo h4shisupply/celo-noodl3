@@ -339,9 +339,9 @@ export function ProgramManagePage({
                 <Badge dir="ltr" variant={program.active ? "accent" : "danger"}>
                   {formatProgramCode(program.id)} {!program.active ? `· ${copy.inactive}` : ""}
                 </Badge>
-                <h1 className="mt-2 break-words text-2xl font-semibold leading-tight text-ink">
+                <h2 className="mt-2 break-words text-2xl font-semibold leading-tight text-ink">
                   {program.name}
-                </h1>
+                </h2>
                 <p className="break-words text-sm leading-6 text-muted">{program.rewardDescription}</p>
               </div>
             </div>
