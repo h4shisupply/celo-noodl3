@@ -147,6 +147,7 @@ export function ProfileDialog({
             aria-invalid={isNameInvalid || undefined}
             aria-label={dictionary.profile.namePlaceholder}
             autoFocus
+            autoCapitalize="words"
             autoComplete="name"
             enterKeyHint="next"
             placeholder={dictionary.profile.namePlaceholder}
