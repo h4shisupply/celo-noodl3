@@ -2,7 +2,7 @@
 
 import { Copy, Download, ExternalLink, Printer, Share2 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
-import { useRef, useState, type ReactNode, type RefObject } from "react";
+import { useEffect, useRef, useState, type ReactNode, type RefObject } from "react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { StatusMessage } from "./ui/status-message";
@@ -54,6 +54,10 @@ export function QrActionBar({
   showPrint?: boolean;
 }) {
   const [notice, setNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    setNotice(null);
+  }, [value]);
 
   async function handleCopy() {
     setNotice(null);
