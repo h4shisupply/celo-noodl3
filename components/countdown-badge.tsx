@@ -48,6 +48,7 @@ export function CountdownBadge({
   return (
     <span
       role="timer"
+      aria-label={expired ? expiredLabel : `${label} ${display}`}
       aria-live={expired ? "assertive" : "off"}
       aria-atomic="true"
       className={`inline-flex min-w-0 max-w-full flex-wrap items-center gap-2 break-words rounded-full border px-3 py-1 text-xs font-semibold tabular-nums ${
