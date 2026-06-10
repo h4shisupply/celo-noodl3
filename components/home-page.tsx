@@ -229,12 +229,18 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section id="workflow" className="scroll-mt-6 py-10 md:py-14" aria-labelledby="home-workflow-title">
+      <section
+        id="workflow"
+        className="scroll-mt-6 py-10 md:py-14"
+        aria-labelledby="home-workflow-title"
+        aria-describedby="home-workflow-description"
+      >
         <SectionIntro
           eyebrow={copy.workflow.eyebrow}
           title={copy.workflow.title}
           description={copy.workflow.description}
           titleId="home-workflow-title"
+          descriptionId="home-workflow-description"
         />
         <ol className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {copy.workflow.steps.map((step, index) => {
