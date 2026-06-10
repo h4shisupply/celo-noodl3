@@ -2,7 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BrandMark } from "./brand-mark";
 import { LanguageSwitcher } from "./language-switcher";
 import { useLocale } from "./locale-provider";
@@ -57,11 +57,18 @@ function NavLink({
 export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
   const { dictionary } = useLocale();
   const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
   const menuLabel = menuOpen ? dictionary.common.close : dictionary.common.menu;
 
   useEffect(() => {
     if (!menuOpen) {
       return;
+    }
+
+    function handlePointerDown(event: PointerEvent) {
+      if (!headerRef.current?.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
     }
 
     function handleKeyDown(event: KeyboardEvent) {
@@ -70,8 +77,10 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
       }
     }
 
+    document.addEventListener("pointerdown", handlePointerDown);
     document.addEventListener("keydown", handleKeyDown);
     return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [menuOpen]);
@@ -115,7 +124,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
   };
 
   return (
-    <header className="py-4 md:py-5">
+    <header className="py-4 md:py-5" ref={headerRef}>
       <div className="flex items-center justify-between gap-6">
         <BrandMark href={brandHref} />
 
