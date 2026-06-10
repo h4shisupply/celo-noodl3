@@ -46,6 +46,7 @@
 - Confirm status updates and QR scanner feedback announce through live regions.
 - Confirm QR scanner announces the active camera state after permission is granted and associates it with the scanner video.
 - Confirm menu toggles expose expanded state and announce the close action while open.
+- Confirm account and select popovers close from outside pointer input on mouse, touch, and pen.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative and remote UI images stay non-blocking and hidden from assistive tech when appropriate.
 - Confirm Escape closes temporary overlays such as the mobile menu, account menu, profile dialog, and QR scanner.
