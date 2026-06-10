@@ -63,6 +63,9 @@ export function AppAccountBar({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const accountMenuId = useId();
+  const accountMenuLabel = isMenuOpen
+    ? `${dictionary.common.close}: ${dictionary.account.connectedWallet}`
+    : dictionary.account.openMenu;
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -107,7 +110,7 @@ export function AppAccountBar({
                 className="inline-flex h-11 max-w-[13rem] items-center gap-2 rounded-lg border border-line bg-panel px-3 text-sm font-semibold text-ink-soft shadow-card transition hover:border-accent-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus sm:max-w-none"
                 aria-controls={accountMenuId}
                 aria-expanded={isMenuOpen}
-                aria-label={isMenuOpen ? dictionary.common.close : dictionary.account.openMenu}
+                aria-label={accountMenuLabel}
               >
                 {profile ? (
                   <>
