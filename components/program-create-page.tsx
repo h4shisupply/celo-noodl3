@@ -188,6 +188,7 @@ export function ProgramCreatePage({
             <Field label={copy.rewardDescription}>
               <Textarea
                 value={rewardDescription}
+                autoCapitalize="sentences"
                 autoComplete="off"
                 enterKeyHint="done"
                 maxLength={120}
