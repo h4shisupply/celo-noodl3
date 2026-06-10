@@ -150,6 +150,7 @@ function WalletRequiredGate({
   walletState: AppChromeWalletState;
 }) {
   const { dictionary } = useLocale();
+  const descriptionId = useId();
   const isChecking = !walletState.hasCheckedProvider;
   const canConnect = walletState.hasCheckedProvider && walletState.hasProvider;
   const title = isChecking
@@ -164,9 +165,14 @@ function WalletRequiredGate({
       : dictionary.account.noWalletDescription;
 
   return (
-    <section className="mx-auto max-w-xl pt-8 md:pt-14" aria-labelledby={titleId}>
+    <section
+      className="mx-auto max-w-xl pt-8 md:pt-14"
+      aria-labelledby={titleId}
+      aria-describedby={descriptionId}
+    >
       <EmptyState
         titleId={titleId}
+        descriptionId={descriptionId}
         title={title}
         description={gateDescription}
         icon={<WalletCards className="h-5 w-5" />}

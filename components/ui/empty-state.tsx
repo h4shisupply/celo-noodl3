@@ -4,12 +4,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./car
 export function EmptyState({
   title,
   titleId,
+  descriptionId,
   description,
   icon,
   actions
 }: {
   title: string;
   titleId?: string;
+  descriptionId?: string;
   description: string;
   icon?: ReactNode;
   actions?: ReactNode;
@@ -26,7 +28,7 @@ export function EmptyState({
           </div>
         ) : null}
         <CardTitle id={titleId}>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        <CardDescription id={descriptionId}>{description}</CardDescription>
       </CardHeader>
       {actions ? <CardContent className="flex flex-wrap gap-3">{actions}</CardContent> : null}
     </Card>
