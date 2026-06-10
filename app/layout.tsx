@@ -38,6 +38,7 @@ export const metadata: Metadata = {
     "MiniPay",
     "Celo",
     "loyalty",
+    "customer loyalty",
     "stamp card",
     "wallet stamps",
     "merchant rewards",
