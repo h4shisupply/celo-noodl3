@@ -4,7 +4,8 @@ import { getDefaultChainId } from "../../../../lib/chains";
 import { publicEnv } from "../../../../lib/env";
 
 export const metadata: Metadata = {
-  title: "Reward claim"
+  title: "Reward claim",
+  description: "Show a noodl3 reward ticket QR and validate the claim once."
 };
 
 type ClaimRouteProps = {
