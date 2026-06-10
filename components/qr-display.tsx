@@ -141,6 +141,7 @@ export function QrActionBar({
           rel="noopener noreferrer"
           referrerPolicy="no-referrer"
           aria-label={`${labels.open}: ${fileName}`}
+          onClick={() => setNotice(null)}
           className="inline-flex min-h-9 w-full max-w-full shrink-0 select-none items-center justify-center gap-2 rounded-lg border border-transparent bg-transparent px-3.5 py-2 text-sm font-semibold text-muted transition duration-200 hover:bg-accent-soft hover:text-ink active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus sm:w-auto"
         >
           <span className="grid h-4 w-4 shrink-0 place-items-center" aria-hidden="true">
