@@ -221,6 +221,7 @@ export function QrDisplay({
             ref={qrRef}
             value={value}
             aria-label={title}
+            aria-describedby={description ? descriptionId : undefined}
             role="img"
             title={title}
             size={256}
