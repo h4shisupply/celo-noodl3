@@ -230,12 +230,13 @@ export function HomePage({ locale }: { locale: Locale }) {
         </ol>
       </section>
 
-      <section className="py-10 md:py-14">
+      <section className="py-10 md:py-14" aria-labelledby="home-benefits-title">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <SectionIntro
             eyebrow={copy.benefits.eyebrow}
             title={copy.benefits.title}
             description={copy.benefits.description}
+            titleId="home-benefits-title"
           />
           <ul className="grid gap-4 sm:grid-cols-2">
             {copy.benefits.items.map((item, index) => {
