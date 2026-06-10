@@ -1,5 +1,7 @@
 # Demo Script
 
+Use separate owner and customer wallets, or separate browser profiles, so wallet-gated states are clear during the demo.
+
 1. Open the home page and explain the product in one sentence: Web3 stamp-card loyalty for real-world visits.
 2. Switch the language once and confirm the landing page, header, and app entry copy update together.
 3. Open `/app`, connect a wallet, optionally add a profile name, and create a loyalty program with an HTTPS icon URL.
