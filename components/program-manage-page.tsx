@@ -497,9 +497,9 @@ export function ProgramManagePage({
                   </div>
                 </section>
 
-                <Card>
+                <Card role="region" aria-labelledby="program-manage-settings-title">
                   <CardHeader>
-                    <CardTitle>{copy.settings}</CardTitle>
+                    <CardTitle id="program-manage-settings-title">{copy.settings}</CardTitle>
                     <CardDescription>{copy.updateProgram}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
