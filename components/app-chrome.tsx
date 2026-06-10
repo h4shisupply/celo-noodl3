@@ -157,7 +157,7 @@ function WalletRequiredGate({
       : dictionary.account.noWalletDescription;
 
   return (
-    <section className="mx-auto max-w-xl pt-8 md:pt-14">
+    <section className="mx-auto max-w-xl pt-8 md:pt-14" aria-labelledby={titleId}>
       <EmptyState
         titleId={titleId}
         title={title}
