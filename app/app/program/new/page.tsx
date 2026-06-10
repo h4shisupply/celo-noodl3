@@ -5,7 +5,7 @@ import { publicEnv } from "../../../../lib/env";
 
 export const metadata: Metadata = {
   title: "Create program",
-  description: "Create a noodl3 stamp card with a shop icon, visit goal, and reward."
+  description: "Create a noodl3 QR stamp card with a shop icon, visit goal, and reward."
 };
 
 export default function Page() {
