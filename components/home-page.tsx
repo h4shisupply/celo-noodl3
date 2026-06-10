@@ -306,12 +306,15 @@ export function HomePage({ locale }: { locale: Locale }) {
       <section id="faq" className="scroll-mt-6 py-10 md:py-14" aria-labelledby="home-faq-title">
         <SectionIntro eyebrow={copy.faq.eyebrow} title={copy.faq.title} titleId="home-faq-title" />
         <div className="mt-7 grid gap-4 md:grid-cols-2">
-          {copy.faq.items.map((item) => (
+          {copy.faq.items.map((item, index) => (
             <article
               key={item.question}
+              aria-labelledby={`home-faq-item-${index}`}
               className="rounded-lg border border-line bg-panel/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur"
             >
-              <h3 className="text-base font-semibold text-ink">{item.question}</h3>
+              <h3 id={`home-faq-item-${index}`} className="text-base font-semibold text-ink">
+                {item.question}
+              </h3>
               <p className="mt-3 text-sm leading-6 text-muted">{item.answer}</p>
             </article>
           ))}
