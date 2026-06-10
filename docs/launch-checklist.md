@@ -53,6 +53,7 @@
 - Confirm landing page sections expose accessible names from their visible headings.
 - Confirm landing page FAQ cards expose accessible names from their question headings.
 - Confirm dashboard cards, reward tickets, customer summaries, and metrics use semantic list or description-list markup.
+- Confirm dashboard stamp cards, managed programs, and reward claims expose accessible names from visible card text.
 - Confirm progress meters show matching visible and announced totals.
 - Confirm status updates and QR scanner feedback announce through live regions.
 - Confirm QR scanner announces the active camera state after permission is granted and associates it with the scanner video.
