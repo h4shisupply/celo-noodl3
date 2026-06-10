@@ -16,6 +16,7 @@ export function BrandMark({ href }: { href: string }) {
         height={40}
         aria-hidden="true"
         decoding="async"
+        draggable={false}
         className="h-10 w-10 shrink-0 rounded-lg shadow-card"
       />
       <span className="text-lg font-semibold text-ink">
