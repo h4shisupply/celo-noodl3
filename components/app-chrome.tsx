@@ -90,7 +90,10 @@ export function AppChrome({
       ) : (
         <>
           {title || description || eyebrow ? (
-            <section className="space-y-4 pb-2 md:space-y-5">
+            <section
+              className="space-y-4 pb-2 md:space-y-5"
+              aria-labelledby={title ? titleId : undefined}
+            >
               {backHref ? (
                 <Link
                   href={backHref}
