@@ -1,6 +1,7 @@
 # Launch Checklist
 
 ## Contract
+- Confirm the local Node version matches `.nvmrc` before installing dependencies or running release checks.
 - Deploy a fresh incompatible `Noodl3Loyalty` contract on Celo Sepolia.
 - Set `NEXT_PUBLIC_NOODL3_CONTRACT_ADDRESS_SEPOLIA`.
 - Set `NOODL3_CONTRACT_ADDRESS_SEPOLIA` for scripts.
