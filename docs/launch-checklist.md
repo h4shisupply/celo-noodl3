@@ -40,6 +40,7 @@
 - Confirm keyboard focus is visible on header links, account menu controls, QR actions, and form fields.
 - Confirm loading actions expose their busy state while disabled.
 - Confirm app pages expose a named main landmark from the visible page heading.
+- Confirm wallet-required states expose a named main landmark from the visible gate heading.
 - Confirm landing page grouped stats, checklists, and card grids use semantic list or description-list markup.
 - Confirm dashboard cards, reward tickets, customer summaries, and metrics use semantic list or description-list markup.
 - Confirm progress meters show matching visible and announced totals.
