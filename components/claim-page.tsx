@@ -242,9 +242,9 @@ export function ClaimPage({
               </>
             ) : null}
 
-            <Card>
+            <Card role="region" aria-labelledby="claim-details-title">
               <CardHeader>
-                <CardTitle>{copy.claimTitle}</CardTitle>
+                <CardTitle id="claim-details-title">{copy.claimTitle}</CardTitle>
                 <CardDescription>{copy.claimDescription}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-5">
