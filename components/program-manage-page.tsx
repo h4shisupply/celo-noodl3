@@ -335,6 +335,7 @@ export function ProgramManagePage({
           <>
             <section
               aria-labelledby="program-manage-summary-title"
+              aria-describedby="program-manage-summary-description"
               className="surface-panel stamp-pattern flex flex-col gap-4 rounded-lg p-5 shadow-float sm:flex-row sm:items-center"
             >
               <Avatar name={program.name} imageUrl={program.iconUrl} size="lg" />
@@ -348,7 +349,12 @@ export function ProgramManagePage({
                 >
                   {program.name}
                 </h2>
-                <p className="break-words text-sm leading-6 text-muted">{program.rewardDescription}</p>
+                <p
+                  id="program-manage-summary-description"
+                  className="break-words text-sm leading-6 text-muted"
+                >
+                  {program.rewardDescription}
+                </p>
               </div>
             </section>
 
