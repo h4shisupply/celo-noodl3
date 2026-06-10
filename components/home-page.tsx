@@ -136,7 +136,7 @@ export function HomePage({ locale }: { locale: Locale }) {
   ];
 
   return (
-    <main className="pb-16 md:pb-20">
+    <main className="pb-16 md:pb-20" aria-labelledby="home-hero-title">
       <SiteHeader
         brandHref="/"
         items={navItems}
@@ -147,7 +147,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <div className="max-w-3xl space-y-4 md:space-y-6">
           <AccentPill icon={Sparkles}>{copy.hero.eyebrow}</AccentPill>
           <div className="space-y-4">
-            <h1 className="max-w-4xl text-[1.75rem] font-semibold leading-[1.04] text-ink sm:text-5xl lg:text-6xl">
+            <h1 id="home-hero-title" className="max-w-4xl text-[1.75rem] font-semibold leading-[1.04] text-ink sm:text-5xl lg:text-6xl">
               {copy.hero.title}
             </h1>
             <p className="max-w-2xl text-sm leading-6 text-muted sm:text-base sm:leading-8 md:text-lg">
