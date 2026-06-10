@@ -35,6 +35,7 @@ export function AppChrome({
   const { dictionary } = useLocale();
   const [profileOpen, setProfileOpen] = useState(false);
   const titleId = useId();
+  const descriptionId = useId();
   const shouldGateWallet = !walletState.account;
 
   return (
@@ -93,6 +94,7 @@ export function AppChrome({
             <section
               className="space-y-4 pb-2 md:space-y-5"
               aria-labelledby={title ? titleId : undefined}
+              aria-describedby={description ? descriptionId : undefined}
             >
               {backHref ? (
                 <Link
@@ -118,7 +120,9 @@ export function AppChrome({
                   </h1>
                 ) : null}
                 {description ? (
-                  <p className="break-words text-base leading-8 text-muted">{description}</p>
+                  <p id={descriptionId} className="break-words text-base leading-8 text-muted">
+                    {description}
+                  </p>
                 ) : null}
               </div>
             </section>
