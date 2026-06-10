@@ -261,6 +261,7 @@ export function QrScanner({
                 className="sr-only"
                 role="status"
                 aria-live="polite"
+                aria-atomic="true"
               >
                 {qrCopy.cameraActive}
               </p>
