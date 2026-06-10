@@ -56,6 +56,8 @@ export function QrActionBar({
   const [notice, setNotice] = useState<string | null>(null);
 
   async function handleCopy() {
+    setNotice(null);
+
     try {
       await navigator.clipboard.writeText(value);
       setNotice(labels.copied);
