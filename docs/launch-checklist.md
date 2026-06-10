@@ -53,6 +53,7 @@
 - Confirm account and select popovers close from outside pointer input on mouse, touch, and pen.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative and remote UI images stay non-blocking and hidden from assistive tech when appropriate.
+- Confirm landing page decorative icon treatments stay hidden from assistive tech.
 - Confirm decorative images inside links and controls do not trigger drag interactions.
 - Confirm Escape closes temporary overlays such as the mobile menu, account menu, profile dialog, and QR scanner.
 - Confirm modal backdrops close temporary dialogs from outside pointer input where supported.
