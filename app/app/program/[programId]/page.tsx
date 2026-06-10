@@ -8,7 +8,7 @@ import { parseProgramId } from "../../../../lib/program";
 
 export const metadata: Metadata = {
   title: "Stamp card",
-  description: "Collect stamps, track progress, and claim rewards from a noodl3 card."
+  description: "Collect QR stamps, track progress, and claim rewards from a noodl3 card."
 };
 
 type ProgramRouteProps = {
