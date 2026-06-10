@@ -97,7 +97,10 @@ export function AppAccountBar({
   }, [isMenuOpen]);
 
   return (
-    <header className="py-5 md:py-6">
+    <header
+      className="py-5 md:py-6"
+      aria-label={account ? dictionary.account.connectedWallet : undefined}
+    >
       <div className="flex items-center justify-between gap-4">
         <BrandMark href="/app" />
 
