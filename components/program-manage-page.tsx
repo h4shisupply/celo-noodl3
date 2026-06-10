@@ -503,10 +503,16 @@ export function ProgramManagePage({
                   </div>
                 </section>
 
-                <Card role="region" aria-labelledby="program-manage-settings-title">
+                <Card
+                  role="region"
+                  aria-labelledby="program-manage-settings-title"
+                  aria-describedby="program-manage-settings-description"
+                >
                   <CardHeader>
                     <CardTitle id="program-manage-settings-title">{copy.settings}</CardTitle>
-                    <CardDescription>{copy.updateProgram}</CardDescription>
+                    <CardDescription id="program-manage-settings-description">
+                      {copy.updateProgram}
+                    </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <Field label={copy.programName}>
