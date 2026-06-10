@@ -282,7 +282,12 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section id="proof" className="scroll-mt-6 py-10 md:py-14" aria-labelledby="home-proof-title">
+      <section
+        id="proof"
+        className="scroll-mt-6 py-10 md:py-14"
+        aria-labelledby="home-proof-title"
+        aria-describedby="home-proof-description"
+      >
         <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <ul className="order-2 grid gap-4 sm:grid-cols-2 lg:order-1">
             {copy.proof.items.map((item, index) => {
@@ -304,6 +309,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               title={copy.proof.title}
               description={copy.proof.description}
               titleId="home-proof-title"
+              descriptionId="home-proof-description"
             />
           </div>
         </div>
