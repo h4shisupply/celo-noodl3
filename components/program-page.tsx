@@ -278,7 +278,11 @@ export function ProgramPage({
             icon={<Stamp className="h-5 w-5" />}
           />
         ) : (
-          <Card className="overflow-hidden shadow-float">
+          <Card
+            role="region"
+            aria-labelledby="stamp-card-details-title"
+            className="overflow-hidden shadow-float"
+          >
             <CardHeader className="stamp-pattern space-y-4 border-b border-line bg-panel-soft">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="flex min-w-0 items-center gap-4">
@@ -287,7 +291,7 @@ export function ProgramPage({
                     <Badge dir="ltr" variant={program.active ? "accent" : "danger"}>
                       {formatProgramCode(program.id)} {!program.active ? `· ${copy.inactive}` : ""}
                     </Badge>
-                    <CardTitle>{program.name}</CardTitle>
+                    <CardTitle id="stamp-card-details-title">{program.name}</CardTitle>
                     <CardDescription>{program.rewardDescription}</CardDescription>
                   </div>
                 </div>
