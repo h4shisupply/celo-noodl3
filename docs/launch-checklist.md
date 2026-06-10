@@ -17,6 +17,7 @@
 - Confirm fixed QR renders locally without a third-party QR image URL.
 - Confirm fixed QR copy, share fallback, SVG download, and print sheet actions work.
 - Confirm QR action feedback resets before a new copy, share, download, print, or open action.
+- Confirm QR action feedback clears when regenerated QR content changes.
 - Confirm visible and printable QR images expose accessible names.
 - Confirm QR open actions launch the visit or claim link in a separate tab.
 - Confirm QR open actions do not send the current app page as the referrer.
