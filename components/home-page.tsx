@@ -360,7 +360,11 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="py-10 md:py-14" aria-labelledby="home-final-cta-title">
+      <section
+        className="py-10 md:py-14"
+        aria-labelledby="home-final-cta-title"
+        aria-describedby="home-final-cta-description"
+      >
         <div className="stamp-pattern rounded-lg border border-line bg-panel/88 p-6 text-center shadow-card backdrop-blur md:p-10">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
             {copy.finalCta.eyebrow}
@@ -368,7 +372,10 @@ export function HomePage({ locale }: { locale: Locale }) {
           <h2 id="home-final-cta-title" className="mx-auto mt-4 max-w-3xl text-3xl font-semibold text-ink md:text-5xl">
             {copy.finalCta.title}
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-muted">
+          <p
+            id="home-final-cta-description"
+            className="mx-auto mt-4 max-w-2xl text-base leading-8 text-muted"
+          >
             {copy.finalCta.description}
           </p>
           <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
