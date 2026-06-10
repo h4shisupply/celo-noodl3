@@ -2,7 +2,7 @@
 
 import { Copy, Download, ExternalLink, Printer, Share2 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
-import { useEffect, useRef, useState, type ReactNode, type RefObject } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode, type RefObject } from "react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { StatusMessage } from "./ui/status-message";
@@ -188,10 +188,11 @@ export function QrDisplay({
   showPrint?: boolean;
   children?: ReactNode;
 }) {
+  const titleId = useId();
   const qrRef = useRef<SVGSVGElement | null>(null);
 
   return (
-    <Card className="overflow-hidden">
+    <Card role="region" aria-labelledby={titleId} className="overflow-hidden">
       <CardHeader className="stamp-pattern border-b border-line bg-panel-soft">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0 space-y-2">
@@ -200,7 +201,7 @@ export function QrDisplay({
                 {code}
               </p>
             ) : null}
-            <CardTitle>{title}</CardTitle>
+            <CardTitle id={titleId}>{title}</CardTitle>
             {description ? <CardDescription>{description}</CardDescription> : null}
           </div>
           {children}
