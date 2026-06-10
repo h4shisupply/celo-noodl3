@@ -274,6 +274,8 @@ export function HomePage({ locale }: { locale: Locale }) {
                   icon={Icon}
                   title={item.title}
                   description={item.description}
+                  titleId={`home-benefit-${index}-title`}
+                  descriptionId={`home-benefit-${index}-description`}
                   tone="accent"
                 />
               );
@@ -510,11 +512,15 @@ function FeatureCard({
   icon: Icon,
   title,
   description,
+  titleId,
+  descriptionId,
   tone
 }: {
   icon: LucideIcon;
   title: string;
   description: string;
+  titleId?: string;
+  descriptionId?: string;
   tone: "accent" | "mint";
 }) {
   const iconClasses =
@@ -523,15 +529,23 @@ function FeatureCard({
       : "border-accent-border bg-accent-soft text-accent";
 
   return (
-    <li className="rounded-lg border border-line bg-panel/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur">
+    <li
+      className="rounded-lg border border-line bg-panel/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur"
+      aria-labelledby={titleId}
+      aria-describedby={descriptionId}
+    >
       <span
         className={`grid h-10 w-10 place-items-center rounded-lg border ${iconClasses}`}
         aria-hidden="true"
       >
         <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
-      <h3 className="mt-4 text-base font-semibold text-ink">{title}</h3>
-      <p className="mt-2 text-sm leading-6 text-muted">{description}</p>
+      <h3 id={titleId} className="mt-4 text-base font-semibold text-ink">
+        {title}
+      </h3>
+      <p id={descriptionId} className="mt-2 text-sm leading-6 text-muted">
+        {description}
+      </p>
     </li>
   );
 }
