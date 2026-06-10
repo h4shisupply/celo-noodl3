@@ -51,6 +51,7 @@
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative and remote UI images stay non-blocking and hidden from assistive tech when appropriate.
 - Confirm Escape closes temporary overlays such as the mobile menu, account menu, profile dialog, and QR scanner.
+- Confirm modal backdrops close temporary dialogs from outside pointer input where supported.
 - Confirm modal overlays expose dialog names and descriptions to assistive tech.
 - Confirm profile validation errors are associated with the relevant name or avatar URL field.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
