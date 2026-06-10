@@ -315,7 +315,12 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section id="launch" className="scroll-mt-6 py-10 md:py-14" aria-labelledby="home-launch-title">
+      <section
+        id="launch"
+        className="scroll-mt-6 py-10 md:py-14"
+        aria-labelledby="home-launch-title"
+        aria-describedby="home-launch-description"
+      >
         <div className="rounded-lg border border-line bg-panel/88 p-5 shadow-card backdrop-blur md:p-8">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <SectionIntro
@@ -323,6 +328,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               title={copy.launch.title}
               description={copy.launch.description}
               titleId="home-launch-title"
+              descriptionId="home-launch-description"
             />
             <ul className="grid gap-3 sm:grid-cols-2">
               {copy.launch.checklist.map((item) => (
