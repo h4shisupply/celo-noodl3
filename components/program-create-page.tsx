@@ -259,6 +259,7 @@ export function ProgramCreatePage({
                   height={48}
                   aria-hidden="true"
                   decoding="async"
+                  draggable={false}
                   referrerPolicy="no-referrer"
                   className="h-12 w-12 rounded-lg border border-line object-cover"
                 />
