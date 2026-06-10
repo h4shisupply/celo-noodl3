@@ -462,7 +462,11 @@ export function ProgramManagePage({
                 aria-label={`${copy.dynamicQr} ${copy.settings}`}
                 className="space-y-6 xl:sticky xl:top-6 xl:self-start"
               >
-                <section className="space-y-4" aria-labelledby="program-manage-dynamic-qr-title">
+                <section
+                  className="space-y-4"
+                  aria-labelledby="program-manage-dynamic-qr-title"
+                  aria-describedby="program-manage-dynamic-qr-description"
+                >
                   <div className="space-y-2">
                     <h2
                       id="program-manage-dynamic-qr-title"
@@ -470,7 +474,12 @@ export function ProgramManagePage({
                     >
                       {copy.dynamicQr}
                     </h2>
-                    <p className="break-words text-sm leading-6 text-muted">{copy.dynamicQrHelp}</p>
+                    <p
+                      id="program-manage-dynamic-qr-description"
+                      className="break-words text-sm leading-6 text-muted"
+                    >
+                      {copy.dynamicQrHelp}
+                    </p>
                   </div>
                   <div className="space-y-4">
                     <Button
