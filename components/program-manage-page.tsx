@@ -617,9 +617,9 @@ export function ProgramManagePage({
               </aside>
             </div>
 
-            <Card>
+            <Card role="region" aria-labelledby="program-manage-claims-title">
               <CardHeader>
-                <CardTitle>{copy.rewardClaims}</CardTitle>
+                <CardTitle id="program-manage-claims-title">{copy.rewardClaims}</CardTitle>
                 <CardDescription>{copy.claimDescription}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
