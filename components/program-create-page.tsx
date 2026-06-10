@@ -253,7 +253,7 @@ export function ProgramCreatePage({
         </Card>
 
         <aside
-          aria-label={copy.previewCard}
+          aria-labelledby="program-create-preview-title program-create-preview-label"
           aria-describedby="program-create-preview-reward"
           className="surface-panel stamp-pattern h-fit rounded-lg p-3 lg:sticky lg:top-6"
         >
@@ -282,10 +282,13 @@ export function ProgramCreatePage({
                 </span>
               )}
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-ink">
+                <p id="program-create-preview-title" className="truncate text-sm font-semibold text-ink">
                   {name || copy.previewProgramName}
                 </p>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+                <p
+                  id="program-create-preview-label"
+                  className="text-xs font-semibold uppercase tracking-[0.12em] text-muted"
+                >
                   {copy.previewCard}
                 </p>
               </div>
