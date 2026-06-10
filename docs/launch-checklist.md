@@ -73,6 +73,7 @@
 - Confirm the app manifest icon, dashboard and create-program shortcuts, categories, language, theme color, standalone display mode, and portrait orientation work when installed on mobile.
 - Confirm package metadata keywords match the Celo, MiniPay, QR, wallet, and merchant reward surfaces.
 - Confirm package repository, homepage, and issue links point to the public noodl3 project.
+- Confirm root metadata keywords cover customer loyalty, wallet stamps, and merchant rewards.
 - Confirm installed app launches focus the existing app window when the platform supports launch handlers.
 - Confirm app and shortcut icons keep the logo visible inside safe maskable icon crops.
 - Confirm app route metadata descriptions summarize the dashboard, create, card, manager, and claim pages.
