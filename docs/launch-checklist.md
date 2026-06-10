@@ -23,6 +23,7 @@
 - Confirm static QR collects one stamp and immediate reuse fails before 20 hours.
 - Confirm dynamic QR opens `/app/program/[programId]?visit=dynamic&nonce=...&expires=...&sig=...`.
 - Confirm dynamic QR shows a countdown, expires after five minutes, and can be regenerated.
+- Confirm dynamic QR countdowns expose the remaining duration as machine-readable time.
 - Confirm dynamic QR generation shows an in-progress label while the action is disabled.
 - Confirm dynamic QR can be collected once and fails on reuse.
 - Confirm malformed or expired dynamic QR links show clear user-facing states.
