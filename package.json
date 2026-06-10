@@ -28,6 +28,7 @@
     "rewards",
     "stamp-card",
     "static-qr",
+    "visit-qr",
     "wallet"
   ],
   "private": true,
