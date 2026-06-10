@@ -59,6 +59,7 @@
 - Confirm language selection persists after refresh through the locale cookie.
 - Confirm custom select controls show their open and closed state visually.
 - Confirm the app manifest icon, dashboard and create-program shortcuts, language, theme color, standalone display mode, and portrait orientation work when installed on mobile.
+- Confirm installed app launches focus the existing app window when the platform supports launch handlers.
 - Confirm app and shortcut icons keep the logo visible inside safe maskable icon crops.
 - Confirm app route metadata descriptions summarize the dashboard, create, card, manager, and claim pages.
 - Confirm social preview metadata resolves against `NEXT_PUBLIC_APP_URL` and shows the expected title, description, and image.
