@@ -264,10 +264,12 @@ export function PrintableQrSheet({
   value: string;
 }) {
   const titleId = useId();
+  const subtitleId = useId();
 
   return (
     <section
       aria-labelledby={titleId}
+      aria-describedby={subtitleId}
       className="print-sheet hidden rounded-lg border border-line bg-panel p-8 text-center shadow-card"
     >
       <p dir="ltr" className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
@@ -276,7 +278,9 @@ export function PrintableQrSheet({
       <h2 id={titleId} className="mt-3 break-words text-3xl font-semibold text-ink">
         {programName}
       </h2>
-      <p className="mt-2 break-words text-sm leading-6 text-muted">{subtitle}</p>
+      <p id={subtitleId} className="mt-2 break-words text-sm leading-6 text-muted">
+        {subtitle}
+      </p>
       <div className="mx-auto mt-8 flex max-w-[18rem] justify-center rounded-lg border border-line bg-panel p-4">
         <QRCodeSVG
           value={value}
