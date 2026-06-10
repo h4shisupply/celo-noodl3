@@ -508,11 +508,13 @@ function ClaimSummaryCard({ claim }: { claim: ClaimRecord }) {
   const { locale } = useLocale();
   const copy = programCopy(locale);
   const titleId = useId();
+  const descriptionId = useId();
 
   return (
     <Card
       role="article"
       aria-labelledby={titleId}
+      aria-describedby={descriptionId}
       className="transition duration-200 hover:shadow-float"
     >
       <CardContent className="flex flex-col gap-4 pt-6 sm:flex-row sm:items-center sm:justify-between">
@@ -520,7 +522,7 @@ function ClaimSummaryCard({ claim }: { claim: ClaimRecord }) {
           <p id={titleId} dir="ltr" className="break-words text-sm font-semibold text-ink">
             {formatClaimCode(claim.id)} · {claim.rewardDescription}
           </p>
-          <p dir="ltr" className="text-sm text-muted">
+          <p id={descriptionId} dir="ltr" className="text-sm text-muted">
             {formatProgramCode(claim.programId)} ·{" "}
             <time dateTime={claim.claimedAt ? new Date(claim.claimedAt * 1000).toISOString() : undefined}>
               {formatDateTime(claim.claimedAt, locale)}
