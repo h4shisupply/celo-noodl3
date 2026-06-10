@@ -48,6 +48,7 @@
 - Confirm app pages expose a named main landmark from the visible page heading.
 - Confirm wallet-required states expose a named main landmark from the visible gate heading.
 - Confirm landing page grouped stats, checklists, and card grids use semantic list or description-list markup.
+- Confirm landing page sections expose accessible names from their visible headings.
 - Confirm dashboard cards, reward tickets, customer summaries, and metrics use semantic list or description-list markup.
 - Confirm progress meters show matching visible and announced totals.
 - Confirm status updates and QR scanner feedback announce through live regions.
