@@ -254,6 +254,7 @@ export function ProgramCreatePage({
 
         <aside
           aria-label={copy.previewCard}
+          aria-describedby="program-create-preview-reward"
           className="surface-panel stamp-pattern h-fit rounded-lg p-3 lg:sticky lg:top-6"
         >
           <div className="space-y-5 rounded-lg bg-panel p-5 shadow-[inset_0_0_0_1px_rgba(221,216,233,0.72)]">
@@ -307,7 +308,10 @@ export function ProgramCreatePage({
               ))}
             </div>
 
-            <div className="break-words rounded-lg border border-sun-border bg-sun-soft p-3 text-sm font-semibold leading-6 text-sun-strong">
+            <div
+              id="program-create-preview-reward"
+              className="break-words rounded-lg border border-sun-border bg-sun-soft p-3 text-sm font-semibold leading-6 text-sun-strong"
+            >
               <Gift className="mb-2 h-4 w-4" aria-hidden="true" />
               {rewardDescription || copy.previewReward}
             </div>
