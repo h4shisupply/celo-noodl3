@@ -349,12 +349,15 @@ export function HomePage({ locale }: { locale: Locale }) {
             <article
               key={item.question}
               aria-labelledby={`home-faq-item-${index}`}
+              aria-describedby={`home-faq-answer-${index}`}
               className="rounded-lg border border-line bg-panel/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur"
             >
               <h3 id={`home-faq-item-${index}`} className="text-base font-semibold text-ink">
                 {item.question}
               </h3>
-              <p className="mt-3 text-sm leading-6 text-muted">{item.answer}</p>
+              <p id={`home-faq-answer-${index}`} className="mt-3 text-sm leading-6 text-muted">
+                {item.answer}
+              </p>
             </article>
           ))}
         </div>
