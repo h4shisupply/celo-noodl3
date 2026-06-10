@@ -86,7 +86,7 @@ export function AppChrome({
       ) : null}
 
       {shouldGateWallet ? (
-        <WalletRequiredGate walletState={walletState} />
+        <WalletRequiredGate titleId={titleId} walletState={walletState} />
       ) : (
         <>
           {title || description || eyebrow ? (
@@ -136,8 +136,10 @@ export function AppChrome({
 }
 
 function WalletRequiredGate({
+  titleId,
   walletState
 }: {
+  titleId: string;
   walletState: AppChromeWalletState;
 }) {
   const { dictionary } = useLocale();
@@ -157,6 +159,7 @@ function WalletRequiredGate({
   return (
     <section className="mx-auto max-w-xl pt-8 md:pt-14">
       <EmptyState
+        titleId={titleId}
         title={title}
         description={gateDescription}
         icon={<WalletCards className="h-5 w-5" />}
