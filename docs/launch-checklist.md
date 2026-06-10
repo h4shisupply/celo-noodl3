@@ -22,6 +22,7 @@
 - Confirm QR action feedback clears when regenerated QR content changes.
 - Confirm QR display panels expose accessible names from their visible QR titles.
 - Confirm visible and printable QR images expose accessible names.
+- Confirm QR images expose visible helper copy as accessible descriptions when helper text is present.
 - Confirm QR open actions launch the visit or claim link in a separate tab.
 - Confirm QR open actions do not send the current app page as the referrer.
 - Confirm static QR collects one stamp and immediate reuse fails before 20 hours.
