@@ -18,7 +18,8 @@
     "minipay",
     "pwa",
     "qr",
-    "stamp-card"
+    "stamp-card",
+    "wallet"
   ],
   "private": true,
   "type": "module",
