@@ -103,6 +103,11 @@ export function ProfileDialog({
       aria-modal="true"
       aria-labelledby="profile-dialog-title"
       aria-describedby="profile-dialog-description"
+      onPointerDown={(event) => {
+        if (event.target === event.currentTarget) {
+          onClose();
+        }
+      }}
     >
       <Card className="max-h-[calc(100dvh-3rem)] w-full max-w-md overflow-y-auto">
         <CardHeader className="space-y-3">
