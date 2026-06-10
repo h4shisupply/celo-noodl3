@@ -111,6 +111,8 @@ export function QrActionBar({
           className="w-full sm:w-auto"
           aria-label={`${labels.download}: ${fileName}`}
           onClick={() => {
+            setNotice(null);
+
             if (qrRef.current) {
               downloadSvg(qrRef.current, fileName);
             }
