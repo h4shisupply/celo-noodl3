@@ -145,10 +145,13 @@ export function ProgramCreatePage({
       title={copy.createTitle}
       description={copy.createDescription}
     >
-      <section className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[minmax(0,1fr)_21rem]">
+      <section
+        className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[minmax(0,1fr)_21rem]"
+        aria-labelledby="program-create-details-title"
+      >
         <Card className="shadow-float">
           <CardHeader>
-            <CardTitle>{copy.createProgram}</CardTitle>
+            <CardTitle id="program-create-details-title">{copy.createProgram}</CardTitle>
             <CardDescription>{copy.createDescription}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">
