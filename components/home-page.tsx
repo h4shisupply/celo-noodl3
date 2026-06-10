@@ -416,7 +416,10 @@ function StepCard({
   return (
     <li className="rounded-lg border border-line bg-panel/88 p-4 shadow-[0_12px_34px_rgba(27,23,43,0.05)] backdrop-blur md:p-5">
       <div className="mb-5 flex items-center justify-between gap-3">
-        <span className="grid h-10 w-10 place-items-center rounded-lg border border-accent-border bg-accent-soft text-accent">
+        <span
+          className="grid h-10 w-10 place-items-center rounded-lg border border-accent-border bg-accent-soft text-accent"
+          aria-hidden="true"
+        >
           <Icon className="h-5 w-5" aria-hidden="true" />
         </span>
         <span className="font-mono text-xs font-semibold text-muted-soft">
@@ -447,7 +450,10 @@ function FeatureCard({
 
   return (
     <li className="rounded-lg border border-line bg-panel/88 p-5 shadow-[0_10px_30px_rgba(27,23,43,0.04)] backdrop-blur">
-      <span className={`grid h-10 w-10 place-items-center rounded-lg border ${iconClasses}`}>
+      <span
+        className={`grid h-10 w-10 place-items-center rounded-lg border ${iconClasses}`}
+        aria-hidden="true"
+      >
         <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
       <h3 className="mt-4 text-base font-semibold text-ink">{title}</h3>
