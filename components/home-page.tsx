@@ -300,6 +300,8 @@ export function HomePage({ locale }: { locale: Locale }) {
                   icon={Icon}
                   title={item.title}
                   description={item.description}
+                  titleId={`home-proof-${index}-title`}
+                  descriptionId={`home-proof-${index}-description`}
                   tone="mint"
                 />
               );
