@@ -189,10 +189,16 @@ export function QrDisplay({
   children?: ReactNode;
 }) {
   const titleId = useId();
+  const descriptionId = useId();
   const qrRef = useRef<SVGSVGElement | null>(null);
 
   return (
-    <Card role="region" aria-labelledby={titleId} className="overflow-hidden">
+    <Card
+      role="region"
+      aria-labelledby={titleId}
+      aria-describedby={description ? descriptionId : undefined}
+      className="overflow-hidden"
+    >
       <CardHeader className="stamp-pattern border-b border-line bg-panel-soft">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0 space-y-2">
@@ -202,7 +208,9 @@ export function QrDisplay({
               </p>
             ) : null}
             <CardTitle id={titleId}>{title}</CardTitle>
-            {description ? <CardDescription>{description}</CardDescription> : null}
+            {description ? (
+              <CardDescription id={descriptionId}>{description}</CardDescription>
+            ) : null}
           </div>
           {children}
         </div>
