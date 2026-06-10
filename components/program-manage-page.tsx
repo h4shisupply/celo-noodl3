@@ -390,6 +390,7 @@ export function ProgramManagePage({
                         autoCorrect="off"
                         dir="ltr"
                         enterKeyHint="done"
+                        inputMode="text"
                         spellCheck={false}
                         aria-label={copy.customerWallet}
                         required
