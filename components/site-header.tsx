@@ -127,7 +127,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
   };
 
   return (
-    <header className="py-4 md:py-5" ref={headerRef}>
+    <header className="py-4 md:py-5" ref={headerRef} aria-label={dictionary.common.landingPage}>
       <div className="flex items-center justify-between gap-6">
         <BrandMark href={brandHref} />
 
