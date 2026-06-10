@@ -281,6 +281,7 @@ export function ProgramPage({
           <Card
             role="region"
             aria-labelledby="stamp-card-details-title"
+            aria-describedby="stamp-card-details-description"
             className="overflow-hidden shadow-float"
           >
             <CardHeader className="stamp-pattern space-y-4 border-b border-line bg-panel-soft">
@@ -292,7 +293,9 @@ export function ProgramPage({
                       {formatProgramCode(program.id)} {!program.active ? `· ${copy.inactive}` : ""}
                     </Badge>
                     <CardTitle id="stamp-card-details-title">{program.name}</CardTitle>
-                    <CardDescription>{program.rewardDescription}</CardDescription>
+                    <CardDescription id="stamp-card-details-description">
+                      {program.rewardDescription}
+                    </CardDescription>
                   </div>
                 </div>
               </div>
