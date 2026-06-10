@@ -375,9 +375,9 @@ export function ProgramManagePage({
                   />
                 </div>
 
-                <Card>
+                <Card role="region" aria-labelledby="program-manage-customers-title">
                   <CardHeader>
-                    <CardTitle>{copy.customers}</CardTitle>
+                    <CardTitle id="program-manage-customers-title">{copy.customers}</CardTitle>
                     <CardDescription>{copy.issueManual}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-5">
