@@ -53,6 +53,7 @@
 - Confirm modal overlays expose dialog names and descriptions to assistive tech.
 - Confirm profile validation errors are associated with the relevant name or avatar URL field.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
+- Confirm mobile landing navigation closes from outside pointer input on mouse, touch, and pen.
 - Confirm the language switcher announces the current language and selected state.
 - Confirm language selection persists after refresh through the locale cookie.
 - Confirm custom select controls show their open and closed state visually.
