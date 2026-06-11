@@ -52,6 +52,6 @@
 ## Slide 8
 - Next steps
 - Real merchant pilots
-- Printable QR kits
+- Printable fixed visit QR kits
 - Analytics and repeat-rate reporting
 - Optional owner delegation after V1
