@@ -779,7 +779,7 @@ const enHomeCopy: HomeCopy = {
     description:
       "Create the card, place the visit QR, collect real stamps, and validate rewards from the shop owner wallet.",
     checklist: [
-      "Create a branded stamp card from the shop owner wallet.",
+      "Create a branded stamp card with a reward promise and visit goal from the shop owner wallet.",
       "Print or download the reusable visit QR.",
       "Use live QR for owner-led check-ins when needed.",
       "Let customers collect stamps at the counter.",
@@ -953,7 +953,7 @@ const ptHomeCopy: HomeCopy = {
     description:
       "Crie o cartão, posicione o QR de visita, carimbe visitas reais e valide recompensas pela carteira do lojista.",
     checklist: [
-      "Criar um cartão de selos pela carteira do lojista.",
+      "Criar um cartão de selos com promessa da recompensa e meta de visitas pela carteira do lojista.",
       "Imprimir ou baixar o QR de visita reutilizável.",
       "Usar QR ao vivo quando o lojista quiser guiar o check-in.",
       "Permitir que clientes carimbem visitas no balcão.",
