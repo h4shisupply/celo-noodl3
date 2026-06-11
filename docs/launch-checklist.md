@@ -15,7 +15,7 @@
 - Confirm the program manager opens for owner wallets.
 - Confirm the program manager back link returns to the QR stamp card.
 - Confirm the account menu can open the profile dialog, save a display name, and skip profile setup.
-- Confirm fixed QR opens `/app/program/[programId]?visit=static`.
+- Confirm fixed visit QR opens `/app/program/[programId]?visit=static`.
 - Confirm fixed QR renders locally without a third-party QR image URL.
 - Confirm fixed QR copy, share fallback, SVG download, and print sheet actions work.
 - Confirm QR action feedback resets before a new copy, share, download, print, or open action.
