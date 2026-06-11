@@ -104,7 +104,7 @@ npm run build
 npm run dev
 ```
 
-After the dev server starts, open `http://localhost:3000/app` for the wallet-aware loyalty dashboard.
+After the dev server starts, open `http://localhost:3000/app` for the wallet-aware QR stamp card dashboard.
 For phone-based QR testing on the same network, use `npm run dev:mobile` so the dev server binds to `0.0.0.0`.
 
 ## Deploy And Seed
