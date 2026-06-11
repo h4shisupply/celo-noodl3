@@ -804,7 +804,7 @@ const enHomeCopy: HomeCopy = {
         answer: "Printed QR is reusable for 20-hour self-stamps. Live QR is owner-generated, expires in minutes, and is best for guided check-ins."
       },
       {
-        question: "How is a reward protected?",
+        question: "How is a reward ticket protected?",
         answer: "Each reward ticket is validated once by the shop owner wallet. After that, the app shows it as used."
       },
       {
@@ -978,7 +978,7 @@ const ptHomeCopy: HomeCopy = {
         answer: "QR impresso é reutilizável para selos a cada 20 horas. QR ao vivo é gerado pelo lojista, expira em minutos e funciona melhor para check-ins guiados."
       },
       {
-        question: "Como a recompensa fica protegida?",
+        question: "Como o ticket de recompensa fica protegido?",
         answer: "Cada ticket de recompensa é validado uma vez pela carteira do lojista. Depois disso, o app mostra que ele já foi usado."
       },
       {
