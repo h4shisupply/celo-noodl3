@@ -757,7 +757,7 @@ const enHomeCopy: HomeCopy = {
     items: [
       {
         title: "Printed QR",
-        description: "A reusable counter sheet for daily visit stamps, with a 20-hour wallet cooldown."
+        description: "A reusable counter sheet for visit stamps, with a 20-hour wallet cooldown."
       },
       {
         title: "Live QR",
@@ -931,7 +931,7 @@ const ptHomeCopy: HomeCopy = {
     items: [
       {
         title: "QR impresso",
-        description: "Folha reutilizável de balcão para selos de visita, com intervalo de 20 horas por carteira."
+        description: "Folha reutilizável para selos de visita no balcão, com intervalo de 20 horas por carteira."
       },
       {
         title: "QR ao vivo",
