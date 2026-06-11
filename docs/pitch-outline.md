@@ -36,7 +36,7 @@
 - Create program
 - Show fixed visit QR
 - Customer collects a daily static stamp
-- Generate dynamic QR
+- Generate dynamic visit QR
 - Customer collects instantly
 - Customer claims reward
 - Owner consumes claim
