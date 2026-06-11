@@ -38,7 +38,7 @@
 - Customer collects a daily static stamp
 - Generate dynamic visit QR
 - Customer collects one dynamic stamp
-- Customer creates reward claim
+- Customer creates reward ticket
 - Owner validates each reward ticket once
 
 ## Slide 7
