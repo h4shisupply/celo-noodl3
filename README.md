@@ -84,7 +84,7 @@ Design choices:
 - Program IDs are incrementing `uint256` values.
 - Program icon URLs are required HTTPS URLs stored onchain with the program.
 - Static visit QR lets each wallet collect one stamp every 20 hours when enabled.
-- Dynamic visit QR signs `chainId`, `contract`, `programId`, `nonce`, and `expiresAt`; each check-in nonce can be used once and must be signed by the owner.
+- Dynamic visit QR signs `chainId`, `contract`, `programId`, `nonce`, and `expiresAt`; the app generates five-minute expiries, and each check-in nonce can be used once.
 - Progress is stored as `mapping(user => mapping(programId => uint32))`.
 - Reward ticket claims are internal records, not NFTs.
 - Dashboard reads direct onchain indexes instead of requiring event indexing.
