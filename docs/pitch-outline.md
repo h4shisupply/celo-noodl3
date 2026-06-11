@@ -38,7 +38,7 @@
 - Customer collects a daily static stamp
 - Generate dynamic visit QR
 - Customer collects instantly
-- Customer claims reward
+- Customer creates reward claim
 - Owner consumes reward claim
 
 ## Slide 7
