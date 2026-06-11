@@ -17,7 +17,7 @@ The core loop is simple:
 
 ## Product Shape
 
-- Self-serve loyalty program creation
+- Self-serve QR stamp card creation
 - Local visit and reward QR rendering, sharing, SVG download, and printable counter sheets
 - No catalog, menu, cart, item checkout, or payment requirement in V1
 - Bilingual runtime copy: `pt-BR` and `English`
