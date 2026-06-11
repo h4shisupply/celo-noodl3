@@ -28,7 +28,7 @@ The core loop is simple:
 - Onchain loyalty progress per program
 - Static visit QR with one stamp per wallet every 20 hours
 - Dynamic visit QR with one-use owner-signed payloads
-- Reward ticket QR with backup codes for counter validation
+- Reward ticket QR with backup codes for owner counter validation
 - Internal non-transferable claims instead of points tokens or NFTs
 
 ## Routes
