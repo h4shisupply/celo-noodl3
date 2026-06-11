@@ -1,6 +1,6 @@
 # noodl3
 
-`noodl3` is a Celo-native loyalty app for real-world visit stamp cards.
+`noodl3` is a Celo-native QR stamp-card loyalty app for real-world visits.
 
 The product is split into two layers:
 
