@@ -18,7 +18,7 @@
 - Confirm fixed visit QR opens `/app/program/[programId]?visit=static`.
 - Confirm fixed visit QR renders locally without a third-party QR image URL.
 - Confirm fixed visit QR copy, share fallback, SVG download, and print sheet actions work.
-- Confirm QR action feedback resets before a new copy, share, download, print, or open action.
+- Confirm QR action feedback resets before a new copy, share, SVG download, print, or open action.
 - Confirm QR action feedback clears when regenerated QR content changes.
 - Confirm QR display panels expose accessible names from their visible QR titles.
 - Confirm visible and printable QR images expose accessible names.
