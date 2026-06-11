@@ -11,7 +11,7 @@
 ## Product
 - Confirm a fresh wallet can create a QR stamp card.
 - Confirm owner and customer demo steps use separate wallets or browser profiles for wallet-gated states.
-- Confirm program creation requires a public HTTPS icon URL.
+- Confirm QR stamp card creation requires a public HTTPS icon URL.
 - Confirm the program manager opens for owner wallets.
 - Confirm the program manager back link returns to the program card.
 - Confirm the account menu can open the profile dialog, save a display name, and skip profile setup.
