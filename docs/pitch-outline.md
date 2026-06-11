@@ -37,7 +37,7 @@
 - Show fixed visit QR
 - Customer collects a daily static stamp
 - Generate dynamic visit QR
-- Customer collects instantly
+- Customer collects one dynamic stamp
 - Customer creates reward claim
 - Owner validates reward claim once
 
