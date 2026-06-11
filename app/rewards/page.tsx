@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Rewards",
-  description: "Redirect to the noodl3 dashboard for reward claims and stamp cards."
+  description: "Redirect to the noodl3 dashboard for reward claims and QR stamp cards."
 };
 
 export default function Page() {
