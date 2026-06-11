@@ -2,7 +2,7 @@
 
 ## Slide 1
 - noodl3
-- Web3 loyalty stamp cards for real-world visits
+- Celo-native QR stamp-card loyalty for real-world visits
 
 ## Slide 2
 - Problem
