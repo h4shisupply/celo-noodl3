@@ -29,7 +29,7 @@
 - Stamps are non-transferable contract state
 - Static visit QR allows one stamp per wallet every 20 hours
 - Dynamic visit QR uses owner-signed, expiring, one-use check-in payloads
-- Rewards use one-time ticket claims
+- Rewards use one-time reward tickets
 
 ## Slide 6
 - Demo loop
