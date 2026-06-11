@@ -90,7 +90,7 @@
 - Confirm root metadata keywords cover customer loyalty, QR code, visit QR, wallet stamps, and merchant rewards.
 - Confirm installed app launches focus the existing app window when the platform supports launch handlers.
 - Confirm app and shortcut icons keep the logo visible inside safe maskable icon crops.
-- Confirm app route metadata descriptions summarize the dashboard, create, QR stamp card, manager, and claim pages.
+- Confirm app route metadata descriptions summarize the dashboard, create QR stamp card, customer QR stamp card, manager, and claim pages.
 - Confirm social preview metadata resolves against `NEXT_PUBLIC_APP_URL` and shows the expected title, description, and image.
 - Check mobile and desktop layouts for:
   - home page
