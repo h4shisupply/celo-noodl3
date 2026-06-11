@@ -48,7 +48,7 @@ For a real pilot, the owner should:
 
 1. Create a QR stamp card with a square HTTPS icon, reward text, and visit count.
 2. Open the manager view and print the fixed visit QR counter sheet.
-3. Keep the printed QR at the register for customer self-stamps.
+3. Keep the printed fixed visit QR at the register for customer self-stamps.
 4. Use the dynamic visit QR for owner-led check-ins; it expires after five minutes and can be regenerated.
 5. Ask customers with full stamp cards to open their reward ticket QR.
 6. Validate the reward ticket from the owner wallet and confirm the used state before handing out the reward.
