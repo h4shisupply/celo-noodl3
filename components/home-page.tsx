@@ -699,7 +699,7 @@ const enHomeCopy: HomeCopy = {
   },
   workflow: {
     eyebrow: "How it works",
-    title: "Print a visit QR, stamp real visits, validate rewards.",
+    title: "Print a visit QR, stamp real visits, validate reward tickets.",
     description:
       "The flow matches the counter routine a small shop can run without extra hardware.",
     steps: [
@@ -873,7 +873,7 @@ const ptHomeCopy: HomeCopy = {
   },
   workflow: {
     eyebrow: "Como funciona",
-    title: "Imprima um QR de visita, carimbe visitas reais e valide recompensas.",
+    title: "Imprima um QR de visita, carimbe visitas reais e valide tickets de recompensa.",
     description:
       "O fluxo acompanha a rotina de balcão que uma pequena loja consegue rodar sem hardware extra.",
     steps: [
