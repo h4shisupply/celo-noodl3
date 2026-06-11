@@ -801,7 +801,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         question: "What is the difference between printed and live QR?",
-        answer: "Printed QR is reusable for daily self-stamps. Live QR is owner-generated, expires in minutes, and is best for guided check-ins."
+        answer: "Printed QR is reusable for 20-hour self-stamps. Live QR is owner-generated, expires in minutes, and is best for guided check-ins."
       },
       {
         question: "How is a reward protected?",
@@ -975,7 +975,7 @@ const ptHomeCopy: HomeCopy = {
       },
       {
         question: "Qual a diferença entre QR impresso e QR ao vivo?",
-        answer: "QR impresso é reutilizável para selos diários. QR ao vivo é gerado pelo lojista, expira em minutos e funciona melhor para check-ins guiados."
+        answer: "QR impresso é reutilizável para selos a cada 20 horas. QR ao vivo é gerado pelo lojista, expira em minutos e funciona melhor para check-ins guiados."
       },
       {
         question: "Como a recompensa fica protegida?",
