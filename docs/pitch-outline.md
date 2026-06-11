@@ -27,7 +27,7 @@
 - Onchain design
 - Programs are self-created by wallets
 - Stamps are non-transferable contract state
-- Static QR allows one stamp per wallet every 20 hours
+- Static visit QR allows one stamp per wallet every 20 hours
 - Dynamic QR is owner-signed, expiring, and one-use
 - Rewards become one-time claims
 
