@@ -46,7 +46,7 @@
 - Confirm browser-visible `NEXT_PUBLIC_` RPC URLs use public endpoints and private RPC endpoints stay in non-public vars.
 - Confirm wallet addresses, dates, and reward codes do not get auto-linked by mobile browser format detection.
 - Confirm wallet address entry fields stay left-to-right and avoid mobile autocorrect.
-- Confirm form fields use mobile keyboard hints for wallet addresses, URLs, names, rewards, and visit counts.
+- Confirm form fields use mobile keyboard hints for wallet addresses, URLs, names, reward promises, and visit goals.
 - Confirm keyboard focus is visible on header links, account menu controls, QR actions, and form fields.
 - Confirm loading actions expose their busy state while disabled.
 - Confirm app pages expose a named main landmark from the visible page heading.
