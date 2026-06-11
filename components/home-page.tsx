@@ -667,7 +667,7 @@ const enHomeCopy: HomeCopy = {
       "noodl3 turns a counter QR into a wallet stamp card. Customers scan during a visit, collect stamps in their wallet, and return with a reward ticket the shop owner validates once.",
     primaryCta: "Create stamp card",
     secondaryCta: "Open app",
-    footnote: "Built for quick setup, daily counter routines, and clear one-time rewards.",
+    footnote: "Built for quick setup, daily counter routines, and clear one-time reward tickets.",
     stats: [
       { value: "Visit QR", label: "One counter scan for everyday stamps" },
       { value: "Live QR", label: "Five-minute owner-led check-ins" },
@@ -841,7 +841,7 @@ const ptHomeCopy: HomeCopy = {
       "noodl3 transforma um QR de balcão em um cartão de selos na carteira. O cliente lê durante a visita, coleciona selos e volta com um ticket de recompensa que o lojista valida uma vez.",
     primaryCta: "Criar cartão de selos",
     secondaryCta: "Abrir app",
-    footnote: "Feito para configurar rápido, caber na rotina do balcão e evitar recompensa usada duas vezes.",
+    footnote: "Feito para configurar rápido, caber na rotina do balcão e evitar ticket de recompensa usado duas vezes.",
     stats: [
       { value: "QR de visita", label: "Um scan no balcão para selos do dia a dia" },
       { value: "QR ao vivo", label: "Check-ins guiados por cinco minutos" },
