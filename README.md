@@ -86,7 +86,7 @@ Design choices:
 - Static visit QR lets each wallet collect one stamp every 20 hours when enabled.
 - Dynamic visit QR signs `chainId`, `contract`, `programId`, `nonce`, and `expiresAt`; each check-in nonce can be used once and must be signed by the owner.
 - Progress is stored as `mapping(user => mapping(programId => uint32))`.
-- Reward claims are internal records, not NFTs.
+- Reward ticket claims are internal records, not NFTs.
 - Dashboard reads direct onchain indexes instead of requiring event indexing.
 
 ## Quick Start
