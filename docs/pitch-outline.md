@@ -34,7 +34,7 @@
 ## Slide 6
 - Demo loop
 - Create program
-- Show fixed QR
+- Show fixed visit QR
 - Customer collects a daily static stamp
 - Generate dynamic QR
 - Customer collects instantly
