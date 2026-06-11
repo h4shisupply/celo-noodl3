@@ -37,7 +37,7 @@
 - Show fixed visit QR actions
 - Customer collects one static stamp
 - Generate five-minute dynamic visit QR
-- Customer collects one dynamic stamp
+- Customer collects one dynamic stamp instantly
 - Customer creates reward ticket
 - Owner validates each reward ticket once
 
