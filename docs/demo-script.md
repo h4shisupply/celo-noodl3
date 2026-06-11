@@ -6,7 +6,7 @@ Use separate owner and customer wallets, or separate browser profiles, so wallet
 2. Switch the language once, refresh, and confirm the landing page, header, and app entry copy stay in sync.
 3. Open `/app`, connect a wallet, optionally add a profile name, and create a QR stamp card with an HTTPS icon URL, reward promise, and visit goal.
 4. Open the manager view and show the fixed visit QR actions: copy link, share, SVG download, and print sheet.
-5. Open the fixed visit QR as a customer, collect one static stamp, and confirm immediate reuse is blocked.
+5. Open the fixed visit QR as a customer, collect one static stamp, and confirm immediate reuse is blocked by the 20-hour cooldown.
 6. Generate a dynamic visit QR on an HTTPS or localhost demo URL, point out the five-minute countdown, scan it as a customer, and collect one dynamic stamp instantly.
 7. Call out the scanner camera-state message before the scan and the success feedback after the stamp lands.
 8. Regenerate the dynamic visit QR to show the owner-led check-in workflow.
