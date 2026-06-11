@@ -784,7 +784,7 @@ const enHomeCopy: HomeCopy = {
       "Use live QR for owner-led check-ins when needed.",
       "Let customers collect stamps at the counter.",
       "Open reward tickets with QR and backup code.",
-      "Validate each reward once from the shop owner wallet."
+      "Validate each reward ticket once from the shop owner wallet."
     ]
   },
   faq: {
@@ -958,7 +958,7 @@ const ptHomeCopy: HomeCopy = {
       "Usar QR ao vivo quando o lojista quiser guiar o check-in.",
       "Permitir que clientes carimbem visitas no balcão.",
       "Abrir tickets de recompensa com QR e código de apoio.",
-      "Validar cada recompensa uma vez pela carteira do lojista."
+      "Validar cada ticket de recompensa uma vez pela carteira do lojista."
     ]
   },
   faq: {
