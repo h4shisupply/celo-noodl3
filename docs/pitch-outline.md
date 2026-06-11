@@ -33,7 +33,7 @@
 
 ## Slide 6
 - Demo loop
-- Create program
+- Create QR stamp card
 - Show fixed visit QR
 - Customer collects a daily static stamp
 - Generate dynamic visit QR
