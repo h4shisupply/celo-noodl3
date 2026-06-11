@@ -35,7 +35,7 @@
 - Demo loop
 - Create QR stamp card with a reward promise and visit goal
 - Show fixed visit QR actions
-- Customer collects a daily static stamp
+- Customer collects one static stamp
 - Generate dynamic visit QR
 - Customer collects one dynamic stamp
 - Customer creates reward ticket
