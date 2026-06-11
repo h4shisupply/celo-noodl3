@@ -761,7 +761,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         title: "Live QR",
-        description: "An owner-signed QR that expires quickly and works for one customer check-in."
+        description: "An owner-signed QR that expires in five minutes and works for one customer check-in."
       },
       {
         title: "Reward ticket",
@@ -935,7 +935,7 @@ const ptHomeCopy: HomeCopy = {
       },
       {
         title: "QR ao vivo",
-        description: "QR assinado pelo lojista, com expiração curta, para check-in de um cliente."
+        description: "QR assinado pelo lojista, expira em cinco minutos e serve para check-in de um cliente."
       },
       {
         title: "Ticket de recompensa",
