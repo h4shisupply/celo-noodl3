@@ -33,7 +33,7 @@
 
 ## Slide 6
 - Demo loop
-- Create QR stamp card with a visit goal
+- Create QR stamp card with a reward promise and visit goal
 - Show fixed visit QR
 - Customer collects a daily static stamp
 - Generate dynamic visit QR
