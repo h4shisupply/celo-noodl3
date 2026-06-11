@@ -777,7 +777,7 @@ const enHomeCopy: HomeCopy = {
     eyebrow: "Counter launch",
     title: "A shop can launch the stamp loop in one sitting.",
     description:
-      "Create the card, place the visit QR, collect real stamps, and validate rewards from the shop owner wallet.",
+      "Create the card, place the visit QR, collect real stamps, and validate reward tickets from the shop owner wallet.",
     checklist: [
       "Create a branded stamp card with a reward promise and visit goal from the shop owner wallet.",
       "Print or download the reusable visit QR.",
@@ -951,7 +951,7 @@ const ptHomeCopy: HomeCopy = {
     eyebrow: "Lançamento no balcão",
     title: "A loja consegue lançar o loop de selos de uma vez.",
     description:
-      "Crie o cartão, posicione o QR de visita, carimbe visitas reais e valide recompensas pela carteira do lojista.",
+      "Crie o cartão, posicione o QR de visita, carimbe visitas reais e valide tickets de recompensa pela carteira do lojista.",
     checklist: [
       "Criar um cartão de selos com promessa da recompensa e meta de visitas pela carteira do lojista.",
       "Imprimir ou baixar o QR de visita reutilizável.",
