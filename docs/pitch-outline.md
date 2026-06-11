@@ -28,7 +28,7 @@
 - Programs are self-created by wallets
 - Stamps are non-transferable contract state
 - Static visit QR allows one stamp per wallet every 20 hours
-- Dynamic QR is owner-signed, expiring, and one-use
+- Dynamic visit QR is owner-signed, expiring, and one-use
 - Rewards become one-time claims
 
 ## Slide 6
