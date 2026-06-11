@@ -813,7 +813,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         question: "When should a live QR be used?",
-        answer: "Use live QR when the owner wants a short-lived code for the next customer instead of leaving the printed QR out."
+        answer: "Use live QR when the owner wants a five-minute code for the next customer instead of leaving the printed QR out."
       }
     ]
   },
@@ -987,7 +987,7 @@ const ptHomeCopy: HomeCopy = {
       },
       {
         question: "Quando usar o QR ao vivo?",
-        answer: "Use o QR ao vivo quando o lojista quiser um código curto para o próximo cliente em vez de deixar o QR impresso disponível."
+        answer: "Use o QR ao vivo quando o lojista quiser um código de cinco minutos para o próximo cliente em vez de deixar o QR impresso disponível."
       }
     ]
   },
