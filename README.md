@@ -5,7 +5,7 @@
 The product is split into two layers:
 
 - `/`: public landing page
-- `/app`: wallet-aware customer and owner experience for QR stamp cards, visit stamps, and reward claims
+- `/app`: wallet-aware customer and owner experience for QR stamp cards, visit stamps, and reward tickets
 
 The core loop is simple:
 
