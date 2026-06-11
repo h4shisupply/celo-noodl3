@@ -33,7 +33,8 @@
     "stamp-card",
     "static-visit-qr",
     "visit-qr",
-    "wallet"
+    "wallet",
+    "wallet-stamps"
   ],
   "private": true,
   "type": "module",
