@@ -14,4 +14,4 @@ Use separate owner and customer wallets, or separate browser profiles, so wallet
 10. Claim the reward from the customer card.
 11. Open `/app/claim/[claimId]`, show the reward ticket QR, backup code, and owner-wallet validation hint.
 12. Switch back to the owner wallet, validate the claim, and confirm that a second validation fails.
-13. End on the dashboard showing the customer card, program manager, and claim history.
+13. End on the dashboard showing the customer QR stamp card, program manager, and claim history.
