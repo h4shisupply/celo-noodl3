@@ -29,7 +29,7 @@
 - Confirm dynamic visit QR opens `/app/program/[programId]?visit=dynamic&nonce=...&expires=...&sig=...`.
 - Confirm dynamic visit QR shows a countdown, expires after five minutes, and can be regenerated.
 - Confirm dynamic visit QR countdowns expose the remaining duration as machine-readable time.
-- Confirm dynamic QR countdowns expose an accessible name for the active or expired timer state.
+- Confirm dynamic visit QR countdowns expose an accessible name for the active or expired timer state.
 - Confirm dynamic QR generation shows an in-progress label while the action is disabled.
 - Confirm dynamic QR can be collected once and fails on reuse.
 - Confirm malformed or expired dynamic QR links show clear user-facing states.
