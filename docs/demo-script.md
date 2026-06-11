@@ -7,7 +7,7 @@ Use separate owner and customer wallets, or separate browser profiles, so wallet
 3. Open `/app`, connect a wallet, optionally add a profile name, and create a loyalty program with an HTTPS icon URL.
 4. Open the manager view and show the printed visit QR actions: copy, share, download, and print sheet.
 5. Open the fixed visit QR as a customer, collect one static stamp, and confirm immediate reuse is blocked.
-6. Generate a live QR on an HTTPS or localhost demo URL, point out the five-minute countdown, scan it as a customer, and collect a stamp instantly.
+6. Generate a dynamic visit QR on an HTTPS or localhost demo URL, point out the five-minute countdown, scan it as a customer, and collect a stamp instantly.
 7. Call out the scanner camera-state message before the scan and the success feedback after the stamp lands.
 8. Regenerate the live QR to show the owner-led counter workflow.
 9. Issue enough stamps to reach the threshold.
