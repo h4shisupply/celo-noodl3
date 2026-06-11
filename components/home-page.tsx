@@ -716,7 +716,7 @@ const enHomeCopy: HomeCopy = {
         description: "Customers open the visit QR, connect a wallet, and add the stamp to their card."
       },
       {
-        title: "Unlock the reward",
+        title: "Create reward ticket",
         description: "A full card becomes a reward ticket with its own QR and backup code."
       },
       {
@@ -890,7 +890,7 @@ const ptHomeCopy: HomeCopy = {
         description: "Clientes abrem o QR de visita, conectam a carteira e adicionam o selo ao cartão."
       },
       {
-        title: "Libere a recompensa",
+        title: "Crie o ticket",
         description: "Um cartão completo vira ticket de recompensa com QR próprio e código de apoio."
       },
       {
