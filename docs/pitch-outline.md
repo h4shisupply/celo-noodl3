@@ -39,7 +39,7 @@
 - Generate dynamic visit QR
 - Customer collects instantly
 - Customer claims reward
-- Owner consumes claim
+- Owner consumes reward claim
 
 ## Slide 7
 - MVP boundaries
