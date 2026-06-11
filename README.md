@@ -40,7 +40,7 @@ The core loop is simple:
 - `/app/program/[programId]/manage`: owner visit QR and reward manager
 - `/app/claim/[claimId]`: reward ticket QR and owner validation
 - `/claim/[claimId]`: legacy reward claim link that redirects into `/app/claim/[claimId]`
-- `/app/rewards`, `/rewards`, `/merchant/verify`, `/verify`, `/success`, and old store URLs redirect into the `/app` dashboard
+- `/app/rewards`, `/rewards`, `/merchant/verify`, `/verify`, `/success`, and legacy store URLs redirect into the `/app` dashboard
 
 ## Merchant Pilot Flow
 
