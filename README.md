@@ -83,7 +83,7 @@ Design choices:
 - Every static, dynamic, or manual visit gives exactly one stamp.
 - Program IDs are incrementing `uint256` values.
 - Program icon URLs are required HTTPS URLs stored onchain with the program.
-- Static QR lets each wallet collect one stamp every 20 hours when enabled.
+- Static visit QR lets each wallet collect one stamp every 20 hours when enabled.
 - Dynamic visit QR signs `chainId`, `contract`, `programId`, `nonce`, and `expiresAt`; each check-in nonce can be used once and must be signed by the owner.
 - Progress is stored as `mapping(user => mapping(programId => uint32))`.
 - Reward claims are internal records, not NFTs.
