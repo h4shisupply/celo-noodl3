@@ -38,7 +38,7 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         name: "Create QR stamp card",
         short_name: "Create",
-        description: "Create a new noodl3 QR stamp card with a visit goal and reward.",
+        description: "Create a new noodl3 QR stamp card with a reward promise and visit goal.",
         url: "/app/program/new",
         icons: [
           {
