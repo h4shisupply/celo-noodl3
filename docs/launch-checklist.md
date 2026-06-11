@@ -36,7 +36,7 @@
 - Confirm manual stamp works for owner only.
 - Confirm customer progress reaches the reward threshold.
 - Confirm customer can create a reward claim.
-- Confirm reward claim QR renders locally and shows the backup code prominently.
+- Confirm reward ticket QR renders locally and shows the backup code prominently.
 - Confirm owner can consume the reward claim once.
 - Confirm non-owner wallets see the owner-wallet validation hint.
 
