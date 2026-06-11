@@ -769,7 +769,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         title: "Shop owner validation",
-        description: "The shop owner wallet validates the ticket, and used tickets show a clear used state."
+        description: "The shop owner wallet validates the reward ticket, and used tickets show a clear used state."
       }
     ]
   },
@@ -943,7 +943,7 @@ const ptHomeCopy: HomeCopy = {
       },
       {
         title: "Validação pelo lojista",
-        description: "A carteira do lojista valida o ticket, e tickets usados mostram um estado claro."
+        description: "A carteira do lojista valida o ticket de recompensa, e tickets usados mostram um estado claro."
       }
     ]
   },
