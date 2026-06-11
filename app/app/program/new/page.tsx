@@ -4,7 +4,7 @@ import { getDefaultChainId } from "../../../../lib/chains";
 import { publicEnv } from "../../../../lib/env";
 
 export const metadata: Metadata = {
-  title: "Create program",
+  title: "Create QR stamp card",
   description: "Create a noodl3 QR stamp card with a shop icon, visit goal, and reward."
 };
 
