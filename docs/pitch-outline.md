@@ -11,7 +11,7 @@
 
 ## Slide 3
 - Product
-- Any wallet creates a loyalty program
+- Any wallet creates a QR stamp card
 - Customers scan a visit QR and collect one Stamp / Selo per visit
 - Rewards unlock after the configured visit count
 - Owner validates a one-time reward claim
