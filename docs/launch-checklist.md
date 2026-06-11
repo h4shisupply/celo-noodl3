@@ -60,7 +60,7 @@
 - Confirm landing page FAQ cards expose accessible names from their question headings.
 - Confirm landing page feature and workflow cards expose accessible names and descriptions from visible card text.
 - Confirm dashboard cards, reward tickets, customer summaries, and metrics use semantic list or description-list markup.
-- Confirm dashboard QR stamp cards, managed programs, and reward claims expose accessible names from visible card text.
+- Confirm dashboard QR stamp cards, managed programs, and reward tickets expose accessible names from visible card text.
 - Confirm create QR stamp card preview cards expose accessible names and descriptions from visible preview text.
 - Confirm progress meters show matching visible and announced totals.
 - Confirm progress counter badges stay decorative when the progressbar announces the same totals.
