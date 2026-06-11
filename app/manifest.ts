@@ -24,7 +24,7 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         name: "Dashboard",
         short_name: "Dashboard",
-        description: "Open the wallet-aware stamp card dashboard.",
+        description: "Open the wallet-aware QR stamp card dashboard.",
         url: "/app",
         icons: [
           {
