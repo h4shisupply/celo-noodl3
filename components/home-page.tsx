@@ -821,7 +821,7 @@ const enHomeCopy: HomeCopy = {
     eyebrow: "Ready at the counter",
     title: "Launch a stamp card regulars can use today.",
     description:
-      "Start with one reward, one visit QR, and a loop built around the next visit.",
+      "Start with one reward promise, one visit QR, and a loop built around the next visit.",
     primaryCta: "Create stamp card",
     secondaryCta: "Open app"
   }
@@ -995,7 +995,7 @@ const ptHomeCopy: HomeCopy = {
     eyebrow: "Pronto para o balcão",
     title: "Lance um cartão que clientes recorrentes podem usar hoje.",
     description:
-      "Comece com uma recompensa, um QR de visita e um loop feito para a próxima visita.",
+      "Comece com uma promessa de recompensa, um QR de visita e um loop feito para a próxima visita.",
     primaryCta: "Criar cartão de selos",
     secondaryCta: "Abrir app"
   }
