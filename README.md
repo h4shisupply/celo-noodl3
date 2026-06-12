@@ -115,7 +115,7 @@ npm run seed:sepolia
 npm run verify:sepolia
 ```
 
-Mainnet equivalents:
+Mainnet equivalents, without a default seed step:
 
 ```bash
 npm run deploy:mainnet
