@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     "loyalty",
     "customer loyalty",
     "counter QR",
-    "dynamic visit QR",
+    "live visit QR",
     "live QR",
     "static visit QR",
     "visit QR",
