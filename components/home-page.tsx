@@ -664,7 +664,7 @@ const enHomeCopy: HomeCopy = {
     eyebrow: "QR stamp cards for real-world visits",
     title: "Give regulars a stamp card they cannot lose.",
     description:
-      "noodl3 turns a counter QR into a wallet stamp card. Customers scan during a visit, collect stamps in their wallet, and return with a reward ticket the shop owner validates once.",
+      "noodl3 turns a counter QR into a wallet stamp card. Customers scan during a visit, collect visit stamps in their wallet, and return with a reward ticket the shop owner validates once.",
     primaryCta: "Create stamp card",
     secondaryCta: "Open app",
     footnote: "Built for quick setup, daily counter routines, and clear one-time reward tickets.",
