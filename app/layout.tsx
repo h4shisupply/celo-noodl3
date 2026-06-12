@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s · noodl3"
   },
   description:
-    "Wallet QR stamp cards for real-world visits on Celo. Print a counter QR, collect visit stamps, and validate each reward ticket once.",
+    "Merchant QR stamp cards for real-world visits on Celo. Print a counter QR, collect visit stamps, and validate each reward ticket once.",
   manifest: "/manifest.webmanifest",
   metadataBase: new URL(publicEnv.appUrl),
   alternates: {
