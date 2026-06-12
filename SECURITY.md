@@ -13,7 +13,7 @@ Send a report to the repository owner with:
 - a clear description of the issue
 - affected app route, network, or contract address, if applicable
 - reproduction steps or proof-of-concept details
-- impact assessment
+- an impact assessment
 - any suggested mitigation
 
 If the report is valid, fixes will be prepared privately and disclosed after a patch is available.
