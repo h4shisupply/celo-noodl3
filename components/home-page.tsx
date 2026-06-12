@@ -777,7 +777,7 @@ const enHomeCopy: HomeCopy = {
     eyebrow: "Counter launch",
     title: "A shop can launch the stamp loop in one sitting.",
     description:
-      "Create the card, place the visit QR, collect real stamps, and validate reward tickets from the shop owner wallet.",
+      "Create the card, place the visit QR, collect visit stamps, and validate reward tickets from the shop owner wallet.",
     checklist: [
       "Create a branded stamp card with a reward promise and visit goal from the shop owner wallet.",
       "Print or download the reusable visit QR.",
