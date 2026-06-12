@@ -737,7 +737,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         title: "Counter-ready visit QR",
-        description: "Print the visit QR for self-service stamps or generate a live QR for owner-led check-ins."
+        description: "Print the visit QR for self-service visit stamps or generate a live QR for owner-led check-ins."
       },
       {
         title: "Wallet-held progress",
