@@ -12,7 +12,7 @@ Send a report to the repository owner with:
 
 - a clear description of the issue
 - affected app route, network, or contract address, if applicable
-- reproduction steps or a proof-of-concept report
+- reproduction steps or proof-of-concept details
 - impact assessment
 - any suggested mitigation
 
