@@ -729,7 +729,7 @@ const enHomeCopy: HomeCopy = {
     eyebrow: "Shop benefits",
     title: "Small-shop loyalty with less admin and clearer rewards.",
     description:
-      "noodl3 focuses on the jobs repeated at the counter: collect a visit, show progress, and validate a reward ticket.",
+      "noodl3 focuses on the jobs repeated at the counter: collect a visit stamp, show progress, and validate a reward ticket.",
     items: [
       {
         title: "Fast card setup",
