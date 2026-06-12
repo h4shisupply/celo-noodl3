@@ -4,7 +4,7 @@ import { HomePage } from "../components/home-page";
 import { resolveLocaleFromRequest } from "../lib/i18n";
 
 export const metadata: Metadata = {
-  title: "QR stamp cards for real visits",
+  title: "QR stamp cards for real-world visits",
   description:
     "Create counter QR stamp cards, collect wallet stamps, and validate one-time reward tickets on Celo."
 };
