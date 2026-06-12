@@ -843,7 +843,7 @@ const ptHomeCopy: HomeCopy = {
     secondaryCta: "Abrir app",
     footnote: "Feito para configurar rápido, caber na rotina do balcão e evitar ticket de recompensa usado duas vezes.",
     stats: [
-      { value: "QR de visita", label: "Um scan no balcão para selos do dia a dia" },
+      { value: "QR de visita", label: "Um scan no balcão para selos de visita" },
       { value: "QR ao vivo", label: "Check-ins guiados por cinco minutos" },
       { value: "Ticket", label: "Validado uma vez pela carteira do lojista" }
     ]
