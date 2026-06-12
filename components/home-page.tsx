@@ -801,7 +801,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         question: "What is the difference between printed and live QR?",
-        answer: "Printed QR is reusable for 20-hour self-stamps. Live QR is owner-generated, expires in five minutes, and is best for guided check-ins."
+        answer: "Printed QR is reusable for visit stamps every 20 hours. Live QR is owner-generated, expires in five minutes, and is best for guided check-ins."
       },
       {
         question: "How is a reward ticket protected?",
