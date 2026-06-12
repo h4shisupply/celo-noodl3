@@ -46,7 +46,7 @@
 - No catalog or item checkout
 - One stamp per visit
 - Owner-only management
-- Direct onchain indexes
+- Direct onchain indexes for dashboard reads
 - No NFT layer in V1
 
 ## Slide 8
