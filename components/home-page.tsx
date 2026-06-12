@@ -838,7 +838,7 @@ const ptHomeCopy: HomeCopy = {
     eyebrow: "Cartões de selos por QR",
     title: "Dê aos clientes recorrentes um cartão que eles não perdem.",
     description:
-      "noodl3 transforma um QR de balcão em um cartão de selos na carteira. O cliente lê durante a visita, coleciona selos e volta com um ticket de recompensa que o lojista valida uma vez.",
+      "noodl3 transforma um QR de balcão em um cartão de selos na carteira. O cliente lê durante a visita, coleciona selos de visita e volta com um ticket de recompensa que o lojista valida uma vez.",
     primaryCta: "Criar cartão de selos",
     secondaryCta: "Abrir app",
     footnote: "Feito para configurar rápido, caber na rotina do balcão e evitar ticket de recompensa usado duas vezes.",
