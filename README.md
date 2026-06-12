@@ -24,7 +24,7 @@ The core loop is simple:
 - `Selos` in Portuguese and `Stamps` in English
 - Accessible app structure with named landmarks, visible focus, progress meters, timer labels, and live QR scanner feedback
 - Installable app manifest with dashboard and create QR stamp card shortcut descriptions plus maskable icons
-- Installed launches prefer the existing app window when supported
+- Installed app launches prefer the existing app window when supported
 - Onchain loyalty progress per program
 - Printed visit QR with one stamp per wallet every 20 hours
 - Live visit QR with five-minute, one-use owner-signed check-in payloads
