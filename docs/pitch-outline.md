@@ -36,7 +36,7 @@
 - Create QR stamp card with a reward promise and visit goal
 - Show printed visit QR open, copy, share fallback, download, and print actions
 - Customer collects one visit stamp and sees the 20-hour reuse block
-- Generate five-minute live visit QR
+- Generate a five-minute live visit QR
 - Customer collects one visit stamp instantly
 - Customer creates reward ticket
 - Owner validates each reward ticket once
