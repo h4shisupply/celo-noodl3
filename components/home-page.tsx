@@ -669,7 +669,7 @@ const enHomeCopy: HomeCopy = {
     secondaryCta: "Open app",
     footnote: "Built for quick setup, daily counter routines, and clear one-time reward tickets.",
     stats: [
-      { value: "Visit QR", label: "One counter scan for everyday stamps" },
+      { value: "Visit QR", label: "One counter scan for visit stamps" },
       { value: "Live QR", label: "Five-minute owner-led check-ins" },
       { value: "Reward ticket", label: "Validated once by the shop owner wallet" }
     ]
