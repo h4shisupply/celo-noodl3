@@ -92,7 +92,7 @@
 - Confirm app and shortcut icons keep the logo visible inside safe maskable icon crops.
 - Confirm app route metadata descriptions summarize the landing page, dashboard, create QR stamp card, customer QR stamp card, manager, reward ticket, and legacy redirect pages.
 - Confirm social preview metadata resolves against `NEXT_PUBLIC_APP_URL` and shows the expected title, description, and image.
-- Check mobile and desktop layouts for:
+- Check mobile and desktop layouts for these routes:
   - home page
   - `/app`
   - `/app/program/new`
