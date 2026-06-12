@@ -7,9 +7,9 @@ Use separate owner and customer wallets, or separate browser profiles, so wallet
 3. Open `/app`, connect a wallet, optionally add a profile name, and create a QR stamp card with an HTTPS icon URL, reward promise, and visit goal.
 4. Open the manager view and show the printed visit QR actions: open link, copy link, share fallback, SVG download, and print sheet.
 5. Open the printed visit QR as a customer, collect one static stamp, and confirm immediate reuse is blocked by the 20-hour cooldown.
-6. Generate a dynamic visit QR on an HTTPS or localhost demo URL, point out the five-minute countdown, scan it as a customer, and collect one dynamic stamp instantly.
+6. Generate a live visit QR on an HTTPS or localhost demo URL, point out the five-minute countdown, scan it as a customer, and collect one visit stamp instantly.
 7. Call out the scanner camera-state message before the scan and the success feedback after the stamp lands.
-8. Regenerate the dynamic visit QR to show the owner-led check-in workflow.
+8. Regenerate the live visit QR to show the owner-led check-in workflow.
 9. Issue enough stamps to reach the reward threshold.
 10. Create the reward ticket from the customer QR stamp card.
 11. Open `/app/claim/[claimId]`, show the reward ticket QR, counter backup code, and owner-wallet validation hint.
