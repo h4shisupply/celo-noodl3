@@ -44,7 +44,7 @@
 - Confirm `NEXT_PUBLIC_APP_URL` matches the local or deployed base URL before sharing or printing QR links.
 - Confirm `NEXT_PUBLIC_DEFAULT_CHAIN` matches the deployed contract network before QR testing.
 - Confirm browser-visible `NEXT_PUBLIC_` RPC URLs use public endpoints and server-side RPC endpoints stay in non-public variables.
-- Confirm wallet addresses, dates, and reward codes do not get auto-linked by mobile browser format detection.
+- Confirm wallet addresses, dates, and reward codes are not auto-linked by mobile browser format detection.
 - Confirm wallet address entry fields stay left-to-right and avoid mobile autocorrect.
 - Confirm form fields use mobile keyboard hints for wallet addresses, URLs, names, reward promises, and visit goals.
 - Confirm keyboard focus is visible on header links, account menu controls, QR actions, and form fields.
