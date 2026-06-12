@@ -28,7 +28,7 @@
 - Confirm static visit QR collects one stamp and immediate reuse fails before 20 hours.
 - Confirm owner-signed dynamic visit QR opens `/app/program/[programId]?visit=dynamic&nonce=...&expires=...&sig=...`.
 - Confirm dynamic visit QR shows a countdown, expires after five minutes, and can be regenerated.
-- Confirm dynamic visit QR countdowns expose the remaining duration as machine-readable time.
+- Confirm dynamic visit QR countdowns expose the remaining duration in machine-readable time.
 - Confirm dynamic visit QR countdowns expose an accessible name for the active or expired timer state.
 - Confirm dynamic visit QR generation shows an in-progress label while the action is disabled.
 - Confirm owner-signed dynamic visit QR can be used once to collect one visit stamp, then fails on reuse.
