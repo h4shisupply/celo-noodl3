@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Store",
+  title: "Legacy store redirect",
   description: "Redirect legacy store links to the noodl3 QR stamp card dashboard."
 };
 
