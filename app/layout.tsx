@@ -37,6 +37,7 @@ export const metadata: Metadata = {
   keywords: [
     "MiniPay",
     "Celo",
+    "Celo loyalty",
     "PWA",
     "loyalty",
     "customer loyalty",
