@@ -34,7 +34,7 @@
 ## Slide 6
 - Demo loop
 - Create QR stamp card with a reward promise and visit goal
-- Show fixed visit QR actions
+- Show fixed visit QR open, share, download, and print actions
 - Customer collects one static stamp and sees the 20-hour reuse block
 - Generate five-minute dynamic visit QR
 - Customer collects one dynamic stamp instantly
