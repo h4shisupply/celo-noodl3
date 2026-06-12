@@ -15,9 +15,9 @@
 - Confirm the program manager opens for owner wallets.
 - Confirm the program manager back link returns to the QR stamp card.
 - Confirm the account menu can open the profile dialog, save a display name, and skip profile setup.
-- Confirm fixed visit QR opens `/app/program/[programId]?visit=static`.
-- Confirm fixed visit QR renders locally without a third-party QR image URL.
-- Confirm fixed visit QR open link, copy link, share fallback, SVG download, and print sheet actions work.
+- Confirm printed visit QR opens `/app/program/[programId]?visit=static`.
+- Confirm printed visit QR renders locally without a third-party QR image URL.
+- Confirm printed visit QR open link, copy link, share fallback, SVG download, and print sheet actions work.
 - Confirm QR action feedback resets before a new copy, share, SVG download, print, or open action.
 - Confirm QR action feedback clears when regenerated QR content changes.
 - Confirm QR display panels expose accessible names from their visible QR titles.
@@ -100,7 +100,7 @@
   - `/app/program/[programId]/manage`
   - `/app/claim/[claimId]`
 - Confirm camera QR scanning works on HTTPS or localhost.
-- Confirm print output shows only the fixed visit QR counter sheet or reward ticket sheet.
+- Confirm print output shows only the printed visit QR counter sheet or reward ticket sheet.
 - Confirm legacy `/app/store/[slug]`, `/store/[slug]`, `/success`, `/app/rewards`, `/rewards`, `/merchant/verify`, and `/verify` routes do not expose catalog checkout.
 - Confirm legacy `/claim/[claimId]` links preserve the claim ID when redirecting into `/app/claim/[claimId]`.
 - Confirm legacy `/merchant/verify?claim=...` and `/verify?claim=...` links preserve the claim ID when redirecting into `/app/claim/[claimId]`.
