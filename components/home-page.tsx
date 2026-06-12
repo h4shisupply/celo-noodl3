@@ -661,7 +661,7 @@ const enHomeCopy: HomeCopy = {
     faq: "FAQ"
   },
   hero: {
-    eyebrow: "QR stamp cards for real visits",
+    eyebrow: "QR stamp cards for real-world visits",
     title: "Give regulars a stamp card they cannot lose.",
     description:
       "noodl3 turns a counter QR into a wallet stamp card. Customers scan during a visit, collect stamps in their wallet, and return with a reward ticket the shop owner validates once.",
