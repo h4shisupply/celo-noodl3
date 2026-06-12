@@ -13,7 +13,7 @@
 - Product
 - Any wallet creates a QR stamp card with a reward promise
 - Customers scan a visit QR and collect one Stamp / Selo per visit
-- Reward tickets unlock after the configured visit goal
+- Reward tickets unlock when the configured visit goal is reached
 - Owner validates a one-time reward ticket
 
 ## Slide 4
