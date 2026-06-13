@@ -86,7 +86,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "noodl3",
     description:
-      "Merchant QR stamp cards for small shops, with visit QR scans, live check-ins, and one-time reward tickets on Celo.",
+      "Merchant QR stamp cards for small shops, with visit QR scans, live check-ins, and printable one-time reward tickets on Celo.",
     url: publicEnv.appUrl,
     siteName: "noodl3",
     type: "website",
@@ -105,7 +105,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "noodl3",
     description:
-      "Merchant QR stamp cards for real-world visits, visit stamps, and one-time reward tickets on Celo.",
+      "Merchant QR stamp cards for real-world visits, visit stamps, and printable one-time reward tickets on Celo.",
     images: [
       {
         url: "/og.svg",
