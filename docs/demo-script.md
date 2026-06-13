@@ -2,7 +2,7 @@
 
 Use separate owner and customer wallets, or separate browser profiles, so wallet-gated states are clear during the demo.
 
-1. Open the home page and explain the product in one sentence: Celo-native merchant QR stamp card loyalty for real-world visits.
+1. Open the home page and explain the product in one sentence: Celo-native merchant QR stamp card loyalty app for real-world visits.
 2. Switch languages once, refresh, and confirm the landing page, header, and app entry copy stay in sync.
 3. Open `/app`, connect a wallet, optionally add a profile name, and create a merchant QR stamp card with an HTTPS logo URL, reward promise, and visit goal.
 4. Open the merchant QR stamp card manager and show the printed visit QR actions: open link, copy link, share fallback, SVG download, and print sheet.
