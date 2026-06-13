@@ -36,7 +36,7 @@
 - Confirm manual stamp works for owner only.
 - Confirm customer progress reaches the visit goal.
 - Confirm customer can create a reward ticket at the visit goal.
-- Confirm reward ticket QR renders locally and shows the counter backup code prominently.
+- Confirm reward ticket QR renders locally, exposes the print sheet, and shows the counter backup code prominently.
 - Confirm the owner wallet can validate each reward ticket once.
 - Confirm non-owner wallets see the owner wallet validation hint.
 
