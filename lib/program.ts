@@ -111,7 +111,7 @@ const enProgramCopy = {
   claimReward: "Create reward ticket",
   rewardClaimed: "Reward ticket created.",
   createTitle: "Create merchant QR stamp card",
-  createDescription: "Set the shop look, reward promise, and number of visits needed to fill the card.",
+  createDescription: "Set the shop look, reward promise, and visit goal.",
   programName: "Shop or card name",
   programNamePlaceholder: "Coffee Club",
   iconUrl: "Logo URL",
