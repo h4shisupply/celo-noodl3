@@ -37,7 +37,7 @@
 - Confirm customer progress reaches the reward threshold.
 - Confirm customer can create a reward ticket at the reward threshold.
 - Confirm reward ticket QR renders locally and shows the counter backup code prominently.
-- Confirm owner can validate each reward ticket once.
+- Confirm the owner wallet can validate each reward ticket once.
 - Confirm non-owner wallets see the owner wallet validation hint.
 
 ## Frontend
