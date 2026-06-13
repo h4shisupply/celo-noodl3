@@ -717,7 +717,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         title: "Create reward ticket",
-        description: "A full card becomes a reward ticket with its own QR and backup code."
+        description: "A full card becomes a reward ticket with its own QR, print sheet, and backup code."
       },
       {
         title: "Validate once",
@@ -891,7 +891,7 @@ const ptHomeCopy: HomeCopy = {
       },
       {
         title: "Crie o ticket",
-        description: "Um cartão completo vira ticket de recompensa com QR próprio e código de apoio."
+        description: "Um cartão completo vira ticket de recompensa com QR próprio, folha de impressão e código de apoio."
       },
       {
         title: "Valide uma vez",
