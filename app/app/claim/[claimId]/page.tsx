@@ -5,7 +5,7 @@ import { publicEnv } from "../../../../lib/env";
 
 export const metadata: Metadata = {
   title: "Reward ticket",
-  description: "Show a noodl3 reward ticket QR, counter backup code, and owner wallet validation hint."
+  description: "Show a noodl3 reward ticket QR, print sheet, counter backup code, and owner wallet validation hint."
 };
 
 type ClaimRouteProps = {
