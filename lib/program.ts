@@ -124,7 +124,7 @@ const enProgramCopy = {
   staticStampEnabled: "Counter QR stamps",
   staticStampHelp: "Let each wallet stamp from the printed QR once every 20 hours.",
   saveProgram: "Save QR stamp card",
-  programCreated: "Stamp card created.",
+  programCreated: "QR stamp card created.",
   fixedQr: "Counter visit QR",
   dynamicQr: "Live check-in QR",
   generateDynamicQr: "Generate live QR",
