@@ -38,7 +38,7 @@
 - Customer collects one visit stamp and sees the 20-hour reuse block
 - Generate a five-minute live visit QR
 - Customer collects one live visit stamp instantly
-- Customer creates reward ticket
+- Customer creates a reward ticket
 - Owner validates each reward ticket once
 
 ## Slide 7
