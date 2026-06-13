@@ -158,7 +158,7 @@ const enProgramCopy = {
   invalidIconUrl: "Use a public HTTPS icon URL.",
   invalidProgramConfig: "Use a name up to 60 characters, a public HTTPS logo URL, a reward up to 120 characters, and 1-100 visits.",
   previewCard: "Preview QR card",
-  previewProgramName: "Your shop name",
+  previewProgramName: "Your shop or card name",
   previewReward: "Your reward promise appears here.",
   loadingProgram: "Loading this QR stamp card from the contract.",
   loadingClaim: "Checking this reward ticket onchain.",
