@@ -6,7 +6,7 @@ import { resolveLocaleFromRequest } from "../lib/i18n";
 export const metadata: Metadata = {
   title: "Merchant QR stamp cards for real-world visits",
   description:
-    "Create merchant counter QR stamp cards for real-world visits, collect visit stamps, and validate one-time reward tickets on Celo."
+    "Create merchant QR stamp cards for real-world visits, collect visit stamps, and validate one-time reward tickets on Celo."
 };
 
 export default async function Page() {
