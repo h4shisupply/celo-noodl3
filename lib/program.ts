@@ -110,7 +110,7 @@ const enProgramCopy = {
   dynamicCollected: "Live QR stamp added.",
   claimReward: "Create reward ticket",
   rewardClaimed: "Reward ticket created.",
-  createTitle: "Create a stamp card",
+  createTitle: "Create merchant QR stamp card",
   createDescription: "Set the shop look, reward promise, and number of visits needed to fill the card.",
   programName: "Shop or card name",
   programNamePlaceholder: "Coffee Club",
