@@ -36,7 +36,7 @@ The core loop is simple:
 - `/`: landing page
 - `/app`: customer and owner dashboard for QR stamp cards, visit stamps, and reward tickets
 - `/app/program/new`: create a merchant QR stamp card with a reward promise and visit goal
-- `/app/program/[programId]`: customer QR stamp card and visit landing page
+- `/app/program/[programId]`: customer QR stamp card for printed and live visit QR links
 - `/app/program/[programId]/manage`: merchant QR stamp card manager for printed and live visit QR actions
 - `/app/claim/[claimId]`: reward ticket QR, counter backup code, and owner validation
 - `/claim/[claimId]`: legacy reward ticket link that preserves the claim ID when redirecting into `/app/claim/[claimId]`
