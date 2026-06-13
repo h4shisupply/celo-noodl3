@@ -84,7 +84,7 @@
 - Confirm the language switcher announces the current language and pressed selected state.
 - Confirm language selection persists after refresh through the locale cookie.
 - Confirm custom select controls show their open and closed state visually.
-- Confirm the app manifest description, icon, dashboard shortcut description, create merchant QR stamp card shortcut description, categories, language, theme color, standalone display mode, and portrait orientation work when installed on mobile.
+- Confirm the app manifest description, icon, dashboard and create shortcut labels and descriptions, categories, language, theme color, standalone display mode, and portrait orientation work when installed on mobile.
 - Confirm package metadata keywords match the Celo, Celo loyalty, MiniPay, PWA, customer loyalty, loyalty program, merchant loyalty, merchant QR stamp card, QR, counter QR, QR stamp card, static visit QR, dynamic visit QR, live QR, reward ticket, reward ticket QR, wallet, wallet stamps, and merchant reward surfaces.
 - Confirm package repository, homepage, and issue links point to the public noodl3 project.
 - Confirm root metadata keywords cover Celo, Celo loyalty, MiniPay, PWA, customer loyalty, merchant loyalty, merchant QR stamp card, counter QR, QR stamp card, QR code, static visit QR, dynamic visit QR, live QR, wallet stamps, reward ticket, reward ticket QR, and merchant rewards.
