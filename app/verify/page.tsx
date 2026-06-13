@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Legacy reward verification redirect",
+  title: "Legacy reward ticket verification redirect",
   description: "Redirect legacy reward verification links to the matching noodl3 reward ticket QR."
 };
 
