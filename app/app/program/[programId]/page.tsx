@@ -7,7 +7,7 @@ import { publicEnv } from "../../../../lib/env";
 import { parseProgramId } from "../../../../lib/program";
 
 export const metadata: Metadata = {
-  title: "Merchant QR stamp card",
+  title: "Customer QR stamp card",
   description: "Collect visit stamps from printed or live visit QR links, track progress, and create reward tickets from a noodl3 merchant QR stamp card."
 };
 
