@@ -254,7 +254,7 @@ const ptProgramCopy = {
   usedClaim: "Este ticket de recompensa já foi usado.",
   ownerOnly: "Só a carteira do lojista pode gerenciar este cartão de selos.",
   invalidIconUrl: "Use uma URL HTTPS pública para o logo.",
-  invalidProgramConfig: "Use um nome com até 60 caracteres, uma URL HTTPS pública de logo, uma recompensa com até 120 caracteres e 1-100 visitas.",
+  invalidProgramConfig: "Use um nome com até 60 caracteres, uma URL HTTPS pública para o logo, uma recompensa com até 120 caracteres e 1-100 visitas.",
   previewCard: "Prévia do cartão de selos",
   previewProgramName: "Nome da loja ou do cartão",
   previewReward: "A promessa da recompensa aparece aqui.",
