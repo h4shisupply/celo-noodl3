@@ -12,7 +12,7 @@
 - Confirm a fresh merchant wallet can create a merchant QR stamp card.
 - Confirm owner and customer demo steps use separate wallets or browser profiles for wallet-gated states.
 - Confirm merchant QR stamp card creation requires a public HTTPS icon URL.
-- Confirm the program manager opens for owner wallets.
+- Confirm the merchant QR stamp card manager opens for owner wallets.
 - Confirm the program manager back link returns to the QR stamp card.
 - Confirm the account menu can open the profile dialog, save a display name, and skip profile setup.
 - Confirm printed visit QR opens `/app/program/[programId]?visit=static`.
