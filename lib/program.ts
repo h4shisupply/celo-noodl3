@@ -93,7 +93,7 @@ const enProgramCopy = {
   appTitle: "Merchant QR stamp cards for real-world visits",
   appDescription:
     "Create a merchant QR stamp card, collect visit stamps with QR codes, and validate reward tickets without paper cards or counter confusion.",
-  createProgram: "Create stamp card",
+  createProgram: "Create QR stamp card",
   scanQr: "Scan visit QR",
   invalidProgramQr: "This is not a noodl3 visit QR.",
   myCards: "My stamp cards",
