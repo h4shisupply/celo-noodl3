@@ -135,7 +135,7 @@ const enProgramCopy = {
   issueManual: "Add manual stamp",
   consume: "Validate ticket",
   customerWallet: "Customer wallet",
-  updateProgram: "Update card",
+  updateProgram: "Update QR card",
   settingsSaved: "Card settings saved.",
   manualIssued: "Manual stamp added.",
   rewardConsumed: "Reward ticket validated.",
