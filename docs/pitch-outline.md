@@ -34,7 +34,7 @@
 ## Slide 6
 - Demo loop
 - Create merchant QR stamp card with a reward promise and visit goal
-- Show printed visit QR open, copy, share fallback, SVG download, and print actions
+- Show printed visit QR open, copy, share fallback, SVG download, and print sheet actions
 - Customer collects one visit stamp and sees the 20-hour reuse block
 - Generate a five-minute live visit QR
 - Customer collects one live visit stamp instantly
