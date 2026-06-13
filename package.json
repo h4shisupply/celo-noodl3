@@ -1,7 +1,7 @@
 {
   "name": "celo-noodl3",
   "version": "0.1.0",
-  "description": "Celo-native QR stamp card loyalty for real-world visits.",
+  "description": "Celo-native merchant QR stamp card loyalty for real-world visits.",
   "license": "MIT",
   "author": "H4shi",
   "repository": {
