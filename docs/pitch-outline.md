@@ -39,7 +39,7 @@
 - Generate a five-minute live visit QR
 - Customer collects one live visit stamp instantly
 - Customer creates a reward ticket from the customer QR stamp card
-- Owner validates each reward ticket once
+- Owner validates each reward ticket once from the owner wallet
 
 ## Slide 7
 - MVP boundaries
