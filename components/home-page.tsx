@@ -765,7 +765,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         title: "Reward ticket",
-        description: "A completed card creates a reward ticket QR plus a backup code for counter validation."
+        description: "A completed card creates a reward ticket QR, print sheet, and backup code for counter validation."
       },
       {
         title: "Shop owner validation",
@@ -939,7 +939,7 @@ const ptHomeCopy: HomeCopy = {
       },
       {
         title: "Ticket de recompensa",
-        description: "Cartão completo cria um QR de ticket de recompensa e um código de apoio para validação no balcão."
+        description: "Cartão completo cria um QR de ticket de recompensa, folha de impressão e código de apoio para validação no balcão."
       },
       {
         title: "Validação pelo lojista",
