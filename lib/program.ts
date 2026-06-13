@@ -157,7 +157,7 @@ const enProgramCopy = {
   ownerOnly: "Only the shop owner wallet can manage this QR stamp card.",
   invalidIconUrl: "Use a public HTTPS icon URL.",
   invalidProgramConfig: "Use a name up to 60 characters, a public HTTPS logo URL, a reward up to 120 characters, and 1-100 visits.",
-  previewCard: "Preview card",
+  previewCard: "Preview QR card",
   previewProgramName: "Your shop name",
   previewReward: "Your reward promise appears here.",
   loadingProgram: "Loading this QR stamp card from the contract.",
