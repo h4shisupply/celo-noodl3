@@ -9,7 +9,7 @@ The product is split into two layers:
 
 The core loop is simple:
 
-1. A wallet creates a QR stamp card.
+1. A merchant wallet creates a QR stamp card.
 2. The owner prints a visit QR or generates a five-minute live visit QR.
 3. Customers scan the visit QR and collect one Stamp / Selo per visit.
 4. When the reward threshold is reached, the customer creates a reward ticket.
