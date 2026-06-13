@@ -160,7 +160,7 @@ const enProgramCopy = {
   previewCard: "Preview card",
   previewProgramName: "Your shop name",
   previewReward: "Your reward promise appears here.",
-  loadingProgram: "Loading this stamp card from the contract.",
+  loadingProgram: "Loading this QR stamp card from the contract.",
   loadingClaim: "Checking this reward ticket onchain.",
   qrCopy: "Copy link",
   qrCopied: "Link copied.",
