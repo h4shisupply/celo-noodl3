@@ -140,7 +140,7 @@ const enProgramCopy = {
   manualIssued: "Manual stamp added.",
   rewardConsumed: "Reward ticket validated.",
   noContract: "Set the noodl3 contract address before using the app.",
-  connectFirst: "Connect your wallet to load your stamp cards.",
+  connectFirst: "Connect your wallet to load your QR stamp cards.",
   notFound: "Stamp card not found.",
   inactive: "Inactive",
   stamps: "stamps",
