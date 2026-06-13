@@ -46,7 +46,7 @@ The core loop is simple:
 
 For a real pilot, the owner should:
 
-1. Create a QR stamp card with a square HTTPS icon, reward promise, and visit goal.
+1. Create a merchant QR stamp card with a square HTTPS icon, reward promise, and visit goal.
 2. Open the manager view and print the visit QR counter sheet.
 3. Keep the printed visit QR at the register so customers can collect visit stamps.
 4. Use the live visit QR for owner-led check-ins; it expires after five minutes and can be regenerated.
