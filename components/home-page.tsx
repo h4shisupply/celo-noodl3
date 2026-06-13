@@ -694,7 +694,7 @@ const enHomeCopy: HomeCopy = {
     points: [
       "Customers scan while they are already at the counter.",
       "Each visit adds visible progress toward the shop's promised reward.",
-      "Reward tickets include a QR and backup code, so validation has a fallback."
+      "Reward tickets include a QR, print sheet, and backup code, so validation has a fallback."
     ]
   },
   workflow: {
@@ -868,7 +868,7 @@ const ptHomeCopy: HomeCopy = {
     points: [
       "Clientes leem o QR enquanto já estão no balcão.",
       "Cada visita mostra progresso até a recompensa prometida pela loja.",
-      "Tickets de recompensa têm QR e código de apoio para a validação não travar."
+      "Tickets de recompensa têm QR, folha de impressão e código de apoio para a validação não travar."
     ]
   },
   workflow: {
