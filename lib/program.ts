@@ -103,7 +103,7 @@ const enProgramCopy = {
   emptyPrograms: "Create a merchant QR stamp card for a shop or community and it will appear here.",
   emptyClaims: "Full cards become reward tickets for the shop owner to validate.",
   manage: "Manage QR card",
-  openCard: "Open card",
+  openCard: "Open QR card",
   collectVisit: "Collect stamp",
   requestStamp: "Stamp this visit",
   requestSent: "Stamp added.",
