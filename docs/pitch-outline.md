@@ -2,7 +2,7 @@
 
 ## Slide 1
 - noodl3
-- Celo-native merchant QR stamp card loyalty for real-world visits
+- Celo-native merchant QR stamp card loyalty app for real-world visits
 
 ## Slide 2
 - Problem
