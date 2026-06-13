@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Legacy reward verification redirect",
-  description: "Redirect legacy verification links to the matching noodl3 reward ticket QR."
+  description: "Redirect legacy reward verification links to the matching noodl3 reward ticket QR."
 };
 
 type VerifyRouteProps = {
