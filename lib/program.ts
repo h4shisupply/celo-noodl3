@@ -97,7 +97,7 @@ const enProgramCopy = {
   scanQr: "Scan visit QR",
   invalidProgramQr: "This is not a noodl3 visit QR.",
   myCards: "My stamp cards",
-  myPrograms: "Cards I manage",
+  myPrograms: "QR stamp cards I manage",
   rewardClaims: "Reward tickets",
   emptyCards: "Scan a visit QR and your first stamp card will appear here.",
   emptyPrograms: "Create a merchant QR stamp card for a shop or community and it will appear here.",
