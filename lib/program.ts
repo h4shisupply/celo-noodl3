@@ -100,7 +100,7 @@ const enProgramCopy = {
   myPrograms: "Cards I manage",
   rewardClaims: "Reward tickets",
   emptyCards: "Scan a visit QR and your first stamp card will appear here.",
-  emptyPrograms: "Create a stamp card for a shop or community and it will appear here.",
+  emptyPrograms: "Create a merchant QR stamp card for a shop or community and it will appear here.",
   emptyClaims: "Full cards become reward tickets for the shop owner to validate.",
   manage: "Manage card",
   openCard: "Open card",
