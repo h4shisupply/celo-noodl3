@@ -53,7 +53,7 @@ For a real pilot, the owner should:
 5. Ask customers with completed stamp cards to open their reward ticket QR.
 6. Validate the reward ticket from the owner wallet and confirm the used state before handing out the reward.
 
-The QR UI renders locally in the app. It supports opening QR links, copying links, sharing where the browser allows it, downloading the SVG QR, and printing the visit QR counter sheet without relying on an external QR image service. QR action feedback clears between actions and when regenerated QR values change.
+The QR UI renders locally in the app. It supports opening QR links, copying links, sharing where the browser allows it, downloading the SVG QR, and printing visit QR counter sheets and reward ticket sheets without relying on an external QR image service. QR action feedback clears between actions and when regenerated QR values change.
 
 ## Smart Contract
 
