@@ -9,7 +9,7 @@
 - Run `npm run compile`, `npm run export:abi`, and `npm run test`.
 
 ## Product
-- Confirm a fresh wallet can create a QR stamp card.
+- Confirm a fresh merchant wallet can create a QR stamp card.
 - Confirm owner and customer demo steps use separate wallets or browser profiles for wallet-gated states.
 - Confirm QR stamp card creation requires a public HTTPS icon URL.
 - Confirm the program manager opens for owner wallets.
