@@ -4,7 +4,7 @@ import { getDefaultChainId } from "../../lib/chains";
 import { publicEnv } from "../../lib/env";
 
 export const metadata: Metadata = {
-  title: "Dashboard",
+  title: "Customer and owner dashboard",
   description: "Track customer QR stamp cards, managed QR stamp cards, and reward tickets in noodl3."
 };
 
