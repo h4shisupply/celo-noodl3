@@ -136,7 +136,7 @@ const enProgramCopy = {
   consume: "Validate ticket",
   customerWallet: "Customer wallet",
   updateProgram: "Update QR card",
-  settingsSaved: "Card settings saved.",
+  settingsSaved: "QR card settings saved.",
   manualIssued: "Manual stamp added.",
   rewardConsumed: "Reward ticket validated.",
   noContract: "Set the noodl3 contract address before using the app.",
