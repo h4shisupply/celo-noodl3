@@ -17,7 +17,7 @@
 - Confirm the account menu can open the profile dialog, save a display name, and skip profile setup.
 - Confirm printed visit QR opens `/app/program/[programId]?visit=static`.
 - Confirm printed visit QR renders locally without a third-party QR image URL.
-- Confirm printed visit QR open link, copy link, share fallback, SVG download, and print sheet actions work.
+- Confirm printed visit QR actions work: open link, copy link, share fallback, SVG download, and print the visit QR counter sheet.
 - Confirm QR action feedback resets before a new copy, share, SVG download, print, or open action.
 - Confirm QR action feedback clears when regenerated QR content changes.
 - Confirm QR display panels expose accessible names from their visible QR titles.
