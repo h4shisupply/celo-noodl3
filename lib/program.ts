@@ -155,7 +155,7 @@ const enProgramCopy = {
   claimConsumed: "Ticket validated.",
   usedClaim: "This reward ticket is already used.",
   ownerOnly: "Only the shop owner wallet can manage this QR stamp card.",
-  invalidIconUrl: "Use a public HTTPS icon URL.",
+  invalidIconUrl: "Use a public HTTPS logo URL.",
   invalidProgramConfig: "Use a name up to 60 characters, a public HTTPS logo URL, a reward up to 120 characters, and 1-100 visits.",
   previewCard: "Preview QR card",
   previewProgramName: "Your shop or card name",
