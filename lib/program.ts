@@ -118,7 +118,7 @@ const enProgramCopy = {
   iconUrlHelp: "Use a public HTTPS image URL. Square logos look best.",
   rewardDescription: "Reward promise",
   rewardPlaceholder: "Free espresso on visit 10",
-  visitsRequired: "Visits to fill card",
+  visitsRequired: "Visit goal",
   active: "Active",
   activeHelp: "Customers can collect stamps and create reward tickets while this is on.",
   staticStampEnabled: "Counter QR stamps",
