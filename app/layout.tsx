@@ -54,6 +54,7 @@ export const metadata: Metadata = {
     "wallet stamps",
     "visit stamps",
     "merchant loyalty",
+    "merchant reward surfaces",
     "merchant rewards",
     "reward ticket",
     "reward ticket QR",
