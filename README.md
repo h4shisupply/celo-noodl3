@@ -34,7 +34,7 @@ The core loop is simple:
 ## Routes
 
 - `/`: landing page
-- `/app`: customer and owner dashboard
+- `/app`: customer and owner dashboard for QR stamp cards, visit stamps, and reward tickets
 - `/app/program/new`: create a merchant QR stamp card with a reward promise and visit goal
 - `/app/program/[programId]`: customer QR stamp card and visit landing page
 - `/app/program/[programId]/manage`: merchant QR stamp card manager for visit QR and reward actions
