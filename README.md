@@ -23,7 +23,7 @@ The core loop is simple:
 - Bilingual runtime copy: `pt-BR` and `English`
 - `Selos` in Portuguese and `Stamps` in English
 - Accessible app structure with named landmarks, visible focus, progress meters, timer labels, and live QR scanner feedback
-- Installable app manifest with a merchant QR stamp card description, customer and owner dashboard shortcut description, create merchant QR stamp card shortcut description, and maskable icons
+- Installable app manifest with app, dashboard shortcut, and create-card shortcut descriptions plus maskable icons
 - Installed app launches prefer the existing app window when supported
 - Onchain loyalty progress per program
 - Printed visit QR with one stamp per wallet every 20 hours
