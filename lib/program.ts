@@ -90,7 +90,7 @@ export function programCopy(locale: Locale) {
 }
 
 const enProgramCopy = {
-  appTitle: "Wallet stamp cards for real-world visits",
+  appTitle: "Merchant QR stamp cards for real-world visits",
   appDescription:
     "Create a wallet stamp card, collect visit stamps with QR codes, and validate reward tickets without paper cards or counter confusion.",
   createProgram: "Create stamp card",
