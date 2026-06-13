@@ -24,7 +24,7 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         name: "Dashboard",
         short_name: "Dashboard",
-        description: "Open your QR stamp cards, managed QR stamp cards, and reward tickets.",
+        description: "Open customer QR stamp cards, managed QR stamp cards, and reward tickets.",
         url: "/app",
         icons: [
           {
