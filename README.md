@@ -104,7 +104,7 @@ npm run build
 npm run dev
 ```
 
-After the dev server starts, open `http://localhost:3000/app` for the customer and owner dashboard.
+After the dev server starts, open `http://localhost:3000/app` for QR stamp cards, visit stamps, and reward tickets in the customer and owner dashboard.
 For phone-based QR testing on the same network, use `npm run dev:mobile` so the dev server binds to `0.0.0.0`.
 
 ## Deploy And Seed
