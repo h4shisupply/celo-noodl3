@@ -13,6 +13,7 @@ Send a report to the repository owner with:
 - a clear description of the issue
 - affected app route, network, or contract address, if applicable
 - reproduction steps or proof-of-concept details
+- relevant logs or screenshots with secrets redacted, if available
 - no private keys, seed phrases, or production customer data
 - an impact assessment
 - suggested mitigations, if known
