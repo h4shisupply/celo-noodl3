@@ -143,6 +143,7 @@ export function ProfileDialog({
           <Input
             value={name}
             maxLength={40}
+            name="displayName"
             aria-describedby={isNameInvalid ? localErrorId : undefined}
             aria-invalid={isNameInvalid || undefined}
             aria-label={dictionary.profile.namePlaceholder}
@@ -158,6 +159,7 @@ export function ProfileDialog({
             value={avatarUrl}
             type="url"
             maxLength={280}
+            name="avatarUrl"
             aria-describedby={isAvatarInvalid ? localErrorId : undefined}
             aria-invalid={isAvatarInvalid || undefined}
             aria-label={dictionary.profile.avatarPlaceholder}
