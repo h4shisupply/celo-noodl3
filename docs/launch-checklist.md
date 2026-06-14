@@ -74,7 +74,7 @@
 - Confirm decorative or remote UI images stay non-blocking and hidden from assistive tech when appropriate.
 - Confirm profile avatar URLs fall back to wallet initials when the remote image cannot load.
 - Confirm landing page decorative icon treatments stay hidden from assistive tech.
-- Confirm decorative images inside links and controls do not trigger drag interactions.
+- Confirm decorative images inside links or controls do not trigger drag interactions.
 - Confirm Escape closes temporary overlays such as the mobile menu, account menu, profile dialog, and QR scanner.
 - Confirm modal backdrops close temporary dialogs from outside mouse, touch, and pen input when backdrop dismissal is supported.
 - Confirm modal overlays expose dialog names and descriptions to assistive tech.
