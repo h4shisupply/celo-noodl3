@@ -232,7 +232,11 @@ export function QrDisplay({
             className="h-auto w-full"
           />
         </div>
-        <p dir="ltr" className="break-all rounded-lg border border-line bg-panel-soft p-3 text-sm leading-6 text-muted">
+        <p
+          dir="ltr"
+          aria-describedby={titleId}
+          className="break-all rounded-lg border border-line bg-panel-soft p-3 text-sm leading-6 text-muted"
+        >
           {value}
         </p>
         <QrActionBar
