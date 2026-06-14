@@ -76,7 +76,7 @@
 - Confirm landing page decorative icon treatments stay hidden from assistive tech.
 - Confirm decorative images inside links and controls do not trigger drag interactions.
 - Confirm Escape closes temporary overlays such as the mobile menu, account menu, profile dialog, and QR scanner.
-- Confirm modal backdrops close temporary dialogs from outside pointer input when backdrop dismissal is supported.
+- Confirm modal backdrops close temporary dialogs from outside mouse, touch, and pen input when backdrop dismissal is supported.
 - Confirm modal overlays expose dialog names and descriptions to assistive tech.
 - Confirm profile validation errors are associated with the relevant display name or avatar URL field.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
