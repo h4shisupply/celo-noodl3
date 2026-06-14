@@ -47,7 +47,7 @@
 - One stamp per visit
 - Owner-only management
 - Direct onchain indexes without an event-indexing dependency
-- No NFT layer in V1
+- No NFT or points-token layer in V1
 
 ## Slide 8
 - Next steps
