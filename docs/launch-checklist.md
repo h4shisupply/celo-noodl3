@@ -69,7 +69,7 @@
 - Confirm QR scanner live status messages announce complete status updates.
 - Confirm QR scanner framing overlays remain decorative and do not add extra announced content.
 - Confirm menu toggles expose expanded state and announce the close action while open.
-- Confirm account and select popovers close from outside pointer input on mouse, touch, and pen.
+- Confirm account and select popovers close from outside mouse, touch, and pen input.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative and remote UI images stay non-blocking and hidden from assistive tech when appropriate.
 - Confirm profile avatar URLs fall back to wallet initials when the remote image cannot load.
