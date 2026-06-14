@@ -411,6 +411,7 @@ export function ProgramManagePage({
                         enterKeyHint="done"
                         inputMode="text"
                         spellCheck={false}
+                        aria-describedby="program-manage-customers-description"
                         aria-label={copy.customerWallet}
                         required
                         onChange={(event) => setManualCustomer(event.target.value)}
