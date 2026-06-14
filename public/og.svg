@@ -12,5 +12,5 @@
   <rect x="304" y="470" width="224" height="54" rx="27" fill="#F3EBFF"/>
   <text x="336" y="505" fill="#7B3FE4" font-family="Arial, sans-serif" font-size="24" font-weight="700">Collect Stamps</text>
   <rect x="548" y="470" width="302" height="54" rx="27" fill="#F3EBFF"/>
-  <text x="580" y="505" fill="#7B3FE4" font-family="Arial, sans-serif" font-size="24" font-weight="700">Redeem by verifier QR</text>
+  <text x="580" y="505" fill="#7B3FE4" font-family="Arial, sans-serif" font-size="24" font-weight="700">Reward Ticket QR</text>
 </svg>
