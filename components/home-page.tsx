@@ -765,7 +765,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         title: "Reward ticket",
-        description: "A completed card creates a reward ticket QR, print sheet, and backup code for counter validation."
+        description: "A completed card creates a reward ticket QR, print sheet, and counter backup code for validation."
       },
       {
         title: "Shop owner validation",
