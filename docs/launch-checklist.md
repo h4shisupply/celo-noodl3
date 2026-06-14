@@ -91,7 +91,7 @@
 - Confirm installed app launches prefer an existing app window when the platform supports launch handlers.
 - Confirm app and shortcut icons keep the logo visible within safe maskable icon crops.
 - Confirm app route metadata descriptions summarize the landing page, dashboard, create merchant QR stamp card, customer QR stamp card, merchant QR stamp card manager, reward ticket, and legacy redirect pages.
-- Confirm Open Graph and Twitter preview metadata resolves against `NEXT_PUBLIC_APP_URL` and shows the expected title, description, and image.
+- Confirm Open Graph and Twitter preview metadata resolve against `NEXT_PUBLIC_APP_URL` and show the expected title, description, and image.
 - Check mobile and desktop layouts for these routes:
   - home page
   - `/app`
