@@ -733,7 +733,7 @@ const enHomeCopy: HomeCopy = {
     items: [
       {
         title: "Fast card setup",
-        description: "Create a branded stamp card with a shop name, logo, reward promise, and visit goal."
+        description: "Create a branded stamp card with a shop name, logo, reward promise, and customer visit goal."
       },
       {
         title: "Counter-ready visit QR",
