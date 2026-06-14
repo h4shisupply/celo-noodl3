@@ -106,7 +106,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "noodl3",
     description:
-      "Merchant QR stamp cards for real-world visits, visit stamps, and reward tickets validated once on Celo.",
+      "Merchant QR stamp cards for real-world visits on Celo. Print a visit QR, collect visit stamps, and validate each reward ticket once.",
     images: [
       {
         url: "/og.svg",
