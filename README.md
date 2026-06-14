@@ -5,7 +5,7 @@
 The product is split into two layers:
 
 - `/`: public landing page
-- `/app`: customer and owner dashboard for QR stamp cards, visit stamps, and reward tickets
+- `/app`: customer and owner dashboard for customer QR stamp cards, visit stamps, and reward ticket history
 
 The core loop is simple:
 
@@ -34,7 +34,7 @@ The core loop is simple:
 ## Routes
 
 - `/`: landing page
-- `/app`: customer and owner dashboard for QR stamp cards, visit stamps, and reward tickets
+- `/app`: customer and owner dashboard for customer QR stamp cards, visit stamps, and reward ticket history
 - `/app/program/new`: create a merchant QR stamp card with an HTTPS logo URL, reward promise, and customer visit goal
 - `/app/program/[programId]`: customer QR stamp card for printed and live visit QR links
 - `/app/program/[programId]/manage`: merchant QR stamp card manager for printed and live visit QR actions
@@ -104,7 +104,7 @@ npm run build
 npm run dev
 ```
 
-After the dev server starts, open `http://localhost:3000/app` to view QR stamp cards, visit stamps, and reward tickets in the customer and owner dashboard.
+After the dev server starts, open `http://localhost:3000/app` to view customer QR stamp cards, visit stamps, and reward ticket history in the customer and owner dashboard.
 For phone-based QR testing on the same network, use `npm run dev:mobile` so the dev server listens on `0.0.0.0`.
 
 ## Deploy And Seed
