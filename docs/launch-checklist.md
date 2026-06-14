@@ -93,7 +93,7 @@
 - Confirm app route metadata descriptions summarize the landing page, `/app` dashboard page, create merchant QR stamp card, customer QR stamp card, merchant QR stamp card manager, reward ticket, and legacy redirect pages.
 - Confirm Open Graph and Twitter preview metadata resolve against `NEXT_PUBLIC_APP_URL` and show the expected title, description, and image.
 - Check mobile and desktop layouts for these routes:
-  - home page
+  - `/`
   - `/app`
   - `/app/program/new`
   - `/app/program/[programId]`
