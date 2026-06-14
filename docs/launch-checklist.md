@@ -78,7 +78,7 @@
 - Confirm Escape closes temporary overlays such as the mobile menu, account menu, profile dialog, and QR scanner.
 - Confirm modal backdrops close temporary dialogs from outside pointer input where supported.
 - Confirm modal overlays expose dialog names and descriptions to assistive tech.
-- Confirm profile validation errors are associated with the relevant name or avatar URL field.
+- Confirm profile validation errors are associated with the relevant display name or avatar URL field.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
 - Confirm mobile landing navigation closes from outside pointer input on mouse, touch, and pen.
 - Confirm the language switcher announces the current language and pressed selected state.
