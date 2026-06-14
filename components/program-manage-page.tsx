@@ -540,6 +540,7 @@ export function ProgramManagePage({
                       <Input
                         value={name}
                         maxLength={60}
+                        name="programName"
                         autoCapitalize="words"
                         autoComplete="organization"
                         enterKeyHint="next"
@@ -553,6 +554,7 @@ export function ProgramManagePage({
                         value={iconUrl}
                         type="url"
                         maxLength={280}
+                        name="programIconUrl"
                         aria-describedby={iconUrlHelpId}
                         autoCapitalize="none"
                         autoComplete="url"
@@ -569,6 +571,7 @@ export function ProgramManagePage({
                     <Field label={copy.rewardDescription}>
                       <Textarea
                         value={rewardDescription}
+                        name="rewardDescription"
                         autoCapitalize="sentences"
                         autoComplete="off"
                         enterKeyHint="done"
@@ -582,6 +585,7 @@ export function ProgramManagePage({
                       <Input
                         value={stampsRequired}
                         type="number"
+                        name="stampsRequired"
                         autoComplete="off"
                         enterKeyHint="done"
                         inputMode="numeric"
