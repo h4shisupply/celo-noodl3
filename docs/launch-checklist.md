@@ -88,7 +88,7 @@
 - Confirm package metadata keywords match the Celo, Celo loyalty, MiniPay, PWA, loyalty, customer loyalty, customer QR stamp card, loyalty program, merchant, merchant loyalty, merchant QR stamp card, QR, QR code, counter QR, QR stamp card, stamp card, printed visit QR, static visit QR, dynamic visit QR, live QR, visit QR, reward ticket, reward ticket QR, reward ticket sheet, rewards, wallet, wallet stamps, visit stamps, merchant rewards, and merchant reward surfaces.
 - Confirm package repository, homepage, and issue links point to the public noodl3 project.
 - Confirm root metadata keywords cover Celo, Celo loyalty, MiniPay, PWA, loyalty, loyalty program, customer loyalty, customer QR stamp card, merchant loyalty, merchant QR stamp card, QR, counter QR, QR stamp card, QR code, printed visit QR, static visit QR, dynamic visit QR, live visit QR, live QR, visit QR, wallet stamps, visit stamps, reward ticket, reward ticket QR, reward ticket sheet, merchant rewards, and merchant reward surfaces.
-- Confirm installed app launches focus an existing app window when the platform supports launch handlers.
+- Confirm installed app launches prefer an existing app window when the platform supports launch handlers.
 - Confirm app and shortcut icons keep the logo visible inside safe maskable icon crops.
 - Confirm app route metadata descriptions summarize the landing page, dashboard, create merchant QR stamp card, customer QR stamp card, merchant QR stamp card manager, reward ticket, and legacy redirect pages.
 - Confirm Open Graph and Twitter preview metadata resolves against `NEXT_PUBLIC_APP_URL` and shows the expected title, description, and image.
