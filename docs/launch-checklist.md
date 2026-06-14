@@ -66,7 +66,7 @@
 - Confirm progress counter badges stay decorative when the progressbar announces the same totals.
 - Confirm status updates and QR scanner feedback announce through live regions.
 - Confirm QR scanner announces the active camera state after permission is granted and associates it with the scanner video.
-- Confirm QR scanner live status messages announce complete status updates.
+- Confirm QR scanner live regions announce complete scanner status updates.
 - Confirm QR scanner framing overlays remain decorative and do not add extra announced content.
 - Confirm menu toggles expose expanded state and announce the close action while open.
 - Confirm account and select popovers close from outside mouse, touch, and pen input.
