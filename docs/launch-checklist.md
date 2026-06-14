@@ -41,7 +41,7 @@
 - Confirm non-owner wallets see the owner wallet validation hint.
 
 ## Frontend
-- Confirm `NEXT_PUBLIC_APP_URL` matches the local or deployed base URL before sharing or printing QR links.
+- Confirm `NEXT_PUBLIC_APP_URL` matches the reachable local, LAN, or deployed base URL before sharing or printing QR links.
 - Confirm `NEXT_PUBLIC_DEFAULT_CHAIN` matches the deployed contract network before QR testing.
 - Confirm browser-visible `NEXT_PUBLIC_` RPC URLs use public endpoints and server-side RPC endpoints stay in non-public variables.
 - Confirm wallet addresses, dates, and reward codes are not auto-linked by mobile browser format detection.
