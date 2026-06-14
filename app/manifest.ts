@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "noodl3",
     id: "/",
     description:
-      "Merchant QR stamp cards for real-world visits, visit stamps, and reward tickets validated once on Celo.",
+      "Merchant QR stamp cards for real-world visits on Celo. Print a visit QR, collect visit stamps, and validate each reward ticket once.",
     categories: ["business", "finance", "shopping", "utilities"],
     start_url: "/",
     scope: "/",
