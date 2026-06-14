@@ -809,7 +809,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         question: "What should the shop place at the counter?",
-        answer: "Print the visit QR sheet and place it where customers can scan, connect their wallet, and collect a stamp."
+        answer: "Print the visit QR counter sheet and place it where customers can scan, connect their wallet, and collect a stamp."
       },
       {
         question: "When should a live QR be used?",
