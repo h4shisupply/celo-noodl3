@@ -403,6 +403,7 @@ export function ProgramManagePage({
                       <Input
                         value={manualCustomer}
                         maxLength={42}
+                        name="customerWallet"
                         autoCapitalize="none"
                         autoComplete="off"
                         autoCorrect="off"
