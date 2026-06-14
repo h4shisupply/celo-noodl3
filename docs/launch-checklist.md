@@ -49,7 +49,7 @@
 - Confirm form fields use mobile keyboard hints for wallet addresses, URLs, names, reward promises, and customer visit goals.
 - Confirm keyboard focus is visible on header links, account menu controls, QR actions, and form fields.
 - Confirm loading actions expose their busy state while their controls are disabled.
-- Confirm app pages expose a named main landmark from the visible page heading.
+- Confirm app pages expose a named main landmark from their visible page headings.
 - Confirm app page header sections expose accessible names from their visible page headings.
 - Confirm the connected account header exposes a landmark label only after a wallet connects.
 - Confirm wallet-required states expose a named main landmark from the visible gate heading.
