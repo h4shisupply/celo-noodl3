@@ -10,7 +10,7 @@ Use separate owner and customer wallets, or separate browser profiles, so wallet
 6. Generate a live visit QR on an HTTPS or localhost demo URL, point out the five-minute countdown, scan it as a customer, and collect one visit stamp instantly.
 7. Call out the scanner camera state message before scanning and the success feedback after the stamp lands.
 8. Regenerate the live visit QR to show the owner-led check-in workflow.
-9. Issue enough stamps to reach the visit goal.
+9. Issue enough stamps to reach the customer visit goal.
 10. Create the reward ticket from the customer QR stamp card.
 11. Open `/app/claim/[claimId]`, show the reward ticket QR, print sheet, counter backup code, and owner wallet validation hint.
 12. Switch back to the owner wallet, validate the reward ticket, and confirm that a second validation fails.
