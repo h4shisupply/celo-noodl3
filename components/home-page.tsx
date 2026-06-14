@@ -667,7 +667,7 @@ const enHomeCopy: HomeCopy = {
       "noodl3 turns a counter QR into a wallet stamp card. Customers scan during a visit, collect visit stamps in their wallet, and return with a reward ticket the shop owner validates once.",
     primaryCta: "Create stamp card",
     secondaryCta: "Open app",
-    footnote: "Built for quick setup, daily counter routines, and clear one-time reward tickets.",
+    footnote: "Built for quick setup, daily counter routines, and reward tickets validated once.",
     stats: [
       { value: "Visit QR", label: "One counter scan for visit stamps" },
       { value: "Live QR", label: "Five-minute owner-led check-ins" },
