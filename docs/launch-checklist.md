@@ -52,7 +52,7 @@
 - Confirm app pages expose a named main landmark from their visible page headings.
 - Confirm app page header sections expose accessible names from their visible page headings.
 - Confirm the connected account header exposes a landmark label only after a wallet connects.
-- Confirm wallet-required states expose a named main landmark from the visible gate heading.
+- Confirm wallet-required states expose a named main landmark from their visible gate headings.
 - Confirm wallet-required states expose their visible helper text to assistive tech.
 - Confirm the landing page header exposes an accessible label for the page chrome.
 - Confirm landing page grouped stats, checklists, and card grids use semantic list or description-list markup.
