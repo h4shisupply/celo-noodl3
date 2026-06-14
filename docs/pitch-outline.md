@@ -14,7 +14,7 @@
 - A merchant wallet creates a merchant QR stamp card with a reward promise and customer visit goal
 - Customers scan a visit QR and collect one Stamp / Selo per visit
 - Reward tickets unlock when the configured customer visit goal is reached
-- Owner validates a one-time reward ticket from the owner wallet
+- Owner validates each reward ticket once from the owner wallet
 
 ## Slide 4
 - Why Celo + MiniPay
