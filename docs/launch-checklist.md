@@ -35,7 +35,7 @@
 - Confirm malformed or expired dynamic visit QR links show clear user-facing states.
 - Confirm manual stamp works for owner only.
 - Confirm customer progress reaches the customer visit goal.
-- Confirm customer can create a reward ticket at the visit goal.
+- Confirm customer can create a reward ticket at the customer visit goal.
 - Confirm reward ticket QR renders locally, exposes the print sheet, and shows the counter backup code prominently.
 - Confirm the owner wallet can validate each reward ticket once.
 - Confirm non-owner wallets see the owner wallet validation hint.
