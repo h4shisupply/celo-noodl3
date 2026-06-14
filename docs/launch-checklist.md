@@ -83,7 +83,7 @@
 - Confirm mobile landing navigation closes from outside mouse, touch, and pen input.
 - Confirm the language switcher announces the current language and pressed selected state.
 - Confirm language selection persists after refresh through the locale cookie.
-- Confirm custom select controls show their open and closed state visually.
+- Confirm custom select controls show open and closed states visually.
 - Confirm the app manifest description, icon, dashboard and create-card shortcut labels and descriptions, categories, language, theme color, standalone display mode, and portrait orientation work when installed on mobile.
 - Confirm package metadata keywords match the Celo, Celo loyalty, MiniPay, PWA, loyalty, customer loyalty, customer QR stamp card, loyalty program, merchant, merchant loyalty, merchant QR stamp card, QR, QR code, counter QR, QR stamp card, stamp card, printed visit QR, static visit QR, dynamic visit QR, live QR, visit QR, reward ticket, reward ticket QR, reward ticket sheet, rewards, wallet, wallet stamps, visit stamps, merchant rewards, and merchant reward surfaces.
 - Confirm package repository, homepage, and issue links point to the public noodl3 project.
