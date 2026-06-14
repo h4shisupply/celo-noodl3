@@ -50,7 +50,7 @@
 - Confirm keyboard focus is visible on header links, account menu controls, QR actions, and form fields.
 - Confirm loading actions expose their busy state while their controls are disabled.
 - Confirm app pages expose a named main landmark from their visible page headings.
-- Confirm app page header sections expose accessible names from their visible page headings.
+- Confirm app page headers expose accessible names from their visible headings.
 - Confirm the connected account header exposes a landmark label only after a wallet connects.
 - Confirm wallet-required states expose a named main landmark from their visible gate headings.
 - Confirm wallet-required states expose their visible helper text to assistive tech.
