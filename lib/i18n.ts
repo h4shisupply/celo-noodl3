@@ -894,7 +894,8 @@ const dictionaries: Record<Locale, Dictionary> = {
       ]
     },
     qrScanner: {
-      unsupported: "A leitura por câmera não está disponível neste dispositivo.",
+      unsupported:
+        "A leitura por câmera não está disponível neste dispositivo. Use um navegador compatível com leitura de QR.",
       openCamera: "Abrir câmera",
       ready: "Toque em Abrir câmera e mire no QR de visita ou ticket de recompensa.",
       stopCamera: "Parar leitura",
@@ -1391,7 +1392,8 @@ const dictionaries: Record<Locale, Dictionary> = {
       ]
     },
     qrScanner: {
-      unsupported: "Camera-based scanning is not available on this device.",
+      unsupported:
+        "Camera-based scanning is not available on this device. Use a browser with QR scanning support.",
       openCamera: "Open camera",
       ready: "Tap Open camera and point it at a visit QR or reward ticket.",
       stopCamera: "Stop scanning",
