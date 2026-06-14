@@ -5,7 +5,7 @@ import { publicEnv } from "../../lib/env";
 
 export const metadata: Metadata = {
   title: "Customer and owner dashboard",
-  description: "Open customer QR stamp cards, merchant QR stamp cards, visit stamps, and reward tickets in noodl3."
+  description: "Open customer QR stamp cards, merchant QR stamp cards, visit stamps, and reward ticket history in noodl3."
 };
 
 export default function Page() {
