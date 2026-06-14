@@ -54,4 +54,4 @@
 - Run real merchant pilots
 - Gather merchant feedback on printed visit QR counter sheets and reward ticket sheets
 - Add analytics and repeat-rate reporting
-- Optional owner delegation after V1
+- Evaluate optional owner delegation after V1
