@@ -22,7 +22,7 @@ The core loop is simple:
 - No catalog, menu, cart, item checkout, or payment requirement in V1
 - Bilingual runtime copy: `pt-BR` and `English`
 - `Selos` in Portuguese and `Stamps` in English
-- Accessible app structure with named landmarks, visible focus, progress meters, timer labels, and live QR scanner feedback
+- Accessible app structure with named landmarks, visible focus, progress meters, timer labels, live regions, and QR scanner feedback
 - Installable app manifest with app, dashboard shortcut, and create-card shortcut descriptions plus maskable icons
 - Installed app launches prefer an existing app window when supported
 - Onchain loyalty progress per program
