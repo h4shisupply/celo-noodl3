@@ -71,7 +71,7 @@
 - Confirm menu toggles expose expanded state and announce the close action while open.
 - Confirm account and select popovers close from outside mouse, touch, and pen input.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
-- Confirm decorative and remote UI images stay non-blocking and hidden from assistive tech when appropriate.
+- Confirm decorative or remote UI images stay non-blocking and hidden from assistive tech when appropriate.
 - Confirm profile avatar URLs fall back to wallet initials when the remote image cannot load.
 - Confirm landing page decorative icon treatments stay hidden from assistive tech.
 - Confirm decorative images inside links and controls do not trigger drag interactions.
