@@ -699,7 +699,7 @@ const enHomeCopy: HomeCopy = {
   },
   workflow: {
     eyebrow: "How it works",
-    title: "Print a visit QR, collect visit stamps, validate reward tickets.",
+    title: "Print a visit QR, collect visit stamps, validate each reward ticket.",
     description:
       "The flow matches the counter routine a small shop can run without extra hardware.",
     steps: [
