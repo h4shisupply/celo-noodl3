@@ -1,6 +1,6 @@
 # Demo Script
 
-Use separate owner and customer wallets, or separate browser profiles, so wallet-gated states are clear during the demo.
+Use separate owner and customer wallets or separate browser profiles so wallet-gated states stay clear during the demo.
 
 1. Open the home page and explain the product in one sentence: Celo-native merchant QR stamp card loyalty app for real-world visits.
 2. Switch languages once, refresh, and confirm the landing page, header, and app entry copy stay in sync.
