@@ -43,7 +43,7 @@
 
 ## Slide 7
 - MVP boundaries
-- No catalog or item checkout
+- No catalog, menu, cart, or item checkout
 - One stamp per visit
 - Owner-only management
 - Direct onchain indexes for dashboard reads
