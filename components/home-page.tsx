@@ -805,7 +805,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         question: "How is a reward ticket protected?",
-        answer: "Each reward ticket is validated once by the shop owner wallet, whether the owner scans the QR or uses the backup code. After that, the app shows it as used."
+        answer: "Each reward ticket is validated once by the shop owner wallet, whether the owner scans the QR or uses the counter backup code. After that, the app shows it as used."
       },
       {
         question: "What should the shop place at the counter?",
