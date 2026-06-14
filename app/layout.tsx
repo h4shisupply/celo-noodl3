@@ -98,7 +98,7 @@ export const metadata: Metadata = {
         url: "/og.svg",
         width: 1200,
         height: 630,
-        alt: "noodl3 merchant QR stamp card loyalty preview"
+        alt: "noodl3 printed visit QR and reward ticket QR preview"
       }
     ]
   },
@@ -110,7 +110,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/og.svg",
-        alt: "noodl3 merchant QR stamp card loyalty preview"
+        alt: "noodl3 printed visit QR and reward ticket QR preview"
       }
     ]
   },
