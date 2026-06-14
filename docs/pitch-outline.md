@@ -51,7 +51,7 @@
 
 ## Slide 8
 - Next steps
-- Real merchant pilots
+- Run real merchant pilots
 - Gather merchant feedback on printed visit QR counter sheets and reward ticket sheets
 - Analytics and repeat-rate reporting
 - Optional owner delegation after V1
