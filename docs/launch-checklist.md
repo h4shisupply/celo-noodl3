@@ -55,6 +55,7 @@
 - Confirm wallet-required states expose a named main landmark from their visible gate headings.
 - Confirm wallet-required states expose their visible helper text to assistive tech.
 - Confirm the landing page header exposes an accessible label for the page chrome.
+- Confirm landing page navigation landmarks expose labels distinct from the surrounding header.
 - Confirm landing page grouped stats, checklists, and card grids use semantic list or description-list markup.
 - Confirm landing page sections expose accessible names from their visible headings.
 - Confirm landing page FAQ cards expose accessible names from their question headings.
