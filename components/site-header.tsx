@@ -59,8 +59,8 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
   const menuLabel = menuOpen
-    ? `${dictionary.common.close}: ${dictionary.common.landingPage}`
-    : dictionary.common.menu;
+    ? `${dictionary.common.close}: ${dictionary.common.landingNavigation}`
+    : `${dictionary.common.menu}: ${dictionary.common.landingNavigation}`;
   const menuText = menuOpen ? dictionary.common.close : dictionary.common.menu;
 
   useEffect(() => {
