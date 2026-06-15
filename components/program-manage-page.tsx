@@ -716,7 +716,7 @@ export function ProgramManagePage({
                               aria-busy={isSubmitting}
                               disabled={isSubmitting}
                             >
-                              {isSubmitting ? `${copy.consume}...` : copy.consume}
+                              {isSubmitting ? copy.consumingRewardTicket : copy.consume}
                             </Button>
                           ) : null}
                         </div>
