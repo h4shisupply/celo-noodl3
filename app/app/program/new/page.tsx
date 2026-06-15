@@ -5,7 +5,7 @@ import { publicEnv } from "../../../../lib/env";
 
 export const metadata: Metadata = {
   title: "Create merchant QR stamp card",
-  description: "Create a noodl3 merchant QR stamp card with a square HTTPS logo image URL, reward promise, and customer visit goal."
+  description: "Create a noodl3 merchant QR stamp card with a square public HTTPS logo image URL, reward promise, and customer visit goal."
 };
 
 export default function Page() {
