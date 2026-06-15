@@ -564,7 +564,7 @@ export function ProgramManagePage({
                         dir="ltr"
                         enterKeyHint="next"
                         inputMode="url"
-                        placeholder="https://..."
+                        placeholder={copy.iconUrlPlaceholder}
                         required
                         spellCheck={false}
                         onChange={(event) => setIconUrl(event.target.value)}
