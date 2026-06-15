@@ -229,7 +229,7 @@ export function DashboardPage({
                   aria-busy={isConnecting}
                   disabled={isConnecting}
                 >
-                  {isConnecting ? `${dictionary.actions.connectWallet}...` : dictionary.actions.connectWallet}
+                  {isConnecting ? dictionary.account.connecting : dictionary.actions.connectWallet}
                 </Button>
               ) : null
             }

@@ -187,9 +187,7 @@ function WalletRequiredGate({
                   aria-busy={walletState.isConnecting}
                   disabled={walletState.isConnecting}
                 >
-                  {walletState.isConnecting
-                    ? `${dictionary.actions.connectWallet}...`
-                    : dictionary.actions.connectWallet}
+                  {walletState.isConnecting ? dictionary.account.connecting : dictionary.actions.connectWallet}
                 </Button>
               ) : null}
               {walletState.connectError ? (
