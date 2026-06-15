@@ -66,6 +66,7 @@
 - Confirm landing page feature and workflow cards expose accessible names and descriptions from visible card text.
 - Confirm dashboard cards, reward tickets, customer summaries, and metrics use semantic list or description-list markup.
 - Confirm dashboard QR stamp cards, merchant QR stamp cards, and reward tickets expose accessible names from visible card text.
+- Confirm merchant manager reward ticket links use ticket-specific open labels.
 - Confirm create merchant QR stamp card preview cards expose accessible names and descriptions from visible preview text.
 - Confirm progress meters show matching visible and announced totals.
 - Confirm progress counter badges stay decorative when the progressbar announces the same totals.
