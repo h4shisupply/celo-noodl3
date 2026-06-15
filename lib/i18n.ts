@@ -314,6 +314,7 @@ export type Dictionary = {
   };
   account: {
     openMenu: string;
+    closeMenu: string;
     connectedWallet: string;
     expectedNetwork: string;
     connect: string;
@@ -797,6 +798,7 @@ const dictionaries: Record<Locale, Dictionary> = {
     },
     account: {
       openMenu: "Abrir menu da conta",
+      closeMenu: "Fechar menu da conta",
       connectedWallet: "Carteira conectada",
       expectedNetwork: "{{current}} · esperado {{expected}}",
       connect: "Conectar",
@@ -1298,6 +1300,7 @@ const dictionaries: Record<Locale, Dictionary> = {
     },
     account: {
       openMenu: "Open account menu",
+      closeMenu: "Close account menu",
       connectedWallet: "Connected wallet",
       expectedNetwork: "{{current}} · expected {{expected}}",
       connect: "Connect",

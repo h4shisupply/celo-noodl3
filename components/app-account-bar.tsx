@@ -64,7 +64,7 @@ export function AppAccountBar({
   const menuRef = useRef<HTMLDivElement | null>(null);
   const accountMenuId = useId();
   const accountMenuLabel = isMenuOpen
-    ? `${dictionary.common.close}: ${dictionary.account.connectedWallet}`
+    ? dictionary.account.closeMenu
     : dictionary.account.openMenu;
 
   useEffect(() => {
