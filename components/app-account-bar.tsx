@@ -102,7 +102,7 @@ export function AppAccountBar({
       aria-label={account ? dictionary.account.connectedWallet : undefined}
     >
       <div className="flex items-center justify-between gap-4">
-        <BrandMark href="/app" />
+        <BrandMark href="/app" ariaLabel={`${dictionary.brand.name}: ${dictionary.nav.app}`} />
 
         <div className="ml-auto flex flex-wrap items-center justify-end gap-3">
           {account ? (
