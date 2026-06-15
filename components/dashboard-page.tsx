@@ -270,7 +270,7 @@ export function DashboardPage({
                   disabled={isLoading}
                   onClick={() => void loadDashboard()}
                 >
-                  {isLoading ? `${dictionary.common.loading}...` : copy.refreshDashboard}
+                  {isLoading ? copy.refreshingDashboard : copy.refreshDashboard}
                 </Button>
               </div>
             </div>
