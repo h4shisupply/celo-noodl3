@@ -34,7 +34,7 @@
 ## Slide 6
 - Demo loop
 - Switch languages once to show Portuguese and English app copy
-- Create merchant QR stamp card with an HTTPS logo URL, reward promise, and customer visit goal
+- Create merchant QR stamp card with a square HTTPS logo image URL, reward promise, and customer visit goal
 - Show printed visit QR actions: open link, copy link, share fallback, SVG download, and print the visit QR counter sheet
 - Customer collects one visit stamp and sees the 20-hour reuse block
 - Generate a five-minute live visit QR
