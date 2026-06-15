@@ -498,7 +498,7 @@ export function ProgramManagePage({
                       disabled={isSubmitting || !program.active}
                     >
                       {isSubmitting
-                        ? `${dictionary.common.loading}...`
+                        ? copy.generatingDynamicQr
                         : dynamicQr
                           ? copy.regenerateDynamicQr
                           : copy.generateDynamicQr}
