@@ -342,7 +342,7 @@ export function ProgramPage({
                       isStaticCoolingDown
                     }
                   >
-                    {isSubmitting ? `${copy.requestStamp}...` : copy.requestStamp}
+                    {isSubmitting ? copy.requestingStamp : copy.requestStamp}
                   </Button>
                 ) : null}
 
