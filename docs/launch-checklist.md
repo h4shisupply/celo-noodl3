@@ -76,6 +76,7 @@
 - Confirm QR scanner error states give actionable guidance for blocked camera access, insecure URLs, missing cameras, and busy cameras.
 - Confirm QR scanner framing overlays remain decorative and do not add extra announced content.
 - Confirm menu toggles expose expanded state and announce the close action while open.
+- Confirm account menu toggles use account-specific open and close labels.
 - Confirm account and select popovers close from outside mouse, touch, and pen input.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative or remote UI images stay non-blocking and hidden from assistive tech when appropriate.
