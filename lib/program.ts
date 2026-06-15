@@ -187,6 +187,7 @@ const enProgramCopy = {
   ticketReady: "Ready to validate",
   ticketUsed: "Already used",
   ownerValidationHint: "Connect the shop owner wallet to validate this ticket.",
+  validatingClaim: "Validating ticket...",
   rewardTicketSheet: "Reward ticket"
 };
 
@@ -288,5 +289,6 @@ const ptProgramCopy = {
   ticketReady: "Pronto para validar",
   ticketUsed: "Já usado",
   ownerValidationHint: "Conecte a carteira do lojista para validar este ticket.",
+  validatingClaim: "Validando ticket...",
   rewardTicketSheet: "Ticket de recompensa"
 };

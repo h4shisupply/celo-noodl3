@@ -286,7 +286,7 @@ export function ClaimPage({
                     disabled={isSubmitting}
                     className="w-full sm:w-auto"
                   >
-                    {isSubmitting ? `${copy.validateClaim}...` : copy.validateClaim}
+                    {isSubmitting ? copy.validatingClaim : copy.validateClaim}
                   </Button>
                 ) : null}
 
