@@ -324,7 +324,7 @@ export function ProgramPage({
                     aria-busy={isSubmitting}
                     disabled={isSubmitting || !program.active}
                   >
-                    {isSubmitting ? `${copy.collectVisit}...` : copy.collectVisit}
+                    {isSubmitting ? copy.collectingVisit : copy.collectVisit}
                   </Button>
                 ) : null}
 
