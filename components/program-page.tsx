@@ -355,7 +355,7 @@ export function ProgramPage({
                     aria-busy={isSubmitting}
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? `${copy.claimReward}...` : copy.claimReward}
+                    {isSubmitting ? copy.creatingRewardTicket : copy.claimReward}
                   </Button>
                 ) : null}
 
