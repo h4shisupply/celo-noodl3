@@ -57,6 +57,7 @@
 - Confirm live QR generation controls use live-QR-specific idle and loading labels.
 - Confirm manual stamp controls use manual-stamp-specific idle and loading labels.
 - Confirm visit stamp collection controls use stamp-specific idle and loading labels.
+- Confirm counter visit stamp controls use counter-stamp-specific idle and loading labels.
 - Confirm app pages expose a named main landmark from their visible page headings.
 - Confirm app page headers expose accessible names from their visible headings.
 - Confirm the connected account header exposes a landmark label only after a wallet connects.
