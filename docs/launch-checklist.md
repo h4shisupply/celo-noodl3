@@ -54,6 +54,7 @@
 - Confirm dashboard refresh controls use dashboard-specific idle and loading labels.
 - Confirm create merchant QR stamp card controls use QR-card-specific idle and saving labels.
 - Confirm merchant QR stamp card settings controls use QR-card-specific idle and updating labels.
+- Confirm live QR generation controls use live-QR-specific idle and loading labels.
 - Confirm app pages expose a named main landmark from their visible page headings.
 - Confirm app page headers expose accessible names from their visible headings.
 - Confirm the connected account header exposes a landmark label only after a wallet connects.
