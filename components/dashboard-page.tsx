@@ -536,14 +536,14 @@ function ClaimSummaryCard({ claim }: { claim: ClaimRecord }) {
           </Badge>
           <Link
             href={`/app/claim/${claim.id.toString()}`}
-            aria-label={`${copy.openCard}: ${claim.rewardDescription}`}
+            aria-label={`${copy.openTicket}: ${claim.rewardDescription}`}
             className="inline-flex min-h-9 w-full max-w-full shrink-0 select-none items-center justify-center gap-2 rounded-lg border border-line bg-panel px-3.5 py-2 text-sm font-semibold text-ink-soft shadow-[0_8px_24px_rgba(27,23,43,0.045)] transition duration-200 hover:border-accent-border hover:bg-accent-soft active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus sm:w-auto"
           >
             <span className="grid h-4 w-4 shrink-0 place-items-center" aria-hidden="true">
               <Gift className="h-4 w-4" />
             </span>
             <span className="min-w-0 whitespace-normal text-center leading-tight">
-              {copy.openCard}
+              {copy.openTicket}
             </span>
           </Link>
         </div>
