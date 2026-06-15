@@ -246,7 +246,7 @@ export function ProgramCreatePage({
               disabled={isSaving || !contractAddress}
               className="w-full sm:w-auto"
             >
-              {isSaving ? `${dictionary.common.saving}...` : copy.saveProgram}
+              {isSaving ? copy.savingProgram : copy.saveProgram}
             </Button>
 
             {status ? <StatusMessage tone="success">{status}</StatusMessage> : null}
