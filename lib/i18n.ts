@@ -333,6 +333,7 @@ export type Dictionary = {
     nameRequired: string;
     avatarInvalid: string;
     unavailable: string;
+    saving: string;
   };
   catalogEditor: {
     savedTitle: string;
@@ -818,7 +819,8 @@ const dictionaries: Record<Locale, Dictionary> = {
       avatarPlaceholder: "Link https:// da foto (opcional)",
       nameRequired: "Informe um nome para salvar o perfil.",
       avatarInvalid: "Use uma URL HTTPS pública para a foto.",
-      unavailable: "Perfil onchain indisponível nesta rede."
+      unavailable: "Perfil onchain indisponível nesta rede.",
+      saving: "Salvando perfil..."
     },
     catalogEditor: {
       savedTitle: "Salvo",
@@ -1318,7 +1320,8 @@ const dictionaries: Record<Locale, Dictionary> = {
       avatarPlaceholder: "Profile image URL (https://, optional)",
       nameRequired: "Enter a name to save your profile.",
       avatarInvalid: "Use a public HTTPS URL for the profile image.",
-      unavailable: "Onchain profiles are unavailable on this network."
+      unavailable: "Onchain profiles are unavailable on this network.",
+      saving: "Saving profile..."
     },
     catalogEditor: {
       savedTitle: "Saved",

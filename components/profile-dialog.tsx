@@ -180,7 +180,7 @@ export function ProfileDialog({
               aria-busy={isSaving}
               disabled={isSaving || profileUnavailable}
             >
-              {isSaving ? `${dictionary.common.saving}...` : dictionary.actions.save}
+              {isSaving ? dictionary.profile.saving : dictionary.actions.save}
             </Button>
             <Button variant="ghost" onClick={handleSkip} disabled={isSaving}>
               {dictionary.actions.skipForNow}
