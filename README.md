@@ -26,7 +26,7 @@ The core loop is simple:
 - Installable app manifest with app description, dashboard and create-card shortcut names and descriptions, and maskable icons
 - Installed app launch handling prefers an existing app window when the platform supports launch handlers
 - Onchain loyalty progress per program
-- Printed visit QR with one stamp per wallet every 20 hours
+- Printed visit QR that lets each wallet collect one stamp every 20 hours
 - Live visit QR with five-minute, one-use check-in payloads signed by the shop owner
 - Reward ticket QR with a reward ticket sheet and counter backup code for shop owner wallet validation
 - Internal non-transferable claims instead of points tokens or NFTs
