@@ -40,7 +40,7 @@ The core loop is simple:
 - `/app/program/[programId]/manage`: merchant QR stamp card manager for printed and live visit QR actions
 - `/app/claim/[claimId]`: reward ticket QR, reward ticket sheet, counter backup code, and shop owner wallet validation
 - `/claim/[claimId]`: legacy reward ticket link that preserves the claim ID when redirecting into `/app/claim/[claimId]`
-- `/app/rewards`, `/rewards`, `/success`, `/app/store/[slug]`, and `/store/[slug]` redirect into the `/app` dashboard page; `/merchant/verify` and `/verify` preserve `claim` query values when redirecting into `/app/claim/[claimId]`, or into `/app` otherwise
+- `/app/rewards`, `/rewards`, `/success`, `/app/store/[slug]`, and `/store/[slug]` redirect to the `/app` dashboard; `/merchant/verify` and `/verify` preserve `claim` query values when redirecting to `/app/claim/[claimId]`, or to `/app` otherwise
 
 ## Merchant Pilot Flow
 
