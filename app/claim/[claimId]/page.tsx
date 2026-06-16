@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Legacy reward ticket redirect",
-  description: "Redirect legacy reward ticket links while preserving the claim ID for the matching noodl3 reward ticket QR page."
+  description: "Redirect legacy reward ticket links into the matching noodl3 reward ticket QR page while preserving the claim ID."
 };
 
 type ClaimRouteProps = {
