@@ -44,7 +44,7 @@ The core loop is simple:
 
 ## Merchant Pilot Flow
 
-For a real pilot, the owner should:
+For a real pilot, the shop owner should:
 
 1. Create a merchant QR stamp card with a square public HTTPS logo image URL, reward promise, and customer visit goal.
 2. Open the merchant QR stamp card manager and print the visit QR counter sheet.
