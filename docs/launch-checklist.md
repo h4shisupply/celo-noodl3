@@ -33,7 +33,7 @@
 - Confirm dynamic visit QR generation shows an in-progress label while the action is disabled.
 - Confirm owner-signed dynamic visit QR can be used once to collect one visit stamp, then fails on reuse.
 - Confirm malformed or expired dynamic visit QR links show clear user-facing states.
-- Confirm manual stamp works for owner wallets only.
+- Confirm manual stamp works for shop owner wallets only.
 - Confirm customer progress reaches the customer visit goal.
 - Confirm customer can create a reward ticket at the customer visit goal.
 - Confirm reward ticket creation controls use ticket-specific idle and loading labels.
