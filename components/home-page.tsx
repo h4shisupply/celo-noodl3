@@ -670,7 +670,7 @@ const enHomeCopy: HomeCopy = {
     footnote: "Built for quick setup, daily counter routines, and reward tickets validated once.",
     stats: [
       { value: "Visit QR", label: "One counter scan for visit stamps" },
-      { value: "Live QR", label: "Five-minute owner-led check-ins" },
+      { value: "Live QR", label: "Five-minute shop-owner-led check-ins" },
       { value: "Reward ticket", label: "Validated once by the shop owner wallet" }
     ]
   },
@@ -737,7 +737,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         title: "Counter-ready visit QR",
-        description: "Print the visit QR for self-service visit stamps or generate a live QR for owner-led check-ins."
+        description: "Print the visit QR for self-service visit stamps or generate a live QR for shop-owner-led check-ins."
       },
       {
         title: "Wallet-held progress",
@@ -781,7 +781,7 @@ const enHomeCopy: HomeCopy = {
     checklist: [
       "Create a branded stamp card with a customer visit goal and reward promise from the shop owner wallet.",
       "Print or download the reusable visit QR.",
-      "Use live QR for owner-led check-ins when needed.",
+      "Use live QR for shop-owner-led check-ins when needed.",
       "Let customers collect stamps at the counter.",
       "Open reward tickets with QR, reward ticket sheet, and counter backup code.",
       "Validate each reward ticket once from the shop owner wallet."
