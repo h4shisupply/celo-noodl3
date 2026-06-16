@@ -38,7 +38,7 @@ The core loop is simple:
 - `/app/program/new`: create a merchant QR stamp card with a square public HTTPS logo image URL, reward promise, and customer visit goal
 - `/app/program/[programId]`: customer QR stamp card for printed and live visit QR links
 - `/app/program/[programId]/manage`: merchant QR stamp card manager for printed and live visit QR actions
-- `/app/claim/[claimId]`: reward ticket QR, reward ticket sheet, counter backup code, and owner wallet validation
+- `/app/claim/[claimId]`: reward ticket QR, reward ticket sheet, counter backup code, and shop owner wallet validation
 - `/claim/[claimId]`: legacy reward ticket link that preserves the claim ID when redirecting into `/app/claim/[claimId]`
 - `/app/rewards`, `/rewards`, `/success`, `/app/store/[slug]`, and `/store/[slug]` redirect into the `/app` dashboard page; `/merchant/verify` and `/verify` preserve `claim` query values when redirecting into `/app/claim/[claimId]`, or into `/app` otherwise
 
