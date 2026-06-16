@@ -87,7 +87,7 @@ Design choices:
 - Dynamic visit QR signs `chainId`, `contract`, `programId`, `nonce`, and `expiresAt`; the app generates five-minute expiries, and each check-in nonce can be used once.
 - Progress is stored as `mapping(user => mapping(programId => uint32))`.
 - Reward ticket claims are internal records, not NFTs.
-- Dashboard reads direct onchain indexes instead of relying on event indexing.
+- Dashboard reads direct on-chain indexes instead of relying on event indexing.
 
 ## Quick Start
 
