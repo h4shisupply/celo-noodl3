@@ -5,7 +5,7 @@
 The product is split into two layers:
 
 - `/`: public landing page
-- `/app`: customer and merchant dashboard page for customer and merchant QR stamp cards, visit stamps, and reward ticket history
+- `/app`: customer and merchant dashboard for customer and merchant QR stamp cards, visit stamps, and reward ticket history
 
 The core loop is simple:
 
