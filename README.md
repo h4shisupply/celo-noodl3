@@ -51,7 +51,7 @@ For a real pilot, the owner should:
 3. Keep the printed visit QR at the register so customers can collect visit stamps.
 4. Use the live visit QR for owner-led check-ins; it expires after five minutes and can be regenerated.
 5. Ask customers with completed stamp cards to open their reward ticket QR before validation.
-6. Validate the reward ticket from the owner wallet and confirm the used state before handing out the reward.
+6. Validate the reward ticket from the shop owner wallet and confirm the used state before handing out the reward.
 
 The QR UI renders locally in the app. It supports opening QR links, copying links, sharing when the browser allows it, downloading the SVG QR, and printing visit QR counter sheets and reward ticket sheets without relying on an external QR image service. QR action feedback clears between actions and when regenerated QR content changes.
 
