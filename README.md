@@ -13,7 +13,7 @@ The core loop is simple:
 2. The owner prints a visit QR or generates a five-minute live visit QR.
 3. Customers scan the visit QR and collect one Stamp / Selo per visit.
 4. When the customer visit goal is reached, the customer creates a reward ticket.
-5. The owner validates the reward ticket once from the owner wallet.
+5. The shop owner validates the reward ticket once from the shop owner wallet.
 
 ## Product Shape
 
