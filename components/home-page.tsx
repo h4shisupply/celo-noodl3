@@ -761,7 +761,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         title: "Live QR",
-        description: "An owner-signed QR that expires in five minutes and works for one customer check-in."
+        description: "A QR signed by the shop owner that expires in five minutes and works for one customer check-in."
       },
       {
         title: "Reward ticket",
