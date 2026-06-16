@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Legacy reward ticket verification redirect",
-  description: "Redirect legacy reward ticket verification links to the matching Celo-native reward ticket QR page when a claim query is present, or to the dashboard otherwise."
+  description: "Redirect legacy reward ticket verification links to the matching Celo-native reward ticket QR page when a claim query parameter is present, or to the dashboard otherwise."
 };
 
 type VerifyRouteProps = {
