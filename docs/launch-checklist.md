@@ -10,7 +10,7 @@
 
 ## Product
 - Confirm a fresh merchant wallet can create a merchant QR stamp card.
-- Confirm owner and customer demo steps use separate wallets or browser profiles for wallet-gated states.
+- Confirm shop owner and customer demo steps use separate wallets or browser profiles for wallet-gated states.
 - Confirm merchant QR stamp card creation requires a square public HTTPS logo image URL.
 - Confirm the merchant QR stamp card manager opens for owner wallets.
 - Confirm the merchant QR stamp card manager back link returns to the QR stamp card.
