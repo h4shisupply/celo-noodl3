@@ -87,7 +87,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "noodl3",
     description:
-      "Merchant QR stamp cards for small shops, with printed visit QR scans, live check-ins, and reward tickets validated once on Celo.",
+      "Merchant QR stamp cards for real-world visits on Celo. Print a visit QR, collect visit stamps, and validate each reward ticket once.",
     url: publicEnv.appUrl,
     siteName: "noodl3",
     type: "website",
