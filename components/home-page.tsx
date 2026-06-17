@@ -957,7 +957,7 @@ const ptHomeCopy: HomeCopy = {
       "Imprimir ou baixar o QR de visita reutilizável.",
       "Usar o QR ao vivo quando o lojista quiser guiar o check-in.",
       "Permitir que clientes carimbem visitas no balcão.",
-      "Abrir tickets de recompensa com QR, folha de impressão e código de apoio.",
+      "Abrir tickets de recompensa com um QR, folha de impressão e código de apoio.",
       "Validar cada ticket de recompensa uma vez pela carteira do lojista."
     ]
   },
