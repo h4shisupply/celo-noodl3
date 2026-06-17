@@ -25,7 +25,7 @@
 - Confirm QR images expose visible helper copy as accessible descriptions when helper text is present.
 - Confirm QR open actions launch the visit or reward ticket link in a separate tab.
 - Confirm QR open actions do not send the current app page as the referrer.
-- Confirm static visit QR collects one stamp and immediate reuse fails before 20 hours.
+- Confirm static visit QR collects one stamp and immediate reuse fails within 20 hours.
 - Confirm dynamic visit QR signed by the shop owner opens `/app/program/[programId]?visit=dynamic&nonce=...&expires=...&sig=...`.
 - Confirm dynamic visit QR shows a countdown, expires after five minutes, and can be regenerated.
 - Confirm dynamic visit QR countdowns expose the remaining duration in machine-readable time.
