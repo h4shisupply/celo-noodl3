@@ -975,7 +975,7 @@ const ptHomeCopy: HomeCopy = {
       },
       {
         question: "Qual a diferença entre QR impresso e QR ao vivo?",
-        answer: "QR impresso é reutilizável para selos a cada 20 horas. QR ao vivo é gerado pelo lojista, expira em cinco minutos e funciona melhor para check-ins guiados."
+        answer: "O QR impresso é reutilizável para selos a cada 20 horas. O QR ao vivo é gerado pelo lojista, expira em cinco minutos e funciona melhor para check-ins guiados."
       },
       {
         question: "Como o ticket de recompensa fica protegido?",
