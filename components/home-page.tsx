@@ -705,7 +705,7 @@ const enHomeCopy: HomeCopy = {
     steps: [
       {
         title: "Create the card",
-        description: "Add the shop name, logo, reward promise, customer visit goal, and counter QR status."
+        description: "Add the shop name, logo, reward promise, visit goal, and counter QR status."
       },
       {
         title: "Print the visit QR",
