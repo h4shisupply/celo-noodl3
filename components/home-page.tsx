@@ -955,7 +955,7 @@ const ptHomeCopy: HomeCopy = {
     checklist: [
       "Criar um cartão de selos com promessa da recompensa e meta de visitas pela carteira do lojista.",
       "Imprimir ou baixar o QR de visita reutilizável.",
-      "Usar QR ao vivo quando o lojista quiser guiar o check-in.",
+      "Usar o QR ao vivo quando o lojista quiser guiar o check-in.",
       "Permitir que clientes carimbem visitas no balcão.",
       "Abrir tickets de recompensa com QR, folha de impressão e código de apoio.",
       "Validar cada ticket de recompensa uma vez pela carteira do lojista."
