@@ -813,7 +813,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         question: "When should a live QR be used?",
-        answer: "Use live QR when the shop owner wants a five-minute code for the next customer instead of leaving the printed QR out."
+        answer: "Use the live QR when the shop owner wants a five-minute code for the next customer instead of leaving the printed QR out."
       }
     ]
   },
