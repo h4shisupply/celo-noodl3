@@ -935,7 +935,7 @@ const ptHomeCopy: HomeCopy = {
       },
       {
         title: "QR ao vivo",
-        description: "Um QR assinado pelo lojista, expira em cinco minutos e serve para check-in de um cliente."
+        description: "Um QR assinado pelo lojista que expira em cinco minutos e serve para check-in de um cliente."
       },
       {
         title: "Ticket de recompensa",
