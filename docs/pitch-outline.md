@@ -40,7 +40,7 @@
 - Generate a five-minute live visit QR
 - Customer collects one visit stamp from the live QR instantly
 - Customer creates a reward ticket and sees the reward ticket QR, printable reward ticket sheet, and counter backup code
-- Shop owner validates each reward ticket once from the shop owner wallet
+- The shop owner validates each reward ticket once from the shop owner wallet
 
 ## Slide 7
 - MVP boundaries
