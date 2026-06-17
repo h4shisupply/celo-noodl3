@@ -18,7 +18,7 @@ The core loop is simple:
 ## Product Shape
 
 - Self-serve merchant QR stamp card creation
-- Local visit QR and reward ticket QR rendering, link opening, copying, sharing, SVG download, and printed visit QR counter sheets and reward ticket sheets
+- Local visit QR and reward ticket QR rendering, link opening, copying, sharing, SVG download, and printed visit QR counter sheets and printable reward ticket sheets
 - No catalog, menu, cart, item checkout, or payment requirement in V1
 - Bilingual runtime copy: `pt-BR` and English
 - `Selos` in Portuguese and `Stamps` in English
