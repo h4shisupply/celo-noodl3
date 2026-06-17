@@ -781,7 +781,7 @@ const enHomeCopy: HomeCopy = {
     checklist: [
       "Create a branded stamp card with a visit goal and reward promise from the shop owner wallet.",
       "Print or download the reusable visit QR.",
-      "Use live QR for shop-owner-led check-ins when needed.",
+      "Use the live QR for shop-owner-led check-ins when needed.",
       "Let customers collect stamps at the counter.",
       "Open reward tickets with a QR, printable reward ticket sheet, and counter backup code.",
       "Validate each reward ticket once from the shop owner wallet."
