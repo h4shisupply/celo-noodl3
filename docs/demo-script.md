@@ -2,7 +2,7 @@
 
 Use separate shop owner and customer wallets or separate browser profiles so wallet-gated states stay clear during the demo. Confirm `NEXT_PUBLIC_APP_URL` matches the local, LAN, or deployed URL that phones can reach before showing QR links.
 
-1. Open the home page and explain the product in one sentence: Celo-native merchant QR stamp card loyalty app for real-world visits.
+1. Open the home page and explain the product in one sentence: a Celo-native merchant QR stamp card loyalty app for real-world visits.
 2. Switch languages once, refresh, and confirm the landing page, header, and app entry copy stay in sync.
 3. Open `/app`, connect a wallet, optionally add a display name, and create a merchant QR stamp card with a square public HTTPS logo URL, a reward promise, and a visit goal.
 4. Open the merchant QR stamp card manager and show the printed visit QR actions: open link, copy link, share fallback, SVG download, and print the visit QR counter sheet.
