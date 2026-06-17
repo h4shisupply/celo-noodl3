@@ -10,7 +10,7 @@ Use separate shop owner and customer wallets or separate browser profiles so wal
 6. Generate a live visit QR on an HTTPS or localhost demo URL, point out the five-minute countdown, scan it as a customer, and collect one visit stamp instantly.
 7. Call out the scanner camera state message before scanning and the success feedback after the stamp is recorded.
 8. Regenerate the live visit QR to show the shop-owner-led check-in workflow.
-9. Collect or issue enough stamps to reach the customer visit goal.
+9. Collect or issue enough stamps to reach the visit goal.
 10. Create the reward ticket from the customer QR stamp card.
 11. Open `/app/claim/[claimId]`, show the reward ticket QR, printable reward ticket sheet, counter backup code, and shop owner wallet validation hint.
 12. Switch back to the shop owner wallet, validate the reward ticket, refresh the claim page, and confirm that a second validation fails.
