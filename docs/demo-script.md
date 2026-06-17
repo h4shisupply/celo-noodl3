@@ -1,6 +1,6 @@
 # Demo Script
 
-Use separate shop owner and customer wallets or separate browser profiles so wallet-gated states stay clear during the demo. Confirm `NEXT_PUBLIC_APP_URL` matches the local, LAN, or deployed URL that phones will scan before showing QR links.
+Use separate shop owner and customer wallets or separate browser profiles so wallet-gated states stay clear during the demo. Confirm `NEXT_PUBLIC_APP_URL` matches the local, LAN, or deployed URL that phones can reach before showing QR links.
 
 1. Open the home page and explain the product in one sentence: Celo-native merchant QR stamp card loyalty app for real-world visits.
 2. Switch languages once, refresh, and confirm the landing page, header, and app entry copy stay in sync.
