@@ -769,7 +769,7 @@ const enHomeCopy: HomeCopy = {
       },
       {
         title: "Shop owner validation",
-        description: "The shop owner wallet validates the reward ticket, and used reward tickets show a clear used state."
+        description: "The shop owner wallet validates the reward ticket, and validated tickets show a clear used state."
       }
     ]
   },
