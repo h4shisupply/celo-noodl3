@@ -19,7 +19,7 @@
 ## Slide 4
 - Why Celo + MiniPay
 - Mobile-first wallet context
-- Low-cost onchain state changes
+- Low-cost on-chain state changes
 - Portable customer progress
 - No backend points database is required
 
