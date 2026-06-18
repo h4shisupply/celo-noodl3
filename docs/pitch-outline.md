@@ -13,7 +13,7 @@
 - Product
 - A merchant wallet creates a merchant QR stamp card with a reward promise and a visit goal
 - Customers scan a visit QR and collect one Stamp or Selo per visit
-- Reward tickets unlock when the configured visit goal is reached
+- Customers unlock reward tickets when the configured visit goal is reached
 - The shop owner validates each reward ticket once from the shop owner wallet
 
 ## Slide 4
