@@ -36,7 +36,7 @@
 - Switch languages once to show Portuguese and English app copy
 - Create a merchant QR stamp card with a square public HTTPS logo URL, a reward promise, and a visit goal
 - Show printed visit QR actions: open link, copy link, share fallback, SVG download, and print the visit QR counter sheet
-- Customer collects one visit stamp and sees the 20-hour reuse block
+- Customer collects one visit stamp and sees the 20-hour reuse cooldown
 - Generate a five-minute live visit QR
 - Customer collects one visit stamp from the live QR instantly
 - Customer creates a reward ticket and sees the reward ticket QR, printable reward ticket sheet, and counter backup code
