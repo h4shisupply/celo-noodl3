@@ -40,7 +40,7 @@
 - Confirm reward ticket QR renders locally, exposes the printable reward ticket sheet, and shows the counter backup code prominently.
 - Confirm the shop owner wallet can validate each reward ticket only once.
 - Confirm reward ticket validation controls use ticket-specific idle and loading labels.
-- Confirm non-shop-owner wallets see the shop owner wallet validation hint.
+- Confirm non-shop-owner wallets see the shop owner wallet validation guidance.
 
 ## Frontend
 - Confirm `NEXT_PUBLIC_APP_URL` matches the reachable local, LAN, or deployed base URL before sharing or printing QR links.
