@@ -1,6 +1,6 @@
 <svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
   <title>noodl3 square logo</title>
-  <desc>Purple noodl3 square logo for the Celo-native merchant QR stamp card app.</desc>
+  <desc>Purple noodl3 square logo for the Celo-native merchant QR stamp card loyalty app.</desc>
   <rect width="256" height="256" rx="60" fill="#FBFAFD"/>
   <rect x="28" y="28" width="200" height="200" rx="56" fill="#7B3FE4"/>
   <path d="M73 128C73 97.6243 97.6243 73 128 73H165V95H128C109.775 95 95 109.775 95 128C95 146.225 109.775 161 128 161H165V183H128C97.6243 183 73 158.376 73 128Z" fill="white"/>
