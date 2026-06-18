@@ -47,7 +47,7 @@
 - No catalog, menu, cart, or item checkout
 - One stamp per visit
 - Owner-only management
-- Direct onchain indexes without an event-indexing dependency
+- Direct on-chain indexes without an event-indexing dependency
 - No NFT or points-token layer in V1
 
 ## Slide 8
