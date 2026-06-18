@@ -86,7 +86,7 @@
 - Confirm QR scanner framing overlays remain decorative and do not add extra announced content.
 - Confirm menu toggles expose expanded state and announce the close action while open.
 - Confirm account menu toggles use account-specific open and close labels.
-- Confirm account and select popovers close from outside mouse, touch, and pen input.
+- Confirm account and select popovers close after outside mouse, touch, and pen interactions.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative or remote UI images stay non-blocking and hidden from assistive tech when appropriate.
 - Confirm profile avatar URLs fall back to wallet initials when the remote image cannot load.
