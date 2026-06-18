@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s · noodl3"
   },
   description:
-    "Celo-native merchant QR stamp cards for real-world visits. Print a visit QR, collect visit stamps, and validate each reward ticket once.",
+    "Celo-native merchant QR stamp card loyalty app for real-world visits. Print a visit QR, collect visit stamps, and validate each reward ticket once.",
   manifest: "/manifest.webmanifest",
   metadataBase: new URL(publicEnv.appUrl),
   alternates: {
