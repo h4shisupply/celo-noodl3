@@ -98,7 +98,7 @@
 - Confirm profile validation errors are associated with the relevant display name or avatar URL field.
 - Confirm profile save controls use profile-specific idle and saving labels.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
-- Confirm mobile landing navigation closes from outside mouse, touch, and pen input.
+- Confirm mobile landing navigation closes after outside mouse, touch, and pen interactions.
 - Confirm the language switcher announces the current language and each option's pressed state.
 - Confirm language selection persists after refresh through the locale cookie.
 - Confirm custom select controls show clear visual states for open and closed menus.
