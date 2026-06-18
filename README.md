@@ -5,7 +5,7 @@
 The product is split into two layers:
 
 - `/`: public landing page
-- `/app`: customer and merchant dashboard for customer and merchant QR stamp cards, visit stamps, and reward tickets
+- `/app`: dashboard for customer and merchant QR stamp cards, visit stamps, and reward tickets
 
 The core loop is simple:
 
@@ -34,7 +34,7 @@ The core loop is simple:
 ## Routes
 
 - `/`: landing page
-- `/app`: customer and merchant dashboard for customer and merchant QR stamp cards, visit stamps, and reward tickets
+- `/app`: dashboard for customer and merchant QR stamp cards, visit stamps, and reward tickets
 - `/app/program/new`: create a merchant QR stamp card with a square public HTTPS logo URL, a reward promise, and a visit goal
 - `/app/program/[programId]`: customer QR stamp card for printed and live visit QR links
 - `/app/program/[programId]/manage`: merchant QR stamp card manager for printed and live visit QR actions
