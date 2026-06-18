@@ -38,7 +38,7 @@
 - Show printed visit QR actions: open link, copy link, share fallback, SVG download, and print the visit QR counter sheet
 - Customer collects one visit stamp and sees the 20-hour reuse cooldown
 - Generate a five-minute live visit QR
-- Customer collects one visit stamp from the live QR instantly
+- Customer collects one visit stamp from the live QR immediately
 - Customer creates a reward ticket and sees the reward ticket QR, printable reward ticket sheet, and counter backup code
 - The shop owner validates each reward ticket once with the shop owner wallet
 
