@@ -7,7 +7,7 @@ The product has two main entry points:
 - `/`: public landing page
 - `/app`: dashboard for customer and merchant QR stamp cards, visit stamps, and reward tickets
 
-The core loop is simple:
+The core loyalty loop is simple:
 
 1. A merchant wallet creates a merchant QR stamp card with a reward promise and a visit goal.
 2. The shop owner prints a visit QR or generates a five-minute live visit QR.
