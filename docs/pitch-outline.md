@@ -6,7 +6,7 @@
 
 ## Slide 2
 - Problem
-- Small merchants still use paper cards because digital loyalty is too heavy
+- Small merchants still use paper stamp cards because digital loyalty is too heavy
 - Existing apps often force catalogs, checkout, integrations, or custodial point systems
 
 ## Slide 3
