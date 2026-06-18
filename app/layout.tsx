@@ -106,7 +106,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "noodl3",
     description:
-      "Celo-native merchant QR stamp cards for real-world visits. Print a visit QR, collect visit stamps, and validate each reward ticket once.",
+      "Celo-native merchant QR stamp card loyalty app for real-world visits. Print a visit QR, collect visit stamps, and validate each reward ticket once.",
     images: [
       {
         url: "/og.svg",
