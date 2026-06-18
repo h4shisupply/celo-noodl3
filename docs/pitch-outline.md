@@ -24,7 +24,7 @@
 - No backend points database is required
 
 ## Slide 5
-- Onchain design
+- On-chain design
 - Merchant wallets create programs themselves
 - Stamps are non-transferable contract state
 - Printed visit QR allows one stamp per wallet every 20 hours
