@@ -99,7 +99,7 @@
 - Confirm profile save controls use profile-specific idle and saving labels.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
 - Confirm mobile landing navigation closes from outside mouse, touch, and pen input.
-- Confirm the language switcher announces the current language and pressed selected state.
+- Confirm the language switcher announces the current language and each option's pressed state.
 - Confirm language selection persists after refresh through the locale cookie.
 - Confirm custom select controls show open and closed states visually.
 - Confirm the app manifest description, icon, dashboard and create-card shortcut names and descriptions, categories, language, theme color, standalone display mode, minimal-ui display override, and portrait orientation work when installed on mobile.
