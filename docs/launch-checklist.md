@@ -31,7 +31,7 @@
 - Confirm dynamic visit QR countdowns expose the remaining duration as machine-readable time.
 - Confirm dynamic visit QR countdowns expose an accessible name for the active or expired timer state.
 - Confirm dynamic visit QR generation shows an in-progress label while its action is disabled.
-- Confirm a dynamic visit QR signed by the shop owner can be used once to collect one visit stamp, then fails on reuse.
+- Confirm a one-use dynamic visit QR signed by the shop owner collects one visit stamp, then fails on reuse.
 - Confirm malformed or expired dynamic visit QR links show clear user-facing error states.
 - Confirm manual stamp issuance works for shop owner wallets only.
 - Confirm customer progress reaches the configured visit goal.
