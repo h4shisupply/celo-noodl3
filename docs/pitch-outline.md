@@ -21,7 +21,7 @@
 - Mobile-first wallet context
 - Low-cost on-chain state changes
 - Portable customer progress
-- No backend points database needed
+- No backend points database is needed
 
 ## Slide 5
 - On-chain design
