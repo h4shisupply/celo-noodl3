@@ -2,7 +2,7 @@
 
 `noodl3` is a Celo-native merchant QR stamp card loyalty app for real-world visits.
 
-The product has two main entry points:
+The app has two main entry points:
 
 - `/`: public landing page
 - `/app`: dashboard for customer and merchant QR stamp cards, visit stamps, and reward tickets
