@@ -11,7 +11,7 @@ The core loyalty loop is simple:
 
 1. A merchant wallet creates a merchant QR stamp card with a reward promise and a visit goal.
 2. The shop owner prints a visit QR or generates a five-minute live visit QR.
-3. Customers scan the visit QR and collect one Stamp or Selo per visit.
+3. Customers scan the visit QR and collect one Stamp (or Selo) per visit.
 4. After reaching the configured visit goal, the customer creates a reward ticket.
 5. The shop owner validates the reward ticket once with the shop owner wallet.
 
