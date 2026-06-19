@@ -7,7 +7,7 @@
 ## Slide 2
 - Problem
 - Small merchants still use paper stamp cards because digital loyalty tools are too heavy for counter workflows
-- Existing apps often force catalogs, checkout, integrations, or custodial point systems
+- Existing apps often force catalogs, checkout flows, integrations, or custodial point systems
 
 ## Slide 3
 - Product
