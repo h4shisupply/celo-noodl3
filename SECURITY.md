@@ -11,7 +11,7 @@ Please do not open a public issue for suspected vulnerabilities.
 Send a report to the repository owner that includes:
 
 - a clear description of the issue
-- affected app route, network, or contract address, if applicable
+- the affected app route, network, or contract address, if applicable
 - reproduction steps or proof-of-concept details
 - relevant logs or screenshots with secrets redacted, if available
 - no private keys, seed phrases, or production customer data
