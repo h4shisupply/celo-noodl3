@@ -111,7 +111,7 @@
 - Confirm the public SVG logo and preview assets include up-to-date title and description metadata.
 - Confirm app route metadata descriptions cover the landing page, `/app` dashboard, create merchant QR stamp card, customer QR stamp card, merchant QR stamp card manager, reward ticket, and claim-preserving legacy redirect pages.
 - Confirm Open Graph and Twitter preview metadata use `NEXT_PUBLIC_APP_URL` as their base URL and show the expected title, description, and image.
-- Confirm mobile and desktop layouts for these routes:
+- Confirm mobile and desktop layouts render correctly for these routes:
   - `/`
   - `/app`
   - `/app/program/new`
