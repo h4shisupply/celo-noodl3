@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     "merchant rewards",
     "reward ticket",
     "reward ticket QR",
-    "printable reward ticket sheet",
+    "reward ticket sheet",
     "QR code",
     "QR"
   ],
