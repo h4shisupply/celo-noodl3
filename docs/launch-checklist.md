@@ -86,19 +86,19 @@
 - Confirm QR scanner framing overlays remain decorative and do not add extra announced content.
 - Confirm menu toggles expose expanded state and announce the close action while open.
 - Confirm account menu toggles use account-specific open and close labels.
-- Confirm account and select popovers close after outside mouse, touch, and pen interactions.
+- Confirm account and select popovers close after outside mouse, touch, or pen interactions.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative UI images stay hidden from assistive tech and remote UI images remain non-blocking when appropriate.
 - Confirm profile avatar URLs fall back to wallet initials when the remote image cannot load.
 - Confirm landing page decorative icon treatments stay hidden from assistive tech.
 - Confirm decorative images inside links or controls do not trigger drag interactions.
 - Confirm Escape closes temporary overlays such as the mobile menu, account menu, profile dialog, and QR scanner.
-- Confirm modal backdrops close temporary dialogs after outside mouse, touch, and pen interactions when backdrop dismissal is supported.
+- Confirm modal backdrops close temporary dialogs after outside mouse, touch, or pen interactions when backdrop dismissal is supported.
 - Confirm modal overlays expose accessible names and descriptions to assistive tech.
 - Confirm profile validation errors are associated with the relevant display name or avatar URL input.
 - Confirm profile save controls use profile-specific idle and saving labels.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
-- Confirm mobile landing navigation closes after outside mouse, touch, and pen interactions.
+- Confirm mobile landing navigation closes after outside mouse, touch, or pen interactions.
 - Confirm the language switcher announces the current language and each option's pressed state.
 - Confirm language selection persists after refresh through the locale cookie.
 - Confirm custom select controls show clear visual states for open and closed menus.
