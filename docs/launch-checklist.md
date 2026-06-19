@@ -108,7 +108,7 @@
 - Confirm root metadata keywords cover Celo, Celo loyalty, MiniPay, PWA, loyalty, loyalty program, customer loyalty, customer QR stamp card, merchant loyalty, merchant QR stamp card, QR, counter QR, QR stamp card, stamp card, QR code, printed visit QR, static visit QR, dynamic visit QR, live visit QR, live QR, visit QR, wallet stamps, visit stamps, reward ticket, reward ticket QR, reward ticket sheet, merchant rewards, and merchant reward surfaces.
 - Confirm installed app launches use the focus-existing launch handler when the platform supports it.
 - Confirm the app icon and shortcut icons keep the logo visible within safe maskable-icon crops.
-- Confirm public SVG logo and preview assets include up-to-date title and description metadata.
+- Confirm the public SVG logo and preview assets include up-to-date title and description metadata.
 - Confirm app route metadata descriptions summarize the landing page, `/app` dashboard, create merchant QR stamp card, customer QR stamp card, merchant QR stamp card manager, reward ticket, and claim-preserving legacy redirect pages.
 - Confirm Open Graph and Twitter preview metadata use `NEXT_PUBLIC_APP_URL` as their base and show the expected title, description, and image.
 - Confirm mobile and desktop layouts for these routes:
