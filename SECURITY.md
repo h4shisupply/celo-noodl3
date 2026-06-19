@@ -18,4 +18,4 @@ Send a report to the repository owner that includes:
 - an impact assessment
 - suggested mitigations, if known
 
-Valid reports are handled privately and disclosed after a patch is available.
+Valid reports are handled privately and disclosed only after a patch is available.
