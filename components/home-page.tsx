@@ -694,7 +694,7 @@ const enHomeCopy: HomeCopy = {
     points: [
       "Customers scan while they are already at the counter.",
       "Each visit adds visible progress toward the shop's promised reward.",
-      "Reward tickets include a QR, printable reward ticket sheet, and counter backup code, so validation has a fallback."
+      "Reward tickets include a QR, reward ticket sheet, and counter backup code, so validation has a fallback."
     ]
   },
   workflow: {
