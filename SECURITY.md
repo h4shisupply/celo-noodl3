@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Only the latest version on the default branch is supported for security fixes.
+Only the latest version on the default branch receives security fixes.
 
 ## Reporting
 
