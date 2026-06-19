@@ -59,7 +59,7 @@ The QR UI renders locally in the app. It supports opening QR links, copying link
 
 The app uses a single contract: `contracts/Noodl3Loyalty.sol`.
 
-Core methods:
+Core contract methods:
 
 - `createProgram(name, iconUrl, rewardDescription, stampsRequired, active, staticStampEnabled)`
 - `updateProgram(programId, name, iconUrl, rewardDescription, stampsRequired, active, staticStampEnabled)`
