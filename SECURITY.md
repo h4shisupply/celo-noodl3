@@ -8,7 +8,7 @@ Only the latest version on the default branch is supported for security fixes.
 
 Please do not open a public issue for suspected vulnerabilities.
 
-Send a report to the repository owner with:
+Send a report to the repository owner that includes:
 
 - a clear description of the issue
 - affected app route, network, or contract address, if applicable
