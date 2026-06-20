@@ -40,6 +40,7 @@
 - Confirm reward ticket creation controls use ticket-specific idle and loading labels.
 - Confirm reward ticket QR renders locally, exposes the reward ticket sheet, and keeps the counter backup code easy to find.
 - Confirm the shop owner wallet can validate each reward ticket exactly once.
+- Confirm validated reward tickets show their used state after refresh.
 - Confirm reward ticket validation controls use ticket-specific idle and loading labels.
 - Confirm non-shop-owner wallets see shop owner wallet guidance before validation.
 
