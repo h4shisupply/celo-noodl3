@@ -93,7 +93,7 @@ Design choices:
 
 ## Quick Start
 
-Use Node `22.13.0` or newer; `.nvmrc` pins the recommended local Node version.
+Use Node `22.13.0` or newer; `.nvmrc` pins the recommended local Node version, so nvm users can run `nvm use`.
 
 ```bash
 npm install
