@@ -6,7 +6,7 @@ Only the latest version on the default branch receives security fixes.
 
 ## Reporting
 
-Please do not open a public issue for suspected vulnerabilities.
+Please report suspected vulnerabilities privately instead of opening a public issue.
 
 Send a report to the repository owner that includes:
 
