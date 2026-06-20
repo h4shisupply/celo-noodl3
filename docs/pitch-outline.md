@@ -19,7 +19,7 @@
 ## Slide 4
 - Why Celo + MiniPay
 - Mobile-first wallet context for QR-based visits
-- Low-cost on-chain state changes
+- Low-cost on-chain visit and reward updates
 - Portable customer progress
 - No separate backend points database is needed
 
