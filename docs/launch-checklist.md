@@ -20,7 +20,7 @@
 - Confirm printed visit QR actions work: open the link, copy the link, use the share fallback, download the SVG, and print the visit QR counter sheet.
 - Confirm QR action feedback resets before copying, sharing, downloading an SVG, printing, or opening a link.
 - Confirm QR action feedback clears when regenerated QR content changes.
-- Confirm QR display panels expose accessible names from their visible QR titles.
+- Confirm QR display panels use their visible QR titles as accessible names.
 - Confirm visible and printed QR images expose accessible names.
 - Confirm QR images expose visible helper copy as accessible descriptions when helper text is present.
 - Confirm QR open actions launch the visit or reward ticket link in a separate tab.
