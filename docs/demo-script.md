@@ -14,4 +14,4 @@ Use separate shop owner and customer wallets, or use separate browser profiles, 
 10. Create the reward ticket from the customer QR stamp card.
 11. Open `/app/claim/[claimId]` and show the reward ticket QR, sheet, counter backup code, and shop owner wallet validation guidance.
 12. Switch back to the shop owner wallet, validate the reward ticket, refresh the claim page, and confirm a second validation attempt is rejected.
-13. End on the `/app` dashboard showing the customer QR stamp card, merchant QR stamp card manager, and reward tickets.
+13. End on the `/app` dashboard with the customer QR stamp card, merchant QR stamp card manager, and reward tickets visible.
