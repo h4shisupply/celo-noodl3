@@ -81,7 +81,7 @@ Core contract methods:
 
 Design choices:
 
-- Every static, dynamic, or manual visit gives exactly one stamp.
+- Every static visit, dynamic visit, or manual stamp issuance gives exactly one stamp.
 - Program IDs are incrementing `uint256` values.
 - Program logo URLs must be public HTTPS image URLs stored on-chain with the program.
 - Static visit QR lets each wallet collect one stamp every 20 hours when enabled.
