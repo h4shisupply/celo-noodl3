@@ -123,4 +123,4 @@
 - Confirm legacy `/app/store/[slug]`, `/store/[slug]`, `/success`, `/app/rewards`, `/rewards`, `/merchant/verify`, and `/verify` routes do not expose catalog or checkout surfaces.
 - Confirm legacy `/claim/[claimId]` links preserve the claim ID when redirecting to `/app/claim/[claimId]`.
 - Confirm legacy `/merchant/verify?claim=...` and `/verify?claim=...` links preserve the claim ID when redirecting to `/app/claim/[claimId]`.
-- Confirm legacy `/merchant/verify` and `/verify` links without a claim query redirect to the `/app` dashboard.
+- Confirm legacy `/merchant/verify` and `/verify` links without a claim query redirect to the noodl3 `/app` dashboard.
