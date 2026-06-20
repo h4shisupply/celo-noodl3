@@ -29,7 +29,7 @@
 - Stamps are non-transferable contract state
 - The printed visit QR allows one stamp per wallet every 20 hours
 - The live visit QR uses five-minute, one-use check-in payloads signed by the shop owner
-- Rewards are issued as reward tickets that are validated only once
+- Rewards are issued as reward tickets that can be validated only once
 
 ## Slide 6
 - Demo loop
