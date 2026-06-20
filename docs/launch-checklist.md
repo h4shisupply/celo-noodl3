@@ -84,6 +84,7 @@
 - Confirm QR scanner announces the active camera state after permission is granted and associates it with the scanner video.
 - Confirm QR scanner live regions announce every scanner status change.
 - Confirm QR scanner error states give actionable guidance for blocked camera access, insecure URLs, missing cameras, and busy cameras.
+- Confirm QR scanner permission-denied states explain how to retry after browser permissions are changed.
 - Confirm QR scanner framing overlays remain decorative and do not add extra announced content.
 - Confirm menu toggles expose expanded state and announce the close action while open.
 - Confirm account menu toggles use account-specific open and close labels.
