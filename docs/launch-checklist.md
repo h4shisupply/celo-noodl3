@@ -16,7 +16,7 @@
 - Confirm the merchant QR stamp card manager back link returns to the QR stamp card.
 - Confirm the account menu can open the profile dialog, save a display name, and skip profile setup.
 - Confirm printed visit QR opens `/app/program/[programId]?visit=static`.
-- Confirm printed visit QR renders locally without a third-party QR image URL.
+- Confirm printed visit QR renders locally without an external QR image URL.
 - Confirm printed visit QR actions work: open the link, copy the link, use the share fallback, download the SVG, and print the visit QR counter sheet.
 - Confirm QR action feedback resets before copying, sharing, downloading an SVG, printing, or opening a link.
 - Confirm QR action feedback clears when regenerated QR content changes.
