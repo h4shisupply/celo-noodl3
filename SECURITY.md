@@ -11,7 +11,7 @@ Please report suspected vulnerabilities privately instead of opening a public is
 Send the repository owner a report that includes:
 
 - a clear description of the issue
-- the affected app route, network, or contract address, if applicable
+- the affected app route, program or claim ID, network, or contract address, if applicable
 - reproduction steps or proof-of-concept details, if available
 - relevant logs or screenshots, with secrets redacted, if available
 - confirmation that private keys, seed phrases, and production customer data are excluded
