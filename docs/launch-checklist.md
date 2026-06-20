@@ -21,7 +21,7 @@
 - Confirm QR action feedback resets before copying, sharing, downloading an SVG, printing, or opening a link.
 - Confirm QR action feedback clears when regenerated QR content changes.
 - Confirm QR display panels use their visible QR titles as accessible names.
-- Confirm visible and printed QR images expose accessible names.
+- Confirm visible and printed QR images expose descriptive accessible names.
 - Confirm QR images expose visible helper copy as accessible descriptions when helper text is present.
 - Confirm QR open actions launch the visit or reward ticket link in a separate tab.
 - Confirm QR open actions do not send the current app page as the referrer.
