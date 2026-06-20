@@ -14,7 +14,7 @@ Send a report to the repository owner that includes:
 - the affected app route, network, or contract address, if applicable
 - reproduction steps or proof-of-concept details, if available
 - relevant logs or screenshots, with secrets redacted, if available
-- do not include private keys, seed phrases, or production customer data
+- confirmation that private keys, seed phrases, and production customer data are excluded
 - an impact assessment
 - suggested mitigations, if known
 
