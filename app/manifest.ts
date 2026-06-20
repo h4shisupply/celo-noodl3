@@ -24,7 +24,7 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         name: "Dashboard",
         short_name: "Dashboard",
-        description: "Open the noodl3 dashboard for customer and merchant QR stamp cards, visit stamps, and reward tickets.",
+        description: "Open the noodl3 wallet dashboard for customer and merchant QR stamp cards, visit stamps, and reward tickets.",
         url: "/app",
         icons: [
           {
