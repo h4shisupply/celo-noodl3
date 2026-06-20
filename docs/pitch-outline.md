@@ -21,7 +21,7 @@
 - Mobile-first wallet context for QR-based visits
 - Low-cost on-chain state changes
 - Portable customer progress
-- No backend points database is needed
+- No separate backend points database is needed
 
 ## Slide 5
 - On-chain design
