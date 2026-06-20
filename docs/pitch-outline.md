@@ -53,6 +53,6 @@
 ## Slide 8
 - Next steps
 - Run real merchant pilots in counter workflows
-- Gather merchant feedback on visit QR counter sheets and reward ticket sheets
+- Gather merchant feedback on printed visit QR counter sheets and reward ticket sheets
 - Add analytics and repeat-rate reporting
 - Evaluate optional owner delegation after V1
