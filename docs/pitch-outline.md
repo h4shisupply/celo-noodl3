@@ -55,5 +55,6 @@
 - Next steps
 - Run real merchant pilots in counter workflows
 - Gather merchant feedback on printed visit QR counter sheets and reward ticket sheets
+- Validate phone camera scans and printed QR flows before each merchant demo
 - Add analytics and repeat-rate reporting
 - Evaluate optional shop owner delegation after V1
