@@ -127,7 +127,7 @@ npm run verify:mainnet
 
 ## Environment Notes
 
-- `NEXT_PUBLIC_DEFAULT_CHAIN` should be `celoSepolia` during testing and `celo` in production.
+- `NEXT_PUBLIC_DEFAULT_CHAIN` should match the deployed contract network: `celoSepolia` during testing and `celo` in production.
 - `NEXT_PUBLIC_NOODL3_CONTRACT_ADDRESS_SEPOLIA` and `NEXT_PUBLIC_NOODL3_CONTRACT_ADDRESS_MAINNET` point the app at the deployed loyalty contract.
 - `NEXT_PUBLIC_NOODL3_CONTRACT_DEPLOYMENT_BLOCK_SEPOLIA` and `NEXT_PUBLIC_NOODL3_CONTRACT_DEPLOYMENT_BLOCK_MAINNET` are optional but useful for deployment tracking and event lookups from the contract launch block.
 - `NEXT_PUBLIC_APP_URL` should match the reachable local, LAN, or deployed URL used in shared QR links, printed QR sheets, and social metadata.
