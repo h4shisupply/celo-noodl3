@@ -48,7 +48,7 @@
 ## Frontend
 - Confirm `NEXT_PUBLIC_APP_URL` matches the reachable local, LAN, or deployed base URL before sharing QR links, printing QR sheets, or previewing social metadata.
 - Confirm printed QR sheets are regenerated after the final preview or production base URL is set.
-- Confirm `NEXT_PUBLIC_DEFAULT_CHAIN` matches the deployed contract network before QR testing.
+- Confirm `NEXT_PUBLIC_DEFAULT_CHAIN` matches the deployed contract network before QR testing: `celoSepolia` for testing and `celo` for production.
 - Confirm browser-visible `NEXT_PUBLIC_` RPC URLs point to public endpoints and private or metered providers stay in server-side RPC variables.
 - Confirm wallet addresses, dates, and reward codes are not auto-linked by mobile browser format detection.
 - Confirm wallet address entry fields keep left-to-right text direction and disable mobile autocorrect.
