@@ -38,7 +38,7 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         name: "Create merchant QR stamp card",
         short_name: "Create card",
-        description: "Create a Celo-native merchant QR stamp card with a shop logo URL, reward promise, and visit goal.",
+        description: "Create a Celo-native merchant QR stamp card with a square public HTTPS logo URL, reward promise, and visit goal.",
         url: "/app/program/new",
         icons: [
           {
