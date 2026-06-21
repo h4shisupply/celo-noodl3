@@ -22,6 +22,7 @@ export function StatusMessage({
   children,
   className,
   role,
+  title,
   tone = "info",
   ...props
 }: HTMLAttributes<HTMLParagraphElement> & {
@@ -29,12 +30,15 @@ export function StatusMessage({
 }) {
   const Icon = icons[tone];
   const liveRole = role ?? (tone === "error" ? "alert" : "status");
+  const messageTitle =
+    title ?? (typeof children === "string" || typeof children === "number" ? String(children) : undefined);
 
   return (
     <p
       role={liveRole}
       aria-live={tone === "error" ? "assertive" : "polite"}
       aria-atomic="true"
+      title={messageTitle}
       className={clsx(
         "flex min-w-0 max-w-full items-start gap-2 rounded-lg border px-4 py-3 text-sm font-medium leading-6",
         toneClasses[tone],
