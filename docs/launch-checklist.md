@@ -97,6 +97,7 @@
 - Confirm menu toggles expose expanded state and announce the close action while open.
 - Confirm mobile menu controls expose matching open and close titles.
 - Confirm account menu toggles use account-specific open and close labels.
+- Confirm account menu toggles expose titles that match their account-specific labels.
 - Confirm account and select popovers close after outside mouse, touch, or pen interactions.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative UI images stay hidden from assistive tech and remote UI images remain non-blocking when appropriate.
