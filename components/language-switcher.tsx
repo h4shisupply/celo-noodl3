@@ -44,6 +44,7 @@ export function LanguageSwitcher() {
             lang={option.value}
             title={optionTitle}
             aria-label={optionTitle}
+            aria-current={active ? "true" : undefined}
             aria-pressed={active}
             onClick={() => changeLocale(option.value)}
             className={`shrink-0 rounded-md px-3 py-2 text-xs font-semibold tracking-[0.08em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus ${
