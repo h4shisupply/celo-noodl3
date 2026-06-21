@@ -125,7 +125,7 @@
   - `/app/program/[programId]`
   - `/app/program/[programId]/manage`
   - `/app/claim/[claimId]`
-- Confirm camera QR scanning works over HTTPS or on localhost, and phone LAN camera tests use a secure tunnel or HTTPS preview.
+- Confirm camera-based QR scanning works over HTTPS or on localhost, and phone LAN camera tests use a secure tunnel or HTTPS preview.
 - Confirm printed output includes only the active visit QR counter sheet or reward ticket sheet.
 - Confirm legacy `/app/store/[slug]`, `/store/[slug]`, `/success`, `/app/rewards`, `/rewards`, `/claim/[claimId]`, `/merchant/verify`, and `/verify` routes do not expose catalog or checkout surfaces.
 - Confirm legacy `/claim/[claimId]` links preserve the claim ID when redirecting to `/app/claim/[claimId]`.
