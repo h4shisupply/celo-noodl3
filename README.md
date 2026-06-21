@@ -22,7 +22,7 @@ The core loyalty loop is simple:
 - No catalog, menu, cart, item checkout, or payment is required in V1
 - Bilingual runtime copy in `pt-BR` and English
 - `Selos` in Portuguese and `Stamps` in English
-- Accessible app structure with named landmarks, visible focus, progress meters, timer labels, live regions, and QR scanner feedback
+- Accessible app structure with named landmarks, visible focus, progress meters, timer labels, live regions, QR scanner feedback, and scanner busy states
 - Installable app manifest with app description, dashboard and create-card shortcut names, shortcut descriptions, and maskable app and shortcut icons
 - Installed app launch handling focuses an existing app window when the platform supports launch handlers
 - On-chain loyalty progress per program
