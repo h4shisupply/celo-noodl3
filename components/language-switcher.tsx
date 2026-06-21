@@ -33,18 +33,17 @@ export function LanguageSwitcher() {
     >
       {localeOptions.map((option) => {
         const active = option.value === locale;
+        const optionTitle = active
+          ? `${currentLanguageLabel}: ${option.name}`
+          : `${switchLanguageLabel} ${option.name}`;
 
         return (
           <button
             key={option.value}
             type="button"
             lang={option.value}
-            title={option.name}
-            aria-label={
-              active
-                ? `${currentLanguageLabel}: ${option.name}`
-                : `${switchLanguageLabel} ${option.name}`
-            }
+            title={optionTitle}
+            aria-label={optionTitle}
             aria-pressed={active}
             onClick={() => changeLocale(option.value)}
             className={`shrink-0 rounded-md px-3 py-2 text-xs font-semibold tracking-[0.08em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus ${
