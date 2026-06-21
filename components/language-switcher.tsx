@@ -39,6 +39,7 @@ export function LanguageSwitcher() {
             key={option.value}
             type="button"
             lang={option.value}
+            title={option.name}
             aria-label={
               active
                 ? `${currentLanguageLabel}: ${option.name}`
