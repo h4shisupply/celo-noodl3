@@ -228,6 +228,7 @@ export function DashboardPage({
                   onClick={() => void connect()}
                   aria-busy={isConnecting}
                   disabled={isConnecting}
+                  title={isConnecting ? dictionary.account.connecting : dictionary.actions.connectWallet}
                 >
                   {isConnecting ? dictionary.account.connecting : dictionary.actions.connectWallet}
                 </Button>
