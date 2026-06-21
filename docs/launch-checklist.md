@@ -127,7 +127,7 @@
   - `/app/claim/[claimId]`
 - Confirm camera QR scanning works over HTTPS or on localhost, and phone LAN tests use a secure tunnel or HTTPS preview.
 - Confirm printed output includes only the active visit QR counter sheet or reward ticket sheet.
-- Confirm legacy `/app/store/[slug]`, `/store/[slug]`, `/success`, `/app/rewards`, `/rewards`, `/merchant/verify`, and `/verify` routes do not expose catalog or checkout surfaces.
+- Confirm legacy `/app/store/[slug]`, `/store/[slug]`, `/success`, `/app/rewards`, `/rewards`, `/claim/[claimId]`, `/merchant/verify`, and `/verify` routes do not expose catalog or checkout surfaces.
 - Confirm legacy `/claim/[claimId]` links preserve the claim ID when redirecting to `/app/claim/[claimId]`.
 - Confirm legacy `/merchant/verify?claim=...` and `/verify?claim=...` links preserve the claim ID when redirecting to `/app/claim/[claimId]`.
 - Confirm legacy `/merchant/verify` and `/verify` links without a claim query redirect to the noodl3 `/app` dashboard.
