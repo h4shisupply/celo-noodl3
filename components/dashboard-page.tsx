@@ -535,7 +535,7 @@ function ClaimSummaryCard({ claim }: { claim: ClaimRecord }) {
               {formatDateTime(claim.claimedAt, locale)}
             </time>
           </p>
-          <p dir="ltr" className="text-sm text-muted">{formatWalletLabel(claim.user)}</p>
+          <p dir="ltr" title={claim.user} className="text-sm text-muted">{formatWalletLabel(claim.user)}</p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           <Badge variant={claim.consumed ? "neutral" : "mint"}>
