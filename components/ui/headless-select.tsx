@@ -132,6 +132,9 @@ export function HeadlessSelect({
             {options.map((option, index) => {
               const active = option.value === value;
               const optionDescriptionId = `${selectId}-option-${index}-description`;
+              const optionTitle = option.description
+                ? `${option.label}: ${option.description}`
+                : option.label;
 
               return (
                 <button
@@ -140,7 +143,7 @@ export function HeadlessSelect({
                   role="option"
                   aria-selected={active}
                   aria-describedby={option.description ? optionDescriptionId : undefined}
-                  title={option.label}
+                  title={optionTitle}
                   onClick={() => {
                     onChange(option.value);
                     setOpen(false);
