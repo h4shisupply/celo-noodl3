@@ -87,6 +87,7 @@
 - Confirm progress counter badges stay decorative when the progressbar announces the same totals.
 - Confirm status updates and QR scanner feedback announce through live regions.
 - Confirm QR scanner announces the active camera state after permission is granted and associates it with the scanner video.
+- Confirm QR scanner exposes a busy state while a detected QR value is being processed.
 - Confirm QR scanner live regions announce each scanner status change.
 - Confirm QR scanner error states give actionable guidance for blocked camera access, insecure URLs, missing cameras, and busy cameras.
 - Confirm QR scanner permission-denied states explain how to retry after browser permissions are changed.
