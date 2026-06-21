@@ -185,6 +185,7 @@ export function AppAccountBar({
                         icon={<UserRound className="h-4 w-4" />}
                         aria-haspopup="dialog"
                         aria-controls="profile-dialog"
+                        title={profile ? dictionary.actions.editProfile : dictionary.actions.addProfile}
                         onClick={() => {
                           setIsMenuOpen(false);
                           onProfileClick();
