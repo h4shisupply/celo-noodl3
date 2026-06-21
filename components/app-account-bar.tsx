@@ -114,6 +114,7 @@ export function AppAccountBar({
                 aria-controls={accountMenuId}
                 aria-expanded={isMenuOpen}
                 aria-label={accountMenuLabel}
+                title={accountMenuLabel}
               >
                 {profile ? (
                   <>
