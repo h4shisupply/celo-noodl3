@@ -92,6 +92,7 @@
 - Confirm QR scanner live regions announce each scanner status change.
 - Confirm QR scanner error states give actionable guidance for blocked camera access, insecure URLs, missing cameras, and busy cameras.
 - Confirm QR scanner permission-denied states explain how to retry after browser permissions are changed.
+- Confirm QR scanner close controls expose titles that match their accessible labels.
 - Confirm QR scanner framing overlays remain decorative and do not add extra announced content.
 - Confirm menu toggles expose expanded state and announce the close action while open.
 - Confirm mobile menu controls expose matching open and close titles.
