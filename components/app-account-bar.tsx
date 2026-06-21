@@ -113,6 +113,7 @@ export function AppAccountBar({
                 className="inline-flex h-11 max-w-[13rem] items-center gap-2 rounded-lg border border-line bg-panel px-3 text-sm font-semibold text-ink-soft shadow-card transition hover:border-accent-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus sm:max-w-none"
                 aria-controls={accountMenuId}
                 aria-expanded={isMenuOpen}
+                aria-haspopup="dialog"
                 aria-label={accountMenuLabel}
                 title={accountMenuLabel}
               >
@@ -138,6 +139,8 @@ export function AppAccountBar({
               {isMenuOpen ? (
                 <div
                   id={accountMenuId}
+                  role="dialog"
+                  aria-label={dictionary.account.connectedWallet}
                   className="absolute right-0 top-[calc(100%+0.75rem)] z-30 w-[min(17rem,calc(100vw-2rem))] rounded-lg border border-line bg-panel p-4 shadow-float"
                 >
                   <div className="space-y-1 border-b border-line-soft pb-4">
