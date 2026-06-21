@@ -255,6 +255,7 @@ export function DashboardPage({
                   variant="warm"
                   icon={<QrCode className="h-4 w-4" />}
                   className="w-full sm:w-auto"
+                  title={copy.scanQr}
                   aria-haspopup="dialog"
                   aria-controls="qr-scanner-dialog"
                   aria-expanded={isScannerOpen}
