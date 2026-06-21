@@ -16,8 +16,10 @@ export function EmptyState({
   icon?: ReactNode;
   actions?: ReactNode;
 }) {
+  const emptyStateTitle = `${title}: ${description}`;
+
   return (
-    <Card variant="soft" className="overflow-hidden">
+    <Card variant="soft" title={emptyStateTitle} className="overflow-hidden">
       <CardHeader className="space-y-3 bg-panel">
         {icon ? (
           <div
