@@ -105,6 +105,7 @@ export function QrActionBar({
           icon={<Share2 className="h-4 w-4" />}
           className="w-full sm:w-auto"
           aria-label={`${labels.share}: ${fileName}`}
+          title={`${labels.share}: ${fileName}`}
           onClick={() => void handleShare()}
         >
           {labels.share}
