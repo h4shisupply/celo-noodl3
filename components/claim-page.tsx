@@ -261,7 +261,7 @@ export function ClaimPage({
                   </div>
                   <div dir="ltr" className="break-all">
                     <dt className="inline">{dictionary.common.customer}: </dt>
-                    <dd className="inline">{formatWalletLabel(claim.user)}</dd>
+                    <dd title={claim.user} className="inline">{formatWalletLabel(claim.user)}</dd>
                   </div>
                   <div>
                     <dt className="inline">{dictionary.common.date}: </dt>
