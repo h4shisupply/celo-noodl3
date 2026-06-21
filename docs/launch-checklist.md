@@ -114,6 +114,7 @@
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
 - Confirm mobile landing navigation closes after outside mouse, touch, or pen interactions.
 - Confirm the language switcher announces the current language and each option's pressed state.
+- Confirm the active language option exposes current-item semantics.
 - Confirm abbreviated language switcher buttons expose full language names.
 - Confirm language selection persists after refresh through the locale cookie.
 - Confirm custom select controls show clear visual states for open and closed menus.
