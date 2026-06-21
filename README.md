@@ -24,7 +24,7 @@ The core loyalty loop is simple:
 - `Selos` in Portuguese and `Stamps` in English
 - Accessible app structure with named landmarks, visible focus, progress meters, timer labels, live regions, and QR scanner feedback
 - Installable app manifest with app description, dashboard and create-card shortcut names, shortcut descriptions, and maskable app and shortcut icons
-- Installed app launch handling prefers an existing app window when the platform supports launch handlers
+- Installed app launch handling focuses an existing app window when the platform supports launch handlers
 - On-chain loyalty progress per program
 - Printed visit QR that lets each wallet collect one stamp every 20 hours
 - Live visit QR with five-minute, one-use check-in payloads signed by the shop owner wallet
