@@ -10,7 +10,7 @@ Please report suspected vulnerabilities privately instead of opening a public is
 
 Send the repository owner a report that includes:
 
-- a clear description of the issue
+- a clear description of the suspected vulnerability
 - the affected app route, program ID, claim ID, network, or contract address, if applicable
 - the related transaction hash, if applicable
 - reproduction steps or proof-of-concept details, if available
