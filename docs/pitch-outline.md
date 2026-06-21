@@ -45,7 +45,7 @@
 
 ## Slide 7
 - MVP boundaries
-- No catalog, menu, cart, or item checkout
+- No catalog, menu, cart, item checkout, or payment
 - One stamp per visit
 - Shop-owner-only management
 - Direct on-chain indexes without an event-indexing dependency
