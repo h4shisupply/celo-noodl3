@@ -24,8 +24,10 @@ export function MetricCard({
   tone?: MetricTone;
   className?: string;
 }) {
+  const metricTitle = `${label}: ${value}`;
+
   return (
-    <Card variant="soft" className={clsx("h-full overflow-hidden", className)}>
+    <Card variant="soft" title={metricTitle} className={clsx("h-full overflow-hidden", className)}>
       <CardContent className="relative flex min-h-[7.25rem] items-center justify-between gap-4 pt-5">
         <span
           aria-hidden="true"
