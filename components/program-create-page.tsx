@@ -241,6 +241,7 @@ export function ProgramCreatePage({
 
             <Button
               icon={<Save className="h-4 w-4" />}
+              title={copy.saveProgram}
               onClick={() => void handleSubmit()}
               aria-busy={isSaving}
               disabled={isSaving || !contractAddress}
