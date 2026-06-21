@@ -175,7 +175,7 @@ export function QrScanner({
       role="dialog"
       aria-modal="true"
       aria-labelledby="qr-scanner-title"
-      aria-describedby="qr-scanner-description"
+      aria-describedby={isActive ? "qr-scanner-description" : "qr-scanner-description qr-scanner-camera-status"}
       aria-busy={isProcessing}
     >
       <div className="flex items-start justify-between gap-4">
