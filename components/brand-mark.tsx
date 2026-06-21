@@ -7,6 +7,7 @@ export function BrandMark({ href, ariaLabel }: { href: string; ariaLabel?: strin
     <Link
       href={href}
       aria-label={ariaLabel}
+      title={ariaLabel}
       className="inline-flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
