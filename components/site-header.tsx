@@ -36,6 +36,7 @@ function NavLink({
       <a
         href={href}
         onClick={onClick}
+        title={label}
         className="min-w-0 break-words rounded-md px-3 py-2 text-sm font-semibold text-muted transition hover:bg-accent-soft hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
       >
         {label}
