@@ -196,6 +196,7 @@ export function QrDisplay({
   const titleId = useId();
   const descriptionId = useId();
   const qrRef = useRef<SVGSVGElement | null>(null);
+  const qrTitle = description ? `${title}: ${description}` : title;
 
   return (
     <Card
@@ -225,10 +226,10 @@ export function QrDisplay({
           <QRCodeSVG
             ref={qrRef}
             value={value}
-            aria-label={title}
+            aria-label={qrTitle}
             aria-describedby={description ? descriptionId : undefined}
             role="img"
-            title={title}
+            title={qrTitle}
             size={256}
             marginSize={4}
             level="M"
