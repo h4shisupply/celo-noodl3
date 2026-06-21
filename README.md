@@ -36,7 +36,7 @@ The core loyalty loop is simple:
 
 - `/`: landing page
 - `/app`: dashboard for customer and merchant QR stamp cards, visit stamps, and reward tickets
-- `/app/program/new`: create a merchant QR stamp card with a square public HTTPS logo URL, a reward promise, and a visit goal
+- `/app/program/new`: create a merchant QR stamp card as the shop owner with a square public HTTPS logo URL, a reward promise, and a visit goal
 - `/app/program/[programId]`: customer QR stamp card for printed and live visit QR links, progress tracking, and reward ticket creation
 - `/app/program/[programId]/manage`: merchant QR stamp card manager for printed and live visit QR actions, manual stamps, and reward tickets
 - `/app/claim/[claimId]`: reward ticket QR, reward ticket sheet, counter backup code, and one-time shop owner wallet validation
