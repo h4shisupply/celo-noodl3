@@ -334,6 +334,7 @@ export function ProgramPage({
                     variant={canCollectDynamic ? "outline" : "primary"}
                     icon={<BadgeCheck className="h-4 w-4" />}
                     className="w-full sm:w-auto"
+                    title={copy.requestStamp}
                     onClick={() => void handleCollectStatic()}
                     aria-busy={isSubmitting}
                     disabled={
