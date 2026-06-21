@@ -154,6 +154,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
           aria-controls="site-mobile-menu"
           aria-expanded={menuOpen}
           aria-label={menuLabel}
+          title={menuLabel}
         >
           {menuOpen ? (
             <X className="h-4 w-4" aria-hidden="true" />
