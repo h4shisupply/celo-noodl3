@@ -140,6 +140,7 @@ export function HeadlessSelect({
                   role="option"
                   aria-selected={active}
                   aria-describedby={option.description ? optionDescriptionId : undefined}
+                  title={option.label}
                   onClick={() => {
                     onChange(option.value);
                     setOpen(false);
