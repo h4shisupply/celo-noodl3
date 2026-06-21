@@ -449,7 +449,7 @@ export function ProgramManagePage({
                             key={customer.address}
                             className="rounded-lg border border-line bg-panel-soft p-4"
                           >
-                            <p dir="ltr" className="mb-3 break-all text-sm font-semibold text-ink">
+                            <p dir="ltr" title={customer.address} className="mb-3 break-all text-sm font-semibold text-ink">
                               {formatWalletLabel(customer.address)}
                             </p>
                             <ProgressMeter
