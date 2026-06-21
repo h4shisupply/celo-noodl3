@@ -615,6 +615,7 @@ export function ProgramManagePage({
                     <Button
                       icon={<Save className="h-4 w-4" />}
                       className="w-full sm:w-auto"
+                      title={copy.updateProgram}
                       onClick={() =>
                         void submitAction(async () => {
                           const parsedStampsRequired = Number.parseInt(stampsRequired, 10);
