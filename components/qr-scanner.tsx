@@ -245,6 +245,7 @@ export function QrScanner({
                   <Button
                     autoFocus
                     aria-describedby="qr-scanner-camera-status"
+                    title={qrCopy.openCamera}
                     onClick={() => void startCamera()}
                   >
                     {qrCopy.openCamera}
