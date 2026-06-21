@@ -353,7 +353,7 @@ export function ProgramPage({
                     variant="warm"
                     icon={<Gift className="h-4 w-4" />}
                     className="w-full sm:w-auto"
-                    title={copy.claimReward}
+                    title={isSubmitting ? copy.creatingRewardTicket : copy.claimReward}
                     onClick={() => void handleClaimReward()}
                     aria-busy={isSubmitting}
                     disabled={isSubmitting}
