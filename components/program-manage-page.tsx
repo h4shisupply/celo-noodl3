@@ -497,6 +497,7 @@ export function ProgramManagePage({
                       onClick={() => void handleGenerateDynamicQr()}
                       aria-busy={isSubmitting}
                       disabled={isSubmitting || !program.active}
+                      title={isSubmitting ? copy.generatingDynamicQr : dynamicQr ? copy.regenerateDynamicQr : copy.generateDynamicQr}
                     >
                       {isSubmitting
                         ? copy.generatingDynamicQr
