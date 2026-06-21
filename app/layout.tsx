@@ -41,6 +41,7 @@ export const metadata: Metadata = {
     "QR loyalty",
     "QR scanner",
     "PWA",
+    "installable loyalty app",
     "loyalty",
     "loyalty program",
     "manual stamp",
