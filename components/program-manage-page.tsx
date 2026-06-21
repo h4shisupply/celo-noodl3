@@ -420,6 +420,7 @@ export function ProgramManagePage({
                       <Button
                         icon={<UserPlus className="h-4 w-4" />}
                         className="w-full md:w-auto"
+                        title={copy.issueManual}
                         onClick={() =>
                           void submitAction(async () => {
                             const customer = getValidAddress(manualCustomer);
