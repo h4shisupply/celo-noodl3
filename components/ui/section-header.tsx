@@ -11,8 +11,10 @@ export function SectionHeader({
   description?: string;
   actions?: ReactNode;
 }) {
+  const sectionTitle = description ? `${title}: ${description}` : title;
+
   return (
-    <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <div title={sectionTitle} className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
       <div className="min-w-0 space-y-3">
         {eyebrow ? (
           <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
