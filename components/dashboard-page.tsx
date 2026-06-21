@@ -269,7 +269,7 @@ export function DashboardPage({
                   variant="ghost"
                   icon={<RefreshCw className="h-4 w-4" />}
                   className="w-full sm:w-auto"
-                  title={copy.refreshDashboard}
+                  title={isLoading ? copy.refreshingDashboard : copy.refreshDashboard}
                   aria-busy={isLoading}
                   disabled={isLoading}
                   onClick={() => void loadDashboard()}
