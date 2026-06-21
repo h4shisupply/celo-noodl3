@@ -679,7 +679,7 @@ export function ProgramManagePage({
                         className="flex flex-col gap-3 rounded-lg border border-line bg-panel-soft p-4 sm:flex-row sm:items-center sm:justify-between"
                       >
                         <div className="min-w-0 space-y-2">
-                          <p dir="ltr" className="break-all text-sm font-semibold text-ink">
+                          <p dir="ltr" title={claim.user} className="break-all text-sm font-semibold text-ink">
                             {formatClaimCode(claim.id)} · {formatWalletLabel(claim.user)}
                           </p>
                           <Badge variant={claim.consumed ? "neutral" : "mint"}>
