@@ -14,6 +14,7 @@ export function ProgressMeter({
   const safeValue = Math.min(Math.max(value, 0), safeTotal);
   const width = Math.min(100, Math.round((safeValue / safeTotal) * 100));
   const label = unitLabel ?? dictionary.common.stampsLabel;
+  const progressLabel = `${safeValue}/${safeTotal} ${label}`;
 
   return (
     <div className="space-y-3">
@@ -35,7 +36,8 @@ export function ProgressMeter({
         aria-valuemin={0}
         aria-valuemax={safeTotal}
         aria-valuenow={safeValue}
-        aria-valuetext={`${safeValue}/${safeTotal} ${label}`}
+        aria-valuetext={progressLabel}
+        title={progressLabel}
       >
         <div
           aria-hidden="true"
