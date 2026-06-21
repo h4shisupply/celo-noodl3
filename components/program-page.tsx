@@ -320,6 +320,7 @@ export function ProgramPage({
                   <Button
                     icon={<Stamp className="h-4 w-4" />}
                     className="w-full sm:w-auto"
+                    title={copy.collectVisit}
                     onClick={() => void handleCollectDynamic()}
                     aria-busy={isSubmitting}
                     disabled={isSubmitting || !program.active}
