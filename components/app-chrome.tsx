@@ -187,6 +187,7 @@ function WalletRequiredGate({
                   onClick={() => void walletState.connect()}
                   aria-busy={walletState.isConnecting}
                   disabled={walletState.isConnecting}
+                  title={walletState.isConnecting ? dictionary.account.connecting : dictionary.actions.connectWallet}
                 >
                   {walletState.isConnecting ? dictionary.account.connecting : dictionary.actions.connectWallet}
                 </Button>
