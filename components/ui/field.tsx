@@ -14,8 +14,10 @@ export function Field({
   children: ReactNode;
   className?: string;
 }) {
+  const fieldTitle = typeof description === "string" ? `${label}: ${description}` : label;
+
   return (
-    <label className={clsx("block min-w-0 space-y-2", className)}>
+    <label title={fieldTitle} className={clsx("block min-w-0 space-y-2", className)}>
       <span className="break-words text-xs font-semibold uppercase tracking-[0.12em] text-muted">
         {label}
       </span>
