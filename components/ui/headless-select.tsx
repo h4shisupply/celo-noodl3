@@ -88,6 +88,7 @@ export function HeadlessSelect({
           aria-haspopup="listbox"
           aria-controls={listboxId}
           aria-expanded={open}
+          title={selected?.label || placeholder}
           onClick={() => {
             if (disabled) return;
             setOpen((current) => !current);
