@@ -275,6 +275,7 @@ export function PrintableQrSheet({
 }) {
   const titleId = useId();
   const subtitleId = useId();
+  const qrTitle = `${title}: ${subtitle}`;
 
   return (
     <section
@@ -294,10 +295,10 @@ export function PrintableQrSheet({
       <div className="mx-auto mt-8 flex max-w-[18rem] justify-center rounded-lg border border-line bg-panel p-4">
         <QRCodeSVG
           value={value}
-          aria-label={title}
+          aria-label={qrTitle}
           aria-describedby={subtitleId}
           role="img"
-          title={title}
+          title={qrTitle}
           size={256}
           marginSize={4}
           level="M"
