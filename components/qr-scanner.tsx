@@ -176,6 +176,7 @@ export function QrScanner({
       aria-modal="true"
       aria-labelledby="qr-scanner-title"
       aria-describedby="qr-scanner-description"
+      aria-busy={isProcessing}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 max-w-xl space-y-2">
