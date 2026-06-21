@@ -105,6 +105,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
           }}
           aria-busy={cta.isLoading}
           disabled={cta.isLoading}
+          title={cta.label}
         >
           {cta.label}
         </Button>
