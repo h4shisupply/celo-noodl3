@@ -24,6 +24,7 @@ export function CountdownBadge({
   const expired = remaining <= 0;
   const safeRemaining = Math.max(remaining, 0);
   const display = useMemo(() => formatSeconds(remaining), [remaining]);
+  const timerLabel = expired ? expiredLabel : `${label} ${display}`;
 
   useEffect(() => {
     const currentNow = Math.floor(Date.now() / 1000);
@@ -48,9 +49,10 @@ export function CountdownBadge({
   return (
     <span
       role="timer"
-      aria-label={expired ? expiredLabel : `${label} ${display}`}
+      aria-label={timerLabel}
       aria-live={expired ? "assertive" : "off"}
       aria-atomic="true"
+      title={timerLabel}
       className={`inline-flex min-w-0 max-w-full flex-wrap items-center gap-2 break-words rounded-full border px-3 py-1 text-xs font-semibold tabular-nums ${
         expired
           ? "border-danger-border bg-danger-soft text-danger"
