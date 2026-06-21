@@ -42,6 +42,9 @@ export function HeadlessSelect({
     () => options.find((option) => option.value === value),
     [options, value]
   );
+  const triggerTitle = selected?.description
+    ? `${selected.label}: ${selected.description}`
+    : selected?.label || placeholder;
 
   useEffect(() => {
     if (!open) {
@@ -88,7 +91,7 @@ export function HeadlessSelect({
           aria-haspopup="listbox"
           aria-controls={listboxId}
           aria-expanded={open}
-          title={selected?.label || placeholder}
+          title={triggerTitle}
           onClick={() => {
             if (disabled) return;
             setOpen((current) => !current);
