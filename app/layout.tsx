@@ -39,6 +39,7 @@ export const metadata: Metadata = {
     "Celo",
     "Celo loyalty",
     "QR loyalty",
+    "QR scanner",
     "PWA",
     "loyalty",
     "loyalty program",
