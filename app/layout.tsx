@@ -51,6 +51,7 @@ export const metadata: Metadata = {
     "static visit QR",
     "dynamic visit QR",
     "visit QR",
+    "wallet",
     "customer QR stamp card",
     "merchant QR stamp card",
     "QR stamp card",
