@@ -29,6 +29,7 @@
 - Confirm static visit QR collects one stamp and shows the 20-hour reuse cooldown on immediate reuse.
 - Confirm a dynamic visit QR signed by the shop owner opens `/app/program/[programId]?visit=dynamic&nonce=...&expires=...&sig=...`.
 - Confirm the dynamic visit QR shows a countdown, expires after five minutes, and can be regenerated.
+- Confirm regenerated dynamic visit QR links use a new nonce before they are shown to customers.
 - Confirm dynamic visit QR countdowns expose the remaining duration as a machine-readable time value.
 - Confirm dynamic visit QR countdowns expose an accessible name for the active or expired timer state.
 - Confirm dynamic visit QR generation shows an in-progress label while its action is disabled.
