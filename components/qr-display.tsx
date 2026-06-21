@@ -116,6 +116,7 @@ export function QrActionBar({
           icon={<Download className="h-4 w-4" />}
           className="w-full sm:w-auto"
           aria-label={`${labels.download}: ${fileName}`}
+          title={`${labels.download}: ${fileName}`}
           onClick={() => {
             setNotice(null);
 
