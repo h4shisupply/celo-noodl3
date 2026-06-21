@@ -93,6 +93,7 @@
 - Confirm QR scanner permission-denied states explain how to retry after browser permissions are changed.
 - Confirm QR scanner framing overlays remain decorative and do not add extra announced content.
 - Confirm menu toggles expose expanded state and announce the close action while open.
+- Confirm mobile menu controls expose matching open and close titles.
 - Confirm account menu toggles use account-specific open and close labels.
 - Confirm account and select popovers close after outside mouse, touch, or pen interactions.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
