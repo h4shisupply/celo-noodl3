@@ -102,6 +102,7 @@
 - Confirm account popovers expose dialog semantics and account-specific labels while open.
 - Confirm account popovers describe the visible wallet and network summary while open.
 - Confirm shortened account wallet labels expose the full wallet address on hover.
+- Confirm merchant customer wallet labels expose the full wallet address on hover.
 - Confirm account and select popovers close after outside mouse, touch, or pen interactions.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative UI images stay hidden from assistive tech and remote UI images remain non-blocking when appropriate.
