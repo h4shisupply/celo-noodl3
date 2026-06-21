@@ -113,7 +113,7 @@
 - Confirm package metadata keywords cover Celo, Celo loyalty, MiniPay, PWA, loyalty, customer loyalty, customer QR stamp card, loyalty program, manual stamp, merchant, merchant loyalty, merchant QR stamp card, QR, QR code, QR loyalty, counter QR, QR stamp card, stamp card, printed visit QR, static visit QR, dynamic visit QR, live visit QR, live QR, visit QR, reward ticket, reward ticket QR, reward ticket sheet, rewards, wallet, wallet stamps, visit stamps, merchant rewards, and merchant reward surfaces.
 - Confirm package repository, homepage, and issue links point to the public noodl3 project.
 - Confirm root metadata keywords cover Celo, Celo loyalty, MiniPay, PWA, loyalty, loyalty program, manual stamp, customer loyalty, customer QR stamp card, merchant loyalty, merchant QR stamp card, QR, QR loyalty, counter QR, QR stamp card, stamp card, QR code, printed visit QR, static visit QR, dynamic visit QR, live visit QR, live QR, visit QR, wallet, wallet stamps, visit stamps, reward ticket, reward ticket QR, reward ticket sheet, merchant rewards, and merchant reward surfaces.
-- Confirm installed app launches use the focus-existing launch handler when the platform supports it.
+- Confirm installed app launches focus an existing app window when the platform supports launch handlers.
 - Confirm the app icon and shortcut icons keep the logo visible within safe maskable-icon crops.
 - Confirm the public SVG logo and preview assets include up-to-date title and description metadata.
 - Confirm app route metadata descriptions cover the landing page, `/app` dashboard, create merchant QR stamp card, customer QR stamp card, merchant QR stamp card manager, reward ticket, and claim-preserving legacy redirect pages.
