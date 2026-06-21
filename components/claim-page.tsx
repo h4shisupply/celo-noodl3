@@ -282,6 +282,7 @@ export function ClaimPage({
                     icon={<BadgeCheck className="h-4 w-4" />}
                     onClick={() => void handleConsume()}
                     aria-label={`${copy.validateClaim}: ${formatClaimCode(claim.id)}`}
+                    title={`${copy.validateClaim}: ${formatClaimCode(claim.id)}`}
                     aria-busy={isSubmitting}
                     disabled={isSubmitting}
                     className="w-full sm:w-auto"
