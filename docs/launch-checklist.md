@@ -3,6 +3,7 @@
 ## Contract
 - Confirm the local Node version matches `.nvmrc` or run `nvm use` before installing dependencies or running release checks.
 - Confirm `package.json` Node engine metadata stays compatible with the `.nvmrc` version.
+- Copy `.env.example` to an ignored `.env` file and keep real private keys or API keys out of tracked files.
 - Deploy a fresh `Noodl3Loyalty` contract on Celo Sepolia.
 - Set `NEXT_PUBLIC_NOODL3_CONTRACT_ADDRESS_SEPOLIA`.
 - Set `NOODL3_CONTRACT_ADDRESS_SEPOLIA` for deploy, verify, and seed scripts.
