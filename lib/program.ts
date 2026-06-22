@@ -219,7 +219,7 @@ const ptProgramCopy = {
   openCard: "Abrir cartão de selos",
   openTicket: "Abrir ticket",
   collectVisit: "Coletar selo de visita",
-  collectingVisit: "Coletando selo...",
+  collectingVisit: "Coletando selo de visita...",
   requestStamp: "Carimbar esta visita",
   requestingStamp: "Carimbando esta visita...",
   requestSent: "Selo adicionado.",
