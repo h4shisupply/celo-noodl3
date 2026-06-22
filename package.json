@@ -26,6 +26,7 @@
     "loyalty-program",
     "manual-stamp",
     "manual-stamp-issuance",
+    "fallback-visits",
     "merchant",
     "merchant-loyalty",
     "merchant-qr-stamp-card",
