@@ -105,6 +105,7 @@
 - Confirm profile dialog wallet summaries expose the full wallet address to assistive tech while showing shortened text.
 - Confirm merchant customer wallet labels expose the full wallet address on hover.
 - Confirm reward ticket customer wallet labels expose the full wallet address on hover.
+- Confirm customer and reward ticket wallet summaries expose the full wallet address to assistive tech while showing shortened text.
 - Confirm account and select popovers close after outside mouse, touch, or pen interactions.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative UI images stay hidden from assistive tech and remote UI images remain non-blocking when appropriate.
