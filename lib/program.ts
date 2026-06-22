@@ -266,7 +266,7 @@ const ptProgramCopy = {
   connectFirst: "Conecte sua carteira para carregar seus cartões de selos.",
   notFound: "Cartão de selos não encontrado.",
   inactive: "Inativo",
-  stamps: "selos",
+  stamps: "selos de visita",
   visits: "visitas",
   ready: "Recompensa pronta",
   collecting: "Colecionando selos de visita",
