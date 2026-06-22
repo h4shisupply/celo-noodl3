@@ -122,7 +122,7 @@
 - Confirm mobile landing navigation closes after outside mouse, touch, or pen interactions.
 - Confirm the language switcher announces the current language and each option's pressed state.
 - Confirm the active language option exposes current-item semantics.
-- Confirm abbreviated language switcher buttons expose full language names.
+- Confirm abbreviated language switcher buttons expose full language names in their titles and accessible labels.
 - Confirm language selection persists after refresh through the language switcher locale cookie.
 - Confirm custom select controls show clear visual states for open and closed menus.
 - Confirm the app manifest name, short name, description, app ID, start URL, scope, icon, dashboard and create-card shortcut names, shortcut short names, shortcut descriptions, categories, language, text direction, theme color, background color, standalone display mode, minimal-ui display override, and portrait orientation are correct when installed on mobile.
