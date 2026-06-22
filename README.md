@@ -53,7 +53,7 @@ For a real pilot, the shop owner should:
 2. Open the merchant QR stamp card manager and print the visit QR counter sheet.
 3. Keep the printed visit QR at the register so customers can collect visit stamps.
 4. Use the live visit QR for shop-owner-led check-ins; it expires after five minutes, works once, and can be regenerated.
-5. Use manual stamp issuance for shop-owner-approved fallback visits when QR scanning is not available.
+5. Use manual stamp issuance to add shop-owner-approved fallback visits to a customer wallet when QR scanning is not available.
 6. Ask customers with completed QR stamp cards to open their reward ticket QR before validation.
 7. Validate the reward ticket with the shop owner wallet and confirm the used state before handing out the reward.
 
