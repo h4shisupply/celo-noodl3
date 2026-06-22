@@ -450,7 +450,8 @@ export function ProgramManagePage({
                             className="rounded-lg border border-line bg-panel-soft p-4"
                           >
                             <p dir="ltr" title={customer.address} className="mb-3 break-all text-sm font-semibold text-ink">
-                              {formatWalletLabel(customer.address)}
+                              <span className="sr-only">{customer.address}</span>
+                              <span aria-hidden="true">{formatWalletLabel(customer.address)}</span>
                             </p>
                             <ProgressMeter
                               value={customer.progress?.stamps ?? 0}
