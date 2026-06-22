@@ -11,7 +11,7 @@ Please report suspected vulnerabilities privately instead of opening a public is
 Send the repository owner a report that includes:
 
 - a clear description of the suspected vulnerability
-- the affected app route, program ID, claim ID, Celo network, or contract address, if applicable
+- the affected app route, program ID, claim ID, Celo network, wallet address, or contract address, if applicable
 - the related Celo transaction hash, if applicable
 - reproduction steps or proof-of-concept details, if available
 - relevant logs or screenshots, with secrets redacted, if available
