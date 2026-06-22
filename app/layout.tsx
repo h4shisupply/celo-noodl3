@@ -46,6 +46,7 @@ export const metadata: Metadata = {
     "loyalty program",
     "manual stamp",
     "customer loyalty",
+    "counter backup code",
     "counter QR",
     "live visit QR",
     "live QR",
