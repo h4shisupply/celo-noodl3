@@ -139,7 +139,7 @@ const enProgramCopy = {
   generatingDynamicQr: "Generating live QR...",
   dynamicQrReady: "Live QR is ready for the next customer.",
   nextStaticStamp: "Next counter-QR stamp",
-  customers: "Stamp collectors",
+  customers: "Visit stamp collectors",
   settings: "Settings",
   issueManual: "Add manual visit stamp",
   issuingManualStamp: "Adding manual visit stamp...",
