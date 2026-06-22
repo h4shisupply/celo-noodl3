@@ -137,7 +137,8 @@ export function ProfileDialog({
             </CardDescription>
           </div>
           <p dir="ltr" title={account} className="rounded-lg bg-panel-soft p-3 text-sm font-medium text-muted">
-            {formatWalletLabel(account)}
+            <span className="sr-only">{account}</span>
+            <span aria-hidden="true">{formatWalletLabel(account)}</span>
           </p>
         </CardHeader>
         <CardContent className="space-y-4">
