@@ -123,7 +123,7 @@
 - Confirm the language switcher announces the current language and each option's pressed state.
 - Confirm the active language option exposes current-item semantics.
 - Confirm abbreviated language switcher buttons expose full language names.
-- Confirm language selection persists after refresh through the locale cookie.
+- Confirm language selection persists after refresh through the language switcher locale cookie.
 - Confirm custom select controls show clear visual states for open and closed menus.
 - Confirm the app manifest description, icon, dashboard and create-card shortcut names, shortcut descriptions, categories, language, theme color, background color, standalone display mode, minimal-ui display override, and portrait orientation are correct when installed on mobile.
 - Confirm installed app shortcuts open the `/app` dashboard and `/app/program/new` create-card routes.
