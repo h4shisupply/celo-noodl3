@@ -148,7 +148,10 @@ export function AppAccountBar({
                     <p className="break-words text-sm font-semibold text-ink">
                       {profile?.displayName ?? dictionary.account.connectedWallet}
                     </p>
-                    <p dir="ltr" title={account} className="break-all text-sm text-muted">{formatWalletLabel(account)}</p>
+                    <p dir="ltr" title={account} className="break-all text-sm text-muted">
+                      <span className="sr-only">{account}</span>
+                      <span aria-hidden="true">{formatWalletLabel(account)}</span>
+                    </p>
                     <p className="break-words text-sm text-muted">
                       {isWrongChain
                         ? interpolate(dictionary.account.expectedNetwork, {
