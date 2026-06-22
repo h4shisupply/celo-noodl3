@@ -132,6 +132,7 @@
 - Confirm installed app shortcuts open the `/app` dashboard and `/app/program/new` create-card routes.
 - Confirm package metadata keywords cover Celo, Celo loyalty, MiniPay, PWA, installable loyalty app, loyalty, customer loyalty, customer QR stamp card, loyalty program, manual stamp, merchant, merchant loyalty, merchant QR stamp card, QR, QR code, QR loyalty, QR scanner, counter QR, QR stamp card, stamp card, printed visit QR, static visit QR, dynamic visit QR, live visit QR, live QR, visit QR, reward ticket, reward ticket QR, reward ticket sheet, rewards, wallet, wallet stamps, visit stamps, merchant rewards, and merchant reward surfaces.
 - Confirm package repository, homepage, and issue links point to the public noodl3 project.
+- Confirm root metadata application name, author, creator, and publisher identify `noodl3` and `H4shi` consistently.
 - Confirm root metadata keywords cover Celo, Celo loyalty, MiniPay, PWA, installable loyalty app, loyalty, loyalty program, manual stamp, customer loyalty, customer QR stamp card, merchant loyalty, merchant QR stamp card, QR, QR loyalty, QR scanner, counter QR, QR stamp card, stamp card, QR code, printed visit QR, static visit QR, dynamic visit QR, live visit QR, live QR, visit QR, wallet, wallet stamps, visit stamps, reward ticket, reward ticket QR, reward ticket sheet, merchant rewards, and merchant reward surfaces.
 - Confirm root metadata uses `NEXT_PUBLIC_APP_URL` as the metadata base and `/` as the canonical URL.
 - Confirm root metadata robots keep public launch pages indexable and followable.
