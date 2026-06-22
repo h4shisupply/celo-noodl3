@@ -15,7 +15,7 @@ Send the repository owner a report that includes:
 - the related Celo transaction hash, if applicable
 - reproduction steps or proof-of-concept details, if available
 - relevant logs or screenshots, with secrets redacted, if available
-- confirmation that private keys, seed phrases, and production customer data are excluded
+- confirmation that private keys, seed phrases, and production customer data are excluded from reports and attachments
 - an impact assessment
 - suggested mitigations, if known
 
