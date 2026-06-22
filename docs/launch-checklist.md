@@ -49,6 +49,7 @@
 ## Frontend
 - Confirm `NEXT_PUBLIC_APP_URL` matches the reachable local, LAN, or deployed base URL before sharing QR links, printing QR sheets, or previewing social metadata.
 - Run `npm run lint`, `npm run typecheck`, and `npm run build` before release.
+- Use `npm run dev:mobile` for trusted LAN phone QR tests so the dev server listens on `0.0.0.0`.
 - Confirm printed QR sheets are regenerated after the final preview or production base URL is set.
 - Confirm `NEXT_PUBLIC_DEFAULT_CHAIN` matches the deployed contract network before QR testing: `celoSepolia` for testing and `celo` for production.
 - Confirm optional deployment block hints start deployment tracking and event lookups from the contract launch block.
