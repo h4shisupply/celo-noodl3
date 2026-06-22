@@ -257,7 +257,7 @@ const ptProgramCopy = {
   consume: "Validar ticket",
   consumingRewardTicket: "Validando ticket...",
   customerWallet: "Carteira do cliente",
-  updateProgram: "Atualizar cartão",
+  updateProgram: "Atualizar cartão de selos",
   updatingProgram: "Atualizando cartão...",
   settingsSaved: "Configurações do cartão salvas.",
   manualIssued: "Selo manual adicionado à carteira do cliente.",
