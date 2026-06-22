@@ -34,7 +34,7 @@
 
 ## Slide 6
 - Demo loop
-- Switch languages once to show Portuguese and English app copy
+- Switch languages once to show Brazilian Portuguese and English app copy
 - Create a merchant QR stamp card with a square public HTTPS logo URL, a reward promise, and a visit goal
 - Show printed visit QR actions: open the link, copy the link, use the share fallback, download the SVG, and print the visit QR counter sheet
 - Customer collects one visit stamp and sees the 20-hour reuse cooldown
