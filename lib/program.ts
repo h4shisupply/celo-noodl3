@@ -107,7 +107,7 @@ const enProgramCopy = {
   manage: "Manage QR stamp card",
   openCard: "Open QR stamp card",
   openTicket: "Open ticket",
-  collectVisit: "Collect stamp",
+  collectVisit: "Collect visit stamp",
   collectingVisit: "Collecting stamp...",
   requestStamp: "Stamp this visit",
   requestingStamp: "Stamping this visit...",
