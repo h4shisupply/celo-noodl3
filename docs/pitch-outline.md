@@ -45,7 +45,7 @@
 
 ## Slide 7
 - MVP boundaries
-- No catalog, menu, cart, item checkout, or payment
+- No catalog, menu, cart, item checkout, or payment flow in the V1 loyalty loop
 - One stamp per visit
 - Shop-owner-only management
 - Direct on-chain indexes without an event-indexing dependency
