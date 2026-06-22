@@ -102,6 +102,7 @@
 - Confirm account popovers expose dialog semantics and account-specific labels while open.
 - Confirm account popovers describe the visible wallet and network summary while open.
 - Confirm shortened account wallet labels expose the full wallet address on hover.
+- Confirm profile dialog wallet summaries expose the full wallet address to assistive tech while showing shortened text.
 - Confirm merchant customer wallet labels expose the full wallet address on hover.
 - Confirm reward ticket customer wallet labels expose the full wallet address on hover.
 - Confirm account and select popovers close after outside mouse, touch, or pen interactions.
