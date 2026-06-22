@@ -250,7 +250,7 @@ const ptProgramCopy = {
   generatingDynamicQr: "Gerando QR ao vivo...",
   dynamicQrReady: "QR ao vivo pronto para o próximo cliente.",
   nextStaticStamp: "Próximo selo pelo QR de balcão",
-  customers: "Colecionadores",
+  customers: "Colecionadores de selos de visita",
   settings: "Configurações",
   issueManual: "Adicionar selo de visita manual",
   issuingManualStamp: "Adicionando selo de visita manual...",
