@@ -240,7 +240,7 @@ const ptProgramCopy = {
   active: "Ativo",
   activeHelp: "Clientes podem coletar selos e criar tickets de recompensa enquanto estiver ligado.",
   staticStampEnabled: "Selos pelo QR de balcão",
-  staticStampHelp: "Permite que cada carteira carimbe pelo QR impresso uma vez a cada 20 horas.",
+  staticStampHelp: "Permite que cada carteira colete um selo pelo QR impresso a cada 20 horas.",
   saveProgram: "Salvar cartão de selos",
   savingProgram: "Salvando cartão de selos...",
   programCreated: "Cartão de selos criado.",
