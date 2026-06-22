@@ -261,7 +261,10 @@ export function ClaimPage({
                   </div>
                   <div dir="ltr" className="break-all">
                     <dt className="inline">{dictionary.common.customer}: </dt>
-                    <dd title={claim.user} className="inline">{formatWalletLabel(claim.user)}</dd>
+                    <dd title={claim.user} className="inline">
+                      <span className="sr-only">{claim.user}</span>
+                      <span aria-hidden="true">{formatWalletLabel(claim.user)}</span>
+                    </dd>
                   </div>
                   <div>
                     <dt className="inline">{dictionary.common.date}: </dt>
