@@ -213,7 +213,7 @@ const ptProgramCopy = {
   refreshDashboard: "Atualizar dashboard",
   refreshingDashboard: "Atualizando dashboard...",
   emptyCards: "Leia um QR de visita e seu primeiro cartão de selos aparece aqui.",
-  emptyPrograms: "Crie um cartão para uma loja ou comunidade e ele aparece aqui.",
+  emptyPrograms: "Crie um cartão de selos para uma loja ou comunidade e ele aparece aqui.",
   emptyClaims: "Cartões cheios viram tickets para o lojista validar.",
   manage: "Gerenciar cartão de selos",
   openCard: "Abrir cartão de selos",
