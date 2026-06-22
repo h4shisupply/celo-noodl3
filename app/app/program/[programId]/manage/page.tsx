@@ -7,7 +7,7 @@ import { parseProgramId } from "../../../../../lib/program";
 
 export const metadata: Metadata = {
   title: "Manage merchant QR stamp card",
-  description: "Manage a Celo-native merchant QR stamp card with printed visit QR actions, a five-minute live visit QR, manual stamps, customer progress, and reward tickets."
+  description: "Manage a Celo-native merchant QR stamp card for shop owner wallets with printed visit QR actions, a five-minute live visit QR, manual stamps, customer progress, and reward tickets."
 };
 
 type ManageRouteProps = {
