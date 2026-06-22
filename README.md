@@ -43,7 +43,7 @@ The core loyalty loop is simple:
 - `/claim/[claimId]`: legacy reward ticket link that preserves the claim ID when redirecting to `/app/claim/[claimId]`
 - `/app/rewards`, `/rewards`, and `/success` redirect to the `/app` dashboard where customer QR stamp cards, visit stamps, and reward tickets now live
 - `/app/store/[slug]` and `/store/[slug]` redirect to the `/app` dashboard instead of exposing old catalog or checkout surfaces
-- `/merchant/verify` and `/verify` preserve `claim` query values when redirecting to `/app/claim/[claimId]`, and links without a `claim` query value redirect to `/app`
+- `/merchant/verify` and `/verify` preserve `claim` query values when redirecting to `/app/claim/[claimId]`, and links without a `claim` query value redirect to the `/app` dashboard
 
 ## Merchant Pilot Flow
 
