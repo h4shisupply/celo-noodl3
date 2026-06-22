@@ -252,7 +252,7 @@ const ptProgramCopy = {
   nextStaticStamp: "Próximo selo pelo QR de balcão",
   customers: "Colecionadores",
   settings: "Configurações",
-  issueManual: "Adicionar selo manual",
+  issueManual: "Adicionar selo de visita manual",
   issuingManualStamp: "Adicionando selo de visita manual...",
   consume: "Validar ticket",
   consumingRewardTicket: "Validando ticket...",
