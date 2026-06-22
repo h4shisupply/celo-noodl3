@@ -126,6 +126,7 @@
 - Confirm language selection persists after refresh through the `noodl3_locale` language switcher cookie.
 - Confirm custom select controls show clear visual states for open and closed menus.
 - Confirm the app manifest name, short name, description, app ID, start URL, scope, icon, dashboard and create-card shortcut names, shortcut short names, shortcut descriptions, categories, language (`en`), text direction (`ltr`), theme color, background color, standalone display mode, minimal-ui display override, and portrait orientation are correct when installed on mobile.
+- Confirm viewport metadata sets the theme color (`#fbfcff`) and light color scheme for browser chrome.
 - Confirm Apple web app metadata sets capable mode, title (`noodl3`), and status bar style (`default`) for the installed app shell.
 - Confirm installed app shortcuts open the `/app` dashboard and `/app/program/new` create-card routes.
 - Confirm package metadata keywords cover Celo, Celo loyalty, MiniPay, PWA, installable loyalty app, loyalty, customer loyalty, customer QR stamp card, loyalty program, manual stamp, merchant, merchant loyalty, merchant QR stamp card, QR, QR code, QR loyalty, QR scanner, counter QR, QR stamp card, stamp card, printed visit QR, static visit QR, dynamic visit QR, live visit QR, live QR, visit QR, reward ticket, reward ticket QR, reward ticket sheet, rewards, wallet, wallet stamps, visit stamps, merchant rewards, and merchant reward surfaces.
