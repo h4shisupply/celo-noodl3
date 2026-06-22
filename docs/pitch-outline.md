@@ -40,7 +40,7 @@
 - Customer collects one visit stamp and sees the 20-hour reuse cooldown
 - Generate a five-minute live visit QR over HTTPS or on localhost
 - Customer collects one visit stamp from the live QR immediately
-- Issue a manual stamp for a fallback visit to show the shop-owner-approved path
+- Issue a manual fallback stamp to show the shop-owner-approved path
 - Customer creates a reward ticket and sees the reward ticket QR, reward ticket sheet, and counter backup code
 - The shop owner validates each reward ticket once with the shop owner wallet and confirms the used state
 
