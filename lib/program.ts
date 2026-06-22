@@ -253,7 +253,7 @@ const ptProgramCopy = {
   customers: "Colecionadores",
   settings: "Configurações",
   issueManual: "Adicionar selo manual",
-  issuingManualStamp: "Adicionando selo manual...",
+  issuingManualStamp: "Adicionando selo de visita manual...",
   consume: "Validar ticket",
   consumingRewardTicket: "Validando ticket...",
   customerWallet: "Carteira do cliente",
