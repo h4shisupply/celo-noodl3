@@ -141,7 +141,7 @@ const enProgramCopy = {
   nextStaticStamp: "Next counter-QR stamp",
   customers: "Stamp collectors",
   settings: "Settings",
-  issueManual: "Add manual stamp",
+  issueManual: "Add manual visit stamp",
   issuingManualStamp: "Adding manual stamp...",
   consume: "Validate ticket",
   consumingRewardTicket: "Validating ticket...",
