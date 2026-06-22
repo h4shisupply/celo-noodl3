@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s · noodl3"
   },
   description:
-    "Celo-native merchant QR stamp card loyalty app for real-world visits. Print a visit QR, collect visit stamps, and validate each reward ticket once.",
+    "Celo-native merchant QR stamp card loyalty app for real-world visits. Print a visit QR, collect visit stamps, add manual fallback stamps, and validate each reward ticket once.",
   manifest: "/manifest.webmanifest",
   metadataBase: new URL(publicEnv.appUrl),
   alternates: {
@@ -102,7 +102,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "noodl3",
     description:
-      "Celo-native merchant QR stamp card loyalty app for real-world visits. Print a visit QR, collect visit stamps, and validate each reward ticket once.",
+      "Celo-native merchant QR stamp card loyalty app for real-world visits. Print a visit QR, collect visit stamps, add manual fallback stamps, and validate each reward ticket once.",
     url: publicEnv.appUrl,
     siteName: "noodl3",
     type: "website",
@@ -121,7 +121,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "noodl3",
     description:
-      "Celo-native merchant QR stamp card loyalty app for real-world visits. Print a visit QR, collect visit stamps, and validate each reward ticket once.",
+      "Celo-native merchant QR stamp card loyalty app for real-world visits. Print a visit QR, collect visit stamps, add manual fallback stamps, and validate each reward ticket once.",
     images: [
       {
         url: "/og.svg",
