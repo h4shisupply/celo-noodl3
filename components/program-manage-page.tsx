@@ -681,7 +681,9 @@ export function ProgramManagePage({
                       >
                         <div className="min-w-0 space-y-2">
                           <p dir="ltr" title={claim.user} className="break-all text-sm font-semibold text-ink">
-                            {formatClaimCode(claim.id)} · {formatWalletLabel(claim.user)}
+                            {formatClaimCode(claim.id)} ·{" "}
+                            <span className="sr-only">{claim.user}</span>
+                            <span aria-hidden="true">{formatWalletLabel(claim.user)}</span>
                           </p>
                           <Badge variant={claim.consumed ? "neutral" : "mint"}>
                             {claim.consumed ? copy.usedClaim : copy.ready}
