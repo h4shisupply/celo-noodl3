@@ -142,7 +142,7 @@ const enProgramCopy = {
   customers: "Stamp collectors",
   settings: "Settings",
   issueManual: "Add manual visit stamp",
-  issuingManualStamp: "Adding manual stamp...",
+  issuingManualStamp: "Adding manual visit stamp...",
   consume: "Validate ticket",
   consumingRewardTicket: "Validating ticket...",
   customerWallet: "Customer wallet",
