@@ -29,7 +29,7 @@
 - Stamps are non-transferable contract state
 - The printed visit QR allows one stamp per wallet every 20 hours
 - The live visit QR uses five-minute, one-use check-in payloads signed by the shop owner
-- Shop owners can issue manual stamps for fallback visits to customer wallets
+- Shop owners can issue manual fallback stamps to customer wallets
 - Each reward is issued as a reward ticket that can be validated only once
 
 ## Slide 6
