@@ -129,7 +129,7 @@ const enProgramCopy = {
   active: "Active",
   activeHelp: "Customers can collect stamps and create reward tickets while this is on.",
   staticStampEnabled: "Counter QR stamps",
-  staticStampHelp: "Let each wallet stamp from the printed QR once every 20 hours.",
+  staticStampHelp: "Let each wallet collect one stamp from the printed QR every 20 hours.",
   saveProgram: "Save QR stamp card",
   savingProgram: "Saving QR stamp card...",
   programCreated: "QR stamp card created.",
