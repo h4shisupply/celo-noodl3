@@ -111,7 +111,7 @@ const enProgramCopy = {
   collectingVisit: "Collecting visit stamp...",
   requestStamp: "Stamp this visit",
   requestingStamp: "Stamping this visit...",
-  requestSent: "Stamp added.",
+  requestSent: "Visit stamp added.",
   dynamicCollected: "Live QR stamp added.",
   claimReward: "Create reward ticket",
   creatingRewardTicket: "Creating reward ticket...",
