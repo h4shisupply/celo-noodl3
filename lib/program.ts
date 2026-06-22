@@ -294,7 +294,7 @@ const ptProgramCopy = {
   qrShareUnavailable: "Compartilhamento indisponível neste navegador. Copie o link.",
   printedSheetTitle: "Folha QR de balcão",
   printedSheetDescription: "Deixe no balcão para clientes lerem e coletarem um selo de visita.",
-  staticQrRule: "Um selo por carteira a cada 20 horas.",
+  staticQrRule: "Um selo de visita por carteira a cada 20 horas.",
   liveQrExpiresIn: "Expira em",
   liveQrExpired: "QR ao vivo expirou",
   regenerateDynamicQr: "Gerar novo QR ao vivo",
