@@ -20,7 +20,7 @@ The core loyalty loop is simple:
 - Self-serve merchant QR stamp card creation
 - Local visit QR and reward ticket QR rendering, opening links, copying, sharing, downloading SVGs, and printing visit QR counter sheets and reward ticket sheets
 - No catalog, menu, cart, item checkout, or payment flow is required for the V1 loyalty loop
-- Bilingual runtime copy in `pt-BR` and English
+- Bilingual runtime copy in Brazilian Portuguese (`pt-BR`) and English
 - `Selos` in Portuguese and `Stamps` in English
 - Accessible app structure with named landmarks, visible focus, hover titles, progress meters, timer labels, full language names for language controls, live regions, QR scanner feedback, and scanner busy states
 - Installable app manifest with app description, dashboard and create-card shortcut names, shortcut descriptions, and maskable app and shortcut icons
