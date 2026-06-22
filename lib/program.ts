@@ -155,7 +155,7 @@ const enProgramCopy = {
   connectFirst: "Connect your wallet to load your QR stamp cards.",
   notFound: "QR stamp card not found.",
   inactive: "Inactive",
-  stamps: "stamps",
+  stamps: "visit stamps",
   visits: "visits",
   ready: "Ready for reward",
   collecting: "Collecting visit stamps",
