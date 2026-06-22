@@ -216,7 +216,7 @@ const ptProgramCopy = {
   emptyPrograms: "Crie um cartão para uma loja ou comunidade e ele aparece aqui.",
   emptyClaims: "Cartões cheios viram tickets para o lojista validar.",
   manage: "Gerenciar cartão",
-  openCard: "Abrir cartão",
+  openCard: "Abrir cartão de selos",
   openTicket: "Abrir ticket",
   collectVisit: "Coletar selo",
   collectingVisit: "Coletando selo...",
