@@ -269,7 +269,7 @@ const ptProgramCopy = {
   stamps: "selos",
   visits: "visitas",
   ready: "Recompensa pronta",
-  collecting: "Colecionando selos",
+  collecting: "Colecionando selos de visita",
   staticQrHelp: "Imprima este QR de visita para o balcão. Cada carteira coleta um selo a cada 20 horas.",
   dynamicQrHelp: "Use este QR ao vivo para check-ins guiados pelo lojista. Expira em cinco minutos e funciona uma vez.",
   claimTitle: "Ticket de recompensa",
