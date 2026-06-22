@@ -218,7 +218,7 @@ const ptProgramCopy = {
   manage: "Gerenciar cartão de selos",
   openCard: "Abrir cartão de selos",
   openTicket: "Abrir ticket",
-  collectVisit: "Coletar selo",
+  collectVisit: "Coletar selo de visita",
   collectingVisit: "Coletando selo...",
   requestStamp: "Carimbar esta visita",
   requestingStamp: "Carimbando esta visita...",
