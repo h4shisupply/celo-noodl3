@@ -222,7 +222,7 @@ const ptProgramCopy = {
   collectingVisit: "Coletando selo de visita...",
   requestStamp: "Carimbar esta visita",
   requestingStamp: "Carimbando esta visita...",
-  requestSent: "Selo adicionado.",
+  requestSent: "Selo de visita adicionado.",
   dynamicCollected: "Selo do QR ao vivo adicionado.",
   claimReward: "Criar ticket de recompensa",
   creatingRewardTicket: "Criando ticket de recompensa...",
