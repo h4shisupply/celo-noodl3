@@ -134,6 +134,7 @@
 - Confirm Apple web app metadata sets capable mode, title (`noodl3`), and status bar style (`default`) for the installed app shell.
 - Confirm root icon metadata points browser, shortcut, and Apple icons to `/icon.svg`.
 - Confirm installed app shortcuts open the `/app` dashboard and `/app/program/new` create-card routes.
+- Confirm package metadata keeps `private` set to `true` to avoid accidental npm publication.
 - Confirm package license and author metadata stay set to MIT and H4shi.
 - Confirm package metadata keywords cover Celo, Celo loyalty, MiniPay, PWA, installable loyalty app, loyalty, customer loyalty, customer QR stamp card, loyalty program, manual stamp, merchant, merchant loyalty, merchant QR stamp card, QR, QR code, QR loyalty, QR scanner, counter QR, QR stamp card, stamp card, printed visit QR, static visit QR, dynamic visit QR, live visit QR, live QR, visit QR, reward ticket, reward ticket QR, reward ticket sheet, rewards, wallet, wallet stamps, visit stamps, merchant rewards, and merchant reward surfaces.
 - Confirm package repository, homepage, and issue links point to the public noodl3 project.
