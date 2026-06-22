@@ -5,7 +5,7 @@ import { publicEnv } from "../../../../lib/env";
 
 export const metadata: Metadata = {
   title: "Create merchant QR stamp card",
-  description: "Create a Celo-native merchant QR stamp card with a shop logo URL, reward promise, and visit goal."
+  description: "Create a Celo-native merchant QR stamp card with a square public HTTPS logo URL, reward promise, and visit goal."
 };
 
 export default function Page() {
