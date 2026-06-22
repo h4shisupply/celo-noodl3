@@ -37,7 +37,7 @@
 - Confirm dynamic visit QR generation shows an in-progress label while its action is disabled.
 - Confirm a one-use dynamic visit QR signed by the shop owner collects one visit stamp, then fails on reuse.
 - Confirm malformed or expired dynamic visit QR links show actionable user-facing error states.
-- Confirm manual stamp issuance adds fallback visits to customer wallets and works for shop owner wallets only.
+- Confirm manual fallback stamp issuance adds fallback visits to customer wallets and works for shop owner wallets only.
 - Confirm customer progress reaches the configured visit goal after printed, live, or manual fallback stamps.
 - Confirm customer can create a reward ticket at the configured visit goal.
 - Confirm reward ticket creation controls use ticket-specific idle and loading labels.
