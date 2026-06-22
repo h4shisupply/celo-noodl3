@@ -159,7 +159,7 @@ const enProgramCopy = {
   visits: "visits",
   ready: "Ready for reward",
   collecting: "Collecting stamps",
-  staticQrHelp: "Print this visit QR for the counter. Each wallet can collect one stamp every 20 hours.",
+  staticQrHelp: "Print this visit QR for the counter. Each wallet can collect one visit stamp every 20 hours.",
   dynamicQrHelp: "Use this live QR for check-ins guided by the shop owner. It expires in five minutes and works once.",
   claimTitle: "Reward ticket",
   claimDescription: "Show this QR to the shop owner so they can validate the reward once.",
