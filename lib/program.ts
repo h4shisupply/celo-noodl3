@@ -260,7 +260,7 @@ const ptProgramCopy = {
   updateProgram: "Atualizar cartão de selos",
   updatingProgram: "Atualizando cartão de selos...",
   settingsSaved: "Configurações do cartão de selos salvas.",
-  manualIssued: "Selo manual adicionado à carteira do cliente.",
+  manualIssued: "Selo de visita manual adicionado à carteira do cliente.",
   rewardConsumed: "Ticket de recompensa validado.",
   noContract: "Configure o endereço do contrato noodl3 antes de usar o app.",
   connectFirst: "Conecte sua carteira para carregar seus cartões de selos.",
