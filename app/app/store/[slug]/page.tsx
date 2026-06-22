@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Legacy store redirect",
-  description: "Redirect legacy store page links to the noodl3 dashboard instead of exposing old catalog or checkout surfaces."
+  description: "Redirect legacy store links to the noodl3 dashboard instead of exposing old catalog or checkout surfaces."
 };
 
 export default function Page() {
