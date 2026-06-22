@@ -29,7 +29,7 @@ The core loyalty loop is simple:
 - Printed visit QR that lets each wallet collect one stamp every 20 hours
 - Live visit QR with five-minute, one-use check-in payloads signed by the shop owner wallet
 - Manual stamp issuance from shop owner wallets to customer wallets
-- Reward ticket QR with a reward ticket sheet and counter backup code for shop owner wallet validation
+- Reward ticket QR with a reward ticket sheet and counter backup code for shop owner wallet validation at the counter
 - Internal, non-transferable reward claims instead of points tokens or NFTs
 
 ## Routes
