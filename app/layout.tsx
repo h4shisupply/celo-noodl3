@@ -52,6 +52,7 @@ export const metadata: Metadata = {
     "live visit QR",
     "live QR",
     "printed visit QR",
+    "visit QR counter sheet",
     "static visit QR",
     "dynamic visit QR",
     "visit QR",
