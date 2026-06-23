@@ -24,7 +24,7 @@
     "live-qr",
     "loyalty",
     "loyalty-program",
-    "manual-stamp",
+    "manual-fallback-stamp",
     "manual-stamp-issuance",
     "fallback-visits",
     "merchant",
