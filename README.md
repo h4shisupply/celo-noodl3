@@ -157,5 +157,5 @@ npm run build
 - [LICENSE](./LICENSE)
 - [.env.example](./.env.example)
 - [docs/pitch-outline.md](./docs/pitch-outline.md)
-- [docs/demo-script.md](./docs/demo-script.md)
+- [Demo script](./docs/demo-script.md)
 - [Launch checklist](./docs/launch-checklist.md)
