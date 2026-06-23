@@ -110,7 +110,7 @@ npm run dev
 
 After the dev server starts, open `http://localhost:3000/app` to view customer QR stamp cards, merchant QR stamp cards, visit stamps, and reward tickets on the `/app` dashboard.
 For phone QR testing on a trusted local network, use `npm run dev:mobile` so the dev server listens on `0.0.0.0` before opening QR links from another device.
-Camera-based QR scanning works over HTTPS or on localhost, so use a secure tunnel or HTTPS preview for phone QR tests against a LAN dev server.
+Camera-based QR scanning works over HTTPS or on localhost; for phone QR tests against a LAN dev server, use a secure tunnel or HTTPS preview.
 
 ## Deploy and Seed
 
