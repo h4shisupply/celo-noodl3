@@ -8,7 +8,7 @@ Use separate shop owner and customer wallets, or separate browser profiles, so w
 4. Open the merchant QR stamp card manager and show the printed visit QR actions: open the link, copy the link, use the share fallback, download the SVG, and print the visit QR counter sheet.
 5. Open the printed visit QR as a customer, collect one visit stamp, and confirm immediate reuse is blocked by the 20-hour cooldown.
 6. Generate a live visit QR over HTTPS or on localhost, show the five-minute countdown, scan it as a customer, and collect one visit stamp instantly.
-7. Show the QR scanner status before scanning, including permission guidance when relevant, the busy state during QR processing, and the success feedback after the stamp is recorded.
+7. Show the QR scanner status before scanning, including permission guidance when relevant, the busy state during QR processing, and the success feedback after the visit stamp is recorded.
 8. Regenerate the live visit QR to show a fresh one-use shop-owner-led check-in.
 9. Collect visit stamps or issue manual fallback stamps to the customer wallet until the configured visit goal is met.
 10. Create the reward ticket from the customer QR stamp card.
