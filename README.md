@@ -127,6 +127,8 @@ npm run deploy:mainnet
 npm run verify:mainnet
 ```
 
+After deployment, copy the printed address and deployment block into the matching contract address and deployment block environment variables before verification or seeding.
+
 ## Environment Notes
 
 - `NEXT_PUBLIC_DEFAULT_CHAIN` should match the deployed contract network: `celoSepolia` during testing and `celo` in production.
