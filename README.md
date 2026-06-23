@@ -5,7 +5,7 @@
 The app has two main entry points:
 
 - `/`: public landing page
-- `/app`: dashboard for customer and merchant QR stamp cards, visit stamps, manual fallback stamps, and reward tickets
+- `/app`: dashboard for customer QR stamp cards, merchant QR stamp cards, visit stamps, manual fallback stamps, and reward tickets
 
 The core loyalty loop is simple:
 
