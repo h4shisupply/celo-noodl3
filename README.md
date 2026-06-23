@@ -151,7 +151,7 @@ npm run typecheck
 npm run build
 ```
 
-## Docs
+## Documentation
 
 - [Security policy](./SECURITY.md)
 - [License](./LICENSE)
