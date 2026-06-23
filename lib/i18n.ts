@@ -1049,7 +1049,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       invalidProfileInput:
         "Use a valid display name and, if you want, a photo with an https:// link.",
       profileSaveFailed: "Could not save the profile.",
-      notEnoughStamps: "You do not have enough stamps to make this ticket yet.",
+      notEnoughStamps: "You do not have enough visit stamps to make this ticket yet.",
       staticStampCooldown: "The counter QR allows only one visit stamp per wallet every 20 hours.",
       staticStampDisabled: "Counter QR visit stamps are off for this card.",
       profileContractOutdated:
