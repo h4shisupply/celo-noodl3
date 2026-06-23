@@ -181,7 +181,7 @@ const enProgramCopy = {
   qrPrint: "Print QR sheet",
   qrOpen: "Open",
   qrShareUnavailable: "Sharing is not available in this browser. Copy the link instead.",
-  printedSheetTitle: "Counter QR sheet",
+  printedSheetTitle: "Counter visit QR sheet",
   printedSheetDescription: "Place this at the counter so customers can scan and collect a visit stamp.",
   staticQrRule: "One visit stamp per wallet every 20 hours.",
   liveQrExpiresIn: "Expires in",
