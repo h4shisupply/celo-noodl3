@@ -549,7 +549,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       profileSaveFailed: "Não foi possível salvar o perfil.",
       notEnoughStamps: "Você ainda não tem selos suficientes para gerar este ticket.",
       staticStampCooldown: "O QR de balcão libera apenas um selo de visita por carteira a cada 20 horas.",
-      staticStampDisabled: "O QR de balcão deste cartão está desligado.",
+      staticStampDisabled: "Selos de visita pelo QR de balcão estão desligados neste cartão.",
       profileContractOutdated:
         "O contrato atual ainda não suporta perfis onchain. Faça deploy da versão mais recente e atualize o endereço no app.",
       switchToNetworkBeforeContinue:
