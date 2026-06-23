@@ -239,7 +239,7 @@ const ptProgramCopy = {
   visitsRequired: "Visitas para completar",
   active: "Ativo",
   activeHelp: "Clientes podem coletar selos de visita e criar tickets de recompensa enquanto estiver ligado.",
-  staticStampEnabled: "Selos pelo QR de balcão",
+  staticStampEnabled: "Selos de visita pelo QR de balcão",
   staticStampHelp: "Permite que cada carteira colete um selo de visita pelo QR impresso a cada 20 horas.",
   saveProgram: "Salvar cartão de selos",
   savingProgram: "Salvando cartão de selos...",
