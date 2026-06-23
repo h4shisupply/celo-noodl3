@@ -150,7 +150,7 @@
 - Confirm the app icon and shortcut icons keep the logo visible within safe maskable-icon crops.
 - Confirm the public SVG logo, app icon, and preview assets include up-to-date title and description metadata.
 - Confirm app route metadata descriptions cover the landing page, `/app` dashboard, create merchant QR stamp card, customer QR stamp card, merchant QR stamp card manager, reward ticket, and claim-preserving legacy redirect pages.
-- Confirm Open Graph and Twitter preview metadata use `NEXT_PUBLIC_APP_URL` as their base URL and show the expected title, manual-fallback-stamps description, image, and image alt text.
+- Confirm Open Graph and Twitter preview metadata use `NEXT_PUBLIC_APP_URL` as their base URL and show the expected title, manual fallback stamps description, image, and image alt text.
 - Confirm Open Graph preview metadata uses `en_US` as the primary locale and includes `pt_BR` as an alternate locale.
 - Confirm mobile and desktop layouts render correctly for these routes:
   - `/`
