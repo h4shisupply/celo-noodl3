@@ -755,7 +755,7 @@ const dictionaries: Record<Locale, Dictionary> = {
         "Selecione a loja, procure o cliente e valide o QR do resgate quando ele estiver pronto.",
       managedStoreLabel: "Lojas gerenciadas",
       activeStoreLabel: "Loja ativa",
-      customersTitle: "Clientes com Selos",
+      customersTitle: "Clientes com selos de visita",
       customersDescription:
         "A lista vem do contrato e mostra o saldo atual de Selos por cliente nesta loja.",
       customerSearchPlaceholder: "Buscar por endereço do cliente",
