@@ -292,7 +292,7 @@ const ptProgramCopy = {
   qrPrint: "Imprimir folha QR",
   qrOpen: "Abrir",
   qrShareUnavailable: "Compartilhamento indisponível neste navegador. Copie o link.",
-  printedSheetTitle: "Folha QR de balcão",
+  printedSheetTitle: "Folha QR de visita no balcão",
   printedSheetDescription: "Deixe no balcão para clientes lerem e coletarem um selo de visita.",
   staticQrRule: "Um selo de visita por carteira a cada 20 horas.",
   liveQrExpiresIn: "Expira em",
