@@ -547,7 +547,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       invalidProfileInput:
         "Use um nome válido e, se quiser, uma foto com link https://.",
       profileSaveFailed: "Não foi possível salvar o perfil.",
-      notEnoughStamps: "Você ainda não tem selos suficientes para gerar este ticket.",
+      notEnoughStamps: "Você ainda não tem selos de visita suficientes para gerar este ticket.",
       staticStampCooldown: "O QR de balcão libera apenas um selo de visita por carteira a cada 20 horas.",
       staticStampDisabled: "Selos de visita pelo QR de balcão estão desligados neste cartão.",
       profileContractOutdated:
