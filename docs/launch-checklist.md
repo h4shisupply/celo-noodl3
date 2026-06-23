@@ -5,7 +5,7 @@
 - Confirm `package.json` Node engine metadata stays compatible with the `.nvmrc` version.
 - Copy `.env.example` to an ignored `.env` file and keep real private keys, sponsor keys, and explorer API keys out of tracked files.
 - Deploy a fresh `Noodl3Loyalty` contract on Celo Sepolia.
-- Set `NEXT_PUBLIC_NOODL3_CONTRACT_ADDRESS_SEPOLIA`.
+- Set `NEXT_PUBLIC_NOODL3_CONTRACT_ADDRESS_SEPOLIA` after deployment so the app reads the deployed loyalty contract.
 - Set `NOODL3_CONTRACT_ADDRESS_SEPOLIA` after deployment for verify and seed scripts.
 - Set `ETHERSCAN_API_KEY` or `CELOSCAN_API_KEY` before Celo explorer verification.
 - Run `npm run compile`, `npm run export:abi`, and `npm run test`.
