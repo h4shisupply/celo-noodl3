@@ -1050,7 +1050,7 @@ const dictionaries: Record<Locale, Dictionary> = {
         "Use a valid display name and, if you want, a photo with an https:// link.",
       profileSaveFailed: "Could not save the profile.",
       notEnoughStamps: "You do not have enough stamps to make this ticket yet.",
-      staticStampCooldown: "The counter QR allows only one stamp per wallet every 20 hours.",
+      staticStampCooldown: "The counter QR allows only one visit stamp per wallet every 20 hours.",
       staticStampDisabled: "Counter QR stamps are off for this card.",
       profileContractOutdated:
         "The current contract does not support onchain profiles yet. Deploy the latest version and update the app contract address.",
