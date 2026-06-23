@@ -5,7 +5,7 @@ Use separate shop owner and customer wallets, or separate browser profiles, so w
 1. Open the landing page and explain the product in one sentence: a Celo-native merchant QR stamp card loyalty app for real-world visits.
 2. Switch between Brazilian Portuguese and English once, refresh, and confirm the landing page, header, and app entry copy remain in sync.
 3. Open `/app`, connect a wallet, optionally add a display name, and create a merchant QR stamp card with a square public HTTPS logo URL, a reward promise, and a visit goal.
-4. Open the merchant QR stamp card manager and show the printed visit QR actions: open the link, copy the link, use the share fallback, download the SVG, and print the visit QR counter sheet.
+4. Open the merchant QR stamp card manager and show the printed visit QR actions: open the link, copy the link, use native share when available, download the SVG, and print the visit QR counter sheet.
 5. Open the printed visit QR as a customer, collect one visit stamp, and confirm immediate reuse is blocked by the 20-hour cooldown.
 6. Generate a live visit QR on localhost for desktop demos or over HTTPS for phone scans, show the five-minute countdown, scan it as a customer, and collect one visit stamp immediately.
 7. Show the QR scanner status before scanning, including permission guidance when relevant, the busy state during QR processing, and the success feedback after the visit stamp is recorded.
