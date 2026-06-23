@@ -55,7 +55,7 @@ For a real pilot, the shop owner should:
 4. Use the live visit QR for shop-owner-led check-ins; it expires after five minutes, works once, and can be regenerated.
 5. Use manual fallback stamp issuance to add shop-owner-approved fallback visits to a customer wallet when QR scanning is not available.
 6. Ask customers with completed QR stamp cards to open their reward ticket QR before validation.
-7. Validate the reward ticket with the shop owner wallet and confirm the used state before handing out the reward.
+7. Complete one-time reward ticket validation with the shop owner wallet and confirm the used state before handing out the reward.
 
 The QR UI renders QR codes locally in the app. It supports opening and copying QR links, sharing when supported by the browser, downloading QR SVGs, and printing visit QR counter sheets and reward ticket sheets without relying on an external QR image service. QR action feedback clears between actions and when regenerated QR content changes.
 
