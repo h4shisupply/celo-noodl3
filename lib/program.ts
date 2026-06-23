@@ -191,7 +191,7 @@ const enProgramCopy = {
   dynamicQrOneUse: "This QR expires in five minutes and works for one customer.",
   invalidVisitQr: "This live QR is missing visit data. Ask the shop owner for a fresh QR.",
   dynamicExpiredHelp: "This live QR expired. Ask the shop owner for a new one.",
-  staticDisabledHelp: "Counter QR stamps are off for this card.",
+  staticDisabledHelp: "Counter QR visit stamps are off for this card.",
   backupCode: "Backup code",
   ticketReady: "Ready to validate",
   ticketUsed: "Already used",
