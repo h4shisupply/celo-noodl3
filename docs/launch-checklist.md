@@ -24,7 +24,7 @@
 - Confirm printed visit QR opens `/app/program/[programId]?visit=static`.
 - Confirm printed visit QR renders locally without an external QR image service.
 - Confirm printed visit QR actions work: open the link, copy the link, use native share when available, download the SVG, and print the visit QR counter sheet.
-- Confirm QR action feedback resets before copying, sharing, downloading an SVG, printing, or opening a link.
+- Confirm QR action feedback resets before copying, native sharing, downloading an SVG, printing, or opening a link.
 - Confirm QR action feedback clears when regenerated QR content changes.
 - Confirm QR display panels use their visible QR titles as accessible names.
 - Confirm visible and printed QR images expose descriptive accessible names.
