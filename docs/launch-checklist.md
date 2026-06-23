@@ -132,7 +132,7 @@
 - Confirm abbreviated language switcher buttons expose full language names in their titles and accessible labels.
 - Confirm language selection persists after refresh through the `noodl3_locale` language switcher cookie.
 - Confirm custom select controls show clear visual states for open and closed menus.
-- Confirm the app manifest name, short name, description with printed visit QR, manual fallback stamps, and one-time reward ticket validation, app ID, start URL, scope, icon, dashboard and create-card shortcut names, shortcut short names, shortcut descriptions, categories, language (`en`), text direction (`ltr`), theme color, background color, standalone display mode, minimal-ui display override, and portrait orientation are correct when installed on mobile.
+- Confirm the app manifest name, short name, description with printed visit QR, manual fallback stamps, and one-time reward ticket validation, app ID, start URL, scope, icon, dashboard and create-card shortcut names, shortcut short names, shortcut descriptions, categories, language (`en`), text direction (`ltr`), theme and background colors (`#FBFCFF`), standalone display mode, minimal-ui display override, and portrait orientation are correct when installed on mobile.
 - Confirm viewport metadata sets the theme color (`#fbfcff`) and light color scheme for browser chrome.
 - Confirm Apple web app metadata sets capable mode, title (`noodl3`), and status bar style (`default`) for the installed app shell.
 - Confirm root icon metadata points browser, shortcut, and Apple icons to `/icon.svg`.
