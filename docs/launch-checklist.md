@@ -4,7 +4,7 @@
 - Confirm the local Node version matches `.nvmrc` or run `nvm use` before installing dependencies or running release checks.
 - Confirm `package.json` Node engine metadata stays compatible with the `.nvmrc` version.
 - Copy `.env.example` to an ignored `.env` file and keep real private keys, sponsor keys, and explorer API keys out of tracked files.
-- Confirm `CELO_SEPOLIA_RPC_URL` is set for Hardhat deploy, verify, and seed scripts.
+- Confirm `CELO_SEPOLIA_RPC_URL` is set for Hardhat deploy and verify scripts and the Sepolia seed script.
 - Deploy a fresh `Noodl3Loyalty` contract on Celo Sepolia.
 - Confirm the deploy output network and chain ID match Celo Sepolia before copying deployment values.
 - Record the printed contract address and deployment block from the deploy output before updating environment values.
