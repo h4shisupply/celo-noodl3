@@ -302,7 +302,7 @@ const ptProgramCopy = {
   dynamicQrOneUse: "Este QR expira em cinco minutos e funciona para um cliente.",
   invalidVisitQr: "Este QR ao vivo está sem dados da visita. Peça um QR novo ao lojista.",
   dynamicExpiredHelp: "Este QR ao vivo expirou. Peça um novo QR ao lojista.",
-  staticDisabledHelp: "Selos pelo QR de balcão estão desligados neste cartão.",
+  staticDisabledHelp: "Selos de visita pelo QR de balcão estão desligados neste cartão.",
   backupCode: "Código de apoio",
   ticketReady: "Pronto para validar",
   ticketUsed: "Já usado",
