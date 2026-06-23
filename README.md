@@ -18,7 +18,7 @@ The core loyalty loop is simple:
 ## Product Shape
 
 - Self-serve merchant QR stamp card creation
-- Local visit QR and reward ticket QR rendering, opening links, copying, sharing, downloading SVGs, and printing visit QR counter sheets and reward ticket sheets
+- Local visit QR and reward ticket QR rendering, opening links, copying, native sharing, downloading SVGs, and printing visit QR counter sheets and reward ticket sheets
 - No catalog, menu, cart, item checkout, or payment flow is required for the V1 loyalty loop
 - Bilingual runtime copy in Brazilian Portuguese (`pt-BR`) and English
 - `Selos` in Brazilian Portuguese and `Stamps` in English
