@@ -757,7 +757,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       activeStoreLabel: "Loja ativa",
       customersTitle: "Clientes com selos de visita",
       customersDescription:
-        "A lista vem do contrato e mostra o saldo atual de Selos por cliente nesta loja.",
+        "A lista vem do contrato e mostra o saldo atual de selos de visita por cliente nesta loja.",
       customerSearchPlaceholder: "Buscar por endereço do cliente",
       customersEmpty: "Nenhum cliente com histórico encontrado para esta loja.",
       selectedCustomerLabel: "Cliente selecionado",
