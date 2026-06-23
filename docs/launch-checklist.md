@@ -65,7 +65,7 @@
 - Confirm create merchant QR stamp card controls use QR-card-specific idle and saving labels.
 - Confirm merchant QR stamp card settings controls use QR-card-specific idle and updating labels.
 - Confirm live QR generation controls use live-QR-specific idle and loading labels.
-- Confirm manual fallback stamp controls use manual-stamp-specific idle and loading labels.
+- Confirm manual fallback stamp controls use manual-fallback-stamp-specific idle and loading labels.
 - Confirm visit stamp collection controls use stamp-specific idle and loading labels.
 - Confirm counter visit stamp controls use counter-stamp-specific idle and loading labels.
 - Confirm wallet gate connect controls use wallet-specific idle and connecting labels.
