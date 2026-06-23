@@ -154,7 +154,7 @@ npm run build
 ## Docs
 
 - [Security policy](./SECURITY.md)
-- [LICENSE](./LICENSE)
+- [License](./LICENSE)
 - [Environment example](./.env.example)
 - [Pitch outline](./docs/pitch-outline.md)
 - [Demo script](./docs/demo-script.md)
