@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     "installable loyalty app",
     "loyalty",
     "loyalty program",
-    "manual stamp",
+    "manual fallback stamp",
     "manual stamp issuance",
     "fallback visits",
     "merchant",
