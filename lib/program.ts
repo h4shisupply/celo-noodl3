@@ -127,7 +127,7 @@ const enProgramCopy = {
   rewardPlaceholder: "Free espresso on visit 10",
   visitsRequired: "Visit goal",
   active: "Active",
-  activeHelp: "Customers can collect stamps and create reward tickets while this is on.",
+  activeHelp: "Customers can collect visit stamps and create reward tickets while this is on.",
   staticStampEnabled: "Counter QR stamps",
   staticStampHelp: "Let each wallet collect one visit stamp from the printed QR every 20 hours.",
   saveProgram: "Save QR stamp card",
