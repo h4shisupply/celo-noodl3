@@ -1259,7 +1259,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       activeStoreLabel: "Active store",
       customersTitle: "Customers with Visit Stamps",
       customersDescription:
-        "The list comes from the contract and shows current Stamp balances for this store.",
+        "The list comes from the contract and shows current visit stamp balances for this store.",
       customerSearchPlaceholder: "Search by customer address",
       customersEmpty: "No customer history found for this store yet.",
       selectedCustomerLabel: "Selected customer",
