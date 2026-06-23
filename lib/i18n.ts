@@ -1267,7 +1267,7 @@ const dictionaries: Record<Locale, Dictionary> = {
         "Scan this customer's reward QR to validate a reward for the same store.",
       progressLabel: "Progress",
       readyLabel: "Ready to redeem",
-      collectingLabel: "Collecting Stamps",
+      collectingLabel: "Collecting Visit Stamps",
       genericTitle: "Manual validation",
       genericDescription:
         "Use a reward QR or short code to load the reward and confirm it with the store wallet.",
