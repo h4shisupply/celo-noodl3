@@ -25,7 +25,7 @@
 
 ## Slide 5
 - On-chain design
-- Merchant wallets create programs themselves
+- Merchant wallets create QR stamp card programs themselves
 - Visit stamps are non-transferable contract state
 - The printed visit QR allows one visit stamp per wallet every 20 hours
 - The live visit QR uses five-minute, one-use check-in payloads signed by the shop owner wallet
