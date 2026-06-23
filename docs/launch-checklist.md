@@ -32,7 +32,7 @@
 - Confirm QR open actions launch the visit or reward ticket link in a separate tab.
 - Confirm QR open actions do not send the current app page as the referrer.
 - Confirm static visit QR collects one visit stamp and shows the 20-hour reuse cooldown on immediate reuse.
-- Confirm a dynamic visit QR signed by the shop owner opens `/app/program/[programId]?visit=dynamic&nonce=...&expires=...&sig=...`.
+- Confirm a dynamic visit QR signed by the shop owner wallet opens `/app/program/[programId]?visit=dynamic&nonce=...&expires=...&sig=...`.
 - Confirm the dynamic visit QR shows a countdown, expires after five minutes, and can be regenerated.
 - Confirm regenerated dynamic visit QR links use a new nonce before they are shown to customers.
 - Confirm dynamic visit QR countdowns expose the remaining duration as a machine-readable time value.
