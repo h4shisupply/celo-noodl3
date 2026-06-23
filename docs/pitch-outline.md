@@ -42,7 +42,7 @@
 - Customer collects one visit stamp from the live QR immediately
 - Issue a manual fallback stamp to show the shop-owner-approved path
 - Customer creates a reward ticket and sees the reward ticket QR, reward ticket sheet, and counter backup code
-- The shop owner validates each reward ticket once with the shop owner wallet and confirms the used state
+- The shop owner completes one-time reward ticket validation with the shop owner wallet and confirms the used state
 
 ## Slide 7
 - MVP boundaries
