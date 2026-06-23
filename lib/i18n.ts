@@ -1257,7 +1257,7 @@ const dictionaries: Record<Locale, Dictionary> = {
         "Select a store, find the customer, and validate the reward QR when they are ready to redeem.",
       managedStoreLabel: "Managed stores",
       activeStoreLabel: "Active store",
-      customersTitle: "Customers with Stamps",
+      customersTitle: "Customers with Visit Stamps",
       customersDescription:
         "The list comes from the contract and shows current Stamp balances for this store.",
       customerSearchPlaceholder: "Search by customer address",
