@@ -1040,7 +1040,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       contractUnavailable: "Contract unavailable on this network.",
       noManagedStores: "No card managed by this wallet was found.",
       wrongNetworkDescription:
-        "Switch your wallet to the required network before collecting stamps, creating tickets, or validating rewards in noodl3.",
+        "Switch your wallet to the required network before collecting visit stamps, creating reward tickets, or validating rewards in noodl3.",
       wrongNetworkMiniPayDescription:
         "MiniPay is on the wrong network for this app. Switch to the expected network in MiniPay settings, then come back to continue.",
       genericActionFailed: "Could not finish that action. Please try again.",
