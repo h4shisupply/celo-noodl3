@@ -135,7 +135,7 @@ npm run verify:mainnet
 - `NEXT_PUBLIC_APP_URL` should match the reachable local, LAN, or deployed URL used in shared QR links, phone QR tests, printed QR sheets, and social metadata.
 - `CELO_MAINNET_RPC_URL` and `CELO_SEPOLIA_RPC_URL` are server-side endpoints for Hardhat deploy, verify, and seed scripts; the `NEXT_PUBLIC_` RPC URLs are browser-visible fallbacks, so keep private or metered providers in server-only variables.
 - `ETHERSCAN_API_KEY` or `CELOSCAN_API_KEY` enables Celo explorer verification when running the verify scripts.
-- `NOODL3_CONTRACT_ADDRESS_SEPOLIA` and `NOODL3_CONTRACT_ADDRESS_MAINNET` are script-only contract addresses used by deploy and verify scripts, plus the Sepolia seed script.
+- `NOODL3_CONTRACT_ADDRESS_SEPOLIA` and `NOODL3_CONTRACT_ADDRESS_MAINNET` are script-only contract addresses used by verify scripts and the Sepolia seed script.
 - Locale detection uses the `noodl3_locale` cookie set by the language switcher first, request headers second, and `pt-BR` as the fallback.
 
 ## Release Checks
