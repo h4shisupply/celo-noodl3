@@ -11,7 +11,7 @@ Please report suspected vulnerabilities privately rather than opening a public i
 Send the repository owner a report that includes:
 
 - a clear description of the suspected vulnerability
-- the environment where it was observed, such as local, preview, Celo Sepolia, or Celo mainnet, if known
+- the environment where the issue was observed, such as local, preview, Celo Sepolia, or Celo mainnet, if known
 - the affected app route, program ID, claim ID, Celo network, wallet address, or contract address, if applicable
 - the related Celo transaction hash, if applicable
 - reproduction steps or proof-of-concept details, if available
