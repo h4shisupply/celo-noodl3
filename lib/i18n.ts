@@ -538,7 +538,7 @@ const dictionaries: Record<Locale, Dictionary> = {
       contractUnavailable: "Contrato indisponível nesta rede.",
       noManagedStores: "Nenhum cartão gerenciado por esta carteira foi encontrado.",
       wrongNetworkDescription:
-        "Troque sua carteira para a rede correta antes de coletar selos, criar tickets ou validar recompensas no noodl3.",
+        "Troque sua carteira para a rede correta antes de coletar selos de visita, criar tickets de recompensa ou validar recompensas no noodl3.",
       wrongNetworkMiniPayDescription:
         "O MiniPay está na rede errada para este app. Troque para a rede esperada nas configurações e volte para continuar.",
       genericActionFailed: "Não foi possível concluir. Tente novamente.",
