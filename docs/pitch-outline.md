@@ -48,7 +48,7 @@
 - MVP boundaries
 - No catalog, menu, cart, item checkout, or payment flow in the V1 loyalty loop
 - One visit stamp per visit
-- Shop-owner-only management
+- Management stays limited to shop owner wallets
 - Direct on-chain indexes without an event-indexing dependency
 - No NFT or points token layer in V1
 
