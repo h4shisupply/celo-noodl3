@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Legacy merchant reward verification redirect",
-  description: "Redirect legacy merchant reward verification links with a claim query parameter to the matching Celo-native reward ticket QR page, and links without one to the noodl3 dashboard."
+  title: "Legacy merchant reward ticket verification redirect",
+  description: "Redirect legacy merchant reward ticket verification links with a claim query parameter to the matching Celo-native reward ticket QR page, and links without one to the noodl3 dashboard."
 };
 
 type VerifyRouteProps = {
