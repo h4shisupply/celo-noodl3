@@ -6,7 +6,7 @@
 - Copy `.env.example` to an ignored `.env` file and keep real private keys, sponsor keys, and explorer API keys out of tracked files.
 - Deploy a fresh `Noodl3Loyalty` contract on Celo Sepolia.
 - Set `NEXT_PUBLIC_NOODL3_CONTRACT_ADDRESS_SEPOLIA`.
-- Set `NOODL3_CONTRACT_ADDRESS_SEPOLIA` for deploy, verify, and seed scripts.
+- Set `NOODL3_CONTRACT_ADDRESS_SEPOLIA` after deployment for verify and seed scripts.
 - Set `ETHERSCAN_API_KEY` or `CELOSCAN_API_KEY` before Celo explorer verification.
 - Run `npm run compile`, `npm run export:abi`, and `npm run test`.
 
