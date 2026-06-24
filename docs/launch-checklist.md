@@ -122,7 +122,7 @@
 - Confirm Escape closes temporary overlays such as the mobile menu, account menu, profile dialog, and QR scanner.
 - Confirm modal backdrops close temporary dialogs after outside mouse, touch, or pen interactions when backdrop dismissal is supported.
 - Confirm modal overlays expose accessible names, descriptions, and modal state to assistive tech.
-- Confirm profile dialog close controls expose titles that match their accessible labels.
+- Confirm the profile dialog close control exposes matching title and accessible label text that includes the profile title.
 - Confirm profile validation errors are associated with the relevant display name or avatar URL input.
 - Confirm profile save controls use profile-specific idle and saving labels.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
