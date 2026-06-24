@@ -22,7 +22,7 @@ The core loyalty loop is simple:
 - No catalog, menu, cart, item checkout, or payment flow is required for the V1 loyalty loop
 - Bilingual runtime copy in Brazilian Portuguese (`pt-BR`) and English
 - `Selos` in Brazilian Portuguese and `Stamps` in English
-- Accessible app structure with named landmarks, visible focus, hover titles, progress meters, timer labels, profile field labels, expected-network action labels, full language names and current-language state for language controls, custom select state cues, live regions, QR scanner status feedback, camera permission guidance, contextual scanner close labels, and scanner busy states
+- Accessible app structure with named landmarks, visible focus, hover titles, progress meters, timer labels, profile field labels, expected-network action labels, full language names and current-language state for language controls, custom select state cues and Escape focus return, live regions, QR scanner status feedback, camera permission guidance, contextual scanner close labels, and scanner busy states
 - Installable app manifest with app description, dashboard and create-card shortcut names, shortcut descriptions, and maskable app and shortcut icons
 - Installed app launch handling focuses an existing app window when the platform supports launch handlers
 - On-chain loyalty progress per program
