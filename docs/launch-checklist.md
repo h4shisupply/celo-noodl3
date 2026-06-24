@@ -127,7 +127,7 @@
 - Confirm profile save controls use profile-specific idle and saving labels.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
 - Confirm mobile landing navigation closes after outside mouse, touch, or pen interactions.
-- Confirm the language switcher announces the current language and each option's pressed state.
+- Confirm the language switcher announces the current language name and each option's pressed state.
 - Confirm the active language option exposes current-item semantics.
 - Confirm abbreviated language switcher buttons expose full language names in their titles and accessible labels.
 - Confirm language selection persists after refresh through the `noodl3_locale` language switcher cookie.
