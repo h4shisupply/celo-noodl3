@@ -130,7 +130,7 @@
 - Confirm the language switcher announces the current language name and each option's pressed state.
 - Confirm the active language option exposes current-item semantics through `aria-current`.
 - Confirm abbreviated language switcher buttons expose full language names in their titles, accessible labels, and per-option `lang` attributes.
-- Confirm language selection persists after refresh through the `noodl3_locale` language switcher cookie.
+- Confirm language selection persists after refresh through the path-wide `noodl3_locale` language switcher cookie.
 - Confirm custom select controls show clear visual states for open and closed menus.
 - Confirm the app manifest name, short name, description with printed visit QR, manual fallback stamps, and one-time reward ticket validation, app ID, start URL, scope, icon, dashboard and create-card shortcut names, shortcut short names, shortcut descriptions, categories, language (`en`), text direction (`ltr`), theme and background colors (`#FBFCFF`), standalone display mode, `standalone` and `minimal-ui` display overrides, and portrait orientation are correct when installed on mobile.
 - Confirm viewport metadata sets the theme color (`#fbfcff`) and light color scheme for browser chrome.
