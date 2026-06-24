@@ -116,6 +116,7 @@
 - Confirm reward ticket customer wallet labels expose the full wallet address on hover.
 - Confirm customer and reward ticket wallet summaries expose the full wallet address to assistive tech while showing shortened text.
 - Confirm account and select popovers close after outside mouse, touch, or pen interactions.
+- Confirm custom select popovers close after Escape without changing the selected option.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative UI images stay hidden from assistive tech and remote UI images remain non-blocking when appropriate.
 - Confirm profile avatar URLs fall back to wallet initials when the remote image cannot load.
