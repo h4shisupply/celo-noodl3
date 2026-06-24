@@ -64,6 +64,7 @@
 - Confirm logo URL fields show concrete HTTPS image placeholders in create and settings forms.
 - Confirm QR-card active and printed visit QR toggle rows expose their visible helper copy as checkbox descriptions and hover titles.
 - Confirm keyboard focus is visible on header links, account menu controls, QR actions, and form fields.
+- Confirm shared button controls expose hover titles from explicit titles, accessible labels, or visible button text.
 - Confirm loading actions expose their busy state while their controls are disabled.
 - Confirm dashboard refresh controls use dashboard-specific idle and loading labels.
 - Confirm create merchant QR stamp card controls use QR-card-specific idle and saving labels.
