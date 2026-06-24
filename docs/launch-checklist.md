@@ -78,6 +78,7 @@
 - Confirm app header connect controls use wallet-specific idle and connecting labels.
 - Confirm app pages expose a named main landmark from their visible page headings.
 - Confirm app page headers expose accessible names from their visible headings.
+- Confirm shared section headers expose hover titles from their visible heading and description text.
 - Confirm the connected account header exposes a landmark label only after a wallet connects.
 - Confirm the account menu refresh control updates the displayed network label after wallet network changes.
 - Confirm network mismatch modal action labels and titles include the expected network while visible button text stays action-specific.
