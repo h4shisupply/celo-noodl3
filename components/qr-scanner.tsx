@@ -168,6 +168,8 @@ export function QrScanner({
     stopCamera
   ]);
 
+  const closeScannerLabel = `${dictionary.actions.closeScanner}: ${title}`;
+
   return (
     <div
       id="qr-scanner-dialog"
@@ -198,8 +200,8 @@ export function QrScanner({
             onClose?.();
           }}
           className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-line bg-panel text-ink-soft shadow-card transition hover:border-accent-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
-          aria-label={dictionary.actions.closeScanner}
-          title={dictionary.actions.closeScanner}
+          aria-label={closeScannerLabel}
+          title={closeScannerLabel}
         >
           <X className="h-5 w-5" aria-hidden="true" />
         </button>
