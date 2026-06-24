@@ -3,11 +3,13 @@
 import Link from "next/link";
 
 export function BrandMark({ href, ariaLabel }: { href: string; ariaLabel?: string }) {
+  const linkTitle = ariaLabel ?? "noodl3";
+
   return (
     <Link
       href={href}
       aria-label={ariaLabel}
-      title={ariaLabel}
+      title={linkTitle}
       className="inline-flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
