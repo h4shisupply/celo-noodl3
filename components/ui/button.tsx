@@ -15,14 +15,26 @@ export function Button({
   children,
   icon,
   iconPosition = "start",
+  title,
   variant = "primary",
   size = "md",
   type = "button",
+  "aria-label": ariaLabel,
   ...props
 }: ButtonProps) {
+  const buttonTitle =
+    title ??
+    (typeof ariaLabel === "string"
+      ? ariaLabel
+      : typeof children === "string" || typeof children === "number"
+        ? String(children)
+        : undefined);
+
   return (
     <button
       type={type}
+      aria-label={ariaLabel}
+      title={buttonTitle}
       className={clsx(
         "inline-flex max-w-full shrink-0 select-none items-center justify-center gap-2 rounded-lg border font-semibold transition duration-200 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50",
         size === "sm" && "min-h-9 px-3.5 py-2 text-sm",
