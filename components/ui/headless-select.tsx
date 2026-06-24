@@ -32,6 +32,7 @@ export function HeadlessSelect({
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
   const selectId = useId();
   const labelId = `${selectId}-label`;
   const valueId = `${selectId}-value`;
@@ -60,6 +61,7 @@ export function HeadlessSelect({
     function handleEscape(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setOpen(false);
+        triggerRef.current?.focus();
       }
     }
 
@@ -85,6 +87,7 @@ export function HeadlessSelect({
 
       <div className="relative">
         <button
+          ref={triggerRef}
           type="button"
           aria-labelledby={label ? `${labelId} ${valueId}` : valueId}
           aria-describedby={selected?.description ? selectedDescriptionId : undefined}
