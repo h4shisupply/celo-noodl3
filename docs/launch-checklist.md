@@ -62,6 +62,7 @@
 - Confirm wallet address entry fields keep left-to-right text direction and disable mobile autocorrect.
 - Confirm form fields use mobile keyboard hints for wallet addresses, URLs, names, reward promises, and visit goals.
 - Confirm logo URL fields show concrete HTTPS image placeholders in create and settings forms.
+- Confirm QR-card active and printed visit QR toggle rows expose their visible helper copy as checkbox descriptions and hover titles.
 - Confirm keyboard focus is visible on header links, account menu controls, QR actions, and form fields.
 - Confirm loading actions expose their busy state while their controls are disabled.
 - Confirm dashboard refresh controls use dashboard-specific idle and loading labels.
