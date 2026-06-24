@@ -153,6 +153,7 @@ export function HeadlessSelect({
                   onClick={() => {
                     onChange(option.value);
                     setOpen(false);
+                    triggerRef.current?.focus();
                   }}
                   className={clsx(
                     "flex w-full min-w-0 flex-col rounded-md px-3 py-3 text-left transition",
