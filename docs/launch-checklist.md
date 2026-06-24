@@ -51,7 +51,7 @@
 - Confirm non-shop-owner wallets see shop owner wallet guidance before validation.
 
 ## Frontend
-- Confirm `NEXT_PUBLIC_APP_URL` matches the reachable local, LAN, or deployed base URL before sharing QR links, phone QR tests, printing QR sheets, or previewing social metadata.
+- Confirm `NEXT_PUBLIC_APP_URL` matches the reachable local, LAN, or deployed base URL before copying QR links, using native share, testing phone QR scans, printing QR sheets, or previewing social metadata.
 - Run `npm run lint`, `npm run typecheck`, and `npm run build` before release.
 - Use `npm run dev:mobile` for trusted LAN phone QR tests so the dev server listens on `0.0.0.0`.
 - Confirm printed QR sheets are regenerated after the final preview or production base URL is set.
