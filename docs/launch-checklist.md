@@ -123,6 +123,7 @@
 - Confirm modal backdrops close temporary dialogs after outside mouse, touch, or pen interactions when backdrop dismissal is supported.
 - Confirm modal overlays expose accessible names, descriptions, and modal state to assistive tech.
 - Confirm the profile dialog close control exposes matching title and accessible label text that includes the profile title.
+- Confirm profile dialog display name and avatar URL fields expose matching placeholder, title, and accessible label text.
 - Confirm profile validation errors are associated with the relevant display name or avatar URL input.
 - Confirm profile save controls use profile-specific idle and saving labels.
 - Confirm mobile landing navigation opens, closes, and keeps the language switcher and CTA reachable.
