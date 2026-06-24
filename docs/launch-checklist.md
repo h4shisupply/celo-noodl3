@@ -97,6 +97,7 @@
 - Confirm progress meters show matching visible and announced totals.
 - Confirm progress counter badges stay decorative when the progressbar announces the same totals.
 - Confirm status updates and QR scanner feedback announce through live regions.
+- Confirm reusable status messages announce non-errors politely, errors assertively, and update atomically.
 - Confirm QR scanner announces the active camera state after permission is granted and associates it with the scanner video.
 - Confirm QR scanner dialogs describe the visible camera status before the camera opens.
 - Confirm the QR scanner dialog exposes `aria-busy` while a detected QR value is being processed.
