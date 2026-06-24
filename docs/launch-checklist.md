@@ -85,7 +85,7 @@
 - Confirm the landing page header exposes an accessible label for the page chrome.
 - Confirm landing page navigation landmarks expose labels distinct from the surrounding header.
 - Confirm brand links expose accessible names that include their destination context.
-- Confirm brand links expose matching titles from their accessible destination labels.
+- Confirm brand links expose matching titles from their accessible destination labels, or the visible `noodl3` text when no destination label is provided.
 - Confirm landing page grouped stats, checklists, and card grids use semantic list or description-list markup.
 - Confirm landing page sections expose accessible names from their visible headings.
 - Confirm landing page FAQ cards expose accessible names from their question headings.
