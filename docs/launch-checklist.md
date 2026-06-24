@@ -121,7 +121,7 @@
 - Confirm decorative images inside links or controls do not trigger drag interactions.
 - Confirm Escape closes temporary overlays such as the mobile menu, account menu, profile dialog, and QR scanner.
 - Confirm modal backdrops close temporary dialogs after outside mouse, touch, or pen interactions when backdrop dismissal is supported.
-- Confirm modal overlays expose accessible names and descriptions to assistive tech.
+- Confirm modal overlays expose accessible names, descriptions, and modal state to assistive tech.
 - Confirm profile dialog close controls expose titles that match their accessible labels.
 - Confirm profile validation errors are associated with the relevant display name or avatar URL input.
 - Confirm profile save controls use profile-specific idle and saving labels.
