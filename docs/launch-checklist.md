@@ -78,6 +78,7 @@
 - Confirm the connected account header exposes a landmark label only after a wallet connects.
 - Confirm the account menu refresh control updates the displayed network label after wallet network changes.
 - Confirm network mismatch modal action labels and titles include the expected network while visible button text stays action-specific.
+- Confirm network mismatch modals move initial focus to the switch or refresh network action.
 - Confirm wallet-required states expose a named main landmark from their visible gate headings.
 - Confirm wallet-required states expose their visible helper text to assistive tech.
 - Confirm the landing page header exposes an accessible label for the page chrome.
