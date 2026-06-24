@@ -17,6 +17,8 @@ export function NetworkMismatchModal({
   actionLabel: string;
   onAction: () => void;
 }) {
+  const actionTitle = `${actionLabel}: ${title}`;
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-ink-overlay px-4 py-6 backdrop-blur-sm"
@@ -40,7 +42,8 @@ export function NetworkMismatchModal({
             size="lg"
             className="mt-8 min-w-[13rem]"
             icon={<RefreshCw className="h-4 w-4" />}
-            title={actionLabel}
+            aria-label={actionTitle}
+            title={actionTitle}
             autoFocus
             onClick={onAction}
           >
