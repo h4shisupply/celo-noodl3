@@ -10,7 +10,7 @@ export function BrandMark({ href, ariaLabel }: { href: string; ariaLabel?: strin
       href={href}
       aria-label={ariaLabel}
       title={linkTitle}
-      className="inline-flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
+      className="inline-flex min-w-0 items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -23,7 +23,7 @@ export function BrandMark({ href, ariaLabel }: { href: string; ariaLabel?: strin
         draggable={false}
         className="h-10 w-10 shrink-0 rounded-lg shadow-card"
       />
-      <span className="text-lg font-semibold text-ink">
+      <span className="min-w-0 break-words text-lg font-semibold text-ink">
         noodl3
       </span>
     </Link>
