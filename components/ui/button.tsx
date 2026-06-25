@@ -36,7 +36,7 @@ export function Button({
       aria-label={ariaLabel}
       title={buttonTitle}
       className={clsx(
-        "inline-flex max-w-full shrink-0 select-none items-center justify-center gap-2 rounded-lg border font-semibold transition duration-200 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50",
+        "inline-flex max-w-full shrink-0 select-none items-center justify-center gap-2 rounded-lg border font-semibold transition duration-200 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50 disabled:shadow-none",
         size === "sm" && "min-h-9 px-3.5 py-2 text-sm",
         size === "md" && "min-h-11 px-4 py-2.5 text-sm",
         size === "lg" && "min-h-12 px-5 py-3 text-base",
