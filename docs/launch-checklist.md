@@ -97,6 +97,7 @@
 - Confirm metric cards expose hover titles from their visible label and value while keeping decorative accents hidden.
 - Confirm dashboard QR stamp cards, merchant QR stamp cards, and reward tickets expose accessible names from visible card text.
 - Confirm empty-state cards expose hover titles from visible title and description text while keeping their icons decorative.
+- Confirm shared badges expose hover titles from their visible text when the label is plain text or numeric.
 - Confirm merchant manager reward ticket links use ticket-specific open labels.
 - Confirm create merchant QR stamp card preview cards expose accessible names and descriptions from visible preview text.
 - Confirm progress meters show matching visible and announced totals.
