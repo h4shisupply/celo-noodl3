@@ -43,6 +43,7 @@ export const metadata: Metadata = {
     "QR SVG",
     "PWA",
     "installable loyalty app",
+    "accessible loyalty app",
     "loyalty",
     "loyalty program",
     "manual fallback stamp",
