@@ -47,7 +47,7 @@ export function ToggleRow({
         )}
         aria-hidden="true"
       >
-        <Check className="h-3.5 w-3.5" />
+        <Check className="h-3.5 w-3.5" aria-hidden="true" />
       </span>
       {icon ? (
         <span className="mt-0.5 shrink-0 text-accent" aria-hidden="true">
