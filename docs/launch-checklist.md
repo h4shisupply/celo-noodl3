@@ -61,6 +61,7 @@
 - Confirm wallet addresses, dates, and reward codes are not auto-linked by mobile browser telephone, date, address, or email format detection.
 - Confirm wallet address entry fields keep left-to-right text direction and disable mobile autocorrect.
 - Confirm form fields use mobile keyboard hints for wallet addresses, URLs, names, reward promises, and visit goals.
+- Confirm shared field wrappers expose hover titles from visible labels and plain-text helper descriptions.
 - Confirm shared input and textarea controls expose hover titles from explicit titles, accessible labels, or placeholders.
 - Confirm logo URL fields show concrete HTTPS image placeholders in create and settings forms.
 - Confirm QR-card active and printed visit QR toggle rows expose their visible helper copy as checkbox descriptions and hover titles.
