@@ -59,7 +59,7 @@ export function CountdownBadge({
           : "border-sun-border bg-sun-soft text-sun-strong"
       }`}
     >
-      <Clock3 className="h-3.5 w-3.5" aria-hidden="true" />
+      <Clock3 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
       {expired ? expiredLabel : (
         <>
           {label} <time dateTime={`PT${safeRemaining}S`}>{display}</time>
