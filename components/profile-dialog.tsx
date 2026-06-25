@@ -113,7 +113,7 @@ export function ProfileDialog({
         <CardHeader className="space-y-3">
           <div className="flex items-start justify-between gap-4">
             <div
-              className="flex h-11 w-11 items-center justify-center rounded-lg border border-accent-border bg-accent-soft text-accent"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-accent-border bg-accent-soft text-accent"
               aria-hidden="true"
             >
               <UserRound className="h-5 w-5" aria-hidden="true" />
