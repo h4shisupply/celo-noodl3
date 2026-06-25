@@ -184,7 +184,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               className="inline-flex h-full min-h-12 min-w-0 flex-1 max-w-full shrink-0 select-none items-center justify-center gap-2 rounded-lg border border-line bg-panel px-5 py-3 text-base font-semibold text-ink-soft shadow-[0_8px_24px_rgba(27,23,43,0.045)] transition duration-200 hover:border-accent-border hover:bg-accent-soft active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus sm:w-auto sm:flex-none"
             >
               <span className="grid h-4 w-4 shrink-0 place-items-center" aria-hidden="true">
-                <AppWindow className="h-4 w-4" />
+                <AppWindow className="h-4 w-4" aria-hidden="true" />
               </span>
               <span className="min-w-0 whitespace-normal text-center leading-tight">
                 {copy.hero.secondaryCta}
