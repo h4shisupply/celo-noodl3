@@ -161,9 +161,9 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
           title={menuLabel}
         >
           {menuOpen ? (
-            <X className="h-4 w-4" aria-hidden="true" />
+            <X className="h-4 w-4 shrink-0" aria-hidden="true" />
           ) : (
-            <Menu className="h-4 w-4" aria-hidden="true" />
+            <Menu className="h-4 w-4 shrink-0" aria-hidden="true" />
           )}
           {menuText}
         </button>
