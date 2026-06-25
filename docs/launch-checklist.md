@@ -66,6 +66,7 @@
 - Confirm shared input and textarea controls expose hover titles from explicit titles, accessible labels, or placeholders.
 - Confirm logo URL fields show concrete HTTPS image placeholders in create and settings forms.
 - Confirm QR-card active and printed visit QR toggle rows expose their visible helper copy as checkbox descriptions and hover titles.
+- Confirm shared toggle rows keep their checkmark and optional icons decorative when helper copy already describes the checkbox.
 - Confirm keyboard focus is visible on header links, account menu controls, QR actions, and form fields.
 - Confirm shared button controls expose hover titles from explicit titles, accessible labels, or visible button text.
 - Confirm loading actions expose their busy state while their controls are disabled.
