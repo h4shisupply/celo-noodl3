@@ -225,7 +225,7 @@ export function QrScanner({
                   className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-panel text-accent shadow-card"
                   aria-hidden="true"
                 >
-                  <Camera className="h-5 w-5" aria-hidden="true" />
+                  <Camera className="h-5 w-5 shrink-0" aria-hidden="true" />
                 </div>
                 <p
                   id="qr-scanner-camera-status"
