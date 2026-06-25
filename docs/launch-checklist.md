@@ -133,6 +133,7 @@
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative UI images stay hidden from assistive tech and remote UI images remain non-blocking when appropriate.
 - Confirm decorative program and profile avatars stay hidden from assistive tech when adjacent text already names the item.
+- Confirm decorative avatars expose hover titles from the adjacent program or profile name.
 - Confirm profile avatar URLs fall back to wallet initials when the remote image cannot load.
 - Confirm landing page decorative icon treatments stay hidden from assistive tech.
 - Confirm decorative images inside links or controls do not trigger drag interactions.
