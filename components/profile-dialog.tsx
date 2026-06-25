@@ -120,7 +120,7 @@ export function ProfileDialog({
             </div>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-panel text-muted transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-line bg-panel text-muted transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus"
               onClick={onClose}
               aria-label={`${dictionary.common.close}: ${dictionary.profile.title}`}
               title={`${dictionary.common.close}: ${dictionary.profile.title}`}
