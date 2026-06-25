@@ -609,7 +609,7 @@ function ProductVisual({ copy }: { copy: HomeCopy["visual"] }) {
                     {copy.ticketCode}
                   </p>
                 </div>
-                <TicketCheck className="h-5 w-5 text-mint" aria-hidden="true" />
+                <TicketCheck className="h-5 w-5 shrink-0 text-mint" aria-hidden="true" />
               </div>
               <div className="mt-3 hidden flex-wrap items-center justify-between gap-2 rounded-lg bg-mint-soft px-3 py-2.5 sm:mt-4 sm:flex sm:gap-3 sm:py-3">
                 <p className="text-sm font-semibold text-mint-strong">{copy.validate}</p>
