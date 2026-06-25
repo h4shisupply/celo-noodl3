@@ -203,7 +203,7 @@ export function QrScanner({
           aria-label={closeScannerLabel}
           title={closeScannerLabel}
         >
-          <X className="h-5 w-5" aria-hidden="true" />
+          <X className="h-5 w-5 shrink-0" aria-hidden="true" />
         </button>
       </div>
 
