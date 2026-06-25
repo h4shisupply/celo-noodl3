@@ -37,6 +37,7 @@
 - Confirm regenerated dynamic visit QR links use a new nonce before they are shown to customers.
 - Confirm dynamic visit QR countdowns expose the remaining duration as a machine-readable time value.
 - Confirm dynamic visit QR countdowns expose an accessible name for the active or expired timer state.
+- Confirm dynamic visit QR countdowns keep active ticks quiet and announce expiry assertively.
 - Confirm dynamic visit QR generation shows an in-progress label while its action is disabled.
 - Confirm a one-use dynamic visit QR signed by the shop owner wallet collects one visit stamp, then fails on reuse.
 - Confirm malformed or expired dynamic visit QR links show actionable user-facing error states.
