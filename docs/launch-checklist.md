@@ -103,6 +103,7 @@
 - Confirm merchant manager reward ticket links use ticket-specific open labels.
 - Confirm create merchant QR stamp card preview cards expose accessible names and descriptions from visible preview text.
 - Confirm progress meters show matching visible and announced totals.
+- Confirm progress meters expose hover titles from their announced value text while keeping decorative fills hidden.
 - Confirm progress counter badges stay decorative when the progressbar announces the same totals.
 - Confirm status updates and QR scanner feedback announce through live regions.
 - Confirm reusable status messages announce non-errors politely, errors assertively, and update atomically.
