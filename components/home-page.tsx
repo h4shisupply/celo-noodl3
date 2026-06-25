@@ -594,7 +594,7 @@ function ProductVisual({ copy }: { copy: HomeCopy["visual"] }) {
               <div className="flex items-center justify-between gap-3">
                 <p className="text-sm font-semibold text-ink">{copy.liveQr}</p>
                 <span className="inline-flex shrink-0 items-center gap-1 rounded-full border border-sun-border bg-sun-soft px-2.5 py-1 text-xs font-semibold text-sun-strong">
-                  <Clock3 className="h-3.5 w-3.5" aria-hidden="true" />
+                  <Clock3 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                   {copy.expires}
                 </span>
               </div>
