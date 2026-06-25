@@ -64,6 +64,7 @@
 - Confirm form fields use mobile keyboard hints for wallet addresses, URLs, names, reward promises, and visit goals.
 - Confirm shared field wrappers expose hover titles from visible labels and plain-text helper descriptions.
 - Confirm shared input and textarea controls expose hover titles from explicit titles, accessible labels, or placeholders.
+- Confirm disabled shared input and textarea controls use muted styling and a non-interactive cursor.
 - Confirm logo URL fields show concrete HTTPS image placeholders in create and settings forms.
 - Confirm QR-card active and printed visit QR toggle rows expose their visible helper copy as checkbox descriptions and hover titles.
 - Confirm shared toggle rows keep their checkmark and optional icons decorative when helper copy already describes the checkbox.
