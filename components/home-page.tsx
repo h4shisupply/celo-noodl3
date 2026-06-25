@@ -394,7 +394,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               className="inline-flex min-h-12 w-full max-w-full shrink-0 select-none items-center justify-center gap-2 rounded-lg border border-transparent bg-ink px-5 py-3 text-base font-semibold text-white shadow-[0_12px_28px_rgba(27,23,43,0.18)] transition duration-200 hover:bg-ink-hover hover:shadow-[0_16px_34px_rgba(27,23,43,0.22)] active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-focus sm:w-auto"
             >
               <span className="grid h-4 w-4 shrink-0 place-items-center" aria-hidden="true">
-                <Plus className="h-4 w-4" />
+                <Plus className="h-4 w-4" aria-hidden="true" />
               </span>
               <span className="min-w-0 whitespace-normal text-center leading-tight">
                 {copy.finalCta.primaryCta}
