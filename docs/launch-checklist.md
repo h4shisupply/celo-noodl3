@@ -130,6 +130,7 @@
 - Confirm account and select popovers close after outside mouse, touch, or pen interactions.
 - Confirm custom select popovers close after Escape, return focus to the trigger, and keep the selected option unchanged.
 - Confirm custom select option selection closes the popover, returns focus to the trigger, and updates the selected option.
+- Confirm custom select triggers and options expose hover titles from their visible label and description text.
 - Confirm disclosure popovers do not expose menu semantics unless they implement menu keyboard behavior.
 - Confirm decorative UI images stay hidden from assistive tech and remote UI images remain non-blocking when appropriate.
 - Confirm decorative program and profile avatars stay hidden from assistive tech when adjacent text already names the item.
