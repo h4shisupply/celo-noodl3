@@ -27,7 +27,7 @@ export function LanguageSwitcher() {
 
   return (
     <div
-      className="inline-flex items-center rounded-lg border border-line bg-panel p-1 shadow-card"
+      className="inline-flex shrink-0 items-center rounded-lg border border-line bg-panel p-1 shadow-card"
       role="group"
       aria-label={languageLabel}
     >
