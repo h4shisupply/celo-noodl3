@@ -70,6 +70,7 @@
 - Confirm shared toggle rows keep their checkmark and optional icons decorative when helper copy already describes the checkbox.
 - Confirm keyboard focus is visible on header links, account menu controls, QR actions, and form fields.
 - Confirm shared button controls expose hover titles from explicit titles, accessible labels, or visible button text.
+- Confirm shared button icons stay decorative when button text or accessible labels already name the action.
 - Confirm loading actions expose their busy state while their controls are disabled.
 - Confirm dashboard refresh controls use dashboard-specific idle and loading labels.
 - Confirm create merchant QR stamp card controls use QR-card-specific idle and saving labels.
