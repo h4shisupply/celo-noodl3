@@ -126,7 +126,7 @@ export function AppAccountBar({
                   </>
                 ) : (
                   <>
-                    <Wallet className="h-5 w-5 text-ink" aria-hidden="true" />
+                    <Wallet className="h-5 w-5 shrink-0 text-ink" aria-hidden="true" />
                     <span dir="ltr" title={account} className="hidden sm:block">{formatWalletLabel(account)}</span>
                   </>
                 )}
@@ -275,7 +275,7 @@ function ProfileAvatar({
         draggable={false}
         loading="lazy"
         referrerPolicy="no-referrer"
-        className="h-7 w-7 rounded-full object-cover"
+        className="h-7 w-7 shrink-0 rounded-full object-cover"
         onError={() => setHasError(true)}
       />
     );
@@ -283,7 +283,7 @@ function ProfileAvatar({
 
   return (
     <span
-      className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-mint-soft text-xs font-semibold text-mint-strong"
+      className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-mint-soft text-xs font-semibold text-mint-strong"
       aria-hidden="true"
     >
       {getInitials(name)}
