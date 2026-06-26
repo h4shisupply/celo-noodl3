@@ -351,7 +351,7 @@ export function ProgramPage({
                 {progress?.canClaim ? (
                   <Button
                     variant="warm"
-                    icon={<Gift className="h-4 w-4" />}
+                    icon={<Gift className="h-4 w-4" aria-hidden="true" />}
                     className="w-full sm:w-auto"
                     title={isSubmitting ? copy.creatingRewardTicket : copy.claimReward}
                     onClick={() => void handleClaimReward()}
