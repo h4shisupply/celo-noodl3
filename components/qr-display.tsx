@@ -91,7 +91,7 @@ export function QrActionBar({
         <Button
           size="sm"
           variant="outline"
-          icon={<Copy className="h-4 w-4" />}
+          icon={<Copy className="h-4 w-4" aria-hidden="true" />}
           className="w-full sm:w-auto"
           aria-label={`${labels.copy}: ${fileName}`}
           title={`${labels.copy}: ${fileName}`}
