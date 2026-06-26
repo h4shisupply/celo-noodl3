@@ -706,7 +706,7 @@ export function ProgramManagePage({
                           {!claim.consumed ? (
                             <Button
                               size="sm"
-                              icon={<Send className="h-4 w-4" />}
+                              icon={<Send className="h-4 w-4" aria-hidden="true" />}
                               className="w-full sm:w-auto"
                               aria-label={`${copy.consume}: ${formatClaimCode(claim.id)}`}
                               title={`${copy.consume}: ${formatClaimCode(claim.id)}`}
