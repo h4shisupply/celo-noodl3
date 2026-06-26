@@ -102,7 +102,7 @@ export function QrActionBar({
         <Button
           size="sm"
           variant="outline"
-          icon={<Share2 className="h-4 w-4" />}
+          icon={<Share2 className="h-4 w-4" aria-hidden="true" />}
           className="w-full sm:w-auto"
           aria-label={`${labels.share}: ${fileName}`}
           title={`${labels.share}: ${fileName}`}
