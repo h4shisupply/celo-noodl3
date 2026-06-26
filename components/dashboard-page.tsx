@@ -255,7 +255,7 @@ export function DashboardPage({
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <Button
                   variant="warm"
-                  icon={<QrCode className="h-4 w-4" />}
+                  icon={<QrCode className="h-4 w-4" aria-hidden="true" />}
                   className="w-full sm:w-auto"
                   title={copy.scanQr}
                   aria-haspopup="dialog"
