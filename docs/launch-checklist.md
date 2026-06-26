@@ -9,6 +9,7 @@
 - Confirm the deploy output network and chain ID match Celo Sepolia before copying deployment values.
 - Record the printed contract address and deployment block from the deploy output before updating environment values.
 - Set `NEXT_PUBLIC_NOODL3_CONTRACT_ADDRESS_SEPOLIA` after deployment so the app reads the deployed loyalty contract.
+- Prefer the `NEXT_PUBLIC_NOODL3_` public contract and deployment block variables over the legacy fallback aliases for new deployments.
 - Set `NOODL3_CONTRACT_ADDRESS_SEPOLIA` after deployment for verify scripts and the Sepolia seed script.
 - Set `ETHERSCAN_API_KEY` or `CELOSCAN_API_KEY` before running the Celo explorer verify scripts.
 - Run `npm run compile`, `npm run export:abi`, and `npm run test`.
