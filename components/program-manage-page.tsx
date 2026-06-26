@@ -418,7 +418,7 @@ export function ProgramManagePage({
                         placeholder={copy.customerWallet}
                       />
                       <Button
-                        icon={<UserPlus className="h-4 w-4" />}
+                        icon={<UserPlus className="h-4 w-4" aria-hidden="true" />}
                         className="w-full md:w-auto"
                         title={isSubmitting ? copy.issuingManualStamp : copy.issueManual}
                         onClick={() =>
