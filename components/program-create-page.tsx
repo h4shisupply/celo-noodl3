@@ -240,7 +240,7 @@ export function ProgramCreatePage({
             </div>
 
             <Button
-              icon={<Save className="h-4 w-4" />}
+              icon={<Save className="h-4 w-4" aria-hidden="true" />}
               title={isSaving ? copy.savingProgram : copy.saveProgram}
               onClick={() => void handleSubmit()}
               aria-busy={isSaving}
