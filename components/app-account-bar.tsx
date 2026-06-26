@@ -168,7 +168,7 @@ export function AppAccountBar({
                         variant="outline"
                         size="sm"
                         className="w-full justify-start"
-                        icon={<RefreshCw className="h-4 w-4" />}
+                        icon={<RefreshCw className="h-4 w-4" aria-hidden="true" />}
                         title={isMiniPay ? dictionary.actions.refreshNetwork : dictionary.actions.switchNetwork}
                         onClick={() => {
                           setIsMenuOpen(false);
