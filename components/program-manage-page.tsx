@@ -610,7 +610,7 @@ export function ProgramManagePage({
                     />
                     <ToggleRow
                       checked={staticStampEnabled}
-                      icon={<BadgeCheck className="h-4 w-4" />}
+                      icon={<BadgeCheck className="h-4 w-4" aria-hidden="true" />}
                       label={copy.staticStampEnabled}
                       description={copy.staticStampHelp}
                       onChange={(event) => setStaticStampEnabled(event.target.checked)}
