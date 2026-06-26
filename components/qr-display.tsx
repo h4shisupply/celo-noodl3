@@ -113,7 +113,7 @@ export function QrActionBar({
         <Button
           size="sm"
           variant="outline"
-          icon={<Download className="h-4 w-4" />}
+          icon={<Download className="h-4 w-4" aria-hidden="true" />}
           className="w-full sm:w-auto"
           aria-label={`${labels.download}: ${fileName}`}
           title={`${labels.download}: ${fileName}`}
