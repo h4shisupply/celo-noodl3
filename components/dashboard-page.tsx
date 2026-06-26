@@ -224,7 +224,7 @@ export function DashboardPage({
             actions={
               hasProvider ? (
                 <Button
-                  icon={<WalletCards className="h-4 w-4" />}
+                  icon={<WalletCards className="h-4 w-4" aria-hidden="true" />}
                   onClick={() => void connect()}
                   aria-busy={isConnecting}
                   disabled={isConnecting}
