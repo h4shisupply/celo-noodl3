@@ -318,7 +318,7 @@ export function ProgramPage({
 
                 {canCollectDynamic ? (
                   <Button
-                    icon={<Stamp className="h-4 w-4" />}
+                    icon={<Stamp className="h-4 w-4" aria-hidden="true" />}
                     className="w-full sm:w-auto"
                     title={isSubmitting ? copy.collectingVisit : copy.collectVisit}
                     onClick={() => void handleCollectDynamic()}
