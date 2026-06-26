@@ -131,7 +131,7 @@ export function QrActionBar({
           <Button
             size="sm"
             variant="warm"
-            icon={<Printer className="h-4 w-4" />}
+            icon={<Printer className="h-4 w-4" aria-hidden="true" />}
             className="w-full sm:w-auto"
             aria-label={`${labels.print}: ${fileName}`}
             title={`${labels.print}: ${fileName}`}
