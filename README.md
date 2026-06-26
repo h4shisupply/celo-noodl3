@@ -23,7 +23,7 @@ The core loyalty loop is simple:
 - Bilingual runtime copy in Brazilian Portuguese (`pt-BR`) and English
 - `Selos` in Brazilian Portuguese and `Stamps` in English
 - Accessible app structure with named landmarks, visible focus, disabled field states, hover titles, progress meters, timer labels, quiet active countdown ticks, assertive timer expiry, profile field labels, expected-network action labels, full language names and current-language state for language controls, custom select state cues, option descriptions, Escape focus return, post-selection focus return, polite and assertive status messages, live regions, QR scanner status feedback, camera permission guidance, contextual scanner close labels, and scanner busy states
-- Installable app manifest with app description, dashboard and create-card shortcut names, shortcut descriptions, and maskable app and shortcut icons
+- Installable app manifest with app description, dashboard and create-card shortcut names, shortcut descriptions, and regular/maskable app and shortcut icons
 - Installed app launch handling focuses an existing app window when the platform supports launch handlers
 - On-chain loyalty progress per program
 - Printed visit QR that lets each wallet collect one visit stamp every 20 hours
