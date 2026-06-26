@@ -213,7 +213,7 @@ export function AppAccountBar({
                     variant="outline"
                     size="sm"
                     className="w-full"
-                    icon={<LogOut className="h-4 w-4" />}
+                    icon={<LogOut className="h-4 w-4" aria-hidden="true" />}
                     title={dictionary.actions.disconnectWallet}
                     onClick={() => {
                       setIsMenuOpen(false);
