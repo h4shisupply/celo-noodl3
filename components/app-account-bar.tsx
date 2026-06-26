@@ -190,7 +190,7 @@ export function AppAccountBar({
                         variant="ghost"
                         size="sm"
                         className="w-full justify-start"
-                        icon={<UserRound className="h-4 w-4" />}
+                        icon={<UserRound className="h-4 w-4" aria-hidden="true" />}
                         aria-haspopup="dialog"
                         aria-controls="profile-dialog"
                         title={profile ? dictionary.actions.editProfile : dictionary.actions.addProfile}
