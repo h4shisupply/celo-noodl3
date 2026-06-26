@@ -183,7 +183,7 @@ function WalletRequiredGate({
             <div className="flex w-full flex-col items-start gap-3">
               {canConnect ? (
                 <Button
-                  icon={<WalletCards className="h-4 w-4" />}
+                  icon={<WalletCards className="h-4 w-4" aria-hidden="true" />}
                   onClick={() => void walletState.connect()}
                   aria-busy={walletState.isConnecting}
                   disabled={walletState.isConnecting}
