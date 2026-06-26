@@ -38,7 +38,7 @@
 - Create a merchant QR stamp card with a square public HTTPS logo URL, a reward promise, and a visit goal
 - Show printed visit QR actions: open the link, copy the link, use native share when available, download the SVG, and print the visit QR counter sheet
 - Customer collects one visit stamp and sees the 20-hour reuse cooldown
-- Generate a five-minute live visit QR on localhost for desktop demos or through a secure tunnel or HTTPS preview for phone scans
+- Generate a one-use five-minute live visit QR on localhost for desktop demos or through a secure tunnel or HTTPS preview for phone scans
 - Customer collects one visit stamp from the live QR immediately
 - Issue a manual fallback stamp to show the shop-owner-approved path
 - Customer creates a reward ticket and sees the reward ticket QR, reward ticket sheet, and counter backup code
