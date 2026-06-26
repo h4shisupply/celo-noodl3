@@ -603,7 +603,7 @@ export function ProgramManagePage({
                     </Field>
                     <ToggleRow
                       checked={active}
-                      icon={<Sparkles className="h-4 w-4" />}
+                      icon={<Sparkles className="h-4 w-4" aria-hidden="true" />}
                       label={copy.active}
                       description={copy.activeHelp}
                       onChange={(event) => setActive(event.target.checked)}
