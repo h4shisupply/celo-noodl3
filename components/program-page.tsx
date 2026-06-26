@@ -332,7 +332,7 @@ export function ProgramPage({
                 {canCollectStatic ? (
                   <Button
                     variant={canCollectDynamic ? "outline" : "primary"}
-                    icon={<BadgeCheck className="h-4 w-4" />}
+                    icon={<BadgeCheck className="h-4 w-4" aria-hidden="true" />}
                     className="w-full sm:w-auto"
                     title={isSubmitting ? copy.requestingStamp : copy.requestStamp}
                     onClick={() => void handleCollectStatic()}
