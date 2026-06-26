@@ -177,7 +177,7 @@ export function ProfileDialog({
           />
           <div className="flex flex-wrap gap-3">
             <Button
-              icon={<Save className="h-4 w-4" />}
+              icon={<Save className="h-4 w-4" aria-hidden="true" />}
               title={isSaving ? dictionary.profile.saving : dictionary.actions.save}
               onClick={() => void handleSave()}
               aria-busy={isSaving}
