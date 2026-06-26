@@ -493,7 +493,7 @@ export function ProgramManagePage({
                   </div>
                   <div className="space-y-4">
                     <Button
-                      icon={dynamicQr ? <RefreshCw className="h-4 w-4" /> : <QrCode className="h-4 w-4" />}
+                      icon={dynamicQr ? <RefreshCw className="h-4 w-4" aria-hidden="true" /> : <QrCode className="h-4 w-4" aria-hidden="true" />}
                       className="w-full sm:w-auto"
                       onClick={() => void handleGenerateDynamicQr()}
                       aria-busy={isSubmitting}
