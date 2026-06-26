@@ -616,7 +616,7 @@ export function ProgramManagePage({
                       onChange={(event) => setStaticStampEnabled(event.target.checked)}
                     />
                     <Button
-                      icon={<Save className="h-4 w-4" />}
+                      icon={<Save className="h-4 w-4" aria-hidden="true" />}
                       className="w-full sm:w-auto"
                       title={isSubmitting ? copy.updatingProgram : copy.updateProgram}
                       onClick={() =>
