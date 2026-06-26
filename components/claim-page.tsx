@@ -282,7 +282,7 @@ export function ClaimPage({
 
                 {canConsume && !claim.consumed ? (
                   <Button
-                    icon={<BadgeCheck className="h-4 w-4" />}
+                    icon={<BadgeCheck className="h-4 w-4" aria-hidden="true" />}
                     onClick={() => void handleConsume()}
                     aria-label={`${copy.validateClaim}: ${formatClaimCode(claim.id)}`}
                     title={`${isSubmitting ? copy.validatingClaim : copy.validateClaim}: ${formatClaimCode(claim.id)}`}
