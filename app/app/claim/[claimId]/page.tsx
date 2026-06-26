@@ -5,7 +5,7 @@ import { publicEnv } from "../../../../lib/env";
 
 export const metadata: Metadata = {
   title: "Reward ticket QR",
-  description: "Show the Celo-native reward ticket QR with its printable reward ticket sheet, counter backup code, and one-time reward ticket validation guidance for the shop owner wallet."
+  description: "Show the Celo-native reward ticket QR with its printable reward ticket sheet, counter backup code, one-time shop owner wallet validation, and used state."
 };
 
 type ClaimRouteProps = {
