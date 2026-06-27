@@ -1,7 +1,7 @@
 "use client";
 
 import { Save, UserRound, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import type { Hex } from "viem";
 import { formatWalletLabel } from "../lib/claim-code";
 import { getUserFacingErrorMessage } from "../lib/error-message";
@@ -40,7 +40,9 @@ export function ProfileDialog({
   const [status, setStatus] = useState<string | null>(null);
   const [localError, setLocalError] = useState<string | null>(null);
   const profileUnavailable = !enabled || !contractAddress;
-  const localErrorId = "profile-dialog-error";
+  const titleId = useId();
+  const descriptionId = useId();
+  const localErrorId = useId();
   const isNameInvalid = localError === dictionary.profile.nameRequired;
   const isAvatarInvalid = localError === dictionary.profile.avatarInvalid;
 
@@ -101,8 +103,8 @@ export function ProfileDialog({
       className="fixed inset-0 z-50 flex items-center justify-center bg-ink-overlay px-4 py-6 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="profile-dialog-title"
-      aria-describedby="profile-dialog-description"
+      aria-labelledby={titleId}
+      aria-describedby={descriptionId}
       onPointerDown={(event) => {
         if (event.target === event.currentTarget) {
           onClose();
@@ -129,10 +131,10 @@ export function ProfileDialog({
             </button>
           </div>
           <div>
-            <CardTitle id="profile-dialog-title">
+            <CardTitle id={titleId}>
               {dictionary.profile.title}
             </CardTitle>
-            <CardDescription id="profile-dialog-description">
+            <CardDescription id={descriptionId}>
               {dictionary.profile.description}
             </CardDescription>
           </div>
