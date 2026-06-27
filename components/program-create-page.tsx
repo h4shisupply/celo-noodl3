@@ -2,7 +2,7 @@
 
 import { BadgeCheck, Gift, Image as ImageIcon, Save, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import type { Hex } from "viem";
 import { AppChrome } from "./app-chrome";
 import { useLocale } from "./locale-provider";
@@ -46,7 +46,7 @@ export function ProgramCreatePage({
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
-  const iconUrlHelpId = "program-icon-url-help";
+  const iconUrlHelpId = useId();
   const {
     account,
     chainId,
