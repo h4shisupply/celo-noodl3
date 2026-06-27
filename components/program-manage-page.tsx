@@ -14,7 +14,7 @@ import {
   Users
 } from "lucide-react";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useState } from "react";
 import { getAddress, isAddress, type Hex } from "viem";
 import { AppChrome } from "./app-chrome";
 import { CountdownBadge } from "./countdown-badge";
@@ -89,7 +89,7 @@ export function ProgramManagePage({
 }) {
   const { locale, dictionary } = useLocale();
   const copy = programCopy(locale);
-  const iconUrlHelpId = "manage-program-icon-url-help";
+  const iconUrlHelpId = useId();
   const [program, setProgram] = useState<ProgramRecord | null>(null);
   const [canManage, setCanManage] = useState(false);
   const [customers, setCustomers] = useState<CustomerSummary[]>([]);
