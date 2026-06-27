@@ -99,7 +99,7 @@ export function AppAccountBar({
   return (
     <header
       className="py-5 md:py-6"
-      aria-label={account ? dictionary.account.connectedWallet : undefined}
+      aria-label={dictionary.nav.app}
     >
       <div className="flex items-center justify-between gap-4">
         <BrandMark href="/app" ariaLabel={`${dictionary.brand.name}: ${dictionary.nav.app}`} />
