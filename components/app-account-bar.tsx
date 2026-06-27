@@ -142,6 +142,7 @@ export function AppAccountBar({
                   role="dialog"
                   aria-label={dictionary.account.connectedWallet}
                   aria-describedby={`${accountMenuId}-summary`}
+                  title={dictionary.account.connectedWallet}
                   className="absolute right-0 top-[calc(100%+0.75rem)] z-30 w-[min(17rem,calc(100vw-2rem))] rounded-lg border border-line bg-panel p-4 shadow-float"
                 >
                   <div id={`${accountMenuId}-summary`} className="space-y-1 border-b border-line-soft pb-4">
