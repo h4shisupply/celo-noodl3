@@ -260,6 +260,7 @@ export function ProgramCreatePage({
         <aside
           aria-labelledby="program-create-preview-title program-create-preview-label"
           aria-describedby="program-create-preview-reward"
+          title={`${name || copy.previewProgramName}: ${copy.previewCard}`}
           className="surface-panel stamp-pattern h-fit rounded-lg p-3 lg:sticky lg:top-6"
         >
           <div className="space-y-5 rounded-lg bg-panel p-5 shadow-[inset_0_0_0_1px_rgba(221,216,233,0.72)]">
