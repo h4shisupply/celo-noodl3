@@ -470,6 +470,7 @@ export function ProgramManagePage({
 
               <aside
                 aria-label={`${copy.dynamicQr} ${copy.settings}`}
+                title={`${copy.dynamicQr} ${copy.settings}`}
                 className="space-y-6 xl:sticky xl:top-6 xl:self-start"
               >
                 <section
