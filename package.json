@@ -22,6 +22,7 @@
     "customer-wallet",
     "customer-qr-stamp-card",
     "live-visit-qr",
+    "one-use-live-visit-qr",
     "live-qr",
     "loyalty",
     "loyalty-program",
