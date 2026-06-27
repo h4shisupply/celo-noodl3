@@ -1,7 +1,7 @@
 "use client";
 
 import { Camera, X } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { useLocale } from "./locale-provider";
 import { Button } from "./ui/button";
 
@@ -24,6 +24,10 @@ export function QrScanner({
 }) {
   const { dictionary } = useLocale();
   const qrCopy = dictionary.qrScanner;
+  const titleId = useId();
+  const descriptionId = useId();
+  const cameraStatusId = useId();
+  const activeStatusId = useId();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const intervalRef = useRef<number | null>(null);
@@ -176,19 +180,19 @@ export function QrScanner({
       className="fixed inset-0 z-30 flex min-h-[100dvh] flex-col bg-panel-soft px-5 py-6 md:px-8 md:py-8"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="qr-scanner-title"
-      aria-describedby={isActive ? "qr-scanner-description" : "qr-scanner-description qr-scanner-camera-status"}
+      aria-labelledby={titleId}
+      aria-describedby={isActive ? descriptionId : `${descriptionId} ${cameraStatusId}`}
       aria-busy={isProcessing}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 max-w-xl space-y-2">
           <h2
-            id="qr-scanner-title"
+            id={titleId}
             className="break-words text-2xl font-semibold text-ink md:text-3xl"
           >
             {title}
           </h2>
-          <p id="qr-scanner-description" className="break-words text-sm leading-7 text-muted">
+          <p id={descriptionId} className="break-words text-sm leading-7 text-muted">
             {description}
           </p>
         </div>
@@ -211,7 +215,7 @@ export function QrScanner({
         <div className="relative flex-1 overflow-hidden rounded-lg border border-line bg-accent-soft">
           <video
             ref={videoRef}
-            aria-describedby={isActive ? "qr-scanner-active-status" : undefined}
+            aria-describedby={isActive ? activeStatusId : undefined}
             aria-label={title}
             className="h-full w-full object-cover"
             muted
@@ -228,7 +232,7 @@ export function QrScanner({
                   <Camera className="h-5 w-5 shrink-0" aria-hidden="true" />
                 </div>
                 <p
-                  id="qr-scanner-camera-status"
+                  id={cameraStatusId}
                   className="text-sm text-muted"
                   role={error ? "alert" : "status"}
                   aria-live={error ? "assertive" : "polite"}
@@ -246,7 +250,7 @@ export function QrScanner({
                 ) : (
                   <Button
                     autoFocus
-                    aria-describedby="qr-scanner-camera-status"
+                    aria-describedby={cameraStatusId}
                     title={qrCopy.openCamera}
                     onClick={() => void startCamera()}
                   >
@@ -262,7 +266,7 @@ export function QrScanner({
                 aria-hidden="true"
               />
               <p
-                id="qr-scanner-active-status"
+                id={activeStatusId}
                 className="sr-only"
                 role="status"
                 aria-live="polite"
