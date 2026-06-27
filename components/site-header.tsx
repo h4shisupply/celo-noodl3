@@ -142,6 +142,7 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
           <nav
             className="flex items-center gap-1 rounded-lg border border-line bg-panel/80 p-1 shadow-[0_10px_30px_rgba(27,23,43,0.045)] backdrop-blur"
             aria-label={dictionary.common.landingNavigation}
+            title={dictionary.common.landingNavigation}
           >
             {items.map((item) => (
               <NavLink key={`${item.href}-${item.label}`} {...item} />
@@ -174,7 +175,11 @@ export function SiteHeader({ brandHref, items, cta }: SiteHeaderProps) {
           id="site-mobile-menu"
           className="mt-5 space-y-4 rounded-lg border border-line bg-panel px-5 py-5 shadow-card md:hidden"
         >
-          <nav className="grid gap-3" aria-label={dictionary.common.landingNavigation}>
+          <nav
+            className="grid gap-3"
+            aria-label={dictionary.common.landingNavigation}
+            title={dictionary.common.landingNavigation}
+          >
             {items.map((item) => (
               <NavLink
                 key={`${item.href}-${item.label}`}
